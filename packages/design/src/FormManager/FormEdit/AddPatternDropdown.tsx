@@ -117,6 +117,7 @@ const sidebarPatterns: DropdownPattern[] = [
     'social-security-number',
     defaultFormConfig.patterns['social-security-number'],
   ],
+  ['repeater', defaultFormConfig.patterns['repeater']],
 ] as const;
 export const fieldsetPatterns: DropdownPattern[] = [
   ['checkbox', defaultFormConfig.patterns['checkbox']],

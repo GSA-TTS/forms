@@ -164,6 +164,13 @@ export type GenderIdProps = PatternProps<{
   preferNotToAnswerChecked?: boolean;
 }>;
 
+export type RepeaterProps = PatternProps<{
+  type: 'repeater';
+  legend?: string;
+  subHeading?: string;
+  error?: FormError;
+}>;
+
 export type SequenceProps = PatternProps<{
   type: 'sequence';
 }>;

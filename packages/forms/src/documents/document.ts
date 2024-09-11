@@ -167,7 +167,11 @@ export const addDocumentFieldsToForm = (
           maxLength: 128,
         },
       } satisfies InputPattern);
-    } else if (field.type === 'Paragraph' || field.type === 'RichText') {
+    } else if (
+      field.type === 'Paragraph' ||
+      field.type === 'RichText' ||
+      field.type === 'Repeater'
+    ) {
       // skip purely presentational fields
     } else if (field.type === 'not-supported') {
       console.error(`Skipping field: ${field.error}`);
