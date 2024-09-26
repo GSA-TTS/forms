@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { type RepeaterProps } from '@atj/forms';
 import { type PatternComponent } from '../../../Form/index.js';
 
-const Repeater: PatternComponent<RepeaterProps> = (props) => {
+const Repeater: PatternComponent<RepeaterProps> = props => {
   // Using state to store and manage children elements
-  const [fields, setFields] = useState<React.ReactNode[]>([React.Children.toArray(props.children)]);
+  const [fields, setFields] = useState<React.ReactNode[]>([
+    React.Children.toArray(props.children),
+  ]);
 
   // // Load initial state from localStorage if available
   // useEffect(() => {
@@ -26,9 +28,9 @@ const Repeater: PatternComponent<RepeaterProps> = (props) => {
 
   // Handler to delete children
   const handleDelete = (index: number) => {
-    setFields((fields) => [
+    setFields(fields => [
       ...fields.slice(0, index),
-      ...fields.slice(index + 1)
+      ...fields.slice(index + 1),
     ]);
   };
 
@@ -44,7 +46,10 @@ const Repeater: PatternComponent<RepeaterProps> = (props) => {
           <ul className="add-list-reset">
             {fields.map((item, index) => {
               return (
-                <li key={index} className="padding-bottom-2 border-bottom border-base-lighter">
+                <li
+                  key={index}
+                  className="padding-bottom-2 border-bottom border-base-lighter"
+                >
                   {item}
                   {props.showControls !== false ? (
                     <p>
@@ -64,14 +69,17 @@ const Repeater: PatternComponent<RepeaterProps> = (props) => {
           </ul>
           {props.showControls !== false ? (
             <p>
-              <button type="button" className="usa-button usa-button--outline" onClick={handleClone}>
+              <button
+                type="button"
+                className="usa-button usa-button--outline"
+                onClick={handleClone}
+              >
                 Add new item
               </button>
             </p>
           ) : null}
         </>
-      ) : null }
-
+      ) : null}
     </fieldset>
   );
 };

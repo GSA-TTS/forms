@@ -45,7 +45,7 @@ const RepeaterPreview: PatternComponent<RepeaterProps> = props => {
   );
   const propsOverride = {
     ...props,
-    showControls: false
+    showControls: false,
   };
   const pattern = useFormManagerStore(
     state => state.session.form.patterns[props._patternId]
