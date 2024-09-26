@@ -2,6 +2,7 @@ import { type VoidResult } from '@atj/common';
 import {
   addPageToPageSet,
   addPatternToFieldset,
+  addPatternToRepeater,
   addPatternToPage,
   copyPattern,
   createOnePageBlueprint,
@@ -124,6 +125,16 @@ export class BlueprintBuilder {
       throw new Error('expected pattern to be a fieldset');
     }
     this.bp = addPatternToFieldset(this.form, fieldsetPatternId, pattern);
+    return pattern;
+  }
+
+  addPatternToRepeater(patternType: string, fieldsetPatternId: PatternId) {
+    const pattern = createDefaultPattern(this.config, patternType);
+    const root = this.form.patterns[fieldsetPatternId] as FieldsetPattern;
+    if (root.type !== 'repeater') {
+      throw new Error('expected pattern to be a fieldset');
+    }
+    this.bp = addPatternToRepeater(this.form, fieldsetPatternId, pattern);
     return pattern;
   }
 

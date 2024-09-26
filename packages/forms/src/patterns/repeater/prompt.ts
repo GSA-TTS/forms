@@ -21,6 +21,7 @@ export const createPrompt: CreatePrompt<RepeaterPattern> = (
       _patternId: pattern.id,
       type: 'repeater',
       legend: pattern.data.legend,
+      showControls: true,
     } satisfies RepeaterProps,
     children,
   };

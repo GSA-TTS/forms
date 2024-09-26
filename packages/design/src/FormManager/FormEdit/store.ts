@@ -26,6 +26,7 @@ export type FormEditSlice = {
   addPage: () => void;
   addPattern: (patternType: string) => void;
   addPatternToFieldset: (patternType: string, targetPattern: PatternId) => void;
+  addPatternToRepeater: (patternType: string, targetPattern: PatternId) => void;
   clearFocus: () => void;
   copyPattern: (parentPatternId: PatternId, patternId: PatternId) => void;
   deletePattern: (id: PatternId) => void;
@@ -129,6 +130,33 @@ export const createFormEditSlice =
         patternType,
         targetPattern
       );
+      set({
+        session: mergeSession(state.session, { form: builder.form }),
+        focus: { pattern: newPattern },
+      });
+      state.addNotification(
+        'success',
+        'Element added to fieldset successfully.'
+      );
+    },
+    addPatternToRepeater: (patternType, targetPattern) => {
+      const state = get();
+      const builder = new BlueprintBuilder(
+        state.context.config,
+        state.session.form
+      );
+      const newPattern = builder.addPatternToRepeater(
+        patternType,
+        targetPattern
+      );
+
+      console.group('form slices');
+      console.log({
+        session: mergeSession(state.session, { form: builder.form }),
+        focus: { pattern: newPattern },
+      });
+      console.groupEnd();
+
       set({
         session: mergeSession(state.session, { form: builder.form }),
         focus: { pattern: newPattern },

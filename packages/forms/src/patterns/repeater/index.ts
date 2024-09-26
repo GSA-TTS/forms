@@ -8,6 +8,7 @@ import { createPrompt } from './prompt.js';
 
 export type RepeaterPattern = Pattern<{
   legend?: string;
+  showControls?: boolean;
   patterns: PatternId[];
 }>;
 

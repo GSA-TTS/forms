@@ -4,10 +4,10 @@ import React from 'react';
 import { type PatternId, type RepeaterProps } from '@atj/forms';
 import { RepeaterPattern } from '@atj/forms';
 
-// import {
-//   RepeaterAddPatternButton,
-//   RepeaterEmptyStateAddPatternButton,
-// } from '../AddPatternDropdown.js';
+import {
+  RepeaterAddPatternButton,
+  RepeaterEmptyStateAddPatternButton,
+} from '../AddPatternDropdown.js';
 import { PatternComponent } from '../../../Form/index.js';
 import Repeater from '../../../Form/components/Repeater/index.js';
 import { useFormManagerStore } from '../../store.js';
@@ -25,14 +25,12 @@ const RepeaterEdit: PatternEditComponent<RepeaterProps> = ({
   return (
     <>
       {focus ? (
-        <p>Edit pattern</p>
+        <PatternEditForm
+          pattern={focus.pattern}
+          editComponent={<EditComponent patternId={focus.pattern.id} />}
+        ></PatternEditForm>
       ) : (
-        // <PatternEditForm
-        //   pattern={focus.pattern}
-        //   editComponent={<EditComponent patternId={focus.pattern.id} />}
-        // ></PatternEditForm>
-        <p>Preview pattern</p>
-        // <RepeaterPreview {...previewProps} />
+        <RepeaterPreview {...previewProps} />
       )}
     </>
   );
@@ -45,12 +43,16 @@ const RepeaterPreview: PatternComponent<RepeaterProps> = props => {
       deletePattern: state.deletePattern,
     })
   );
+  const propsOverride = {
+    ...props,
+    showControls: false
+  };
   const pattern = useFormManagerStore(
     state => state.session.form.patterns[props._patternId]
   );
   return (
     <>
-      <Repeater {...(props as RepeaterProps)}>
+      <Repeater {...(propsOverride as RepeaterProps)}>
         {props.children}
         {pattern && pattern.data.patterns.length === 0 && (
           <div
