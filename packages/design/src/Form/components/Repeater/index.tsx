@@ -21,9 +21,35 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
   //   localStorage.setItem('repeaterChildren', JSON.stringify(children));
   // }, [children]);
 
-  // Handler to clone children
+  // TODO: need to make this work for non-input types.
+  const cloneWithModifiedId = (children: React.ReactNode[], suffix: number) => {
+    return React.Children.map(children, (child) => {
+      if (
+        React.isValidElement(child) &&
+        child?.props?.component?.props?.inputId
+      ) {
+        // Clone element with modified _patternId
+        return React.cloneElement(child, {
+          component: {
+            ...child.props.component,
+            props: {
+              ...child.props.component.props,
+              inputId: `${child.props.component.props.inputId}_${suffix}`,
+            },
+          },
+        });
+      }
+      return child;
+    });
+  };
+
   const handleClone = () => {
-    setFields([...fields, [React.Children.toArray(props.children)]]);
+    const newSuffix = fields.length + 1; // Suffix based on number of existing items
+    const clonedChildren = cloneWithModifiedId(
+      React.Children.toArray(props.children),
+      newSuffix
+    );
+    setFields([...fields, clonedChildren]);
   };
 
   // Handler to delete children
