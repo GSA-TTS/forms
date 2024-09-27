@@ -51,33 +51,29 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
                   className="padding-bottom-2 border-bottom border-base-lighter"
                 >
                   {item}
-                  {props.showControls !== false ? (
-                    <p>
-                      <button
-                        type="button"
-                        className="usa-button usa-button--outline"
-                        onClick={() => handleDelete(index)}
-                        disabled={fields.length === 1}
-                      >
-                        Delete item
-                      </button>
-                    </p>
-                  ) : null}
+                  <p>
+                    <button
+                      type="button"
+                      className="usa-button usa-button--outline"
+                      onClick={() => handleDelete(index)}
+                      disabled={fields.length === 1}
+                    >
+                      Delete item
+                    </button>
+                  </p>
                 </li>
               );
             })}
           </ul>
-          {props.showControls !== false ? (
-            <p>
-              <button
-                type="button"
-                className="usa-button usa-button--outline"
-                onClick={handleClone}
-              >
-                Add new item
-              </button>
-            </p>
-          ) : null}
+          <p>
+            <button
+              type="button"
+              className="usa-button usa-button--outline"
+              onClick={handleClone}
+            >
+              Add new item
+            </button>
+          </p>
         </>
       ) : null}
     </fieldset>

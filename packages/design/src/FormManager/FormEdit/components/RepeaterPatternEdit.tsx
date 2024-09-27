@@ -10,6 +10,7 @@ import {
 } from '../AddPatternDropdown.js';
 import { PatternComponent } from '../../../Form/index.js';
 import Repeater from '../../../Form/components/Repeater/index.js';
+import RepeaterEditView from '../../../Form/components/Repeater/edit.js';
 import { useFormManagerStore } from '../../store.js';
 import { PatternEditComponent } from '../types.js';
 
@@ -43,16 +44,12 @@ const RepeaterPreview: PatternComponent<RepeaterProps> = props => {
       deletePattern: state.deletePattern,
     })
   );
-  const propsOverride = {
-    ...props,
-    showControls: false,
-  };
   const pattern = useFormManagerStore(
     state => state.session.form.patterns[props._patternId]
   );
   return (
     <>
-      <Repeater {...(propsOverride as RepeaterProps)}>
+      <RepeaterEditView {...(props as RepeaterProps)}>
         {props.children}
         {pattern && pattern.data.patterns.length === 0 && (
           <div
@@ -101,7 +98,7 @@ const RepeaterPreview: PatternComponent<RepeaterProps> = props => {
             </div>
           </div>
         )}
-      </Repeater>
+      </RepeaterEditView>
     </>
   );
 };
