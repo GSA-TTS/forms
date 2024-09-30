@@ -36,7 +36,7 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
 
   // TODO: need to make this work for non-input types.
   const renderWithUniqueIds = (children: React.ReactNode, index: number) => {
-    return React.Children.map(children, (child) => {
+    return React.Children.map(children, child => {
       if (
         React.isValidElement(child) &&
         child?.props?.component?.props?.inputId
@@ -55,7 +55,6 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
       return child;
     });
   };
-
 
   return (
     <fieldset className="usa-fieldset width-full padding-top-2">
@@ -104,9 +103,9 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
             </p>
           </div>
         </div>
-        )}
-        </fieldset>
-        );
-      };
+      )}
+    </fieldset>
+  );
+};
 
-      export default Repeater;
+export default Repeater;
