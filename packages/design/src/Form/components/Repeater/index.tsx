@@ -34,7 +34,28 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
     setFieldCount(fieldCount => fieldCount - 1);
   };
 
-  // TODO: prevent duplicate ID attributes when items are cloned
+  // TODO: need to make this work for non-input types.
+  const renderWithUniqueIds = (children: React.ReactNode, index: number) => {
+    return React.Children.map(children, (child) => {
+      if (
+        React.isValidElement(child) &&
+        child?.props?.component?.props?.inputId
+      ) {
+        // Clone element with modified _patternId
+        return React.cloneElement(child, {
+          component: {
+            ...child.props.component,
+            props: {
+              ...child.props.component.props,
+              inputId: `${child.props.component.props.inputId}_${index}`,
+            },
+          },
+        });
+      }
+      return child;
+    });
+  };
+
 
   return (
     <fieldset className="usa-fieldset width-full padding-top-2">
@@ -52,7 +73,7 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
                   key={index}
                   className="padding-bottom-4 border-bottom border-base-lighter"
                 >
-                  {item}
+                  {renderWithUniqueIds(item, index)}
                 </li>
               );
             })}
@@ -76,10 +97,16 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
           </div>
         </>
       ) : (
-        <p>This fieldset</p>
-      )}
-    </fieldset>
-  );
-};
+        <div className="usa-alert usa-alert--info usa-alert--no-icon">
+          <div className="usa-alert__body">
+            <p className="usa-alert__text">
+              This fieldset does not have any items assigned to it.
+            </p>
+          </div>
+        </div>
+        )}
+        </fieldset>
+        );
+      };
 
-export default Repeater;
+      export default Repeater;
