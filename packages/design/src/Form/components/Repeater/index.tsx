@@ -1,64 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { type RepeaterProps } from '@atj/forms';
 import { type PatternComponent } from '../../../Form/index.js';
 
 const Repeater: PatternComponent<RepeaterProps> = props => {
-  // Using state to store and manage children elements
+  const STORAGE_KEY = `repeater-${props._patternId}`;
+
+  const loadInitialFields = (): number => {
+    const storedFields = localStorage.getItem(STORAGE_KEY);
+    if (storedFields) {
+      return parseInt(JSON.parse(storedFields), 10) || 1;
+    }
+    return 1;
+  };
+
+  const [fieldCount, setFieldCount] = useState<number>(loadInitialFields);
   const [fields, setFields] = useState<React.ReactNode[]>([
     React.Children.toArray(props.children),
   ]);
+  const hasFields = React.Children.toArray(props.children).length > 0;
 
-  // // Load initial state from localStorage if available
-  // useEffect(() => {
-  //   const storedChildren = localStorage.getItem('repeaterChildren');
-  //   if (storedChildren) {
-  //     setFields(JSON.parse(storedChildren));
-  //   }
-  // }, []);
-
-  // // Sync state with localStorage
-  // useEffect(() => {
-  //   localStorage.setItem('repeaterChildren', JSON.stringify(children));
-  // }, [children]);
-
-  // TODO: need to make this work for non-input types.
-  const cloneWithModifiedId = (children: React.ReactNode[], suffix: number) => {
-    return React.Children.map(children, (child) => {
-      if (
-        React.isValidElement(child) &&
-        child?.props?.component?.props?.inputId
-      ) {
-        // Clone element with modified _patternId
-        return React.cloneElement(child, {
-          component: {
-            ...child.props.component,
-            props: {
-              ...child.props.component.props,
-              inputId: `${child.props.component.props.inputId}_${suffix}`,
-            },
-          },
-        });
-      }
-      return child;
-    });
-  };
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.parse(fieldCount.toString()));
+    setFields(
+      new Array(fieldCount).fill(React.Children.toArray(props.children))
+    );
+  }, [fieldCount]);
 
   const handleClone = () => {
-    const newSuffix = fields.length + 1; // Suffix based on number of existing items
-    const clonedChildren = cloneWithModifiedId(
-      React.Children.toArray(props.children),
-      newSuffix
-    );
-    setFields([...fields, clonedChildren]);
+    setFieldCount(fieldCount => fieldCount + 1);
   };
 
-  // Handler to delete children
-  const handleDelete = (index: number) => {
-    setFields(fields => [
-      ...fields.slice(0, index),
-      ...fields.slice(index + 1),
-    ]);
+  const handleDelete = () => {
+    setFieldCount(fieldCount => fieldCount - 1);
   };
+
+  // TODO: prevent duplicate ID attributes when items are cloned
 
   return (
     <fieldset className="usa-fieldset width-full padding-top-2">
@@ -67,31 +43,21 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
           {props.legend}
         </legend>
       )}
-      {fields ? (
+      {hasFields ? (
         <>
-          <ul className="add-list-reset">
+          <ul className="add-list-reset margin-bottom-4">
             {fields.map((item, index) => {
               return (
                 <li
                   key={index}
-                  className="padding-bottom-2 border-bottom border-base-lighter"
+                  className="padding-bottom-4 border-bottom border-base-lighter"
                 >
                   {item}
-                  <p>
-                    <button
-                      type="button"
-                      className="usa-button usa-button--outline"
-                      onClick={() => handleDelete(index)}
-                      disabled={fields.length === 1}
-                    >
-                      Delete item
-                    </button>
-                  </p>
                 </li>
               );
             })}
           </ul>
-          <p>
+          <div className="usa-button-group margin-bottom-4">
             <button
               type="button"
               className="usa-button usa-button--outline"
@@ -99,9 +65,19 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
             >
               Add new item
             </button>
-          </p>
+            <button
+              type="button"
+              className="usa-button usa-button--outline"
+              onClick={handleDelete}
+              disabled={fields.length === 1}
+            >
+              Delete item
+            </button>
+          </div>
         </>
-      ) : null}
+      ) : (
+        <p>This fieldset</p>
+      )}
     </fieldset>
   );
 };
