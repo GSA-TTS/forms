@@ -37,10 +37,7 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
   // TODO: need to make this work for non-input types.
   const renderWithUniqueIds = (children: React.ReactNode, index: number) => {
     return React.Children.map(children, child => {
-      if (
-        React.isValidElement(child) &&
-        child?.props?.component?.props
-      ) {
+      if (React.isValidElement(child) && child?.props?.component?.props) {
         if (
           child.props.component.props.type === 'input' &&
           child.props.component.props.inputId
@@ -110,15 +107,7 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
             </button>
           </div>
         </>
-      ) : (
-        <div className="usa-alert usa-alert--info usa-alert--no-icon">
-          <div className="usa-alert__body">
-            <p className="usa-alert__text">
-              This fieldset does not have any items assigned to it.
-            </p>
-          </div>
-        </div>
-      )}
+      ) : null}
     </fieldset>
   );
 };
