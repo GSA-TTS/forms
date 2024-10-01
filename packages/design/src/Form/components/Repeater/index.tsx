@@ -39,18 +39,33 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
     return React.Children.map(children, child => {
       if (
         React.isValidElement(child) &&
-        child?.props?.component?.props?.inputId
+        child?.props?.component?.props
       ) {
-        // Clone element with modified _patternId
-        return React.cloneElement(child, {
-          component: {
-            ...child.props.component,
-            props: {
-              ...child.props.component.props,
-              inputId: `${child.props.component.props.inputId}_${index}`,
+        if (
+          child.props.component.props.type === 'input' &&
+          child.props.component.props.inputId
+        ) {
+          return React.cloneElement(child, {
+            component: {
+              ...child.props.component,
+              props: {
+                ...child.props.component.props,
+                inputId: `${child.props.component.props.inputId}_${index}`,
+              },
             },
-          },
-        });
+          });
+        } else if (child.props.component.props.type === 'radio-group') {
+          console.log(child.props.component.props.options);
+          return React.cloneElement(child, {
+            component: {
+              ...child.props.component,
+              props: {
+                ...child.props.component.props,
+                groupId: `${child.props.component.props.groupId}_${index}`,
+              },
+            },
+          });
+        }
       }
       return child;
     });
