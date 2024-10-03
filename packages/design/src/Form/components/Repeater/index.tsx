@@ -20,7 +20,12 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
   const hasFields = React.Children.toArray(props.children).length > 0;
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.parse(fieldCount.toString()));
+    if (
+      (!localStorage.getItem(STORAGE_KEY) && fieldCount !== 1) ||
+      localStorage.getItem(STORAGE_KEY)
+    ) {
+      localStorage.setItem(STORAGE_KEY, JSON.parse(fieldCount.toString()));
+    }
     setFields(
       new Array(fieldCount).fill(React.Children.toArray(props.children))
     );
