@@ -48,7 +48,7 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
             ...child.props.component,
             props: {
               ...child.props.component.props,
-              idSuffix: `_${index}`,
+              idSuffix: `_repeater_${index}`,
             },
           },
         });
