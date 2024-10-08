@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useFieldArray, useForm } from 'react-hook-form';
 import { type RepeaterProps } from '@atj/forms';
 import { type PatternComponent } from '../../../Form/index.js';
 
@@ -13,33 +14,23 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
     return 1;
   };
 
-  const [fieldCount, setFieldCount] = useState<number>(loadInitialFields);
-  const [fields, setFields] = useState<React.ReactNode[]>([
-    React.Children.toArray(props.children),
-  ]);
+  const { control } = useForm({
+    defaultValues: {
+      fields: Array(loadInitialFields()).fill({}),
+    },
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'fields',
+  });
+
+  React.useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(fields.length));
+  }, [fields.length]);
+
   const hasFields = React.Children.toArray(props.children).length > 0;
 
-  useEffect(() => {
-    if (
-      (!localStorage.getItem(STORAGE_KEY) && fieldCount !== 1) ||
-      localStorage.getItem(STORAGE_KEY)
-    ) {
-      localStorage.setItem(STORAGE_KEY, JSON.parse(fieldCount.toString()));
-    }
-    setFields(
-      new Array(fieldCount).fill(React.Children.toArray(props.children))
-    );
-  }, [fieldCount]);
-
-  const handleClone = () => {
-    setFieldCount(fieldCount => fieldCount + 1);
-  };
-
-  const handleDelete = () => {
-    setFieldCount(fieldCount => fieldCount - 1);
-  };
-
-  // TODO: need to make this work for non-input types.
   const renderWithUniqueIds = (children: React.ReactNode, index: number) => {
     return React.Children.map(children, child => {
       if (React.isValidElement(child) && child?.props?.component?.props) {
@@ -48,7 +39,7 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
             ...child.props.component,
             props: {
               ...child.props.component.props,
-              idSuffix: `_repeater_${index}`,
+              idSuffix: `.repeater.${index}`,
             },
           },
         });
@@ -64,39 +55,37 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
           {props.legend}
         </legend>
       )}
-      {hasFields ? (
+      {hasFields && (
         <>
           <ul className="add-list-reset margin-bottom-4">
-            {fields.map((item, index) => {
-              return (
-                <li
-                  key={index}
-                  className="padding-bottom-4 border-bottom border-base-lighter"
-                >
-                  {renderWithUniqueIds(item, index)}
-                </li>
-              );
-            })}
+            {fields.map((field, index) => (
+              <li
+                key={field.id}
+                className="padding-bottom-4 border-bottom border-base-lighter"
+              >
+                {renderWithUniqueIds(props.children, index)}
+              </li>
+            ))}
           </ul>
           <div className="usa-button-group margin-bottom-4">
             <button
               type="button"
               className="usa-button usa-button--outline"
-              onClick={handleClone}
+              onClick={() => append({})}
             >
               Add new item
             </button>
             <button
               type="button"
               className="usa-button usa-button--outline"
-              onClick={handleDelete}
+              onClick={() => remove(fields.length - 1)}
               disabled={fields.length === 1}
             >
               Delete item
             </button>
           </div>
         </>
-      ) : null}
+      )}
     </fieldset>
   );
 };
