@@ -5,8 +5,8 @@ import { type PatternId, type RepeaterProps } from '@atj/forms';
 import { RepeaterPattern } from '@atj/forms';
 
 import {
-  RepeaterAddPatternButton,
-  RepeaterEmptyStateAddPatternButton,
+  CompoundAddPatternButton,
+  CompoundAddNewPatternButton,
 } from '../AddPatternDropdown.js';
 import { PatternComponent } from '../../../Form/index.js';
 import Repeater from '../../../Form/components/Repeater/index.js';
@@ -62,7 +62,7 @@ const RepeaterPreview: PatternComponent<RepeaterProps> = props => {
                   Empty sections will not display.
                 </span>
                 <span className="action-text add-question display-inline-block margin-right-2">
-                  <RepeaterEmptyStateAddPatternButton
+                  <CompoundAddNewPatternButton
                     title="Add question"
                     patternSelected={patternType =>
                       addPatternToRepeater(patternType, props._patternId)
@@ -89,7 +89,7 @@ const RepeaterPreview: PatternComponent<RepeaterProps> = props => {
             className="margin-left-3 margin-right-3 margin-bottom-3 bg-none"
           >
             <div className={classNames(styles.usaAlertBody, 'usa-alert__body')}>
-              <RepeaterAddPatternButton
+              <CompoundAddPatternButton
                 title="Add question to repeater"
                 patternSelected={patternType =>
                   addPatternToRepeater(patternType, props._patternId)

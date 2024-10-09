@@ -5,8 +5,8 @@ import { type PatternId, type FieldsetProps } from '@atj/forms';
 import { FieldsetPattern } from '@atj/forms';
 
 import {
-  FieldsetAddPatternButton,
-  FieldsetEmptyStateAddPatternButton,
+  CompoundAddPatternButton,
+  CompoundAddNewPatternButton,
 } from '../../AddPatternDropdown.js';
 import { PatternComponent } from '../../../../Form/index.js';
 import Fieldset from '../../../../Form/components/Fieldset/index.js';
@@ -61,7 +61,7 @@ const FieldsetPreview: PatternComponent<FieldsetProps> = props => {
                   Empty sections will not display.
                 </span>
                 <span className="action-text add-question display-inline-block margin-right-2">
-                  <FieldsetEmptyStateAddPatternButton
+                  <CompoundAddNewPatternButton
                     title="Add question"
                     patternSelected={patternType =>
                       addPatternToFieldset(patternType, props._patternId)
@@ -88,7 +88,7 @@ const FieldsetPreview: PatternComponent<FieldsetProps> = props => {
             className="margin-left-3 margin-right-3 margin-bottom-3 bg-none"
           >
             <div className={classNames(styles.usaAlertBody, 'usa-alert__body')}>
-              <FieldsetAddPatternButton
+              <CompoundAddPatternButton
                 title="Add question to fieldset"
                 patternSelected={patternType =>
                   addPatternToFieldset(patternType, props._patternId)
