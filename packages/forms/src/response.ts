@@ -43,11 +43,11 @@ const parsePromptResponse = (
     const pattern = getPattern(session.form, id);
     const patternConfig = getPatternConfig(config, pattern.type);
     const isValidResult = validatePattern(patternConfig, pattern, promptValue);
-    console.group('parsePromptResponse');
-    console.log(pattern);
-    console.log(patternConfig);
-    console.log(isValidResult);
-    console.groupEnd();
+    // console.group('parsePromptResponse');
+    // console.log(pattern);
+    // console.log(patternConfig);
+    // console.log(isValidResult);
+    // console.groupEnd();
     if (isValidResult.success) {
       values[patternId] = isValidResult.data;
     } else {

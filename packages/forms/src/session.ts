@@ -129,10 +129,10 @@ export const updateSession = (
   values: PatternValueMap,
   errors: FormErrorMap
 ): FormSession => {
-  console.group('updateSession');
-  console.log('values', values);
-  console.log('errors', errors);
-  console.groupEnd();
+  // console.group('updateSession');
+  // console.log('values', values);
+  // console.log('errors', errors);
+  // console.groupEnd();
   const keysValid =
     Object.keys(values).every(
       patternId => patternId in session.form.patterns
