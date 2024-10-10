@@ -43,10 +43,6 @@ export const safeZodParseFormErrors = <Schema extends z.Schema>(
   schema: Schema,
   obj: unknown
 ): r.Result<z.infer<Schema>, FormErrors> => {
-  // console.group('safeZodParseFormErrors');
-  // console.log(schema);
-  // console.log(obj);
-  // console.groupEnd();
   const result = safeZodParse(schema, obj);
   if (result.success) {
     return r.success(result.data);

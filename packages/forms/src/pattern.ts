@@ -141,11 +141,6 @@ export const validatePattern = (
   pattern: Pattern,
   value: any
 ): r.Result<Pattern['data'], FormError> => {
-  console.group('validatePattern');
-  console.log(pattern);
-  console.log(patternConfig);
-  console.log(value);
-  console.groupEnd();
   if (!patternConfig.parseUserInput) {
     return {
       success: true,

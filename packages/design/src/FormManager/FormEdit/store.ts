@@ -149,21 +149,13 @@ export const createFormEditSlice =
         patternType,
         targetPattern
       );
-
-      console.group('form slices');
-      console.log({
-        session: mergeSession(state.session, { form: builder.form }),
-        focus: { pattern: newPattern },
-      });
-      console.groupEnd();
-
       set({
         session: mergeSession(state.session, { form: builder.form }),
         focus: { pattern: newPattern },
       });
       state.addNotification(
         'success',
-        'Element added to fieldset successfully.'
+        'Element added to repeater successfully.'
       );
     },
     clearFocus: () => {

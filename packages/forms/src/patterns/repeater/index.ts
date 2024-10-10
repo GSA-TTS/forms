@@ -21,11 +21,6 @@ export const repeaterConfig: PatternConfig<RepeaterPattern> = {
   },
   parseConfigData,
   parseUserInput: (pattern, input: unknown) => {
-    console.group('parseUserInput');
-    console.log(pattern);
-    console.log(input);
-    console.groupEnd();
-
     // FIXME: Not sure why we're sometimes getting a string here, and sometimes
     // the expected object. Workaround, by accepting both.
     if (typeof input === 'string') {
