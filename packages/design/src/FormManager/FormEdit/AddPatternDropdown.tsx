@@ -135,10 +135,8 @@ const sidebarPatterns: DropdownPattern[] = [
   ],
   ['repeater', defaultFormConfig.patterns['repeater']],
 ] as const;
-
-export const compoundFieldChildPatterns: DropdownPattern[] = sidebarPatterns.filter(
-  ([key]) => key !== 'fieldset' && key !== 'repeater'
-);
+export const compoundFieldChildPatterns: DropdownPattern[] =
+  sidebarPatterns.filter(([key]) => key !== 'fieldset' && key !== 'repeater');
 
 export const SidebarAddPatternMenuItem = ({
   patternSelected,
