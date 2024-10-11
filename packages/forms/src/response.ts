@@ -39,8 +39,7 @@ const parsePromptResponse = (
   const values: Record<string, any> = {};
   const errors: FormErrorMap = {};
   for (const [patternId, promptValue] of Object.entries(response.data)) {
-    const id = getPatternId(patternId);
-    const pattern = getPattern(session.form, id);
+    const pattern = getPattern(session.form, patternId);
     const patternConfig = getPatternConfig(config, pattern.type);
     const isValidResult = validatePattern(patternConfig, pattern, promptValue);
     if (isValidResult.success) {
@@ -50,8 +49,4 @@ const parsePromptResponse = (
     }
   }
   return { errors, values };
-};
-
-const getPatternId = (id: string) => {
-  return id.replace(/_repeater_(\d+)$/, '');
 };
