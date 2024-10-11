@@ -25,11 +25,15 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
     name: 'fields',
   });
 
-  React.useEffect(() => {
-    // if(!localStorage.getItem(STORAGE_KEY) && fields.length !== 1) {
-    //   localStorage.setItem(STORAGE_KEY, JSON.stringify(fields.length));
-    // }
-  }, [fields.length]);
+  /**
+   * TODO: discuss how this should behave for the user if they resume the form
+   * at a later point.
+   */
+  // React.useEffect(() => {
+  //   if(!localStorage.getItem(STORAGE_KEY) && fields.length !== 1) {
+  //     localStorage.setItem(STORAGE_KEY, JSON.stringify(fields.length));
+  //   }
+  // }, [fields.length]);
 
   const hasFields = React.Children.toArray(props.children).length > 0;
 
