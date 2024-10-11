@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { type RepeaterProps } from '@atj/forms';
-import { type PatternComponent } from '../../../Form/index.js';
+import { type PatternComponent } from '../../index.js';
 
 const Repeater: PatternComponent<RepeaterProps> = props => {
   const STORAGE_KEY = `repeater-${props._patternId}`;
@@ -36,7 +36,7 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
   const renderWithUniqueIds = (children: React.ReactNode, index: number) => {
     return React.Children.map(children, child => {
       if (React.isValidElement(child) && child?.props?.component?.props) {
-        return React.cloneElement(child, {
+        return React.cloneElement(child as React.ReactElement, {
           component: {
             ...child.props.component,
             props: {
