@@ -118,6 +118,11 @@ export class BlueprintBuilder {
     return results.pattern;
   }
 
+  getPatternTypeById(patternId: PatternId) {
+    const root = this.form.patterns[patternId];
+    return root.type;
+  }
+
   addPatternToFieldset(patternType: string, fieldsetPatternId: PatternId) {
     const pattern = createDefaultPattern(this.config, patternType);
     const root = this.form.patterns[fieldsetPatternId] as FieldsetPattern;
@@ -132,7 +137,7 @@ export class BlueprintBuilder {
     const pattern = createDefaultPattern(this.config, patternType);
     const root = this.form.patterns[fieldsetPatternId] as FieldsetPattern;
     if (root.type !== 'repeater') {
-      throw new Error('expected pattern to be a fieldset');
+      throw new Error('expected pattern to be a repeater');
     }
     this.bp = addPatternToRepeater(this.form, fieldsetPatternId, pattern);
     return pattern;

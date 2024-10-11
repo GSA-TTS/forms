@@ -37,9 +37,9 @@ const FieldsetEdit: PatternEditComponent<FieldsetProps> = ({
 };
 
 const FieldsetPreview: PatternComponent<FieldsetProps> = props => {
-  const { addPatternToFieldset, deletePattern } = useFormManagerStore(
+  const { addPatternToCompoundField, deletePattern } = useFormManagerStore(
     state => ({
-      addPatternToFieldset: state.addPatternToFieldset,
+      addPatternToCompoundField: state.addPatternToCompoundField,
       deletePattern: state.deletePattern,
     })
   );
@@ -64,7 +64,7 @@ const FieldsetPreview: PatternComponent<FieldsetProps> = props => {
                   <CompoundAddNewPatternButton
                     title="Add question"
                     patternSelected={patternType =>
-                      addPatternToFieldset(patternType, props._patternId)
+                      addPatternToCompoundField(patternType, props._patternId)
                     }
                   />
                 </span>
@@ -91,7 +91,7 @@ const FieldsetPreview: PatternComponent<FieldsetProps> = props => {
               <CompoundAddPatternButton
                 title="Add question to fieldset"
                 patternSelected={patternType =>
-                  addPatternToFieldset(patternType, props._patternId)
+                  addPatternToCompoundField(patternType, props._patternId)
                 }
               />
             </div>

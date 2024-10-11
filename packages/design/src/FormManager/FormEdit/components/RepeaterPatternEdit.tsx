@@ -38,9 +38,9 @@ const RepeaterEdit: PatternEditComponent<RepeaterProps> = ({
 };
 
 const RepeaterPreview: PatternComponent<RepeaterProps> = props => {
-  const { addPatternToRepeater, deletePattern } = useFormManagerStore(
+  const { addPatternToCompoundField, deletePattern } = useFormManagerStore(
     state => ({
-      addPatternToRepeater: state.addPatternToRepeater,
+      addPatternToCompoundField: state.addPatternToCompoundField,
       deletePattern: state.deletePattern,
     })
   );
@@ -65,7 +65,7 @@ const RepeaterPreview: PatternComponent<RepeaterProps> = props => {
                   <CompoundAddNewPatternButton
                     title="Add question"
                     patternSelected={patternType =>
-                      addPatternToRepeater(patternType, props._patternId)
+                      addPatternToCompoundField(patternType, props._patternId)
                     }
                   />
                 </span>
@@ -92,7 +92,7 @@ const RepeaterPreview: PatternComponent<RepeaterProps> = props => {
               <CompoundAddPatternButton
                 title="Add question to repeater"
                 patternSelected={patternType =>
-                  addPatternToRepeater(patternType, props._patternId)
+                  addPatternToCompoundField(patternType, props._patternId)
                 }
               />
             </div>
