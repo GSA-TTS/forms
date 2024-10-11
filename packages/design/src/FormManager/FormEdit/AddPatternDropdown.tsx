@@ -136,7 +136,7 @@ const sidebarPatterns: DropdownPattern[] = [
   ['repeater', defaultFormConfig.patterns['repeater']],
 ] as const;
 
-export const fieldsetPatterns: DropdownPattern[] = sidebarPatterns.filter(
+export const compoundFieldChildPatterns: DropdownPattern[] = sidebarPatterns.filter(
   ([key]) => key !== 'fieldset' && key !== 'repeater'
 );
 
@@ -203,7 +203,7 @@ export const CompoundAddPatternButton = ({
       className={classNames(styles.dottedLine, 'margin-top-2 cursor-default')}
     >
       <AddPatternDropdown
-        availablePatterns={fieldsetPatterns}
+        availablePatterns={compoundFieldChildPatterns}
         closeDropdown={() => setIsOpen(false)}
         isOpen={isOpen}
         patternSelected={patternSelected}
@@ -242,7 +242,7 @@ export const CompoundAddNewPatternButton = ({
   const [isOpen, setIsOpen] = useState(false);
   return (
     <AddPatternDropdown
-      availablePatterns={fieldsetPatterns}
+      availablePatterns={compoundFieldChildPatterns}
       closeDropdown={() => setIsOpen(false)}
       isOpen={isOpen}
       patternSelected={patternSelected}
