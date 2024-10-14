@@ -23,13 +23,13 @@ export const PatternEditActions = ({ children }: PatternEditActionsProps) => {
     Object.values<Pattern>(state.session.form.patterns)
   );
   const focusPatternId = useFormManagerStore(state => state.focus?.pattern.id);
-  const isPatternInFieldset = useMemo(() => {
+  const isPatternInCompound = useMemo(() => {
     if (!focusPatternId) return false;
     return patterns.some(
-      p => p.type === 'fieldset' && p.data.patterns.includes(focusPatternId)
+      p => (p.type === 'fieldset' || p.type === 'repeater') && p.data.patterns.includes(focusPatternId)
     );
   }, [focusPatternId, patterns]);
-  const isFieldset = focusPatternType === 'fieldset';
+  const isCompound = focusPatternType === 'repeater' || focusPatternType === 'fieldset';
   const isPagePattern = focusPatternType === 'page';
   const { copyPattern } = useFormManagerStore(state => ({
     copyPattern: state.copyPattern,
@@ -77,8 +77,8 @@ export const PatternEditActions = ({ children }: PatternEditActionsProps) => {
           }
         )}
       >
-        {!isPatternInFieldset && !isPagePattern && (
-          <MovePatternDropdown isFieldset={isFieldset} />
+        {!isPatternInCompound && !isPagePattern && (
+          <MovePatternDropdown isCompound={isCompound} />
         )}
         <span
           className={`${styles.patternActionButtons} margin-top-1 margin-bottom-1 display-inline-block text-ttop`}
