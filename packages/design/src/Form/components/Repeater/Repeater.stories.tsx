@@ -8,7 +8,7 @@ export default {
   tags: ['autodocs'],
 } satisfies Meta<typeof Repeater>;
 
-export const RepeaterSection = {
+export const Default = {
   args: {
     legend: 'Default Heading',
     type: 'repeater',
