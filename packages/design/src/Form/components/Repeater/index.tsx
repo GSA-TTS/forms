@@ -66,7 +66,7 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
             </ul>
           ) : (
             <div className="usa-prose bg-accent-cool-lighter padding-1 margin-bottom-2">
-              <p>
+              <p className="margin-top-0">
                 This section is empty. Start by{' '}
                 <button
                   type="button"
