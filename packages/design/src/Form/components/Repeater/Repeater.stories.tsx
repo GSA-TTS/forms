@@ -29,12 +29,12 @@ export const WithContents = {
     const deleteButton = canvas.getByRole('button', { name: /Delete item/ });
     await userEvent.click(addButton);
 
-    let inputs = await canvas.findAllByRole('textbox');
-    await expect(inputs.length).toEqual(2);
+    let inputs = canvas.queryAllByRole('textbox');
+    await expect(inputs).toHaveLength(1);
 
     await userEvent.click(deleteButton);
-    inputs = await canvas.findAllByRole('textbox');
-    await expect(inputs.length).toEqual(1);
+    inputs = canvas.queryAllByRole('textbox');
+    await expect(inputs).toHaveLength(0);
   },
   args: {
     ...defaultArgs,

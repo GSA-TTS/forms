@@ -9,9 +9,9 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
   const loadInitialFields = (): number => {
     const storedFields = localStorage.getItem(STORAGE_KEY);
     if (storedFields) {
-      return parseInt(JSON.parse(storedFields), 10) || 1;
+      return parseInt(JSON.parse(storedFields), 10) || 0;
     }
-    return 1;
+    return 0;
   };
 
   const { control } = useForm({
@@ -53,16 +53,32 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
       )}
       {hasFields && (
         <>
-          <ul className="add-list-reset margin-bottom-4">
-            {fields.map((field, index) => (
-              <li
-                key={field.id}
-                className="padding-bottom-4 border-bottom border-base-lighter"
-              >
-                {renderWithUniqueIds(props.children, index)}
-              </li>
-            ))}
-          </ul>
+          {fields.length ? (
+            <ul className="add-list-reset margin-bottom-4">
+              {fields.map((field, index) => (
+                <li
+                  key={field.id}
+                  className="padding-bottom-4 border-bottom border-base-lighter"
+                >
+                  {renderWithUniqueIds(props.children, index)}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div className="usa-prose bg-accent-cool-lighter padding-1 margin-bottom-2">
+              <p>
+                This section is empty. Start by{' '}
+                <button
+                  type="button"
+                  className="usa-button usa-button--secondary usa-button--unstyled"
+                  onClick={() => append({})}
+                >
+                  adding an item
+                </button>
+                .
+              </p>
+            </div>
+          )}
           <div className="usa-button-group margin-bottom-4">
             <button
               type="button"
@@ -75,7 +91,7 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
               type="button"
               className="usa-button usa-button--outline"
               onClick={() => remove(fields.length - 1)}
-              disabled={fields.length === 1}
+              disabled={fields.length === 0}
             >
               Delete item
             </button>
