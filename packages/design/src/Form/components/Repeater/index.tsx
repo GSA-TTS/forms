@@ -69,9 +69,14 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
               <p className="margin-top-0">
                 This section is empty. Start by{' '}
                 <button
-                  type="button"
+                  type="submit"
                   className="usa-button usa-button--secondary usa-button--unstyled"
-                  onClick={() => append({})}
+                  name={`btn_repeater-${props._patternId}`}
+                  value={`add_repeater-${props._patternId}`}
+                  onClick={e => {
+                    e.preventDefault();
+                    append({});
+                  }}
                 >
                   adding an item
                 </button>
@@ -81,16 +86,26 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
           )}
           <div className="usa-button-group margin-bottom-4">
             <button
-              type="button"
+              type="submit"
               className="usa-button usa-button--outline"
-              onClick={() => append({})}
+              name={`btn_repeater-${props._patternId}`}
+              value={`add_repeater-${props._patternId}`}
+              onClick={e => {
+                e.preventDefault();
+                append({});
+              }}
             >
               Add new item
             </button>
             <button
-              type="button"
+              type="submit"
               className="usa-button usa-button--outline"
-              onClick={() => remove(fields.length - 1)}
+              name={`btn_repeater-${props._patternId}`}
+              value={`delete_repeater-${props._patternId}`}
+              onClick={e => {
+                e.preventDefault();
+                remove(fields.length - 1);
+              }}
               disabled={fields.length === 0}
             >
               Delete item
