@@ -1,27 +1,10 @@
 import React from 'react';
-import { useFieldArray, useForm } from 'react-hook-form';
+import { useFieldArray } from 'react-hook-form';
 import { type RepeaterProps } from '@atj/forms';
 import { type PatternComponent } from '../../index.js';
 
 const Repeater: PatternComponent<RepeaterProps> = props => {
-  const STORAGE_KEY = `repeater-${props._patternId}`;
-
-  const loadInitialFields = (): number => {
-    const storedFields = localStorage.getItem(STORAGE_KEY);
-    if (storedFields) {
-      return parseInt(JSON.parse(storedFields), 10) || 0;
-    }
-    return 0;
-  };
-
-  const { control } = useForm({
-    defaultValues: {
-      fields: Array(loadInitialFields()).fill({}),
-    },
-  });
-
   const { fields, append, remove } = useFieldArray({
-    control,
     name: 'fields',
   });
 

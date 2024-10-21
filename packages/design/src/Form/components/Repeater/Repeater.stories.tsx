@@ -2,10 +2,24 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import Repeater from './index.js';
 import { expect, userEvent } from '@storybook/test';
+import { FormProvider, useForm } from 'react-hook-form';
 
 export default {
   title: 'patterns/Repeater',
   component: Repeater,
+  decorators: [
+    (Story, args) => {
+      const FormDecorator = () => {
+        const formMethods = useForm();
+        return (
+          <FormProvider {...formMethods}>
+            <Story {...args} />
+          </FormProvider>
+        );
+      };
+      return <FormDecorator />;
+    },
+  ],
   tags: ['autodocs'],
 } satisfies Meta<typeof Repeater>;
 
