@@ -54,8 +54,6 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
                 <button
                   type="submit"
                   className="usa-button usa-button--secondary usa-button--unstyled"
-                  name={`btn_repeater-${props._patternId}`}
-                  value={`add_repeater-${props._patternId}`}
                   onClick={e => {
                     e.preventDefault();
                     append({});
@@ -71,8 +69,6 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
             <button
               type="submit"
               className="usa-button usa-button--outline"
-              name={`btn_repeater-${props._patternId}`}
-              value={`add_repeater-${props._patternId}`}
               onClick={e => {
                 e.preventDefault();
                 append({});
@@ -83,8 +79,6 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
             <button
               type="submit"
               className="usa-button usa-button--outline"
-              name={`btn_repeater-${props._patternId}`}
-              value={`delete_repeater-${props._patternId}`}
               onClick={e => {
                 e.preventDefault();
                 remove(fields.length - 1);
