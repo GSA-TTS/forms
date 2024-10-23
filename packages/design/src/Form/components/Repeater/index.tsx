@@ -1,10 +1,13 @@
 import React from 'react';
-import { useFieldArray } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 import { type RepeaterProps } from '@atj/forms';
 import { type PatternComponent } from '../../index.js';
 
 const Repeater: PatternComponent<RepeaterProps> = props => {
+  const { control } = useForm();
+
   const { fields, append, remove } = useFieldArray({
+    control,
     name: 'fields',
   });
 
