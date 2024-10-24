@@ -16,12 +16,14 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
   const renderWithUniqueIds = (children: React.ReactNode, index: number) => {
     return React.Children.map(children, child => {
       if (React.isValidElement(child) && child?.props?.component?.props) {
+        console.group('renderwithuniqueids');
+        console.log(child.props);
+        console.groupEnd();
         return React.cloneElement(child as React.ReactElement, {
           component: {
             ...child.props.component,
             props: {
               ...child.props.component.props,
-              idSuffix: `.repeater.${index}`,
             },
           },
         });

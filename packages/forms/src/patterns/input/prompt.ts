@@ -19,6 +19,13 @@ export const createPrompt: CreatePrompt<InputPattern> = (
       extraAttributes['error'] = isValidResult.error;
     }
   }
+
+  console.group('input/createprompt');
+  console.log(session);
+  console.log(options);
+  console.log(pattern);
+  console.groupEnd();
+
   return {
     props: {
       _patternId: pattern.id,
