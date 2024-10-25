@@ -9,6 +9,7 @@ import PageSet from './PageSet/index.js';
 import Paragraph from './Paragraph/index.js';
 import RadioGroup from './RadioGroup/index.js';
 import RichText from './RichText/index.js';
+import Select from './Select/index.js';
 import Sequence from './Sequence/index.js';
 import SubmissionConfirmation from './SubmissionConfirmation/index.js';
 import TextInput from './TextInput/index.js';
@@ -24,6 +25,7 @@ export const defaultPatternComponents: ComponentForPattern = {
   paragraph: Paragraph as PatternComponent,
   'radio-group': RadioGroup as PatternComponent,
   'rich-text': RichText as PatternComponent,
+  select: Select as PatternComponent,
   sequence: Sequence as PatternComponent,
   'submission-confirmation': SubmissionConfirmation as PatternComponent,
 };

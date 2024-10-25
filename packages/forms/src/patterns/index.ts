@@ -8,7 +8,7 @@ import { inputConfig } from './input/index.js';
 import { pageConfig } from './page/index.js';
 import { pageSetConfig } from './page-set/index.js';
 import { paragraphConfig } from './paragraph.js';
-import { radioGroupConfig } from './radio-group.js';
+import { selectConfig } from './radio-group.js';
 import { richTextConfig } from './rich-text.js';
 import { sequenceConfig } from './sequence.js';
 
@@ -26,7 +26,7 @@ export const defaultFormConfig: FormConfig = {
     'page-set': pageSetConfig,
     paragraph: paragraphConfig,
     'rich-text': richTextConfig,
-    'radio-group': radioGroupConfig,
+    'radio-group': selectConfig,
     sequence: sequenceConfig,
   },
 } as const;

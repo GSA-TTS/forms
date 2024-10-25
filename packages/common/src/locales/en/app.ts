@@ -41,5 +41,11 @@ export const en = {
       fieldLabel: 'Radio group label',
       errorTextMustContainChar: 'String must contain at least 1 character(s)',
     },
+    select: {
+      ...defaults,
+      displayName: 'Select label',
+      fieldLabel: 'Select label',
+      errorTextMustContainChar: 'String must contain at least 1 character(s)',
+    },
   },
 };
