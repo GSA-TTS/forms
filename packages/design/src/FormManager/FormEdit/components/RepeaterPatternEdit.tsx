@@ -1,15 +1,16 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { type PatternId, type FieldsetProps } from '@atj/forms';
-import { FieldsetPattern } from '@atj/forms';
+import { type PatternId, type RepeaterProps } from '@atj/forms';
+import { RepeaterPattern } from '@atj/forms';
 
 import {
   CompoundAddPatternButton,
   CompoundAddNewPatternButton,
 } from '../AddPatternDropdown.js';
 import { PatternComponent } from '../../../Form/index.js';
-import Fieldset from '../../../Form/components/Fieldset/index.js';
+import Repeater from '../../../Form/components/Repeater/index.js';
+import RepeaterEditView from '../../../Form/components/Repeater/edit.js';
 import { useFormManagerStore } from '../../store.js';
 import { PatternEditComponent } from '../types.js';
 
@@ -18,7 +19,7 @@ import { PatternEditForm } from './common/PatternEditForm.js';
 import { usePatternEditFormContext } from './common/hooks.js';
 import styles from '../formEditStyles.module.css';
 
-const FieldsetEdit: PatternEditComponent<FieldsetProps> = ({
+const RepeaterEdit: PatternEditComponent<RepeaterProps> = ({
   focus,
   previewProps,
 }) => {
@@ -30,13 +31,13 @@ const FieldsetEdit: PatternEditComponent<FieldsetProps> = ({
           editComponent={<EditComponent patternId={focus.pattern.id} />}
         ></PatternEditForm>
       ) : (
-        <FieldsetPreview {...previewProps} />
+        <RepeaterPreview {...previewProps} />
       )}
     </>
   );
 };
 
-const FieldsetPreview: PatternComponent<FieldsetProps> = props => {
+const RepeaterPreview: PatternComponent<RepeaterProps> = props => {
   const { addPatternToCompoundField, deletePattern } = useFormManagerStore(
     state => ({
       addPatternToCompoundField: state.addPatternToCompoundField,
@@ -48,7 +49,7 @@ const FieldsetPreview: PatternComponent<FieldsetProps> = props => {
   );
   return (
     <>
-      <Fieldset {...(props as FieldsetProps)}>
+      <RepeaterEditView {...(props as RepeaterProps)}>
         {props.children}
         {pattern && pattern.data.patterns.length === 0 && (
           <div
@@ -89,7 +90,7 @@ const FieldsetPreview: PatternComponent<FieldsetProps> = props => {
           >
             <div className={classNames(styles.usaAlertBody, 'usa-alert__body')}>
               <CompoundAddPatternButton
-                title="Add question to fieldset"
+                title="Add question to repeater"
                 patternSelected={patternType =>
                   addPatternToCompoundField(patternType, props._patternId)
                 }
@@ -97,17 +98,17 @@ const FieldsetPreview: PatternComponent<FieldsetProps> = props => {
             </div>
           </div>
         )}
-      </Fieldset>
+      </RepeaterEditView>
     </>
   );
 };
 
 const EditComponent = ({ patternId }: { patternId: PatternId }) => {
-  const pattern = useFormManagerStore<FieldsetPattern>(
+  const pattern = useFormManagerStore<RepeaterPattern>(
     state => state.session.form.patterns[patternId]
   );
   const { fieldId, getFieldState, register } =
-    usePatternEditFormContext<FieldsetPattern>(patternId);
+    usePatternEditFormContext<RepeaterPattern>(patternId);
   const legend = getFieldState('legend');
   return (
     <div className="grid-row">
@@ -141,10 +142,10 @@ const EditComponent = ({ patternId }: { patternId: PatternId }) => {
           autoFocus
         ></input>
       </div>
-      <Fieldset type="fieldset" _patternId={patternId} />
+      <Repeater type="repeater" _patternId={patternId} />
       <PatternEditActions />
     </div>
   );
 };
 
-export default FieldsetEdit;
+export default RepeaterEdit;

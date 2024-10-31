@@ -3,6 +3,7 @@ import { type FormConfig } from '../pattern.js';
 import { addressConfig } from './address/index.js';
 import { checkboxConfig } from './checkbox.js';
 import { fieldsetConfig } from './fieldset/index.js';
+import { repeaterConfig } from './repeater/index.js';
 import { formSummaryConfig } from './form-summary.js';
 import { inputConfig } from './input/index.js';
 import { pageConfig } from './page/index.js';
@@ -25,6 +26,7 @@ export const defaultFormConfig: FormConfig = {
     page: pageConfig,
     'page-set': pageSetConfig,
     paragraph: paragraphConfig,
+    repeater: repeaterConfig,
     'rich-text': richTextConfig,
     'radio-group': radioGroupConfig,
     sequence: sequenceConfig,
@@ -42,4 +44,5 @@ export * from './checkbox.js';
 export * from './form-summary.js';
 export * from './paragraph.js';
 export * from './radio-group.js';
+export * from './repeater/index.js';
 export * from './sequence.js';

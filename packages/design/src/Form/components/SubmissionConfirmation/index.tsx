@@ -5,7 +5,7 @@ import { type PatternComponent } from '../../../Form/index.js';
 
 const SubmissionConfirmation: PatternComponent<
   SubmissionConfirmationProps
-> = props => {
+> = (/* props */) => {
   return (
     <>
       <legend className="usa-legend usa-legend--large">
@@ -39,30 +39,35 @@ const SubmissionConfirmation: PatternComponent<
             Submission details
           </button>
         </h4>
-        <div
-          id="submission-confirmation-table"
-          className="usa-accordion__content usa-prose"
-          hidden={true}
-        >
-          <table className="usa-table usa-table--striped width-full">
-            <thead>
-              <tr>
-                <th scope="col">Form field</th>
-                <th scope="col">Provided value</th>
-              </tr>
-            </thead>
-            <tbody>
-              {props.table.map((row, index) => {
-                return (
-                  <tr key={index}>
-                    <th scope="row">{row.label}</th>
-                    <td>{row.value}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+        {/*
+          EG: turn this off for now. Will need some design perhaps to see what the presentation
+          should look like. This was a minimal blocker for the repeater field due to the flat data structure
+          that was there previously.
+        */}
+        {/*<div*/}
+        {/*  id="submission-confirmation-table"*/}
+        {/*  className="usa-accordion__content usa-prose"*/}
+        {/*  hidden={true}*/}
+        {/*>*/}
+        {/*  <table className="usa-table usa-table--striped width-full">*/}
+        {/*    <thead>*/}
+        {/*      <tr>*/}
+        {/*        <th scope="col">Form field</th>*/}
+        {/*        <th scope="col">Provided value</th>*/}
+        {/*      </tr>*/}
+        {/*    </thead>*/}
+        {/*    <tbody>*/}
+        {/*      {props.table.map((row, index) => {*/}
+        {/*        return (*/}
+        {/*          <tr key={index}>*/}
+        {/*            <th scope="row">{row.label}</th>*/}
+        {/*            <td>{row.value}</td>*/}
+        {/*          </tr>*/}
+        {/*        );*/}
+        {/*      })}*/}
+        {/*    </tbody>*/}
+        {/*  </table>*/}
+        {/*</div>*/}
       </div>
     </>
   );

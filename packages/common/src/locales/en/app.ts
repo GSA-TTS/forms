@@ -41,5 +41,10 @@ export const en = {
       fieldLabel: 'Radio group label',
       errorTextMustContainChar: 'String must contain at least 1 character(s)',
     },
+    repeater: {
+      ...defaults,
+      displayName: 'Repeatable Group',
+      errorTextMustContainChar: 'String must contain at least 1 character(s)',
+    },
   },
 };

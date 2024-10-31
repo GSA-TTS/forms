@@ -10,6 +10,7 @@ import { type FormSession, nullSession, sessionIsComplete } from './session.js';
 export type TextInputProps = PatternProps<{
   type: 'input';
   inputId: string;
+  idSuffix?: string;
   value: string;
   label: string;
   required: boolean;
@@ -54,6 +55,7 @@ export type ZipcodeProps = PatternProps<{
 export type CheckboxProps = PatternProps<{
   type: 'checkbox';
   id: string;
+  idSuffix?: string;
   label: string;
   defaultChecked: boolean;
 }>;
@@ -73,12 +75,21 @@ export type RadioGroupProps = PatternProps<{
   type: 'radio-group';
   groupId: string;
   legend: string;
+  idSuffix?: string;
   options: {
     id: string;
     name: string;
     label: string;
     defaultChecked: boolean;
   }[];
+}>;
+
+export type RepeaterProps = PatternProps<{
+  type: 'repeater';
+  legend?: string;
+  showControls?: boolean;
+  subHeading?: string;
+  error?: FormError;
 }>;
 
 export type SequenceProps = PatternProps<{

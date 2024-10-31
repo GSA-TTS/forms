@@ -15,6 +15,7 @@ import { type InputPattern } from '../../patterns/input/index.js';
 import { type ParagraphPattern } from '../../patterns/paragraph.js';
 import { type CheckboxPattern } from '../../patterns/checkbox.js';
 import { type RadioGroupPattern } from '../../patterns/radio-group.js';
+import { type RepeaterPattern } from '../../patterns/repeater/index.js';
 
 import { uint8ArrayToBase64 } from '../util.js';
 import { type DocumentFieldMap } from '../types.js';
@@ -80,11 +81,26 @@ const Fieldset = z.object({
   page: z.union([z.number(), z.string()]),
 });
 
+const Repeater = z.object({
+  component_type: z.literal('repeater'),
+  legend: z.string(),
+  fields: z.union([TxInput, Checkbox]).array(),
+  page: z.union([z.number(), z.string()]),
+});
+
 const ExtractedObject = z.object({
   raw_text: z.string(),
   form_summary: FormSummary,
   elements: z
-    .union([TxInput, Checkbox, RadioGroup, Paragraph, Fieldset, RichText])
+    .union([
+      TxInput,
+      Checkbox,
+      RadioGroup,
+      Paragraph,
+      Fieldset,
+      RichText,
+      Repeater,
+    ])
     .array(),
 });
 
@@ -313,6 +329,74 @@ export const processApiResponse = async (json: any): Promise<ParsedPdf> => {
         defaultFormConfig,
         parsedPdf,
         'fieldset',
+        {
+          legend: element.legend,
+          patterns: fieldsetPatterns,
+        }
+      );
+      if (fieldset) {
+        pagePatterns[element.page] = (pagePatterns[element.page] || []).concat(
+          fieldset.id
+        );
+      }
+    }
+
+    if (element.component_type === 'repeater') {
+      for (const input of element.fields) {
+        if (input.component_type === 'text_input') {
+          const inputPattern = processPatternData<InputPattern>(
+            defaultFormConfig,
+            parsedPdf,
+            'input',
+            {
+              label: input.label,
+              required: false,
+              initial: '',
+              maxLength: 128,
+            }
+          );
+          if (inputPattern) {
+            fieldsetPatterns.push(inputPattern.id);
+            parsedPdf.outputs[inputPattern.id] = {
+              type: 'TextField',
+              name: input.id,
+              label: input.label,
+              value: '',
+              maxLength: 1024,
+              required: input.required,
+            };
+          }
+        }
+        if (input.component_type === 'checkbox') {
+          const checkboxPattern = processPatternData<CheckboxPattern>(
+            defaultFormConfig,
+            parsedPdf,
+            'checkbox',
+            {
+              label: input.label,
+              defaultChecked: false,
+            }
+          );
+          if (checkboxPattern) {
+            fieldsetPatterns.push(checkboxPattern.id);
+            parsedPdf.outputs[checkboxPattern.id] = {
+              type: 'CheckBox',
+              name: input.id,
+              label: input.label,
+              value: false,
+              required: true,
+            };
+          }
+        }
+      }
+    }
+
+    // Add fieldset to parsedPdf.patterns and rootSequence
+    if (element.component_type === 'repeater' && fieldsetPatterns.length > 0) {
+      const fieldset = processPatternData<RepeaterPattern>(
+        defaultFormConfig,
+        parsedPdf,
+        'repeater',
         {
           legend: element.legend,
           patterns: fieldsetPatterns,

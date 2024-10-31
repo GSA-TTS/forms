@@ -3,7 +3,7 @@ import { useFormManagerStore } from '../../../store.js';
 import styles from '../../formEditStyles.module.css';
 
 interface MovePatternDropdownProps {
-  isFieldset: boolean;
+  isCompound: boolean;
 }
 
 // Define the extended type for pages
@@ -18,7 +18,7 @@ interface PageWithLabel {
 }
 
 const MovePatternDropdown: React.FC<MovePatternDropdownProps> = ({
-  isFieldset,
+  isCompound,
 }) => {
   const context = useFormManagerStore(state => state.context);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -119,7 +119,7 @@ const MovePatternDropdown: React.FC<MovePatternDropdownProps> = ({
           }}
         >
           <span className="display-inline-block text-ttop">
-            {isFieldset ? 'Move fieldset' : 'Move question'}
+            {isCompound ? 'Move questions' : 'Move question'}
           </span>
           <svg
             className="usa-icon display-inline-block text-ttop"
@@ -186,19 +186,19 @@ const MovePatternDropdown: React.FC<MovePatternDropdownProps> = ({
             <button
               type="button"
               aria-label={
-                isFieldset
-                  ? 'Move fieldset to another page'
+                isCompound
+                  ? 'Move these questions to another page'
                   : 'Move question to another page'
               }
               title={
-                isFieldset
-                  ? 'Move fieldset to another page'
+                isCompound
+                  ? 'Move these questions to another page'
                   : 'Move question to another page'
               }
               className="usa-button margin-right-0"
               onClick={handleMovePattern}
             >
-              {isFieldset ? 'Move fieldset' : 'Move question'}
+              {isCompound ? 'Move fieldset' : 'Move question'}
             </button>
           </p>
         </div>

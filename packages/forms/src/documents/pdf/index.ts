@@ -19,4 +19,5 @@ export type PDFFieldType =
   | 'OptionList'
   | 'RadioGroup'
   | 'Paragraph'
+  | 'Repeater'
   | 'RichText';
