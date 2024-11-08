@@ -72,7 +72,7 @@ export class AstroService extends Construct {
     new cloudfoundry.app.App(this, `${id}-app`, {
       name: `${id}-app`,
       space: spaceId,
-      dockerImage: `ghcr.io/gsa-tts/atj-platform/${imageName}`,
+      dockerImage: `ghcr.io/gsa-tts/forms/${imageName}`,
       memory: 1024,
       diskQuota: 4096,
       healthCheckType: 'http',
