@@ -1,6 +1,6 @@
-# 10x Access to Justice Tooling
+# 10x Forms Platform
 
-Test bed for ATJ platform tooling, completed as part of the [10x Digital Access to Justice Platform](https://trello.com/c/25Jl6NwJ/207-digital-access-to-justice-platform) project.
+Test bed for 10x forms tooling, completed as part of the [10x Forms Platform](https://github.com/orgs/GSA-TTS/projects/38?pane=issue&itemId=58755590&issue=GSA-TTS%7C10x-projects%7C29) project.
 
 ## Overview
 
@@ -17,13 +17,13 @@ The platform is made up of the following high-level terms.
 
 ### Key personas
 
-- Content authors: legal experts who craft guided interview experiences via a "no code" interface
-- Self-represented litigants (SREs): end-users who interact with the court via guided interviews created by content authors
+- Form Builders: government program office staff or UX experts who create and publish "guided interview" web experiences for members of the public and fellow government staff via a friendly browser-based app, no coding necessary. For examples of "guided interview" style web experiences, check out [IRS Direct File](https://coforma.io/case-studies/irs-direct-file#results) (filing your taxes), [GetCalFresh](https://codeforamerica.org/news/overcoming-barriers-setting-expectations-for-calfresh-eligibility/) (Applying for food benefits) and [Court Forms Online](https://courtformsonline.org/) (filing court documents).
+- Form Fillers: folks who provide info to the government via guided interviews created by Form Builders
 
 ### Things
 
-- **Blueprint**: produced by a content author, the blueprint defines the structure of an interactive session between a court and an SRL
-- **Conversation**: one instance of a blueprint; the interactive session between a court and an SRL. Other terms for this concept include dialogue or session.
+- **Blueprint**: produced by a form builder, the blueprint defines the structure of an interactive session between a government office and a form filler.
+- **Conversation**: one instance of a blueprint; the interactive session between a government office and a form filler. Other terms for this concept include dialogue or session.
 - **Pattern/template**: the building blocks of a blueprint, patterns implement UX best-practices, defining the content and behavior of the user interface.
 - **Prompt**: produced by a pattern, the prompt defines what is presented to the end user at single point in a conversation.
 - **Component**: user interface component that acts as the building block of prompts.
@@ -61,6 +61,7 @@ To start developing with hot reloading, use:
 ```bash
 pnpm build
 ```
+
 then run:
 
 ```bash
