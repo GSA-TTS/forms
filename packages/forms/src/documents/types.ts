@@ -8,6 +8,14 @@ export type DocumentFieldValue =
       required: boolean;
     }
   | {
+      type: 'Attachment';
+      name: string;
+      label: string;
+      value: string;
+      maxLength?: number;
+      required: boolean;
+    }
+  | {
       type: 'CheckBox';
       name: string;
       label: string;

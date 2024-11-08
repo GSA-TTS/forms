@@ -1,5 +1,6 @@
 import { type FormConfig } from '../pattern.js';
 
+import { attachmentConfig } from './attachment/index.js';
 import { addressConfig } from './address/index.js';
 import { checkboxConfig } from './checkbox.js';
 import { dateOfBirthConfig } from './date-of-birth/date-of-birth.js';
@@ -21,6 +22,7 @@ import { sequenceConfig } from './sequence.js';
 export const defaultFormConfig: FormConfig = {
   patterns: {
     address: addressConfig,
+    attachment: attachmentConfig,
     checkbox: checkboxConfig,
     'date-of-birth': dateOfBirthConfig,
     fieldset: fieldsetConfig,
@@ -37,6 +39,9 @@ export const defaultFormConfig: FormConfig = {
   },
 } as const;
 
+export * from './attachment/index.js';
+export { type AttachmentPattern } from './attachment/config.js';
+export * from './attachment/file-type-options.js';
 export * from './address/index.js';
 export * from './checkbox.js';
 export * from './date-of-birth/date-of-birth.js';

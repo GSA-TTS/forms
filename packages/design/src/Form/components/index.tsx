@@ -1,5 +1,6 @@
 import { PatternComponent, type ComponentForPattern } from '../index.js';
 
+import Attachment from './Attachment/index.js';
 import Address from './Address/index.js';
 import Checkbox from './Checkbox/index.js';
 import Fieldset from './Fieldset/index.js';
@@ -17,6 +18,7 @@ import SubmissionConfirmation from './SubmissionConfirmation/index.js';
 import TextInput from './TextInput/index.js';
 
 export const defaultPatternComponents: ComponentForPattern = {
+  attachment: Attachment as PatternComponent,
   address: Address as PatternComponent,
   checkbox: Checkbox as PatternComponent,
   fieldset: Fieldset as PatternComponent,

@@ -6,6 +6,8 @@ import {
 } from '../blueprint.js';
 import { type Pattern } from '../pattern.js';
 import { type InputPattern } from '../patterns/input/config.js';
+import { type AttachmentPattern } from '../patterns/attachment/config.js';
+import { attachmentFileTypeMimes } from '../patterns/attachment/file-type-options.js';
 import { type SequencePattern } from '../patterns/sequence.js';
 import { type Blueprint } from '../types.js';
 
@@ -126,6 +128,20 @@ export const addDocumentFieldsToForm = (
           maxLength: 128,
         },
       } satisfies InputPattern);
+    } else if (field.type === 'Attachment') {
+      patterns.push({
+        type: 'attachment',
+        id: patternId,
+        data: {
+          label: field.label,
+          required: false,
+          maxAttachments: 1,
+          allowedFileTypes: attachmentFileTypeMimes as [
+            (typeof attachmentFileTypeMimes)[number],
+          ],
+          maxFileSizeMB: 10,
+        },
+      } satisfies AttachmentPattern);
     } else if (field.type === 'RadioGroup') {
       patterns.push({
         type: 'input',

@@ -14,6 +14,7 @@ export type PDFField = {
 };
 export type PDFFieldType =
   | 'TextField'
+  | 'Attachment'
   | 'CheckBox'
   | 'Dropdown'
   | 'OptionList'

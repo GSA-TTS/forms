@@ -7,6 +7,14 @@ const defaults = {
 
 export const en = {
   patterns: {
+    attachment: {
+      ...defaults,
+      displayName: 'Attachment',
+      maxAttachmentsLabel: 'Max attachments',
+      allowedFileTypesLabel: 'Allowable file types',
+      errorTextMustContainChar: 'String must contain at least 1 character(s)',
+      errorUnsupportedFileType: 'Invalid file type found.',
+    },
     checkbox: {
       ...defaults,
       displayName: 'Checkbox',
