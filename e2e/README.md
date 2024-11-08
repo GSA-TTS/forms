@@ -24,22 +24,22 @@ First, make sure the script is executable:
 
 ```bash
 # from the project root
-chmod +x ./e2e/scripts/end-to-end.sh
+chmod +x ./e2e/script/end-to-end.sh
 ```
 
 Examples:
 
 ```bash
 # builds the test container (also will run the tests)
-./e2e/scripts/end-to-end.sh -f build_container -t test
+./e2e/script/end-to-end.sh -f build_container -t test
 ```
 
 ```bash
 # builds the serve container and start it
-./e2e/scripts/end-to-end.sh -f build_container -t serve -f run_container
+./e2e/script/end-to-end.sh -f build_container -t serve -f run_container
 ```
 
 ```bash
 # Runs the default tasks `end_to_end` and `interaction`
-./e2e/scripts/end-to-end.sh
+./e2e/script/end-to-end.sh
 ```

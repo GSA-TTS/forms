@@ -1,27 +1,28 @@
 import { type VoidResult } from '@atj/common';
 import {
-  type Blueprint,
-  type FormConfig,
-  type FormErrors,
-  type FormSummary,
-  type Pattern,
-  type PatternId,
-  type PatternMap,
-  addDocument,
   addPageToPageSet,
   addPatternToFieldset,
   addPatternToPage,
   copyPattern,
-  createDefaultPattern,
   createOnePageBlueprint,
-  getPattern,
   movePatternBetweenPages,
   removePatternFromBlueprint,
   updateFormSummary,
+} from '../blueprint.js';
+import { addDocument } from '../documents/document.js';
+import type { FormErrors } from '../error.js';
+import {
+  createDefaultPattern,
+  getPattern,
   updatePatternFromFormData,
-} from '../index.js';
+  type FormConfig,
+  type Pattern,
+  type PatternId,
+  type PatternMap,
+} from '../pattern.js';
+import { type FieldsetPattern } from '../patterns/fieldset/config.js';
 import { type PageSetPattern } from '../patterns/page-set/config.js';
-import { type FieldsetPattern } from '../patterns/fieldset/index.js';
+import type { Blueprint, FormSummary } from '../types.js';
 
 export class BlueprintBuilder {
   bp: Blueprint;

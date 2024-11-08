@@ -1,8 +1,8 @@
 import type { APIRoute } from 'astro';
-import { getAstroAppContext } from '../../../context.js';
+import { getServerContext } from '../../../config/astro.js';
 
 export const GET: APIRoute = async context => {
-  const ctx = await getAstroAppContext(context);
+  const ctx = await getServerContext(context);
   const formId = context.params.id;
   if (formId === undefined) {
     return new Response('Form ID is required', {
@@ -20,7 +20,7 @@ export const GET: APIRoute = async context => {
 };
 
 export const DELETE: APIRoute = async context => {
-  const ctx = await getAstroAppContext(context);
+  const ctx = await getServerContext(context);
   const formId = context.params.id;
   if (formId === undefined) {
     return new Response('Form ID is required', {
@@ -38,7 +38,7 @@ export const DELETE: APIRoute = async context => {
 };
 
 export const PUT: APIRoute = async context => {
-  const ctx = await getAstroAppContext(context);
+  const ctx = await getServerContext(context);
 
   const formId = context.params.id;
   if (formId === undefined) {

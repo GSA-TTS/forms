@@ -18,7 +18,15 @@ const configSchema = z.object({
 });
 export type CheckboxPattern = Pattern<z.infer<typeof configSchema>>;
 
-const PatternOutput = z.boolean();
+export const checkbox = () =>
+  z.union([
+    z.literal('on').transform(() => true),
+    z.literal('off').transform(() => false),
+    z.literal(undefined).transform(() => false),
+    z.boolean(),
+  ]);
+
+const PatternOutput = checkbox();
 type PatternOutput = z.infer<typeof PatternOutput>;
 
 export const checkboxConfig: PatternConfig<CheckboxPattern, PatternOutput> = {
@@ -57,9 +65,8 @@ export const checkboxConfig: PatternConfig<CheckboxPattern, PatternOutput> = {
         type: 'checkbox',
         id: pattern.id,
         name: pattern.id,
-        value: sessionValue,
         label: pattern.data.label,
-        defaultChecked: pattern.data.defaultChecked,
+        defaultChecked: sessionValue, // pattern.data.defaultChecked,
         ...extraAttributes,
       } as CheckboxProps,
       children: [],

@@ -1,8 +1,8 @@
 ---
 import { getBranchTreeUrl } from '../lib/github';
 
-import { getAstroAppContext } from '../context';
-const { github } = await getAstroAppContext(Astro);
+import { getServerContext } from '../config/astro.js';
+const { github } = await getServerContext(Astro);
 ---
 
 <footer class="usa-footer usa-footer--slim">

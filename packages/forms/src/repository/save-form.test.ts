@@ -2,10 +2,11 @@ import { expect, it } from 'vitest';
 
 import { type DbTestContext, describeDatabase } from '@atj/database/testing';
 
+import { type Blueprint } from '../index.js';
 import { saveForm } from './save-form.js';
 import { addForm } from './add-form.js';
 
-const TEST_FORM = {
+const TEST_FORM: Blueprint = {
   summary: {
     title: 'Test form',
     description: 'Test description',
@@ -20,7 +21,14 @@ const TEST_FORM = {
       },
     },
   },
-  outputs: [],
+  outputs: [
+    {
+      data: new Uint8Array([1, 2, 3]),
+      path: 'test.pdf',
+      fields: {},
+      formFields: {},
+    },
+  ],
 };
 
 describeDatabase('saveForm', () => {
@@ -47,7 +55,7 @@ describeDatabase('saveForm', () => {
 
     expect(result[0].id).toEqual(addResult.data.id);
     expect(result[0].data).toEqual(
-      '{"summary":{"title":"Updated title","description":"Updated description"},"root":"root","patterns":{"root":{"type":"sequence","id":"root","data":{"patterns":[]}}},"outputs":[]}'
+      '{"summary":{"title":"Updated title","description":"Updated description"},"root":"root","patterns":{"root":{"type":"sequence","id":"root","data":{"patterns":[]}}},"outputs":[{"data":"AQID","path":"test.pdf","fields":{},"formFields":{}}]}'
     );
   });
 });

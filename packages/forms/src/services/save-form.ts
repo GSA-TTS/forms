@@ -8,7 +8,7 @@ type SaveFormError = {
   message: string;
 };
 
-type SaveForm = (
+export type SaveForm = (
   ctx: FormServiceContext,
   formId: string,
   form: Blueprint

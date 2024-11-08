@@ -10,6 +10,8 @@ import {
 } from './common/story-helper.js';
 import FormEdit from '../index.js';
 import { enLocale as message } from '@atj/common';
+import { expect } from '@storybook/test';
+import { within } from '@testing-library/react';
 
 const pattern: CheckboxPattern = {
   id: '1',
@@ -30,12 +32,19 @@ export default storyConfig;
 
 export const Basic: StoryObj<typeof CheckboxPatternEdit> = {
   play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const updatedLabel = 'Updated checkbox pattern';
+
     await testUpdateFormFieldOnSubmit(
       canvasElement,
       message.patterns.checkbox.displayName,
       message.patterns.checkbox.fieldLabel,
-      'Updated checkbox pattern'
+      updatedLabel
     );
+
+    await expect(
+      await canvas.findByLabelText(updatedLabel)
+    ).toBeInTheDocument();
   },
 };
 

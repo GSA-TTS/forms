@@ -12,7 +12,7 @@ type FormListError = {
   message: string;
 };
 
-type GetFormList = (
+export type GetFormList = (
   ctx: FormServiceContext
 ) => Promise<Result<FormListItem[], FormListError>>;
 

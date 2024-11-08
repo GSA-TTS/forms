@@ -2,10 +2,10 @@
 import closeSvg from '@atj/design/static/uswds/img/usa-icons/close.svg';
 import logoSvg from '@atj/design/images/logo.svg';
 
-import { getAstroAppContext, getUserSession } from '../context';
+import { getServerContext, getUserSession } from '../config/astro.js';
 import * as routes from '../routes';
 
-const { baseUrl, title } = await getAstroAppContext(Astro);
+const { baseUrl, title } = await getServerContext(Astro);
 
 const getNavLinkClasses = (url: string) => {
   if (url === Astro.url.pathname) {
@@ -15,7 +15,7 @@ const getNavLinkClasses = (url: string) => {
   }
 };
 
-const { session, user } = getUserSession(Astro);
+const { session } = getUserSession(Astro);
 ---
 
 <div class="usa-overlay"></div>

@@ -3,8 +3,8 @@ import React, { useEffect } from 'react';
 import { mergeSession } from '@atj/forms';
 
 import Form from '../../Form/index.js';
+import { useRouteParams } from '../hooks.js';
 import { useFormManagerStore } from '../store.js';
-import { useRouteParams } from '../../FormRouter/hooks.js';
 
 export const FormPreview = () => {
   const { context, setSession } = useFormManagerStore(state => ({
@@ -15,8 +15,8 @@ export const FormPreview = () => {
   const { routeParams } = useRouteParams();
 
   useEffect(() => {
-    if (routeParams.page !== session.routeParams?.page) {
-      const newSession = mergeSession(session, { routeParams });
+    if (routeParams.page !== session.route?.params.page) {
+      const newSession = mergeSession(session, { route: session.route });
       setSession(newSession);
     }
   }, [routeParams]);

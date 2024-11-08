@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useFormManagerStore } from '../../../store.js';
 import styles from '../../formEditStyles.module.css';
+import type { Pattern } from '@atj/forms';
 
 interface MovePatternDropdownProps {
   isFieldset: boolean;
@@ -27,7 +28,9 @@ const MovePatternDropdown: React.FC<MovePatternDropdownProps> = ({
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const pages = useFormManagerStore(state =>
-    Object.values(state.session.form.patterns).filter(p => p.type === 'page')
+    Object.values<Pattern>(state.session.form.patterns).filter(
+      p => p.type === 'page'
+    )
   );
   const movePatternToPage = useFormManagerStore(state => state.movePattern);
   const focusPatternId = useFormManagerStore(state => state.focus?.pattern.id);

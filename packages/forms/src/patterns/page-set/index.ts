@@ -1,7 +1,20 @@
-import { type PatternConfig } from '../../pattern.js';
+import { type PatternConfig, type PatternId } from '../../pattern.js';
 
 import { type PageSetPattern, parseConfigData } from './config.js';
 import { createPrompt } from './prompt.js';
+
+export const createPageSet = (
+  id: PatternId,
+  pages?: PatternId[]
+): PageSetPattern => {
+  return {
+    id,
+    type: 'page-set',
+    data: {
+      pages: pages || [],
+    },
+  };
+};
 
 export const pageSetConfig: PatternConfig<PageSetPattern> = {
   displayName: 'Page set',

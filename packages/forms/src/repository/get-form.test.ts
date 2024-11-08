@@ -1,6 +1,8 @@
 import { expect, it } from 'vitest';
 
 import { type DbTestContext, describeDatabase } from '@atj/database/testing';
+
+import { type Blueprint } from '../index.js';
 import { getForm } from './get-form.js';
 
 describeDatabase('getForm', () => {
@@ -10,7 +12,7 @@ describeDatabase('getForm', () => {
       .insertInto('forms')
       .values({
         id: '45c66187-64e2-4d75-a45a-e80f1d035bc5',
-        data: '{"summary":{"title":"Test form","description":"Test description"},"root":"root","patterns":{"root":{"type":"sequence","id":"root","data":{"patterns":[]}}},"outputs":[]}',
+        data: '{"summary":{"title":"Title","description":"Description"},"root":"root","patterns":{"root":{"type":"sequence","id":"root","data":{"patterns":[]}}},"outputs":[{"data":"AQID","path":"test.pdf","fields":{},"formFields":{}}]}',
       })
       .execute();
 
@@ -18,23 +20,8 @@ describeDatabase('getForm', () => {
       db.ctx,
       '45c66187-64e2-4d75-a45a-e80f1d035bc5'
     );
-    expect(result).toEqual({
-      outputs: [],
-      patterns: {
-        root: {
-          data: {
-            patterns: [],
-          },
-          id: 'root',
-          type: 'sequence',
-        },
-      },
-      root: 'root',
-      summary: {
-        description: 'Test description',
-        title: 'Test form',
-      },
-    });
+    console.log(result);
+    expect(result).toEqual(TEST_FORM);
   });
 
   it<DbTestContext>('return null with non-existent form', async ({ db }) => {
@@ -45,3 +32,17 @@ describeDatabase('getForm', () => {
     expect(result).toBeNull();
   });
 });
+
+const TEST_FORM: Blueprint = {
+  summary: { title: 'Title', description: 'Description' },
+  root: 'root',
+  patterns: { root: { type: 'sequence', id: 'root', data: { patterns: [] } } },
+  outputs: [
+    {
+      data: new Uint8Array([1, 2, 3]),
+      path: 'test.pdf',
+      fields: {},
+      formFields: {},
+    },
+  ],
+};

@@ -13,6 +13,7 @@ export interface Database<T extends Engine = Engine> {
   users: UsersTable;
   sessions: SessionsTable<T>;
   forms: FormsTable;
+  form_sessions: FormSessionsTable;
 }
 
 interface UsersTable {
@@ -48,3 +49,14 @@ export type FormsTableInsertable = Insertable<FormsTable>;
 export type FormsTableUpdateable = Updateable<FormsTable>;
 
 export type DatabaseClient = Kysely<Database>;
+
+interface FormSessionsTable {
+  id: string;
+  form_id: string;
+  data: string;
+  created_at: Generated<Date>;
+  updated_at: Generated<Date>;
+}
+export type FormSessionsTableSelectable = Selectable<FormSessionsTable>;
+export type FormSessionsTableInsertable = Insertable<FormSessionsTable>;
+export type FormSessionsTableUpdateable = Updateable<FormSessionsTable>;

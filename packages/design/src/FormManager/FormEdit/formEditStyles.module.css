@@ -55,6 +55,10 @@
   padding-left: 0;
 }
 
+.draggableListItemWrapper .dateOfBirthPattern legend {
+  padding-left: 0;
+}
+
 .draggableListItemWrapper button {
   cursor: pointer;
 }
@@ -123,7 +127,7 @@
 }
 
 .draggableListWrapper:has(.patternActionWrapper .dropDown select:focus),
-.draggableListWrapper:has(.patternActionWrapper .dropDown:focus ) {
+.draggableListWrapper:has(.patternActionWrapper .dropDown:focus) {
   outline: 0;
 }
 
@@ -180,8 +184,6 @@
 }
 
 @media (min-width: 64.5em) {
-
-
   .moveToPage,
   .questionPosition {
     min-width: 18.75rem;

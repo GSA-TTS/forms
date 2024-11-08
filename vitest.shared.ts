@@ -1,4 +1,4 @@
-import type { UserConfig } from 'vitest/config';
+import type { ViteUserConfig } from 'vitest/config';
 
 export default {
   test: {
@@ -13,4 +13,4 @@ export default {
       reportOnFailure: true,
     },
   },
-} satisfies UserConfig;
+} satisfies ViteUserConfig;

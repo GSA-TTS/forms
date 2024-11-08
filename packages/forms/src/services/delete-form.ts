@@ -7,7 +7,7 @@ type DeleteFormError = {
   message: string;
 };
 
-type DeleteForm = (
+export type DeleteForm = (
   ctx: FormServiceContext,
   formId: string
 ) => Promise<VoidResult<DeleteFormError>>;

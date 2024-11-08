@@ -1,20 +1,22 @@
 import {
-  Blueprint,
-  Pattern,
   addFormOutput,
-  addPatterns,
   addPatternMap,
+  addPatterns,
   updateFormSummary,
-} from '../index.js';
-import { InputPattern } from '../patterns/input/index.js';
-import { SequencePattern } from '../patterns/sequence.js';
-import { PDFDocument, getDocumentFieldData } from './pdf/index.js';
+} from '../blueprint.js';
+import { type Pattern } from '../pattern.js';
+import { type InputPattern } from '../patterns/input/config.js';
+import { type SequencePattern } from '../patterns/sequence.js';
+import { type Blueprint } from '../types.js';
+
+import { type PDFDocument, getDocumentFieldData } from './pdf/index.js';
 import {
   type FetchPdfApiResponse,
   processApiResponse,
   fetchPdfApiResponse,
 } from './pdf/parsing-api.js';
-import { DocumentFieldMap } from './types.js';
+
+import { type DocumentFieldMap } from './types.js';
 
 export type DocumentTemplate = PDFDocument;
 
@@ -135,7 +137,7 @@ export const addDocumentFieldsToForm = (
           maxLength: 128,
         },
       } satisfies InputPattern);
-    } else if (field.type === 'Paragraph') {
+    } else if (field.type === 'Paragraph' || field.type === 'RichText') {
       // skip purely presentational fields
     } else if (field.type === 'not-supported') {
       console.error(`Skipping field: ${field.error}`);

@@ -8,18 +8,12 @@ type GetFormError = {
   message: string;
 };
 
-type GetForm = (
+export type GetForm = (
   ctx: FormServiceContext,
   formId: string
 ) => Promise<Result<Blueprint, GetFormError>>;
 
 export const getForm: GetForm = async (ctx, formId) => {
-  if (!ctx.isUserLoggedIn()) {
-    return failure({
-      status: 401,
-      message: 'You must be logged in to delete a form',
-    });
-  }
   const result = await ctx.repository.getForm(formId);
   if (result === null) {
     return failure({

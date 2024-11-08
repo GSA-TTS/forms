@@ -1,4 +1,5 @@
-import { type FormError, getRootPattern } from './index.js';
+import { getRootPattern } from './blueprint.js';
+import { type FormError } from './error.js';
 import {
   type FormConfig,
   type Pattern,
@@ -6,6 +7,13 @@ import {
   getPatternConfig,
 } from './pattern.js';
 import { type FormSession, nullSession, sessionIsComplete } from './session.js';
+import { type ActionName } from './submission.js';
+
+export type PackageDownloadProps = PatternProps<{
+  type: 'package-download';
+  text: string;
+  actions: PromptAction[];
+}>;
 
 export type TextInputProps = PatternProps<{
   type: 'input';
@@ -33,6 +41,11 @@ export type ParagraphProps = PatternProps<{
   style: 'indent' | 'normal' | 'heading' | 'subheading';
 }>;
 
+export type RichTextProps = PatternProps<{
+  type: 'rich-text';
+  text: string;
+}>;
+
 export type FieldsetProps = PatternProps<{
   type: 'fieldset';
   legend?: string;
@@ -55,7 +68,7 @@ export type CheckboxProps = PatternProps<{
 
 export type PageSetProps = PatternProps<{
   type: 'page-set';
-  pages: { title: string; active: boolean }[];
+  pages: { title: string; selected: boolean; url: string }[];
   actions: PromptAction[];
 }>;
 
@@ -76,6 +89,29 @@ export type RadioGroupProps = PatternProps<{
   }[];
 }>;
 
+export type SelectDropdownProps = PatternProps<{
+  type: 'select-dropdown';
+  selectId: string;
+  options: {
+    value: string;
+    label: string;
+  }[];
+  label: string;
+  required: boolean;
+  error?: FormError;
+}>;
+
+export type DateOfBirthProps = PatternProps<{
+  type: 'date-of-birth';
+  dayId: string;
+  monthId: string;
+  yearId: string;
+  label: string;
+  hint?: string;
+  required: boolean;
+  error?: FormError;
+}>;
+
 export type SequenceProps = PatternProps<{
   type: 'sequence';
 }>;
@@ -87,7 +123,7 @@ export type PatternProps<T = {}> = {
 
 export type SubmitAction = {
   type: 'submit';
-  submitAction: 'next' | 'submit';
+  submitAction: 'next' | 'submit' | ActionName;
   text: string;
 };
 export type LinkAction = {

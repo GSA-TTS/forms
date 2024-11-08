@@ -44,6 +44,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Install playwright
+        run: pnpm dlx playwright@1.48.1 install --with-deps
+
       # While most of the test suite is self-contained, the tests for the demo
       # servers require a prod build of @atj/server.
       - name: Build

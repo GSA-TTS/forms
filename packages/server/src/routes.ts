@@ -11,7 +11,7 @@ export const getLogoutConfirmUrl = (baseUrl: string) => {
 };
 
 export const getFormUrl = (baseUrl: string, formId: string) => {
-  return `${baseUrl}forms#${formId}`;
+  return `${baseUrl}forms/${formId}`;
 };
 
 export const getFormManagerUrlById = (baseUrl: string, formId: string) => {

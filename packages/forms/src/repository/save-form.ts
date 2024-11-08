@@ -1,14 +1,16 @@
-import { failure, success } from '@atj/common';
+import { type VoidResult, failure, success } from '@atj/common';
 import { type DatabaseContext } from '@atj/database';
 
 import { type Blueprint } from '../index.js';
 import { stringifyForm } from './serialize.js';
 
-export const saveForm = async (
+export type SaveForm = (
   ctx: DatabaseContext,
-  id: string,
-  blueprint: Blueprint
-) => {
+  formId: string,
+  form: Blueprint
+) => Promise<VoidResult>;
+
+export const saveForm: SaveForm = async (ctx, id, blueprint) => {
   const db = await ctx.getKysely();
 
   return await db

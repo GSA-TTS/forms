@@ -10,6 +10,7 @@ import checkboxIcon from './images/checkbox-icon.svg';
 import dateIcon from './images/date-icon.svg';
 import dropDownIcon from './images/dropdown-icon.svg';
 import dropDownOptionIcon from './images/dropdownoption-icon.svg';
+import richTextIcon from './images/richtext-icon.svg';
 import longanswerIcon from './images/longanswer-icon.svg';
 import pageIcon from './images/page-icon.svg';
 import shortanswerIcon from './images/shortanswer-icon.svg';
@@ -21,9 +22,10 @@ import classNames from 'classnames';
 const icons: Record<string, string | any> = {
   'block-icon.svg': blockIcon,
   'checkbox-icon.svg': checkboxIcon,
-  'date-icon.svg.svg': dateIcon,
+  'date-icon.svg': dateIcon,
   'dropdown-icon.svg': dropDownIcon,
   'dropdownoption-icon.svg': dropDownOptionIcon,
+  'richtext-icon.svg': richTextIcon,
   'longanswer-icon.svg': longanswerIcon,
   'page-icon.svg': pageIcon,
   'shortanswer-icon.svg': shortanswerIcon,
@@ -88,14 +90,24 @@ const sidebarPatterns: DropdownPattern[] = [
   ['form-summary', defaultFormConfig.patterns['form-summary']],
   ['fieldset', defaultFormConfig.patterns['fieldset']],
   ['input', defaultFormConfig.patterns['input']],
+  ['checkbox', defaultFormConfig.patterns['checkbox']],
   ['paragraph', defaultFormConfig.patterns['paragraph']],
+  ['rich-text', defaultFormConfig.patterns['rich-text']],
   ['radio-group', defaultFormConfig.patterns['radio-group']],
+  ['package-download', defaultFormConfig.patterns['package-download']],
+  ['select-dropdown', defaultFormConfig.patterns['select-dropdown']],
+  ['date-of-birth', defaultFormConfig.patterns['date-of-birth']],
 ] as const;
 export const fieldsetPatterns: DropdownPattern[] = [
   ['form-summary', defaultFormConfig.patterns['form-summary']],
   ['input', defaultFormConfig.patterns['input']],
+  ['checkbox', defaultFormConfig.patterns['checkbox']],
   ['paragraph', defaultFormConfig.patterns['paragraph']],
+  ['rich-text', defaultFormConfig.patterns['rich-text']],
   ['radio-group', defaultFormConfig.patterns['radio-group']],
+  ['package-download', defaultFormConfig.patterns['package-download']],
+  ['select-dropdown', defaultFormConfig.patterns['select-dropdown']],
+  ['date-of-birth', defaultFormConfig.patterns['date-of-birth']],
 ] as const;
 
 export const SidebarAddPatternMenuItem = ({

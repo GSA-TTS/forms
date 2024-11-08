@@ -1,12 +1,7 @@
 /**
  * @vitest-environment jsdom
  */
-import { expect, it } from 'vitest';
+import { describeStories } from '../../../test-helper.js';
+import meta, * as stories from './CheckboxPatternEdit.stories.js';
 
-it('Is a placeholder test for now', () => {
-  expect(true).to.be.true;
-});
-// import { describeStories } from '../../../test-helper';
-// import meta, * as stories from './CheckboxPatternEdit.stories';
-
-// describeStories(meta, stories);
+describeStories(meta, stories);

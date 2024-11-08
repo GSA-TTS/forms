@@ -1,6 +1,15 @@
 import { type DatabaseContext } from '@atj/database';
 
-export const getFormList = async (ctx: DatabaseContext) => {
+export type GetFormList = (ctx: DatabaseContext) => Promise<
+  | {
+      id: string;
+      title: string;
+      description: string;
+    }[]
+  | null
+>;
+
+export const getFormList: GetFormList = async ctx => {
   const db = await ctx.getKysely();
   const rows = await db.selectFrom('forms').select(['id', 'data']).execute();
 

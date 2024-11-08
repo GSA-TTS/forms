@@ -36,7 +36,6 @@ export const describeDatabase = (
       if (!connectionDetails) {
         throw new Error('Connection details not found');
       }
-
       const { connectionUri, databaseName } =
         await createTestDatabase(connectionDetails);
       const ctx = new PostgresDatabaseContext(connectionUri);

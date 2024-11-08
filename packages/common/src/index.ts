@@ -1,4 +1,4 @@
-export { createService } from './service.js';
+export { type ServiceMethod, createService } from './service.js';
 
 export type Success<T> = { success: true; data: T };
 export type VoidSuccess = { success: true };

@@ -2,10 +2,12 @@ import { type VoidResult, failure } from '@atj/common';
 
 import { type DatabaseContext } from '@atj/database';
 
-export const deleteForm = async (
+export type DeleteForm = (
   ctx: DatabaseContext,
   formId: string
-): Promise<VoidResult> => {
+) => Promise<VoidResult>;
+
+export const deleteForm: DeleteForm = async (ctx, formId) => {
   const db = await ctx.getKysely();
 
   const deleteResult = await db

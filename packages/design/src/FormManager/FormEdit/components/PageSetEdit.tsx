@@ -5,7 +5,6 @@ import { getPattern, type PageSetProps } from '@atj/forms';
 import { PatternEditComponent } from '../types.js';
 
 import ActionBar from '../../../Form/ActionBar/index.js';
-import { useRouteParams } from '../../../FormRouter/hooks.js';
 import classNames from 'classnames';
 import styles from '../../../Form/components/PageSet/PageMenu/pageMenuStyles.module.css';
 import { DraggableList } from './PreviewSequencePattern/DraggableList.js';
@@ -15,23 +14,15 @@ import { UniqueIdentifier } from '@dnd-kit/core';
 import { PageMenuProps } from '../../../Form/components/PageSet/PageMenu/PageMenu.js';
 
 const PageSetEdit: PatternEditComponent<PageSetProps> = ({ previewProps }) => {
-  const { routeParams, pathname } = useRouteParams();
   return (
     <div className="grid-row">
       <nav className="tablet:grid-col-3 tablet:padding-y-3 tablet:padding-right-4">
-        <PageMenuEdit
-          pages={previewProps.pages.map((page, index) => {
-            const params = new URLSearchParams(routeParams?.toString());
-            params.set('page', index.toString());
-            return {
-              title: page.title,
-              selected: page.active,
-              url: `#${pathname}?page=${index}`,
-            };
-          })}
-        />
+        <PageMenuEdit pages={previewProps.pages} />
       </nav>
-      <div className="tablet:grid-col-9 tablet:padding-left-4 padding-left-0 padding-bottom-3 padding-top-3 tablet:border-left tablet:border-base-lighter contentWrapper">
+      <div
+        className="tablet:grid-col-9 tablet:padding-left-4 padding-left-0 padding-bottom-3 padding-top-3 tablet:border-left tablet:border-base-lighter contentWrapper"
+        aria-live="polite"
+      >
         {previewProps.children}
         <ActionBar actions={previewProps.actions} />
       </div>

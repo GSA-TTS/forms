@@ -1,10 +1,58 @@
 import { type Result, type VoidResult, failure } from '@atj/common';
 
-import { type Blueprint } from '../../index.js';
+import { FormSession, FormSessionId, type Blueprint } from '../../index.js';
 import { FormRepository } from '../../repository/index.js';
+
+const formKey = (formId: string) => `forms/${formId}`;
+const isFormKey = (key: string) => key.startsWith('forms/');
+const getFormIdFromKey = (key: string) => {
+  const match = key.match(/^forms\/(.+)$/);
+  if (!match) {
+    throw new Error(`invalid key: "${key}"`);
+  }
+  return match[1];
+};
+const formSessionKey = (sessionId: string) => `formSessions/${sessionId}`;
+//const isFormSessionKey = (key: string) => key.startsWith('formSessions/');
 
 export class BrowserFormRepository implements FormRepository {
   constructor(private storage: Storage) {}
+
+  getFormSession(
+    id: string
+  ): Promise<Result<{ id: FormSessionId; formId: string; data: FormSession }>> {
+    const formSession = this.storage.getItem(formSessionKey(id));
+    if (!formSession) {
+      return Promise.resolve(failure(`not found: ${id}`));
+    }
+    return Promise.resolve({
+      success: true,
+      data: JSON.parse(formSession),
+    });
+  }
+
+  upsertFormSession(opts: {
+    id?: string;
+    formId: string;
+    data: FormSession;
+  }): Promise<Result<{ timestamp: Date; id: string }>> {
+    const id = opts.id || crypto.randomUUID();
+    this.storage.setItem(
+      formSessionKey(id),
+      JSON.stringify({
+        id,
+        formId: opts.formId,
+        data: opts.data,
+      })
+    );
+    return Promise.resolve({
+      success: true,
+      data: {
+        timestamp: new Date(),
+        id,
+      },
+    });
+  }
 
   async addForm(
     form: Blueprint
@@ -26,7 +74,7 @@ export class BrowserFormRepository implements FormRepository {
   }
 
   async deleteForm(formId: string): Promise<VoidResult> {
-    this.storage.removeItem(formId);
+    this.storage.removeItem(formKey(formId));
     return { success: true };
   }
 
@@ -34,7 +82,7 @@ export class BrowserFormRepository implements FormRepository {
     if (!this.storage || !id) {
       return null;
     }
-    const formString = this.storage.getItem(id);
+    const formString = this.storage.getItem(`forms/${id}`);
     if (!formString) {
       return null;
     }
@@ -65,7 +113,7 @@ export class BrowserFormRepository implements FormRepository {
 
   async saveForm(formId: string, form: Blueprint): Promise<VoidResult> {
     try {
-      this.storage.setItem(formId, stringifyForm(form));
+      this.storage.setItem(formKey(formId), stringifyForm(form));
     } catch {
       return failure(`error saving '${formId}' to storage`);
     }
@@ -80,14 +128,17 @@ export const getFormList = (storage: Storage) => {
     if (key === null) {
       return null;
     }
-    keys.push(key);
+    if (!isFormKey(key)) {
+      continue;
+    }
+    keys.push(getFormIdFromKey(key));
   }
   return keys;
 };
 
 export const saveForm = (storage: Storage, formId: string, form: Blueprint) => {
   try {
-    storage.setItem(formId, stringifyForm(form));
+    storage.setItem(formKey(formId), stringifyForm(form));
   } catch {
     return {
       success: false as const,

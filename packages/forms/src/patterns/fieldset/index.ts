@@ -1,15 +1,6 @@
-import {
-  type Pattern,
-  type PatternConfig,
-  type PatternId,
-} from '../../pattern.js';
-import { parseConfigData } from './config.js';
+import { type PatternConfig } from '../../pattern.js';
+import { type FieldsetPattern, parseConfigData } from './config.js';
 import { createPrompt } from './prompt.js';
-
-export type FieldsetPattern = Pattern<{
-  legend?: string;
-  patterns: PatternId[];
-}>;
 
 export const fieldsetConfig: PatternConfig<FieldsetPattern> = {
   displayName: 'Fieldset',

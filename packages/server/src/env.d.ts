@@ -8,11 +8,11 @@ namespace App {
   interface Locals {
     // User-provided server configuration. Will be undefined when running in
     // dev mode.
-    serverOptions?: import('./context').ServerOptions;
+    serverOptions?: import('./config/options.ts').ServerOptions;
 
     // Lazy-loaded app context, derived from `serverOptions` and the Astro
     // global context, via getAstroAppContext().
-    ctx?: AppContext | null;
+    ctx?: import('./config/context.ts').AppContext | null;
 
     // Auth types from Lucia
     session: import('@atj/auth').Session | null;

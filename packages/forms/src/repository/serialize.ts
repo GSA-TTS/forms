@@ -1,4 +1,6 @@
-export const stringifyForm = (form: /*Blueprint*/ any) => {
+import { type Blueprint } from '..';
+
+export const stringifyForm = (form: Blueprint) => {
   return JSON.stringify({
     ...form,
     outputs: form.outputs.map((output: any) => ({

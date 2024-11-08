@@ -18,4 +18,5 @@ export type PDFFieldType =
   | 'Dropdown'
   | 'OptionList'
   | 'RadioGroup'
-  | 'Paragraph';
+  | 'Paragraph'
+  | 'RichText';

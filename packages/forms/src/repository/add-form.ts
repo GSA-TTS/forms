@@ -1,12 +1,15 @@
 import { type Result, failure, success } from '@atj/common';
-
 import { type DatabaseContext } from '@atj/database';
+
+import { type Blueprint } from '../index.js';
 import { stringifyForm } from './serialize.js';
 
-export const addForm = async (
+export type AddForm = (
   ctx: DatabaseContext,
-  form: any // Blueprint
-): Promise<Result<{ timestamp: string; id: string }>> => {
+  form: Blueprint
+) => Promise<Result<{ timestamp: string; id: string }>>;
+
+export const addForm: AddForm = async (ctx, form) => {
   const uuid = crypto.randomUUID();
   const db = await ctx.getKysely();
   return db
