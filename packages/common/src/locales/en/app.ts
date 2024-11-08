@@ -60,5 +60,11 @@ export const en = {
       hint: 'For example: January 19 2000',
       errorTextMustContainChar: 'String must contain at least 1 character(s)',
     },
+    emailInput: {
+      ...defaults,
+      displayName: 'Email Input label',
+      fieldLabel: 'Email Input label',
+      errorTextMustContainChar: 'String must contain at least 1 character(s)',
+    },
   },
 };

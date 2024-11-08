@@ -97,7 +97,7 @@ export const Error: StoryObj<typeof FormEdit> = {
 
     await expect(
       await canvas.findByText(
-        message.patterns.selectDropdown.errorTextMustContainChar
+        message.patterns.dateOfBirth.errorTextMustContainChar
       )
     ).toBeInTheDocument();
   },
