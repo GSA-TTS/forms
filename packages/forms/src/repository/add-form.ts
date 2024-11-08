@@ -2,7 +2,6 @@ import { type Result, failure, success } from '@atj/common';
 import { type DatabaseContext } from '@atj/database';
 
 import { type Blueprint } from '../index.js';
-import { stringifyForm } from './serialize.js';
 
 export type AddForm = (
   ctx: DatabaseContext,
@@ -16,7 +15,7 @@ export const addForm: AddForm = async (ctx, form) => {
     .insertInto('forms')
     .values({
       id: uuid,
-      data: stringifyForm(form),
+      data: JSON.stringify(form),
     })
     .execute()
     .then(() =>

@@ -1,7 +1,8 @@
 import { type Result, failure, success } from '@atj/common';
 
-import { type Blueprint } from '../index.js';
+import { parseForm } from '../builder/index.js';
 import { type FormServiceContext } from '../context/index.js';
+import { type Blueprint } from '../types.js';
 
 type GetFormError = {
   status: number;
@@ -21,5 +22,14 @@ export const getForm: GetForm = async (ctx, formId) => {
       message: 'Form not found',
     });
   }
-  return success(result);
+
+  const parseResult = parseForm(ctx.config, result);
+  if (!parseResult.success) {
+    return failure({
+      status: 500,
+      message: parseResult.error,
+    });
+  }
+
+  return success(parseResult.data);
 };

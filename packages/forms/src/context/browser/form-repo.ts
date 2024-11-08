@@ -1,8 +1,15 @@
 import { type Result, type VoidResult, failure } from '@atj/common';
 
-import { FormSession, FormSessionId, type Blueprint } from '../../index.js';
+import {
+  FormSession,
+  FormSessionId,
+  type Blueprint,
+  type DocumentFieldMap,
+} from '../../index.js';
 import { FormRepository } from '../../repository/index.js';
+import type { ParsedPdf } from '../../documents/pdf/parsing-api.js';
 
+const documentKey = (id: string) => `documents/${id}`;
 const formKey = (formId: string) => `forms/${formId}`;
 const isFormKey = (key: string) => key.startsWith('forms/');
 const getFormIdFromKey = (key: string) => {
@@ -113,11 +120,45 @@ export class BrowserFormRepository implements FormRepository {
 
   async saveForm(formId: string, form: Blueprint): Promise<VoidResult> {
     try {
-      this.storage.setItem(formKey(formId), stringifyForm(form));
+      this.storage.setItem(formKey(formId), JSON.stringify(form));
     } catch {
       return failure(`error saving '${formId}' to storage`);
     }
     return { success: true };
+  }
+
+  addDocument(document: {
+    fileName: string;
+    data: Uint8Array;
+    extract: { parsedPdf: ParsedPdf; fields: DocumentFieldMap };
+  }) {
+    const documentId = crypto.randomUUID();
+    this.storage.setItem(
+      documentKey(documentId),
+      JSON.stringify({
+        id: documentId,
+        type: 'pdf',
+        file_name: document.fileName,
+        data: Buffer.from(document.data),
+        extract: JSON.stringify(document.extract),
+      })
+    );
+    return {} as Promise<Result<{ id: string }>>;
+  }
+
+  getDocument(id: string): Promise<
+    Result<{
+      id: string;
+      data: Uint8Array;
+      path: string;
+      fields: DocumentFieldMap;
+    }>
+  > {
+    const value = this.storage.getItem(documentKey(id));
+    if (value === null) {
+      return Promise.resolve(failure(`Document with id ${id} not found`));
+    }
+    return Promise.resolve(JSON.parse(value));
   }
 }
 
@@ -138,7 +179,7 @@ export const getFormList = (storage: Storage) => {
 
 export const saveForm = (storage: Storage, formId: string, form: Blueprint) => {
   try {
-    storage.setItem(formKey(formId), stringifyForm(form));
+    storage.setItem(formKey(formId), JSON.stringify(form));
   } catch {
     return {
       success: false as const,
@@ -148,17 +189,6 @@ export const saveForm = (storage: Storage, formId: string, form: Blueprint) => {
   return {
     success: true as const,
   };
-};
-
-const stringifyForm = (form: Blueprint) => {
-  return JSON.stringify({
-    ...form,
-    outputs: form.outputs.map(output => ({
-      ...output,
-      // TODO: we probably want to do this somewhere in the documents module
-      data: uint8ArrayToBase64(output.data),
-    })),
-  });
 };
 
 const parseStringForm = (formString: string): Blueprint => {

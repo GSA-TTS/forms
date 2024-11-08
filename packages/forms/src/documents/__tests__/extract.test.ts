@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { getDocumentFieldData } from '../index.js';
 import { loadSamplePDF } from './sample-data.js';
+import { getDocumentFieldData } from '../pdf/extract.js';
 
 describe('PDF form field extraction', () => {
   it('extracts data from California UD-105 form', async () => {

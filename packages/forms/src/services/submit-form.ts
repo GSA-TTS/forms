@@ -81,11 +81,19 @@ export const submitForm: SubmitForm = async (
   }
 
   const { handler, pattern } = submitHandlerResult.data;
-  const newSessionResult = await handler(ctx.config, {
-    pattern,
-    session,
-    data: formData,
-  });
+  const newSessionResult = await handler(
+    {
+      config: ctx.config,
+      getDocument: id => {
+        return ctx.repository.getDocument(id);
+      },
+    },
+    {
+      pattern,
+      session,
+      data: formData,
+    }
+  );
 
   if (!newSessionResult.success) {
     return failure(newSessionResult.error);

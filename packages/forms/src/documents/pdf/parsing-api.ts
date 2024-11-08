@@ -9,7 +9,7 @@ import { type CheckboxPattern } from '../../patterns/checkbox.js';
 import { type RadioGroupPattern } from '../../patterns/radio-group.js';
 import { RichTextPattern } from '../../patterns/rich-text.js';
 
-import { uint8ArrayToBase64 } from '../util.js';
+import { uint8ArrayToBase64 } from '../../util/base64.js';
 import { type DocumentFieldMap } from '../types.js';
 import {
   createPattern,

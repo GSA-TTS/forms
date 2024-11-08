@@ -3,6 +3,7 @@ import {
   createFormService,
   createFormsRepository,
   defaultFormConfig,
+  parsePdf,
 } from '@atj/forms';
 import { type ServerOptions } from './options.js';
 
@@ -14,5 +15,6 @@ export const createServerFormService = (
     repository: createFormsRepository(options.db),
     config: defaultFormConfig,
     isUserLoggedIn: ctx.isUserLoggedIn,
+    parsePdf,
   });
 };

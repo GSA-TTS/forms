@@ -8,6 +8,7 @@ export * from './patterns/index.js';
 export * from './response.js';
 export * from './session.js';
 export * from './types.js';
+export * from './util/base64.js';
 export { type FormService, createFormService } from './services/index.js';
 export { type RichTextPattern } from './patterns/rich-text.js';
 export {

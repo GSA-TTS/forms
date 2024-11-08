@@ -141,7 +141,6 @@ export const updateSession = (
 
 export const sessionIsComplete = (config: FormConfig, session: FormSession) => {
   return Object.values(session.form.patterns).every(pattern => {
-    console.log('validating', pattern.type, pattern.id);
     const patternConfig = getPatternConfig(config, pattern.type);
     const value = getFormSessionValue(session, pattern.id);
     const isValidResult = validatePattern(patternConfig, pattern, value);

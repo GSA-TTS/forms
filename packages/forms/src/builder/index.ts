@@ -1,4 +1,6 @@
-import { type VoidResult } from '@atj/common';
+import * as z from 'zod';
+
+import { failure, success, type Result, type VoidResult } from '@atj/common';
 import {
   addPageToPageSet,
   addPatternToFieldset,
@@ -9,7 +11,7 @@ import {
   removePatternFromBlueprint,
   updateFormSummary,
 } from '../blueprint.js';
-import { addDocument } from '../documents/document.js';
+import { addDocument, addParsedPdfToForm } from '../documents/document.js';
 import type { FormErrors } from '../error.js';
 import {
   createDefaultPattern,
@@ -23,6 +25,64 @@ import {
 import { type FieldsetPattern } from '../patterns/fieldset/config.js';
 import { type PageSetPattern } from '../patterns/page-set/config.js';
 import type { Blueprint, FormSummary } from '../types.js';
+import type { ParsedPdf } from '../documents/pdf/parsing-api.js';
+
+const createFormSchema = (config: FormConfig) => {
+  return z.object({
+    summary: z.object({
+      title: z.string(),
+      description: z.string(),
+    }),
+    root: z.string(),
+    patterns: z.record(
+      z.string(),
+      z.any().refine(
+        val => {
+          const patternConfig = config.patterns[val?.type];
+          if (!patternConfig) {
+            return false;
+          }
+          const result = patternConfig.parseConfigData(val?.data);
+          if (!result.success) {
+            const message = Object.values(result.error)
+              .map(err => err.message || '')
+              .join(', ');
+            console.error(val?.type, result.error);
+            console.error(`Pattern config error: ${message}`);
+          }
+          return result.success;
+        },
+        {
+          message: 'Invalid pattern',
+        }
+      )
+    ),
+    outputs: z.array(
+      z.object({
+        id: z.string(),
+        path: z.string(),
+        fields: z.record(z.string(), z.any()),
+        formFields: z.record(z.string(), z.string()),
+      })
+    ),
+  });
+};
+
+export const parseForm = (config: FormConfig, obj: any): Result<Blueprint> => {
+  const formSchema = createFormSchema(config);
+  const result = formSchema.safeParse(obj);
+  if (result.error) {
+    return failure(result.error.message);
+  }
+  return success(result.data);
+};
+
+export const parseFormString = (
+  config: FormConfig,
+  json: string
+): Result<Blueprint> => {
+  return parseForm(config, JSON.parse(json));
+};
 
 export class BlueprintBuilder {
   bp: Blueprint;
@@ -44,6 +104,15 @@ export class BlueprintBuilder {
 
   async addDocument(fileDetails: { name: string; data: Uint8Array }) {
     const { updatedForm } = await addDocument(this.form, fileDetails);
+    this.bp = updatedForm;
+  }
+
+  async addDocumentRef(opts: { id: string; extract: ParsedPdf }) {
+    const { updatedForm } = await addParsedPdfToForm(this.form, {
+      id: opts.id,
+      label: opts.extract.title,
+      extract: opts.extract,
+    });
     this.bp = updatedForm;
   }
 

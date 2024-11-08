@@ -16,7 +16,7 @@ const getPage = (formSession: FormSession) => {
 };
 
 export const submitPage: SubmitHandler<PageSetPattern> = async (
-  config,
+  context,
   opts
 ) => {
   const pageNumber = getPage(opts.session);
@@ -25,7 +25,7 @@ export const submitPage: SubmitHandler<PageSetPattern> = async (
     return failure(`Page ${pageNumber} does not exist`);
   }
 
-  const pagePatternConfig = getPatternConfig(config, 'page');
+  const pagePatternConfig = getPatternConfig(context.config, 'page');
   const pagePattern = getPatternSafely<PagePattern>({
     type: 'page',
     form: opts.session.form,
@@ -36,7 +36,7 @@ export const submitPage: SubmitHandler<PageSetPattern> = async (
   }
 
   const result = validatePatternAndChildren(
-    config,
+    context.config,
     opts.session.form,
     pagePatternConfig,
     pagePattern.data,

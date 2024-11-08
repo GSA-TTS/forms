@@ -5,6 +5,7 @@ import {
   type FormSessionId,
   type Blueprint,
   type FormService,
+  type FormSummary,
 } from '@atj/forms';
 import { type FormServiceContext } from '@atj/forms/context';
 
@@ -16,6 +17,7 @@ export class FormServiceClient implements FormService {
   constructor(private ctx: FormServiceClientContext) {}
 
   async addForm(form: Blueprint) {
+    console.log('add form');
     const response = await fetch(`${this.ctx.baseUrl}api/forms`, {
       method: 'POST',
       body: JSON.stringify(form),
@@ -24,7 +26,43 @@ export class FormServiceClient implements FormService {
       },
     });
     const result = await response.json();
-    console.log('addForm result', result);
+    return result;
+  }
+
+  async initializeForm(
+    opts:
+      | unknown
+      | {
+          summary?: FormSummary;
+          document?: { fileName: string; data: string };
+        }
+  ): Promise<
+    Result<
+      { timestamp: string; id: string },
+      { status: number; message: string }
+    >
+  > {
+    const options = opts as {
+      summary?: FormSummary;
+      document?: { fileName: string; data: string };
+    };
+    const body = JSON.stringify({
+      summary: options.summary ? options.summary : undefined,
+      document: options.document
+        ? {
+            fileName: options.document.fileName,
+            data: options.document.data,
+          }
+        : undefined,
+    });
+    const response = await fetch(`${this.ctx.baseUrl}api/forms`, {
+      method: 'POST',
+      body,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const result = await response.json();
     return result;
   }
 

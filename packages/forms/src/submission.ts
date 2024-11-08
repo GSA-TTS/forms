@@ -9,10 +9,22 @@ import {
   getPattern,
 } from './pattern';
 import { type FormSession } from './session';
-import { type Blueprint } from '.';
+import { type Blueprint, type DocumentFieldMap } from '.';
+
+export type SubmitHandlerContext = {
+  config: FormConfig;
+  getDocument: (id: string) => Promise<
+    Result<{
+      id: string;
+      data: Uint8Array;
+      path: string;
+      fields: DocumentFieldMap;
+    }>
+  >;
+};
 
 export type SubmitHandler<P extends Pattern = Pattern> = (
-  config: FormConfig,
+  context: SubmitHandlerContext,
   opts: {
     pattern: P;
     session: FormSession;

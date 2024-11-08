@@ -2,7 +2,6 @@ import { type VoidResult, failure, success } from '@atj/common';
 import { type DatabaseContext } from '@atj/database';
 
 import { type Blueprint } from '../index.js';
-import { stringifyForm } from './serialize.js';
 
 export type SaveForm = (
   ctx: DatabaseContext,
@@ -16,7 +15,7 @@ export const saveForm: SaveForm = async (ctx, id, blueprint) => {
   return await db
     .updateTable('forms')
     .set({
-      data: stringifyForm(blueprint),
+      data: JSON.stringify(blueprint),
     })
     .where('id', '=', id)
     .execute()
