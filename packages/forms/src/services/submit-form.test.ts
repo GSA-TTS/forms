@@ -97,11 +97,11 @@ describe('submitForm', () => {
           data: {
             errors: {
               'element-1': {
-                message: 'Required',
+                message: 'Invalid input',
                 type: 'custom',
               },
               'element-2': {
-                message: 'Required',
+                message: 'Invalid input',
                 type: 'custom',
               },
             },
@@ -297,7 +297,7 @@ describe('multi-page form', () => {
           data: {
             errors: {
               'element-1': {
-                message: 'Required',
+                message: 'Invalid input',
                 type: 'custom',
               },
             },

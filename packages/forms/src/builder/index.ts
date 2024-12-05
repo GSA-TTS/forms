@@ -2,8 +2,8 @@ import { type VoidResult } from '@atj/common';
 import {
   addPageToPageSet,
   addPatternToFieldset,
-  addPatternToRepeater,
   addPatternToPage,
+  addPatternToRepeater,
   copyPattern,
   createOnePageBlueprint,
   movePatternBetweenPages,
