@@ -13,7 +13,15 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
 
   const hasFields = React.Children.toArray(props.children).length > 0;
 
-  const renderWithUniqueIds = (children: React.ReactNode, index: number) => {
+  /**
+   * TODO: we want to have an array of objects so it is grouped correctly when submitted
+   * child components when submitted need to escalate validation logic to the repeater and rows without
+   * any input should not be considered fields that we care about for validation.
+   *
+   * Each row of the repeater should have its own unique index
+   */
+
+  const renderWithUniqueIds = (children: React.ReactNode) => {
     return React.Children.map(children, child => {
       if (React.isValidElement(child) && child?.props?.component?.props) {
         console.group('renderwithuniqueids');

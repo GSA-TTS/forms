@@ -141,6 +141,10 @@ export const validatePattern = (
   pattern: Pattern,
   value: any
 ): r.Result<Pattern['data'], FormError> => {
+  /**
+   * TODO: maybe touch this file to see if there are fields that are part of the repeater
+   * that are being treated and a standalone thing. uuid.index.uuid -> ownedByRepeater
+   */
   if (!patternConfig.parseUserInput) {
     return {
       success: true,

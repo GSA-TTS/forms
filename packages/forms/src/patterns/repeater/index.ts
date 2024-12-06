@@ -25,6 +25,12 @@ export const repeaterConfig: PatternConfig<RepeaterPattern> = {
       (patternId: string) => patterns[patternId]
     );
   },
+  /*
+   * TODO: this probably needs a parseUserInput method that maps over the repeater pattern and then
+   *  gets all its child components in a new function. Dan suggested that this is a way to get the dynamic
+   * indexes working.
+   *
+   */
   removeChildPattern(pattern, patternId) {
     const newPatterns = pattern.data.patterns.filter(
       (id: string) => patternId !== id

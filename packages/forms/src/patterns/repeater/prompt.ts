@@ -21,8 +21,12 @@ export const createPrompt: CreatePrompt<RepeaterPattern> = (
     let childPattern = getPattern(session.form, patternId);
     childPattern = {
       ...childPattern,
+      /**
+       * TODO: Dynamically generate the index here. %%INDEX%% is a placeholder
+       */
       id: `${pattern.id}.%%INDEX%%.${childPattern.id}`
     }
+
     // {
     //   "id": "8c8a358d-e977-4d9b-9671-43bf6e847f5d",
     //   "type": "input",

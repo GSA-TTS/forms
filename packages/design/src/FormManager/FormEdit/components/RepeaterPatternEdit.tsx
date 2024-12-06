@@ -103,6 +103,11 @@ const RepeaterPreview: PatternComponent<RepeaterProps> = props => {
   );
 };
 
+/*
+  TODO: make sure the edit UI can have focus if there is the index of the row. You may need to transform
+  the ID when the component below is mounted.
+ */
+
 const EditComponent = ({ patternId }: { patternId: PatternId }) => {
   const pattern = useFormManagerStore<RepeaterPattern>(
     state => state.session.form.patterns[patternId]
