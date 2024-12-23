@@ -14,6 +14,7 @@ import { enLocale as message } from '@atj/common';
 import styles from '../../formEditStyles.module.css';
 
 const EmailInputEdit: PatternEditComponent<EmailInputProps> = ({
+  context,
   focus,
   previewProps,
 }) => {
@@ -28,7 +29,7 @@ const EmailInputEdit: PatternEditComponent<EmailInputProps> = ({
         <div
           className={`${styles.emailInputPattern} padding-left-3 padding-bottom-3 padding-right-3`}
         >
-          <EmailInput {...previewProps} />
+          <EmailInput context={context} {...previewProps} />
         </div>
       )}
     </>
