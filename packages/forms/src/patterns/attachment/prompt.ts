@@ -1,14 +1,10 @@
-import { attachmentConfig } from './index.js';
+import type { AttachmentProps, CreatePrompt } from '../../components.js';
+import { getPatternConfig, validatePattern } from '../../pattern.js';
+import { getFormSessionValue } from '../../session.js';
 import { type AttachmentPattern } from './config.js';
-import {
-  type CreatePrompt,
-  type AttachmentProps,
-  getFormSessionValue,
-  validatePattern,
-} from '../../index.js';
 
 export const createPrompt: CreatePrompt<AttachmentPattern> = (
-  _,
+  config,
   session,
   pattern,
   options
@@ -16,6 +12,7 @@ export const createPrompt: CreatePrompt<AttachmentPattern> = (
   const extraAttributes: Record<string, any> = {};
   const sessionValue = getFormSessionValue(session, pattern.id);
   if (options.validate) {
+    const attachmentConfig = getPatternConfig(config, pattern.type);
     const isValidResult = validatePattern(
       attachmentConfig,
       pattern,
