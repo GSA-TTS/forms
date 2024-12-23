@@ -6,8 +6,6 @@ import {
 } from '../blueprint.js';
 import { type Pattern } from '../pattern.js';
 import { type InputPattern } from '../patterns/input/config.js';
-import { type AttachmentPattern } from '../patterns/attachment/config.js';
-import { attachmentFileTypeMimes } from '../patterns/attachment/file-type-options.js';
 import { type SequencePattern } from '../patterns/sequence.js';
 import { type Blueprint } from '../types.js';
 import { getDocumentFieldData } from './pdf/extract.js';

@@ -14,6 +14,7 @@ import { enLocale as message } from '@atj/common';
 import styles from '../../formEditStyles.module.css';
 
 const SelectDropdownPatternEdit: PatternEditComponent<SelectDropdownProps> = ({
+  context,
   focus,
   previewProps,
 }) => {
@@ -29,7 +30,7 @@ const SelectDropdownPatternEdit: PatternEditComponent<SelectDropdownProps> = ({
           // TODO: update styles for select if available
           className={`${styles.radioFormPattern} padding-left-3 padding-bottom-3 padding-right-3`}
         >
-          <SelectDropdown {...previewProps} />
+          <SelectDropdown context={context} {...previewProps} />
         </div>
       )}
     </>

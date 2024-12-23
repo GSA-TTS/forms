@@ -18,7 +18,7 @@ import { useFormManagerStore } from '../../store.js';
 
 const PackageDownloadPatternEdit: PatternEditComponent<
   PackageDownloadProps
-> = ({ focus, previewProps }) => {
+> = ({ context, focus, previewProps }) => {
   return (
     <>
       {focus ? (
@@ -28,7 +28,7 @@ const PackageDownloadPatternEdit: PatternEditComponent<
         ></PatternEditForm>
       ) : (
         <div className="padding-left-3 padding-bottom-3 padding-right-3">
-          <PackageDownload {...previewProps} />
+          <PackageDownload context={context} {...previewProps} />
         </div>
       )}
     </>
