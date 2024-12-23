@@ -11,15 +11,21 @@
   },
   "dependencies": {
     "@astrojs/react": "^3.6.1",
+    "@atj/common": "workspace:*",
     "@atj/design": "workspace:*",
     "@atj/forms": "workspace:*",
     "astro": "^4.13.2",
+    "qs": "^6.13.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-error-boundary": "^4.0.13"
+    "react-error-boundary": "^4.0.13",
+    "react-router-dom": "^6.26.0",
+    "sharp": "^0.33.5",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@astrojs/check": "^0.4.1",
+    "@types/qs": "^6.9.15",
     "@types/react": "^18.3.3"
   }
 }

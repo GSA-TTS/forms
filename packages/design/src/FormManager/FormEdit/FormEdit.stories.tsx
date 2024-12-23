@@ -22,7 +22,12 @@ const meta: Meta<typeof FormEdit> = {
           context={createTestFormManagerContext()}
           session={createTestSession({
             form: createOnePageTwoPatternTestForm(),
-            routeParams: 'page=0',
+            route: {
+              params: {
+                page: '0',
+              },
+              url: '#',
+            },
           })}
         >
           <Story {...args} />
@@ -55,12 +60,14 @@ export const FormEditAddPattern: StoryObj<typeof FormEdit> = {
     await userEvent.click(canvas.getByText('Pattern 1'));
     //await userEvent.selectOptions(select, 'Text input');
 
-    select.forEach(async element => {
-      await userEvent.click(element);
-    });
+    await Promise.all(
+      select.map(async element => {
+        return await userEvent.click(element);
+      })
+    );
 
     const finalCount = (await canvas.findAllByRole('textbox')).length;
-    expect(finalCount).toBeGreaterThan(initialCount);
+    await expect(finalCount).toBeGreaterThan(initialCount);
   },
 };
 
@@ -82,9 +89,13 @@ const editFieldLabel = async (
   await userEvent.type(input, updatedLabel);
   //await userEvent.click(canvas.getByText('Add Element'));
 
-  select.forEach(async element => {
-    await userEvent.click(element);
-  });
+  await Promise.all(
+    select.map(async element => {
+      return await userEvent.click(element);
+    })
+  );
+
+  await userEvent.click(canvas.getByText(/save and close/i));
 
   waitFor(
     async () => {

@@ -1,13 +1,11 @@
-import { type InputPattern, inputConfig } from './index.js';
-import {
-  type CreatePrompt,
-  type TextInputProps,
-  getFormSessionValue,
-  validatePattern,
-} from '../../index.js';
+import { type CreatePrompt, type TextInputProps } from '../../components.js';
+import { getPatternConfig, validatePattern } from '../../pattern.js';
+import { getFormSessionValue } from '../../session.js';
+
+import { type InputPattern } from './config.js';
 
 export const createPrompt: CreatePrompt<InputPattern> = (
-  _,
+  config,
   session,
   pattern,
   options
@@ -15,6 +13,7 @@ export const createPrompt: CreatePrompt<InputPattern> = (
   const extraAttributes: Record<string, any> = {};
   const sessionValue = getFormSessionValue(session, pattern.id);
   if (options.validate) {
+    const inputConfig = getPatternConfig(config, pattern.type);
     const isValidResult = validatePattern(inputConfig, pattern, sessionValue);
     if (!isValidResult.success) {
       extraAttributes['error'] = isValidResult.error;

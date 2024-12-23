@@ -15,6 +15,7 @@ import { type FormUIContext } from './Form/index.js';
 import { defaultPatternComponents } from './Form/components/index.js';
 import { defaultPatternEditComponents } from './FormManager/FormEdit/components/index.js';
 import { type FormManagerContext } from './FormManager/index.js';
+import { FormRoute } from '../../forms/dist/types/route-data.js';
 
 export const createOnePageTwoPatternTestForm = () => {
   return createForm(
@@ -218,10 +219,10 @@ export const createTestFormManagerContext = (): FormManagerContext => {
 
 export const createTestSession = (options?: {
   form?: Blueprint;
-  routeParams?: string;
+  route?: FormRoute;
 }) => {
   return createFormSession(
     options?.form || createTwoPatternTestForm(),
-    options?.routeParams
+    options?.route
   );
 };

@@ -1,12 +1,9 @@
 import * as r from '@atj/common';
-import {
-  type Blueprint,
-  type FormError,
-  type FormErrors,
-  updatePattern,
-} from './index.js';
+import set from 'set-value';
 
 import { type CreatePrompt } from './components.js';
+import { type FormError, type FormErrors } from './error.js';
+import { type Blueprint } from './types.js';
 
 export type Pattern<C = any> = {
   type: string;
@@ -18,7 +15,10 @@ export type PatternId = string;
 export type PatternValue<T extends Pattern = Pattern> = any;
 export type PatternValueMap = Record<PatternId, PatternValue>;
 export type PatternMap = Record<PatternId, Pattern>;
-export type GetPattern = (form: Blueprint, id: PatternId) => Pattern;
+export type GetPattern<T extends Pattern = Pattern> = (
+  form: Blueprint,
+  id: PatternId
+) => Pattern;
 
 export type ParseUserInput<Pattern, PatternOutput> = (
   pattern: Pattern,
@@ -34,8 +34,50 @@ type RemoveChildPattern<P extends Pattern> = (
   patternId: PatternId
 ) => P;
 
-export const getPattern: GetPattern = (form, patternId) => {
-  return form.patterns[patternId];
+export abstract class PatternBuilder<P extends Pattern> {
+  public readonly id: PatternId;
+  public readonly data: P['data'];
+
+  constructor(data: P['data'], id?: PatternId) {
+    this.id = id || generatePatternId();
+    this.data = data;
+  }
+
+  abstract toPattern(): P;
+}
+
+export const getPattern = <T extends Pattern = Pattern>(
+  form: Blueprint,
+  id: PatternId
+): T => {
+  return form.patterns[id] as T;
+};
+
+export const getPatternSafely = <P extends Pattern>(opts: {
+  type: string;
+  form: Blueprint;
+  patternId: PatternId;
+}): r.Result<P> => {
+  const pattern = opts.form.patterns[opts.patternId];
+  if (pattern === undefined) {
+    return r.failure(`Pattern with id ${opts.patternId} does not exist`);
+  }
+  if (pattern.type !== opts.type) {
+    return r.failure(
+      `Pattern with id ${opts.patternId} is not of type ${opts.type}`
+    );
+  }
+  return r.success(pattern as P);
+};
+
+export const updatePattern = (form: Blueprint, pattern: Pattern): Blueprint => {
+  return {
+    ...form,
+    patterns: {
+      ...form.patterns,
+      [pattern.id]: pattern,
+    },
+  };
 };
 
 export type PatternConfig<
@@ -87,15 +129,60 @@ export const validatePattern = (
   }
   const parseResult = patternConfig.parseUserInput(pattern, value);
   if (!parseResult.success) {
-    return {
-      success: false,
-      error: parseResult.error,
-    };
+    return r.failure(parseResult.error);
   }
-  return {
-    success: true,
-    data: parseResult.data,
-  };
+  return r.success(parseResult.data);
+};
+
+const aggregateValuesByPrefix = (
+  values: Record<string, string>
+): Record<string, any> => {
+  const aggregatedValues: Record<string, any> = {};
+
+  for (const [key, value] of Object.entries(values)) {
+    set(aggregatedValues, key, value);
+  }
+
+  return aggregatedValues;
+};
+
+export const aggregatePatternSessionValues = (
+  config: FormConfig,
+  form: Blueprint,
+  patternConfig: PatternConfig,
+  pattern: Pattern,
+  values: Record<string, string>,
+  result: {
+    values: Record<PatternId, PatternValue>;
+    errors: Record<PatternId, FormError>;
+  }
+) => {
+  const aggregatedValues = aggregateValuesByPrefix(values);
+
+  if (patternConfig.parseUserInput) {
+    const patternValues = aggregatedValues[pattern.id];
+    const parseResult = patternConfig.parseUserInput(pattern, patternValues);
+
+    if (parseResult.success) {
+      result.values[pattern.id] = parseResult.data;
+      delete result.errors[pattern.id];
+    } else {
+      result.values[pattern.id] = values[pattern.id];
+      result.errors[pattern.id] = parseResult.error;
+    }
+  }
+  for (const child of patternConfig.getChildren(pattern, form.patterns)) {
+    const childPatternConfig = getPatternConfig(config, child.type);
+    aggregatePatternSessionValues(
+      config,
+      form,
+      childPatternConfig,
+      child,
+      values,
+      result
+    );
+  }
+  return result;
 };
 
 export const getFirstPattern = (

@@ -2,6 +2,10 @@ import qs from 'qs';
 import { PatternId } from './pattern.js';
 
 export type RouteData = qs.ParsedQs;
+export type FormRoute = {
+  url: string;
+  params: RouteData;
+};
 
 export const getRouteDataFromQueryString = (queryString: string): RouteData => {
   return qs.parse(queryString, { allowDots: true });

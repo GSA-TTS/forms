@@ -4,6 +4,7 @@ import { createForm } from '../index.js';
 import { createTestFormServiceContext } from '../testing.js';
 
 import { saveForm } from './save-form.js';
+import { success } from '@atj/common';
 
 const TEST_FORM = createForm({ title: 'Form Title', description: '' });
 const TEST_FORM_2 = {
@@ -42,9 +43,11 @@ describe('saveForm', () => {
     if (!result.success) {
       expect.fail('Failed to add form:', result.error);
     }
-    expect(result.data).toEqual({ timestamp: expect.any(Date) });
+    expect(result.data).toEqual(
+      expect.objectContaining({ timestamp: expect.any(Date) })
+    );
 
     const savedForm = await ctx.repository.getForm(addResult.data.id);
-    expect(savedForm).toEqual(TEST_FORM_2);
+    expect(savedForm).toEqual(success(TEST_FORM_2));
   });
 });

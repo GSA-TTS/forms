@@ -1,8 +1,8 @@
 import type { APIRoute } from 'astro';
-import { getAstroAppContext } from '../../../context.js';
+import { getServerContext } from '../../../config/astro.js';
 
 export const GET: APIRoute = async context => {
-  const ctx = await getAstroAppContext(context);
+  const ctx = await getServerContext(context);
   const result = await ctx.formService.getFormList();
   return new Response(JSON.stringify(result), {
     headers: {
@@ -13,9 +13,10 @@ export const GET: APIRoute = async context => {
 };
 
 export const POST: APIRoute = async context => {
-  const form = await context.request.json();
-  const ctx = await getAstroAppContext(context);
-  const result = await ctx.formService.addForm(form);
+  const input = await context.request.json();
+  const ctx = await getServerContext(context);
+  //const result = await ctx.formService.addForm(form);
+  const result = await ctx.formService.initializeForm(input);
   return new Response(JSON.stringify(result), {
     headers: {
       'Content-Type': 'application/json',

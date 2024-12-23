@@ -1,9 +1,9 @@
 # base image with Node.js and playwright preinstalled
-FROM mcr.microsoft.com/playwright:v1.46.0-jammy as base
+FROM mcr.microsoft.com/playwright:v1.48.1-noble as base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV NODE_ENV=test
-RUN apt-get update && apt-get install -y netcat
+RUN apt-get -y update && apt-get install -y netcat-openbsd
 WORKDIR /srv/apps/atj-platform
 COPY ./pnpm-lock.yaml ./pnpm-lock.yaml
 COPY ./package.json ./package.json

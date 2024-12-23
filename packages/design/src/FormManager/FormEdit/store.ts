@@ -159,9 +159,20 @@ export const createFormEditSlice =
         focus: undefined,
         session: mergeSession(state.session, {
           form: builder.form,
+          route: state.session.route
+            ? {
+                url: state.session.route.url,
+                params: {
+                  ...state.session.route.params,
+                  page: getSessionPage(state.session).toString(),
+                },
+              }
+            : undefined,
+          /*
           routeParams: {
             page: getSessionPage(state.session).toString(),
           },
+          */
         }),
       });
       state.addNotification('success', 'Element removed successfully.');
@@ -194,7 +205,13 @@ export const createFormEditSlice =
       const state = get();
       set({
         session: mergeSession(state.session, {
-          routeParams: getRouteDataFromQueryString(routeParams),
+          //routeParams: getRouteDataFromQueryString(routeParams),
+          route: state.session.route
+            ? {
+                url: state.session.route.url,
+                params: getRouteDataFromQueryString(routeParams),
+              }
+            : undefined,
         }),
       });
     },

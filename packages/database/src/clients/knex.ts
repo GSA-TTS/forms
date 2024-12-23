@@ -1,6 +1,7 @@
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
+import { Database as SqliteDatabase } from 'better-sqlite3';
 import knex, { type Knex } from 'knex';
 
 const migrationsDirectory = path.resolve(
@@ -29,29 +30,36 @@ export const getPostgresKnex = (
 };
 
 export const getInMemoryKnex = (): Knex => {
-  return knex({
-    client: 'better-sqlite3',
-    connection: {
-      filename: ':memory:',
-    },
-    useNullAsDefault: true,
-    migrations: {
-      directory: migrationsDirectory,
-      loadExtensions: ['.mjs'],
-    },
-  });
+  return getSqlite3Knex(':memory:');
 };
 
 export const getFileSystemKnex = (path: string): Knex => {
+  return getSqlite3Knex(path);
+};
+
+const getSqlite3Knex = (filename: string): Knex => {
   return knex({
     client: 'better-sqlite3',
     connection: {
-      filename: path,
+      filename,
     },
-    useNullAsDefault: true,
     migrations: {
       directory: migrationsDirectory,
       loadExtensions: ['.mjs'],
     },
+    pool: {
+      afterCreate: (
+        conn: SqliteDatabase,
+        done: (err: Error | null, connection?: SqliteDatabase) => void
+      ) => {
+        try {
+          conn.pragma('foreign_keys = ON');
+          done(null, conn);
+        } catch (err) {
+          done(err as Error);
+        }
+      },
+    },
+    useNullAsDefault: true,
   });
 };

@@ -8,7 +8,7 @@ import { getForm } from './get-form.js';
 const TEST_FORM = createForm({ title: 'Form Title', description: '' });
 
 describe('getForm', () => {
-  it('returns access denied (401) if user is not logged in', async () => {
+  it('non-existent form returns 404', async () => {
     const ctx = await createTestFormServiceContext({
       isUserLoggedIn: () => false,
     });
@@ -16,15 +16,15 @@ describe('getForm', () => {
     expect(result).toEqual({
       success: false,
       error: {
-        status: 401,
-        message: 'You must be logged in to delete a form',
+        status: 404,
+        message: 'Form not found',
       },
     });
   });
 
-  it('gets form successfully when user is logged in', async () => {
+  it('gets form successfully', async () => {
     const ctx = await createTestFormServiceContext({
-      isUserLoggedIn: () => true,
+      isUserLoggedIn: () => false,
     });
     const addResult = await ctx.repository.addForm(TEST_FORM);
     if (!addResult.success) {
@@ -33,7 +33,7 @@ describe('getForm', () => {
 
     const result = await getForm(ctx, addResult.data.id);
     if (!result.success) {
-      expect.fail('Failed to add form:', result.error);
+      expect.fail(`Failed to get form: ${JSON.stringify(result.error)}`);
     }
     expect(result.data).toEqual(TEST_FORM);
   });

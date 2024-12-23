@@ -7,7 +7,7 @@ type DeleteFormError = {
   message: string;
 };
 
-type DeleteForm = (
+export type DeleteForm = (
   ctx: FormServiceContext,
   formId: string
 ) => Promise<VoidResult<DeleteFormError>>;
@@ -19,8 +19,14 @@ export const deleteForm: DeleteForm = async (ctx, formId) => {
       message: 'You must be logged in to delete a form',
     });
   }
-  const form = await ctx.repository.getForm(formId);
-  if (form === null) {
+  const formResult = await ctx.repository.getForm(formId);
+  if (!formResult.success) {
+    return failure({
+      status: 500,
+      message: formResult.error,
+    });
+  }
+  if (formResult.data === null) {
     return failure({
       status: 404,
       message: `form '${formId} does not exist`,

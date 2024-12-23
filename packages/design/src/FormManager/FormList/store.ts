@@ -1,6 +1,6 @@
 import { type StateCreator } from 'zustand';
 
-import { BlueprintBuilder } from '@atj/forms';
+import { BlueprintBuilder, uint8ArrayToBase64 } from '@atj/forms';
 import { type FormManagerContext } from '../../FormManager/index.js';
 import { type Result, failure } from '@atj/common';
 
@@ -23,18 +23,17 @@ export const createFormListSlice =
   () => ({
     context,
     createNewFormByPDFUrl: async url => {
-      const data = await fetchUint8Array(`${context.baseUrl}${url}`);
-
-      const builder = new BlueprintBuilder(context.config);
-      builder.setFormSummary({
-        title: url,
-        description: '',
+      const data = await fetchAsBase64(`${context.baseUrl}${url}`);
+      const result = await context.formService.initializeForm({
+        summary: {
+          title: url,
+          description: '',
+        },
+        document: {
+          fileName: url,
+          data,
+        },
       });
-      await builder.addDocument({
-        name: url,
-        data,
-      });
-      const result = await context.formService.addForm(builder.form);
       if (result.success) {
         return {
           success: true,
@@ -51,7 +50,16 @@ export const createFormListSlice =
         description: '',
       });
       await builder.addDocument(fileDetails);
-      const result = await context.formService.addForm(builder.form);
+      const result = await context.formService.initializeForm({
+        summary: {
+          title: fileDetails.name,
+          description: '',
+        },
+        document: {
+          fileName: fileDetails.name,
+          data: await uint8ArrayToBase64(fileDetails.data),
+        },
+      });
       if (result.success) {
         return {
           success: true,
@@ -63,8 +71,9 @@ export const createFormListSlice =
     },
   });
 
-const fetchUint8Array = async (url: string) => {
+const fetchAsBase64 = async (url: string) => {
   const response = await fetch(url);
   const blob = await response.blob();
-  return new Uint8Array(await blob.arrayBuffer());
+  const data = new Uint8Array(await blob.arrayBuffer());
+  return uint8ArrayToBase64(data);
 };

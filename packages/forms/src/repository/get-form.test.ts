@@ -1,6 +1,8 @@
 import { expect, it } from 'vitest';
 
 import { type DbTestContext, describeDatabase } from '@atj/database/testing';
+
+import { defaultFormConfig, type Blueprint } from '../index.js';
 import { getForm } from './get-form.js';
 
 describeDatabase('getForm', () => {
@@ -10,38 +12,36 @@ describeDatabase('getForm', () => {
       .insertInto('forms')
       .values({
         id: '45c66187-64e2-4d75-a45a-e80f1d035bc5',
-        data: '{"summary":{"title":"Test form","description":"Test description"},"root":"root","patterns":{"root":{"type":"sequence","id":"root","data":{"patterns":[]}}},"outputs":[]}',
+        data: '{"summary":{"title":"Title","description":"Description"},"root":"root","patterns":{"root":{"type":"page-set","id":"root","data":{"pages":[]}}},"outputs":[{"id":"test-id","path":"test.pdf","fields":{},"formFields":{}}]}',
       })
       .execute();
 
     const result = await getForm(
-      db.ctx,
+      { db: db.ctx, formConfig: defaultFormConfig },
       '45c66187-64e2-4d75-a45a-e80f1d035bc5'
     );
-    expect(result).toEqual({
-      outputs: [],
-      patterns: {
-        root: {
-          data: {
-            patterns: [],
-          },
-          id: 'root',
-          type: 'sequence',
-        },
-      },
-      root: 'root',
-      summary: {
-        description: 'Test description',
-        title: 'Test form',
-      },
-    });
+    expect(result).toEqual({ success: true, data: TEST_FORM });
   });
 
   it<DbTestContext>('return null with non-existent form', async ({ db }) => {
     const result = await getForm(
-      db.ctx,
+      { db: db.ctx, formConfig: defaultFormConfig },
       '45c66187-64e2-4d75-a45a-e80f1d035bc5'
     );
-    expect(result).toBeNull();
+    expect(result).toEqual({ success: true, data: null });
   });
 });
+
+const TEST_FORM: Blueprint = {
+  summary: { title: 'Title', description: 'Description' },
+  root: 'root',
+  patterns: { root: { type: 'page-set', id: 'root', data: { pages: [] } } },
+  outputs: [
+    {
+      id: 'test-id',
+      path: 'test.pdf',
+      fields: {},
+      formFields: {},
+    },
+  ],
+};

@@ -2,6 +2,7 @@ import {
   type FormConfig,
   type FormService,
   createFormService,
+  parsePdf,
 } from '@atj/forms';
 import { defaultFormConfig } from '@atj/forms';
 import { BrowserFormRepository } from '@atj/forms/context';
@@ -43,6 +44,7 @@ const createAppFormService = () => {
       repository,
       config: defaultFormConfig,
       isUserLoggedIn: () => true,
+      parsePdf,
     });
   } else {
     return createTestBrowserFormService();

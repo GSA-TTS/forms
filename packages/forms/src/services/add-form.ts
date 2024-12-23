@@ -12,7 +12,7 @@ type AddFormResult = {
   id: string;
 };
 
-type AddForm = (
+export type AddForm = (
   ctx: FormServiceContext,
   form: Blueprint
 ) => Promise<Result<AddFormResult, AddFormError>>;

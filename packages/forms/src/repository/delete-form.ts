@@ -1,21 +1,45 @@
-import { type VoidResult, failure } from '@atj/common';
+import { type VoidResult, failure, voidSuccess } from '@atj/common';
 
-import { type DatabaseContext } from '@atj/database';
+import type { FormOutput } from '../types';
+import type { FormRepositoryContext } from '.';
 
-export const deleteForm = async (
-  ctx: DatabaseContext,
+export type DeleteForm = (
+  ctx: FormRepositoryContext,
   formId: string
-): Promise<VoidResult> => {
-  const db = await ctx.getKysely();
+) => Promise<VoidResult<{ message: string; code: 'not-found' | 'unknown' }>>;
 
-  const deleteResult = await db
-    .deleteFrom('forms')
-    .where('id', '=', formId)
-    .execute();
+export const deleteForm: DeleteForm = async (ctx, formId) => {
+  const db = await ctx.db.getKysely();
 
-  if (!deleteResult[0].numDeletedRows) {
-    return failure('form not found');
-  }
+  const result = await db.transaction().execute(async trx => {
+    const deleteResult = await trx
+      .deleteFrom('forms')
+      .where('id', '=', formId)
+      .returning('data')
+      .executeTakeFirst();
 
-  return { success: true };
+    if (!deleteResult) {
+      return failure({ message: 'form not found', code: 'not-found' as const });
+    }
+
+    const form = JSON.parse(deleteResult.data);
+    const documentIds: string[] = form.outputs.map(
+      (output: FormOutput) => output.id
+    );
+
+    if (documentIds.length === 0) {
+      return voidSuccess;
+    }
+
+    return await trx
+      .deleteFrom('form_documents')
+      .where('id', 'in', documentIds)
+      .execute()
+      .then(_ => voidSuccess)
+      .catch((error: Error) => {
+        return failure({ message: error.message, code: 'unknown' as const });
+      });
+  });
+
+  return result;
 };

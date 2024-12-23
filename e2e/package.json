@@ -7,7 +7,7 @@
     "test": "export E2E_ENDPOINT=http://localhost:4321; pnpm playwright test --ui-port=8080 --ui-host=0.0.0.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.46.0",
+    "@playwright/test": "1.48.1",
     "@storybook/test-runner": "^0.19.1",
     "path-to-regexp": "^7.1.0"
   },

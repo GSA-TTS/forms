@@ -10,7 +10,7 @@ import {
   PDFRadioGroup,
 } from 'pdf-lib';
 
-import { stringToBase64 } from '../util.js';
+import { stringToBase64 } from '../../util/base64.js';
 import type { DocumentFieldValue, DocumentFieldMap } from '../types.js';
 
 // TODO: copied from pdf-lib acrofield internals, check if it's already exposed outside of acroform somewhere

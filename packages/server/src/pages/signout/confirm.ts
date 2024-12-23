@@ -1,11 +1,11 @@
 import type { APIContext } from 'astro';
 
 import { logOut } from '@atj/auth';
-import { getAstroAppContext } from '../../context.js';
+import { getServerContext } from '../../config/astro.js';
 import * as routes from '../../routes.js';
 
 export async function POST(context: APIContext): Promise<Response> {
-  const { auth, baseUrl } = await getAstroAppContext(context);
+  const { auth, baseUrl } = await getServerContext(context);
   if (!context.locals.session) {
     return new Response('no active session', {
       status: 401,

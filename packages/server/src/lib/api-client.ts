@@ -1,5 +1,12 @@
 import { type Result } from '@atj/common';
-import { FormSession, type Blueprint, type FormService } from '@atj/forms';
+import {
+  type FormRoute,
+  type FormSession,
+  type FormSessionId,
+  type Blueprint,
+  type FormService,
+  type FormSummary,
+} from '@atj/forms';
 import { type FormServiceContext } from '@atj/forms/context';
 
 type FormServiceClientContext = {
@@ -17,7 +24,45 @@ export class FormServiceClient implements FormService {
         'Content-Type': 'application/json',
       },
     });
-    return await response.json();
+    const result = await response.json();
+    return result;
+  }
+
+  async initializeForm(
+    opts:
+      | unknown
+      | {
+          summary?: FormSummary;
+          document?: { fileName: string; data: string };
+        }
+  ): Promise<
+    Result<
+      { timestamp: string; id: string },
+      { status: number; message: string }
+    >
+  > {
+    const options = opts as {
+      summary?: FormSummary;
+      document?: { fileName: string; data: string };
+    };
+    const body = JSON.stringify({
+      summary: options.summary ? options.summary : undefined,
+      document: options.document
+        ? {
+            fileName: options.document.fileName,
+            data: options.document.data,
+          }
+        : undefined,
+    });
+    const response = await fetch(`${this.ctx.baseUrl}api/forms`, {
+      method: 'POST',
+      body,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const result = await response.json();
+    return result;
   }
 
   async deleteForm(formId: string) {
@@ -49,25 +94,46 @@ export class FormServiceClient implements FormService {
   }
 
   async submitForm(
-    session: FormSession, // TODO: load session from storage by ID
+    sessionId: FormSessionId | undefined,
     formId: string,
-    formData: Record<string, string>
+    formData: Record<string, string>,
+    route?: FormRoute
   ): Promise<
-    Result<
-      {
+    Result<{
+      sessionId: string;
+      session: FormSession;
+      documents: {
         fileName: string;
         data: Uint8Array;
-      }[]
-    >
+      }[];
+    }>
   > {
+    const payload: any = { formId, formData };
+    if (sessionId !== undefined) {
+      payload['sessionId'] = sessionId;
+    }
+    if (route !== undefined) {
+      payload['route'] = route;
+    }
+
     const response = await fetch(`${this.ctx.baseUrl}forms/${formId}`, {
       method: 'POST',
-      body: JSON.stringify({ formId, formData, session }),
+      body: JSON.stringify(payload),
       headers: {
         'Content-Type': 'application/json',
       },
     });
     return await response.json();
+  }
+
+  async getFormSession(_opts: {
+    formId: string;
+    formRoute: FormRoute;
+    sessionId?: string;
+  }): Promise<
+    Result<{ id?: string | undefined; formId: string; data: FormSession }>
+  > {
+    throw new Error('Not implemented');
   }
 
   getContext() {

@@ -40,11 +40,13 @@ export const Basic = {
     pages: [
       {
         title: 'First page',
-        active: false,
+        selected: false,
+        url: '#/?page=0',
       },
       {
         title: 'Second page',
-        active: true,
+        selected: true,
+        url: '#/?page=0',
       },
     ],
     actions: [],

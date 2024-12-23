@@ -9,6 +9,11 @@ type ServiceFunction<Args extends any[], Return, Context> = (
   ...args: Args
 ) => Return;
 
+export type ServiceMethod<F extends ServiceFunction<any, any, any>> =
+  F extends (context: infer C, ...args: infer A) => infer R
+    ? (...args: A) => R
+    : never;
+
 type ServiceFunctions<Context> = {
   [key: string]: ServiceFunction<any[], any, Context>;
 };

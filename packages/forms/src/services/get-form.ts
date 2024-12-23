@@ -1,31 +1,34 @@
 import { type Result, failure, success } from '@atj/common';
 
-import { type Blueprint } from '../index.js';
+import { parseForm } from '../builder/parse-form.js';
 import { type FormServiceContext } from '../context/index.js';
+import { type Blueprint } from '../types.js';
 
 type GetFormError = {
   status: number;
   message: string;
 };
 
-type GetForm = (
+export type GetForm = (
   ctx: FormServiceContext,
   formId: string
 ) => Promise<Result<Blueprint, GetFormError>>;
 
 export const getForm: GetForm = async (ctx, formId) => {
-  if (!ctx.isUserLoggedIn()) {
+  const formResult = await ctx.repository.getForm(formId);
+  if (!formResult.success) {
     return failure({
-      status: 401,
-      message: 'You must be logged in to delete a form',
+      status: 500,
+      message: formResult.error,
     });
   }
-  const result = await ctx.repository.getForm(formId);
-  if (result === null) {
+
+  if (formResult.data === null) {
     return failure({
       status: 404,
       message: 'Form not found',
     });
   }
-  return success(result);
+
+  return success(formResult.data);
 };

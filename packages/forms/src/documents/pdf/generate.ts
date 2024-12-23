@@ -38,6 +38,48 @@ export const fillPDF = async (
       setFormFieldData(form, value.type, name, value.value);
     });
   } catch (error: any) {
+    // console.log('fieldData is:', fieldData);
+    const fieldDataNames = Object.keys(fieldData); // names we got from API
+    const fields = form.getFields();
+    const fieldNames = fields.map(field => field.getName()); // fieldnames we ripped from the PDF
+
+    // Combine the two arrays with an indication of their source
+    const combinedNames = [
+      ...fieldDataNames.map(name => ({ name, source: 'API' })),
+      ...fieldNames.map(name => ({ name, source: 'pdf-lib' })),
+    ];
+
+    // Use a Map to keep track of unique names and their sources
+    const uniqueNamesMap = new Map();
+
+    combinedNames.forEach(({ name, source }) => {
+      if (!uniqueNamesMap.has(name)) {
+        uniqueNamesMap.set(name, []);
+      }
+      uniqueNamesMap.get(name).push(source);
+    });
+
+    // Convert the Map to an array of objects and sort it alphabetically by name
+    const uniqueNamesArray = Array.from(uniqueNamesMap.entries())
+      .map(([name, sources]) => ({ name, sources }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+    // Console log the resulting array
+    console.log('uniqueNamesArray:', uniqueNamesArray);
+
+    // fields.map(field => {
+    //   console.log('field name is:', field.getName());
+    // });
+
+    // console.log('form.getFields() is:', form.getFields());
+    // console.log('pdf form is:', form);
+    if (error?.message) {
+      return {
+        success: false,
+        error: error?.message || 'error setting PDF field',
+      };
+    }
+
     return {
       success: false,
       error: error?.message || 'error setting PDF field',
@@ -65,6 +107,9 @@ const setFormFieldData = (
     } else {
       field.uncheck();
     }
+  } else if (fieldType === 'Attachment') {
+    const field = form.getDropdown(fieldName);
+    field.select(fieldValue);
   } else if (fieldType === 'Dropdown') {
     const field = form.getDropdown(fieldName);
     field.select(fieldValue);
@@ -87,7 +132,7 @@ const setFormFieldData = (
         field.uncheck();
       }
     }
-  } else if (fieldType === 'Paragraph') {
+  } else if (fieldType === 'Paragraph' || fieldType === 'RichText') {
     // do nothing
   } else {
     const exhaustiveCheck: never = fieldType;

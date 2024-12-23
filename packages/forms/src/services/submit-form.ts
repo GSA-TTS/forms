@@ -1,92 +1,157 @@
-import { type Result } from '@atj/common';
+import { failure, success, type Result } from '@atj/common';
+
+import { type FormServiceContext } from '../context/index.js';
+import { submitPage } from '../patterns/page-set/submit';
+import { downloadPackageHandler } from '../patterns/package-download/submit';
+import { type FormRoute } from '../route-data.js';
+import { SubmissionRegistry } from '../submission';
 import {
-  type Blueprint,
+  createFormSession,
   type FormSession,
-  applyPromptResponse,
-  createFormOutputFieldData,
-  fillPDF,
-  sessionIsComplete,
-} from '../index.js';
+  type FormSessionId,
+} from '../session.js';
+import { defaultFormConfig } from '../patterns/index.js';
+import type { Blueprint } from '../types.js';
 
-import { FormServiceContext } from '../context/index.js';
-
-type SubmitForm = (
+export type SubmitForm = (
   ctx: FormServiceContext,
-  //sessionId: string,
-  session: FormSession, // TODO: load session from storage by ID
+  sessionId: FormSessionId | undefined,
   formId: string,
-  formData: Record<string, string>
+  formData: Record<string, string>,
+  route?: FormRoute
 ) => Promise<
-  Result<
-    {
+  Result<{
+    sessionId: FormSessionId;
+    session: FormSession;
+    attachments?: {
       fileName: string;
       data: Uint8Array;
-    }[]
-  >
+    }[];
+  }>
 >;
+
+// Temportary location for the SubmissionRegistry.
+const registry = new SubmissionRegistry(defaultFormConfig);
+registry.registerHandler({
+  handlerId: 'page-set',
+  handler: submitPage,
+});
+registry.registerHandler({
+  handlerId: 'package-download',
+  handler: downloadPackageHandler,
+});
 
 export const submitForm: SubmitForm = async (
   ctx,
-  //sessionId: string,
-  session, // TODO: load session from storage by ID
+  sessionId,
   formId,
-  formData
+  formData,
+  route
 ) => {
-  const form = await ctx.repository.getForm(formId);
-  if (form === null) {
-    return Promise.resolve({
-      success: false,
-      error: 'Form not found',
-    });
+  const formResult = await ctx.repository.getForm(formId);
+  if (!formResult.success) {
+    return failure(formResult.error);
   }
-  //const session = getSessionFromStorage(ctx.storage, sessionId) || createFormSession(form);
-  // For now, the client-side is producing its own error messages.
-  // In the future, we'll want this service to return errors to the client.
-  const newSessionResult = applyPromptResponse(ctx.config, session, {
-    action: 'submit',
-    data: formData,
-  });
+
+  if (formResult.data === null) {
+    return failure('Form not found');
+  }
+
+  const sessionResult = await getFormSessionOrCreate(
+    ctx,
+    formResult.data,
+    route,
+    sessionId
+  );
+  if (!sessionResult.success) {
+    return sessionResult;
+  }
+
+  const session: FormSession = route
+    ? {
+        ...sessionResult.data,
+        route,
+      }
+    : sessionResult.data;
+
+  const actionString = formData['action'];
+  if (typeof actionString !== 'string') {
+    return failure(`Invalid action: ${actionString}`);
+  }
+
+  const submitHandlerResult = registry.getHandlerForAction(
+    formResult.data,
+    actionString
+  );
+  if (!submitHandlerResult.success) {
+    return failure(submitHandlerResult.error);
+  }
+
+  const { handler, pattern } = submitHandlerResult.data;
+  const newSessionResult = await handler(
+    {
+      config: ctx.config,
+      getDocument: id => {
+        return ctx.repository.getDocument(id);
+      },
+    },
+    {
+      pattern,
+      session,
+      data: formData,
+    }
+  );
+
   if (!newSessionResult.success) {
-    return Promise.resolve({
-      success: false,
-      error: newSessionResult.error,
+    return failure(newSessionResult.error);
+  }
+
+  const saveFormSessionResult = await ctx.repository.upsertFormSession({
+    id: sessionId,
+    formId,
+    data: newSessionResult.data.session,
+  });
+  if (!saveFormSessionResult.success) {
+    return failure(saveFormSessionResult.error);
+  }
+
+  /*
+  if (sessionIsComplete(ctx.config, newSessionResult.data)) {
+    const documentsResult = await generateDocumentPackage(
+      form,
+      newSessionResult.data.data.values
+    );
+    if (!documentsResult.success) {
+      return failure(documentsResult.error);
+    }
+
+    return success({
+      sessionId: saveFormSessionResult.data.id,
+      session: newSessionResult.data,
+      documents: documentsResult.data,
     });
   }
-  if (!sessionIsComplete(ctx.config, newSessionResult.data)) {
-    return Promise.resolve({
-      success: false,
-      error: 'Session is not complete',
-    });
-  }
-  return generateDocumentPackage(form, newSessionResult.data.data.values);
+  */
+
+  return success({
+    sessionId: saveFormSessionResult.data.id,
+    session: newSessionResult.data.session,
+    attachments: newSessionResult.data.attachments,
+  });
 };
 
-const generateDocumentPackage = async (
+const getFormSessionOrCreate = async (
+  ctx: FormServiceContext,
   form: Blueprint,
-  formData: Record<string, string>
+  route?: FormRoute,
+  sessionId?: FormSessionId
 ) => {
-  const errors = new Array<string>();
-  const documents = new Array<{ fileName: string; data: Uint8Array }>();
-  for (const document of form.outputs) {
-    const docFieldData = createFormOutputFieldData(document, formData);
-    const pdfDocument = await fillPDF(document.data, docFieldData);
-    if (!pdfDocument.success) {
-      errors.push(pdfDocument.error);
-    } else {
-      documents.push({
-        fileName: document.path,
-        data: pdfDocument.data,
-      });
-    }
+  if (sessionId === undefined) {
+    return success(createFormSession(form, route));
   }
-  if (errors.length > 0) {
-    return {
-      success: false as const,
-      error: errors.join('\n'),
-    };
+  const sessionResult = await ctx.repository.getFormSession(sessionId);
+  if (!sessionResult.success) {
+    return failure('Session not found');
   }
-  return {
-    success: true as const,
-    data: documents,
-  };
+  return success(sessionResult.data.data);
 };

@@ -1,9 +1,9 @@
 ---
 import AppFormManager from '../../components/AppFormManager';
 import Layout from '../../layouts/Layout.astro';
-import { getAstroAppContext } from '../../context';
+import { getServerContext } from '../../config/astro.js';
 
-const ctx = await getAstroAppContext(Astro);
+const ctx = await getServerContext(Astro);
 ---
 
 <Layout title="10x Access to Justice">

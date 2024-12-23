@@ -2,8 +2,8 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import DocumentImporter from '.';
-import { createTwoPatternTestForm } from '../../../test-form';
+import DocumentImporter from './index.js';
+import { createTwoPatternTestForm } from '../../../test-form.js';
 
 const meta: Meta<typeof DocumentImporter> = {
   title: 'FormManager/DocumentImporter',
