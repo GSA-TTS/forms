@@ -7,8 +7,20 @@
     "build": "astro build",
     "clean": "rimraf dist tsconfig.tsbuildinfo coverage",
     "dev": "astro dev",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "size": "pnpm build && size-limit",
+    "size:ci": "size-limit --json"
   },
+  "size-limit": [
+    {
+      "path": "dist/_astro/*.css",
+      "limit": "50 kB"
+    },
+    {
+      "path": "dist/_astro/*.js",
+      "limit": "425 kB"
+    }
+  ],
   "dependencies": {
     "@astrojs/react": "^3.6.1",
     "@atj/common": "workspace:*",
@@ -25,7 +37,10 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.4.1",
+    "@size-limit/preset-app": "^11.1.6",
     "@types/qs": "^6.9.15",
-    "@types/react": "^18.3.3"
+    "@types/react": "^18.3.3",
+    "sharp": "^0.33.5",
+    "size-limit": "^11.1.6"
   }
 }
