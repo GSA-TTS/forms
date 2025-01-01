@@ -1,12 +1,12 @@
 {
   "headers": [
     {
-      "/*.html": {
+      "/preview/gsa-tts/forms/feature/pages-cache/*.html": {
         "cache-control": "public, max-age=60, must-revalidate"
       }
     },
     {
-      "/_astro/*": {
+      "/preview/gsa-tts/forms/feature/pages-cache/_astro/*": {
         "cache-control": "public, max-age=31536000, immutable"
       }
     },
