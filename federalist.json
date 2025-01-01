@@ -12,7 +12,7 @@
     },
     {
       "/*": {
-        "cache-control": "public, max-age=60"
+        "cache-control": "public, max-age=45"
       }
     }
   ]
