@@ -8,6 +8,12 @@ import {
 import { LoginGov } from '../provider.js';
 import { type AuthRepository } from '../repository/index.js';
 
+/**
+ * The `BaseAuthContext` class implements the `AuthServiceContext` interface,
+ * providing an authentication context for user sessions and database interactions.
+ * It integrates with a repository for database operations, a third-party login provider,
+ * and various utilities for managing cookies and user sessions.
+ */
 export class BaseAuthContext implements AuthServiceContext {
   private lucia?: Lucia;
 
