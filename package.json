@@ -9,6 +9,8 @@
   "scripts": {
     "build": "turbo run build --filter=!@atj/infra-cdktf",
     "clean": "turbo run clean",
+    "clean:modules": "find $(git rev-parse --show-toplevel) -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
+    "clean:dist": "find $(git rev-parse --show-toplevel) -name 'dist' -type d -prune -exec rm -rf '{}' +",
     "dev": "turbo run dev --concurrency 20",
     "format": "prettier --write \"packages/*/src/**/*.{js,jsx,ts,tsx,scss,css}\"",
     "lint": "turbo run lint",

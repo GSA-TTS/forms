@@ -56,6 +56,16 @@ To run tests in watch mode (except the `infra` tests, which use Jest):
 pnpm vitest
 ```
 
+If you start having unexplained build errors, the following commands are useful to clean up and start fresh.
+
+```bash
+pnpm clean:dist # removes previously built files recursively
+pnpm clean:modules # removes node_module directories recursively
+
+# ... run more commands like pnpm install and pnpm build after you have run these 
+```
+
+
 To start developing with hot reloading, use:
 
 ```bash

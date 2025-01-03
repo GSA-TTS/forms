@@ -16,42 +16,38 @@ const context = getAppContext();
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="description"
-      content=`10x Access to Justice Spotlight - ${title}`
-    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
     <script
       async
-      type="text/javascript"
+      is:inline
       src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=GSA"
       id="_fed_an_ua_tag"></script>
+    <script is:inline src={`${context.uswdsRoot}js/uswds-init.min.js`}></script>
+    <script src="../lib/initialize.ts"></script>
     <link
-      href="/favicon/apple-touch-icon.png"
+      href={`${context.baseUrl}favicon/apple-touch-icon.png`}
       rel="apple-touch-icon"
       sizes="180x180"
     />
     <link
-      href="/favicon/favicon-32x32.png"
+      href={`${context.baseUrl}favicon/favicon-32x32.png`}
       rel="icon"
       sizes="32x32"
       type="image/png"
     />
     <link
-      href="/favicon/favicon-16x16.png"
+      href={`${context.baseUrl}favicon/favicon-16x16.png`}
       rel="icon"
       sizes="16x16"
       type="image/png"
     />
-    <link href="/favicon/favicon.ico" rel="shortcut icon" />
+    <link href={`${context.baseUrl}favicon/favicon.ico`} rel="shortcut icon" />
     <meta name="generator" content={Astro.generator} />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
+    <meta
+      name="description"
+      content=`10x Access to Justice Spotlight - ${title}`
     />
-    <script is:inline src={`${context.uswdsRoot}js/uswds-init.min.js`}></script>  
-    <script src="../lib/initialize.ts"></script>
-    <title>{title}</title>
   </head>
   <body id="top">
     <script is:inline defer src={`${context.uswdsRoot}js/uswds.min.js`}></script>
