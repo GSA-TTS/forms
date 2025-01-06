@@ -6,19 +6,49 @@ import {
 } from '../blueprint.js';
 import { type Pattern } from '../pattern.js';
 import { type InputPattern } from '../patterns/input/config.js';
+import { type AttachmentPattern } from '../patterns/attachment/config.js';
+import { attachmentFileTypeMimes } from '../patterns/attachment/file-type-options.js';
 import { type SequencePattern } from '../patterns/sequence.js';
 import { type Blueprint } from '../types.js';
+import { getDocumentFieldData } from './pdf/extract.js';
 
-import { type PDFDocument, getDocumentFieldData } from './pdf/index.js';
+import { type PDFDocument } from './pdf/index.js';
 import {
   type FetchPdfApiResponse,
-  processApiResponse,
+  type ParsedPdf,
   fetchPdfApiResponse,
+  processApiResponse,
 } from './pdf/parsing-api.js';
 
 import { type DocumentFieldMap } from './types.js';
 
 export type DocumentTemplate = PDFDocument;
+
+export const addParsedPdfToForm = async (
+  form: Blueprint,
+  document: {
+    id: string;
+    label: string;
+    extract: ParsedPdf;
+  }
+) => {
+  form = addPatternMap(form, document.extract.patterns, document.extract.root);
+  const updatedForm = addFormOutput(form, {
+    id: document.id,
+    path: document.label,
+    fields: document.extract.outputs,
+    formFields: Object.fromEntries(
+      Object.keys(document.extract.outputs).map(output => {
+        return [output, document.extract.outputs[output].name];
+      })
+    ),
+  });
+  return {
+    newFields: document.extract.outputs,
+    updatedForm,
+    errors: document.extract.errors,
+  };
+};
 
 export const addDocument = async (
   form: Blueprint,
@@ -41,7 +71,7 @@ export const addDocument = async (
     });
     form = addPatternMap(form, parsedPdf.patterns, parsedPdf.root);
     const updatedForm = addFormOutput(form, {
-      data: fileDetails.data,
+      id: 'document-1', // TODO: generate a unique ID
       path: fileDetails.name,
       fields: parsedPdf.outputs,
       formFields: Object.fromEntries(
@@ -58,7 +88,7 @@ export const addDocument = async (
   } else {
     const formWithFields = addDocumentFieldsToForm(form, fields);
     const updatedForm = addFormOutput(formWithFields, {
-      data: fileDetails.data,
+      id: 'document-1', // TODO: generate a unique ID
       path: fileDetails.name,
       fields,
       // TODO: for now, reuse the field IDs from the PDF. we need to generate

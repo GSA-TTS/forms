@@ -1,4 +1,5 @@
 import type {
+  ColumnType,
   Generated,
   Insertable,
   Kysely,
@@ -14,7 +15,9 @@ export interface Database<T extends Engine = Engine> {
   sessions: SessionsTable<T>;
   forms: FormsTable;
   form_sessions: FormSessionsTable;
+  form_documents: FormDocumentsTable;
 }
+export type DatabaseClient = Kysely<Database>;
 
 interface UsersTable {
   id: string;
@@ -48,8 +51,6 @@ export type FormsTableSelectable = Selectable<FormsTable>;
 export type FormsTableInsertable = Insertable<FormsTable>;
 export type FormsTableUpdateable = Updateable<FormsTable>;
 
-export type DatabaseClient = Kysely<Database>;
-
 interface FormSessionsTable {
   id: string;
   form_id: string;
@@ -60,3 +61,14 @@ interface FormSessionsTable {
 export type FormSessionsTableSelectable = Selectable<FormSessionsTable>;
 export type FormSessionsTableInsertable = Insertable<FormSessionsTable>;
 export type FormSessionsTableUpdateable = Updateable<FormSessionsTable>;
+
+interface FormDocumentsTable {
+  id: string;
+  type: string;
+  data: ColumnType<Buffer, Buffer, Buffer>;
+  file_name: string;
+  extract: string;
+}
+export type FormDocumentsTableSelectable = Selectable<FormDocumentsTable>;
+export type FormDocumentsTableInsertable = Insertable<FormDocumentsTable>;
+export type FormDocumentsTableUpdateable = Updateable<FormDocumentsTable>;

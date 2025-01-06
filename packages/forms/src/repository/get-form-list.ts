@@ -1,6 +1,6 @@
-import { type DatabaseContext } from '@atj/database';
+import type { FormRepositoryContext } from '.';
 
-export type GetFormList = (ctx: DatabaseContext) => Promise<
+export type GetFormList = (ctx: FormRepositoryContext) => Promise<
   | {
       id: string;
       title: string;
@@ -10,7 +10,7 @@ export type GetFormList = (ctx: DatabaseContext) => Promise<
 >;
 
 export const getFormList: GetFormList = async ctx => {
-  const db = await ctx.getKysely();
+  const db = await ctx.db.getKysely();
   const rows = await db.selectFrom('forms').select(['id', 'data']).execute();
 
   return rows.map(row => {

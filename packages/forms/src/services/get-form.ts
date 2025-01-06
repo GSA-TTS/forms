@@ -1,7 +1,8 @@
 import { type Result, failure, success } from '@atj/common';
 
-import { type Blueprint } from '../index.js';
+import { parseForm } from '../builder/parse-form.js';
 import { type FormServiceContext } from '../context/index.js';
+import { type Blueprint } from '../types.js';
 
 type GetFormError = {
   status: number;
@@ -14,12 +15,20 @@ export type GetForm = (
 ) => Promise<Result<Blueprint, GetFormError>>;
 
 export const getForm: GetForm = async (ctx, formId) => {
-  const result = await ctx.repository.getForm(formId);
-  if (result === null) {
+  const formResult = await ctx.repository.getForm(formId);
+  if (!formResult.success) {
+    return failure({
+      status: 500,
+      message: formResult.error,
+    });
+  }
+
+  if (formResult.data === null) {
     return failure({
       status: 404,
       message: 'Form not found',
     });
   }
-  return success(result);
+
+  return success(formResult.data);
 };

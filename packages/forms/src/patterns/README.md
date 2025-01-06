@@ -39,11 +39,14 @@ const input: InputPattern = {
 }
 ```
 
+... or patterns may be created with the builder's object-oriented interface:
+
 ```typescript
-const input = new InputPatternBuilder();
+const input1 = new InputPatternBuilder();
+const input2 = new InputPatternBuilder();
 const page1 = new Page({ title: 'Page 1', patterns: [input1.id] });
-const pageSet = new PageSet({ pages: [page1.id] }, 'page-set');
-const page2 = new Page({ title: 'Page 2', patterns: [input1.id] });
+const pageSet = new PageSet({ pages: [page1.id] });
+const page2 = new Page({ title: 'Page 2', patterns: [input2.id] });
 pageSet.addPage(page2)
 
 // Construct the pattern objects

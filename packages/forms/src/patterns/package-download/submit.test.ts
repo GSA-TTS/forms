@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { failure } from '@atj/common';
+import { failure, success } from '@atj/common';
 
 import { type Blueprint, type FormSession, defaultFormConfig } from '../..';
 
@@ -18,11 +18,17 @@ describe('downloadPackageHandler', async () => {
       data: { errors: {}, values: {} },
       route: { url: '#', params: {} },
     };
-    const result = await downloadPackageHandler(defaultFormConfig, {
-      pattern: new PackageDownload({ text: 'Download now!' }).toPattern(),
-      session,
-      data: {},
-    });
+    const result = await downloadPackageHandler(
+      {
+        config: defaultFormConfig,
+        getDocument: () => Promise.resolve(failure('Document not found')),
+      },
+      {
+        pattern: new PackageDownload({ text: 'Download now!' }).toPattern(),
+        session,
+        data: {},
+      }
+    );
 
     expect(result).toEqual(failure('Form is not complete'));
   });
@@ -38,11 +44,25 @@ describe('downloadPackageHandler', async () => {
       },
       route: { url: '#', params: {} },
     };
-    const result = await downloadPackageHandler(defaultFormConfig, {
-      pattern: new PackageDownload({ text: 'Download now!' }).toPattern(),
-      session,
-      data: {},
-    });
+    const result = await downloadPackageHandler(
+      {
+        config: defaultFormConfig,
+        getDocument: async () =>
+          success({
+            id: 'id',
+            data: await loadSamplePDF(
+              'doj-pardon-marijuana/application_for_certificate_of_pardon_for_simple_marijuana_possession.pdf'
+            ),
+            path: 'test.pdf',
+            fields: {},
+          }),
+      },
+      {
+        pattern: new PackageDownload({ text: 'Download now!' }).toPattern(),
+        session,
+        data: {},
+      }
+    );
     expect(result).toEqual(
       expect.objectContaining({
         success: true,
@@ -83,8 +103,8 @@ const createTestForm = async (): Promise<Blueprint> => {
     },
     outputs: [
       {
+        id: 'test-id',
         path: 'test.pdf',
-        data: new Uint8Array(pdfBytes),
         fields: {
           [input1.id]: {
             type: 'TextField',

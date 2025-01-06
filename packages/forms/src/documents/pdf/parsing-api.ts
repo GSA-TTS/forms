@@ -9,7 +9,7 @@ import { type CheckboxPattern } from '../../patterns/checkbox.js';
 import { type RadioGroupPattern } from '../../patterns/radio-group.js';
 import { RichTextPattern } from '../../patterns/rich-text.js';
 
-import { uint8ArrayToBase64 } from '../util.js';
+import { uint8ArrayToBase64 } from '../../util/base64.js';
 import { type DocumentFieldMap } from '../types.js';
 import {
   createPattern,
@@ -157,7 +157,6 @@ export const processApiResponse = async (json: any): Promise<ParsedPdf> => {
 
   for (const element of extracted.elements) {
     const fieldsetPatterns: PatternId[] = [];
-
     // Add paragraph elements
     if (element.component_type === 'paragraph') {
       const paragraph = processPatternData<ParagraphPattern>(

@@ -9,7 +9,7 @@ import {
   removePatternFromBlueprint,
   updateFormSummary,
 } from '../blueprint.js';
-import { addDocument } from '../documents/document.js';
+import { addDocument, addParsedPdfToForm } from '../documents/document.js';
 import type { FormErrors } from '../error.js';
 import {
   createDefaultPattern,
@@ -23,6 +23,7 @@ import {
 import { type FieldsetPattern } from '../patterns/fieldset/config.js';
 import { type PageSetPattern } from '../patterns/page-set/config.js';
 import type { Blueprint, FormSummary } from '../types.js';
+import type { ParsedPdf } from '../documents/pdf/parsing-api.js';
 
 export class BlueprintBuilder {
   bp: Blueprint;
@@ -44,6 +45,15 @@ export class BlueprintBuilder {
 
   async addDocument(fileDetails: { name: string; data: Uint8Array }) {
     const { updatedForm } = await addDocument(this.form, fileDetails);
+    this.bp = updatedForm;
+  }
+
+  async addDocumentRef(opts: { id: string; extract: ParsedPdf }) {
+    const { updatedForm } = await addParsedPdfToForm(this.form, {
+      id: opts.id,
+      label: opts.extract.title,
+      extract: opts.extract,
+    });
     this.bp = updatedForm;
   }
 

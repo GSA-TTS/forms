@@ -1,9 +1,9 @@
 import { type Result, failure, success } from '@atj/common';
-import { type DatabaseContext } from '@atj/database';
 import { type FormSession } from '../session';
+import type { FormRepositoryContext } from '.';
 
 export type UpsertFormSession = (
-  ctx: DatabaseContext,
+  ctx: FormRepositoryContext,
   opts: {
     id?: string;
     formId: string;
@@ -12,7 +12,7 @@ export type UpsertFormSession = (
 ) => Promise<Result<{ timestamp: Date; id: string }>>;
 
 export const upsertFormSession: UpsertFormSession = async (ctx, opts) => {
-  const db = await ctx.getKysely();
+  const db = await ctx.db.getKysely();
   const strData = JSON.stringify(opts.data);
   const id = opts.id || crypto.randomUUID();
   return await db

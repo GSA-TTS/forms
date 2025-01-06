@@ -1,9 +1,9 @@
 import { type Result, failure, success } from '@atj/common';
-import { type DatabaseContext } from '@atj/database';
 import { type FormSession, type FormSessionId } from '../session';
+import type { FormRepositoryContext } from '.';
 
 export type GetFormSession = (
-  ctx: DatabaseContext,
+  ctx: FormRepositoryContext,
   id: string
 ) => Promise<
   Result<{
@@ -14,7 +14,7 @@ export type GetFormSession = (
 >;
 
 export const getFormSession: GetFormSession = async (ctx, id) => {
-  const db = await ctx.getKysely();
+  const db = await ctx.db.getKysely();
   return await db
     .selectFrom('form_sessions')
     .where('id', '=', id)

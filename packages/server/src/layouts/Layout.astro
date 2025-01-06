@@ -14,14 +14,14 @@ const { title } = Astro.props;
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content=`10x Access to Justice - ${title}` />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
     <script
       async
       is:inline
-      type="text/javascript"
       src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=GSA"
       id="_fed_an_ua_tag"></script>
+    <script src="../lib/initialize.ts"></script>
     <link
       href="/favicon/apple-touch-icon.png"
       rel="apple-touch-icon"
@@ -41,12 +41,10 @@ const { title } = Astro.props;
     />
     <link href="/favicon/favicon.ico" rel="shortcut icon" />
     <meta name="generator" content={Astro.generator} />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
+    <meta
+      name="description"
+      content=`10x Access to Justice Spotlight - ${title}`
     />
-    <script src="../lib/initialize.ts"></script>
-    <title>{title}</title>
   </head>
   <body id="top">
     <div class="usa-app usa-app__theme-1">

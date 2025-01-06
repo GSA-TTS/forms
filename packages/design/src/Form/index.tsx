@@ -104,6 +104,7 @@ export default function Form({
             {!isPreview ? (
               <form
                 className="usa-form margin-bottom-3 maxw-full"
+                encType="multipart/form-data"
                 onSubmit={
                   onSubmit
                     ? formMethods.handleSubmit(async (data, event) => {

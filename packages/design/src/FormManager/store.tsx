@@ -8,7 +8,7 @@ import {
 import { createContext } from 'zustand-utils';
 
 import { type Result, failure } from '@atj/common';
-import { type FormSession, type Blueprint, BlueprintBuilder } from '@atj/forms';
+import { type FormSession, type Blueprint } from '@atj/forms';
 
 import { type FormListSlice, createFormListSlice } from './FormList/store.js';
 import { type FormEditSlice, createFormEditSlice } from './FormEdit/store.js';
@@ -79,12 +79,12 @@ const createFormManagerSlice =
       inProgress: false,
     },
     createNewForm: async function () {
-      const builder = new BlueprintBuilder(context.config);
-      builder.setFormSummary({
-        title: `My form - ${new Date().toISOString()}`,
-        description: '',
+      const result = await context.formService.initializeForm({
+        summary: {
+          title: `My form - ${new Date().toISOString()}`,
+          description: '',
+        },
       });
-      const result = await context.formService.addForm(builder.form);
       if (!result.success) {
         return failure(result.error.message);
       }

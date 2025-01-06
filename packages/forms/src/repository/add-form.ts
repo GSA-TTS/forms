@@ -1,22 +1,21 @@
 import { type Result, failure, success } from '@atj/common';
-import { type DatabaseContext } from '@atj/database';
 
 import { type Blueprint } from '../index.js';
-import { stringifyForm } from './serialize.js';
+import type { FormRepositoryContext } from './index.js';
 
 export type AddForm = (
-  ctx: DatabaseContext,
+  ctx: FormRepositoryContext,
   form: Blueprint
 ) => Promise<Result<{ timestamp: string; id: string }>>;
 
 export const addForm: AddForm = async (ctx, form) => {
   const uuid = crypto.randomUUID();
-  const db = await ctx.getKysely();
+  const db = await ctx.db.getKysely();
   return db
     .insertInto('forms')
     .values({
       id: uuid,
-      data: stringifyForm(form),
+      data: JSON.stringify(form),
     })
     .execute()
     .then(() =>

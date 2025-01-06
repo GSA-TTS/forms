@@ -71,11 +71,11 @@ export const createForm = (
     patterns: [
       {
         id: 'root',
-        type: 'sequence',
+        type: 'page-set',
         data: {
-          patterns: [],
+          pages: [],
         },
-      } satisfies SequencePattern,
+      } satisfies PageSetPattern,
     ],
     root: 'root',
   }

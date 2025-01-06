@@ -5,11 +5,13 @@ import { type DbTestContext, describeDatabase } from '@atj/database/testing';
 import { createTestBlueprint } from '../builder/builder.test';
 import { addForm } from './add-form';
 import { getFormSession } from './get-form-session';
+import { defaultFormConfig } from '../patterns';
 
 describeDatabase('getFormSession', () => {
   it<DbTestContext>('returns a preexisting form session', async ctx => {
     const db = await ctx.db.ctx.getKysely();
-    const form = await addForm(ctx.db.ctx, createTestBlueprint());
+    const context = { db: ctx.db.ctx, formConfig: defaultFormConfig };
+    const form = await addForm(context, createTestBlueprint());
     if (!form.success) {
       expect.fail(form.error);
     }
@@ -23,7 +25,7 @@ describeDatabase('getFormSession', () => {
       })
       .executeTakeFirstOrThrow();
 
-    const formSessionResult = await getFormSession(ctx.db.ctx, formSessionId);
+    const formSessionResult = await getFormSession(context, formSessionId);
     if (!formSessionResult.success) {
       expect.fail(formSessionResult.error);
     }
@@ -36,8 +38,9 @@ describeDatabase('getFormSession', () => {
   });
 
   it<DbTestContext>('returns an error if the form session does not exist', async ctx => {
+    const context = { db: ctx.db.ctx, formConfig: defaultFormConfig };
     const formSessionResult = await getFormSession(
-      ctx.db.ctx,
+      context,
       '7128b29f-e03d-48c8-8a82-2af8759fc146'
     );
     expect(formSessionResult).toEqual({

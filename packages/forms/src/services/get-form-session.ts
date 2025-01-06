@@ -24,15 +24,22 @@ export type GetFormSession = (
 >;
 
 export const getFormSession: GetFormSession = async (ctx, opts) => {
-  const form = await ctx.repository.getForm(opts.formId);
-  if (form === null) {
+  const formResult = await ctx.repository.getForm(opts.formId);
+  if (!formResult.success) {
+    return failure(`Failed to retrieve form: ${formResult.error}`);
+  }
+
+  if (formResult.data === null) {
     return failure(`form '${opts.formId} does not exist`);
   }
 
   // If this request corresponds to an non-existent session, return a new
   // session that is not yet persisted.
   if (opts.sessionId === undefined) {
-    const formSession = await createFormSession(form, opts.formRoute);
+    const formSession = await createFormSession(
+      formResult.data,
+      opts.formRoute
+    );
     return success({
       formId: opts.formId,
       data: formSession,
@@ -44,7 +51,7 @@ export const getFormSession: GetFormSession = async (ctx, opts) => {
     console.error(
       `Error retrieving form session: ${formSession.error}. Returning new session.`
     );
-    const newSession = await createFormSession(form, opts.formRoute);
+    const newSession = await createFormSession(formResult.data, opts.formRoute);
     return success({
       formId: opts.formId,
       data: newSession,

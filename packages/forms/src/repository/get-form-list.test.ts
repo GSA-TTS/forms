@@ -3,9 +3,11 @@ import { expect, it } from 'vitest';
 import { type DbTestContext, describeDatabase } from '@atj/database/testing';
 import { getForm } from './get-form.js';
 import { getFormList } from './get-form-list.js';
+import { defaultFormConfig } from '../patterns/index.js';
 
 describeDatabase('getFormList', () => {
   it<DbTestContext>('retrieves form list successfully', async ({ db }) => {
+    const context = { db: db.ctx, formConfig: defaultFormConfig };
     const kysely = await db.ctx.getKysely();
     await kysely
       .insertInto('forms')
@@ -21,7 +23,7 @@ describeDatabase('getFormList', () => {
       ])
       .execute();
 
-    const result = await getFormList(db.ctx);
+    const result = await getFormList(context);
     expect(result).toEqual([
       {
         id: '45c66187-64e2-4d75-a45a-e80f1d035bc5',
@@ -37,10 +39,11 @@ describeDatabase('getFormList', () => {
   });
 
   it<DbTestContext>('return null with non-existent form', async ({ db }) => {
+    const context = { db: db.ctx, formConfig: defaultFormConfig };
     const result = await getForm(
-      db.ctx,
+      context,
       '45c66187-64e2-4d75-a45a-e80f1d035bc5'
     );
-    expect(result).toBeNull();
+    expect(result).toEqual({ success: true, data: null });
   });
 });

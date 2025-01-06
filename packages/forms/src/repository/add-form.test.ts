@@ -2,6 +2,7 @@ import { beforeAll, expect, it, vi } from 'vitest';
 
 import { type DbTestContext, describeDatabase } from '@atj/database/testing';
 import { addForm } from './add-form.js';
+import { defaultFormConfig } from '../patterns/index.js';
 
 describeDatabase('add form', () => {
   const today = new Date(2000, 1, 1);
@@ -11,7 +12,10 @@ describeDatabase('add form', () => {
   });
 
   it<DbTestContext>('works', async ({ db }) => {
-    const result = await addForm(db.ctx, testForm);
+    const result = await addForm(
+      { db: db.ctx, formConfig: defaultFormConfig },
+      testForm
+    );
     if (result.success === false) {
       expect.fail('addForm failed');
     }

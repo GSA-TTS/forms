@@ -79,7 +79,7 @@ describe('SelectDropdownPattern tests', () => {
       if (result.success) {
         expect(result.data).toBe('value1');
       } else {
-        throw new Error('Unexpected validation failure');
+        expect.fail('Unexpected validation failure');
       }
     });
 
@@ -105,11 +105,11 @@ describe('SelectDropdownPattern tests', () => {
       console.log('Test parse result (error case):', result);
       if (!result.success) {
         expect(result.error).toBeDefined();
-        expect(result.error.message).toBe(
+        expect(result.error?.message).toBe(
           "Invalid enum value. Expected 'value1' | 'value2', received 'invalid'"
         );
       } else {
-        throw new Error('Unexpected validation success');
+        expect.fail('Unexpected validation success');
       }
     });
 
@@ -132,7 +132,7 @@ describe('SelectDropdownPattern tests', () => {
         expect(result.data.required).toBe(true);
         expect(result.data.options.length).toBe(2);
       } else {
-        throw new Error('Unexpected validation failure');
+        expect.fail('Unexpected validation failure');
       }
     });
 
@@ -150,7 +150,7 @@ describe('SelectDropdownPattern tests', () => {
       if (!result.success) {
         expect(result.error).toBeDefined();
       } else {
-        throw new Error('Unexpected validation success');
+        expect.fail('Unexpected validation success');
       }
     });
   });

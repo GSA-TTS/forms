@@ -59,7 +59,6 @@ export TESTCONTAINERS_RYUK_DISABLED=true
 
 After adding the above lines to your shell configuration file, apply the changes by reloading your shell configuration:
 
-
 For Zsh:
 ```bash
 source ~/.zshrc
@@ -85,7 +84,6 @@ pnpm test
 ## Setting Up Podman for New Team Members
 
 If you're new to the team and need to start with Podman, follow these steps:
-
 
 ### Step 1: Install Podman
 
@@ -121,7 +119,6 @@ export TESTCONTAINERS_RYUK_DISABLED=true
 ### Step 5: Apply Changes
 
 After adding the above lines to your shell configuration file, apply the changes by reloading your shell configuration:
-
 
 For Zsh:
 ```bash
@@ -186,7 +183,6 @@ export PATH="$PNPM_HOME:$PATH"
 ### Step 4: Apply Changes
 
 Save the file and close the editor. Apply the changes by reloading your shell configuration:
-
 
 For Zsh:
 ```bash

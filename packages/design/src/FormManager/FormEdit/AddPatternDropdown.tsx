@@ -5,30 +5,41 @@ import { defaultFormConfig, type PatternConfig } from '@atj/forms';
 import { useFormManagerStore } from '../store.js';
 
 import styles from './formEditStyles.module.css';
+import attachmentIcon from './images/page-icon.svg';
 import blockIcon from './images/block-icon.svg';
 import checkboxIcon from './images/checkbox-icon.svg';
 import dateIcon from './images/date-icon.svg';
 import dropDownIcon from './images/dropdown-icon.svg';
 import dropDownOptionIcon from './images/dropdownoption-icon.svg';
-import richTextIcon from './images/richtext-icon.svg';
+import emailInputIcon from './images/email-icon.svg';
+import genderId from './images/gender-id-icon.svg';
 import longanswerIcon from './images/longanswer-icon.svg';
 import pageIcon from './images/page-icon.svg';
+import phoneIcon from './images/phone-icon.svg';
+import richTextIcon from './images/richtext-icon.svg';
 import shortanswerIcon from './images/shortanswer-icon.svg';
+import ssnIcon from './images/ssn-icon.svg';
 import singleselectIcon from './images/singleselect-icon.svg';
 import templateIcon from './images/template-icon.svg';
+
 import classNames from 'classnames';
 
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
 const icons: Record<string, string | any> = {
+  'attachment-icon.svg': attachmentIcon,
   'block-icon.svg': blockIcon,
   'checkbox-icon.svg': checkboxIcon,
   'date-icon.svg': dateIcon,
   'dropdown-icon.svg': dropDownIcon,
   'dropdownoption-icon.svg': dropDownOptionIcon,
-  'richtext-icon.svg': richTextIcon,
+  'email-icon.svg': emailInputIcon,
+  'gender-id-icon.svg': genderId,
   'longanswer-icon.svg': longanswerIcon,
   'page-icon.svg': pageIcon,
+  'phone-icon.svg': phoneIcon,
+  'richtext-icon.svg': richTextIcon,
   'shortanswer-icon.svg': shortanswerIcon,
+  'ssn-icon.svg': ssnIcon,
   'singleselect-icon.svg': singleselectIcon,
   'template-icon.svg': templateIcon,
 };
@@ -87,27 +98,45 @@ export const AddPatternMenu = () => {
 
 type DropdownPattern = [string, PatternConfig];
 const sidebarPatterns: DropdownPattern[] = [
-  ['form-summary', defaultFormConfig.patterns['form-summary']],
-  ['fieldset', defaultFormConfig.patterns['fieldset']],
-  ['input', defaultFormConfig.patterns['input']],
   ['checkbox', defaultFormConfig.patterns['checkbox']],
-  ['paragraph', defaultFormConfig.patterns['paragraph']],
-  ['rich-text', defaultFormConfig.patterns['rich-text']],
-  ['radio-group', defaultFormConfig.patterns['radio-group']],
+  ['date-of-birth', defaultFormConfig.patterns['date-of-birth']],
+  ['email-input', defaultFormConfig.patterns['email-input']],
+  ['fieldset', defaultFormConfig.patterns['fieldset']],
+  ['form-summary', defaultFormConfig.patterns['form-summary']],
+  ['gender-id', defaultFormConfig.patterns['gender-id']],
+  ['input', defaultFormConfig.patterns['input']],
   ['package-download', defaultFormConfig.patterns['package-download']],
+  ['paragraph', defaultFormConfig.patterns['paragraph']],
+  ['phone-number', defaultFormConfig.patterns['phone-number']],
+  ['radio-group', defaultFormConfig.patterns['radio-group']],
+  ['rich-text', defaultFormConfig.patterns['rich-text']],
   ['select-dropdown', defaultFormConfig.patterns['select-dropdown']],
   ['date-of-birth', defaultFormConfig.patterns['date-of-birth']],
+  ['attachment', defaultFormConfig.patterns['attachment']],
+  [
+    'social-security-number',
+    defaultFormConfig.patterns['social-security-number'],
+  ],
 ] as const;
 export const fieldsetPatterns: DropdownPattern[] = [
-  ['form-summary', defaultFormConfig.patterns['form-summary']],
-  ['input', defaultFormConfig.patterns['input']],
   ['checkbox', defaultFormConfig.patterns['checkbox']],
-  ['paragraph', defaultFormConfig.patterns['paragraph']],
-  ['rich-text', defaultFormConfig.patterns['rich-text']],
-  ['radio-group', defaultFormConfig.patterns['radio-group']],
+  ['date-of-birth', defaultFormConfig.patterns['date-of-birth']],
+  ['email-input', defaultFormConfig.patterns['email-input']],
+  ['form-summary', defaultFormConfig.patterns['form-summary']],
+  ['gender-id', defaultFormConfig.patterns['gender-id']],
+  ['input', defaultFormConfig.patterns['input']],
   ['package-download', defaultFormConfig.patterns['package-download']],
+  ['paragraph', defaultFormConfig.patterns['paragraph']],
+  ['phone-number', defaultFormConfig.patterns['phone-number']],
+  ['radio-group', defaultFormConfig.patterns['radio-group']],
+  ['rich-text', defaultFormConfig.patterns['rich-text']],
   ['select-dropdown', defaultFormConfig.patterns['select-dropdown']],
   ['date-of-birth', defaultFormConfig.patterns['date-of-birth']],
+  ['attachment', defaultFormConfig.patterns['attachment']],
+  [
+    'social-security-number',
+    defaultFormConfig.patterns['social-security-number'],
+  ],
 ] as const;
 
 export const SidebarAddPatternMenuItem = ({
@@ -303,7 +332,9 @@ const AddPatternDropdownContent = ({
           >
             <img
               className="display-inline-block text-ttop margin-right-1"
-              src={getIconPath(pattern.iconPath || 'block-icon.svg')}
+              src={(() => {
+                return getIconPath(pattern.iconPath || 'block-icon.svg');
+              })()}
               alt=""
               width="24"
               height="24"

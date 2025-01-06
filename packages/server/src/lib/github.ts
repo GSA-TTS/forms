@@ -7,7 +7,7 @@ export type GithubRepository = {
 
 export const DEFAULT_REPOSITORY: GithubRepository = {
   owner: 'gsa-tts',
-  repository: 'atj-platform',
+  repository: 'forms',
   branch: 'main',
   commit: 'main',
 };
@@ -28,7 +28,7 @@ export const getGithubRepository = async (
   const { execSync } = await import('child_process');
   return {
     owner: env.OWNER || 'gsa-tts',
-    repository: env.REPOSITORY || 'atj-platform',
+    repository: env.REPOSITORY || 'forms',
     branch: env.BRANCH || 'main',
     commit: execSync('git rev-parse HEAD').toString().trim(),
   };

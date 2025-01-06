@@ -5,7 +5,7 @@ import { type Meta, type StoryObj } from '@storybook/react';
 import { SelectDropdownPattern } from './SelectDropdown.js';
 
 const meta: Meta<typeof SelectDropdownPattern> = {
-  title: 'patterns/SelectPattern',
+  title: 'patterns/SelectDropdownPattern',
   component: SelectDropdownPattern,
   decorators: [
     (Story, args) => {

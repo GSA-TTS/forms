@@ -33,7 +33,7 @@ describe('getForm', () => {
 
     const result = await getForm(ctx, addResult.data.id);
     if (!result.success) {
-      expect.fail('Failed to add form:', result.error);
+      expect.fail(`Failed to get form: ${JSON.stringify(result.error)}`);
     }
     expect(result.data).toEqual(TEST_FORM);
   });

@@ -58,7 +58,7 @@ describe('DateOfBirthPattern tests', () => {
       if (result.success) {
         expect(result.data).toEqual(inputValue);
       } else {
-        throw new Error('Unexpected validation failure');
+        expect.fail('Unexpected validation failure');
       }
     });
 
@@ -81,7 +81,7 @@ describe('DateOfBirthPattern tests', () => {
       if (!result.success) {
         expect(result.error).toBeDefined();
       } else {
-        throw new Error('Unexpected validation success');
+        expect.fail('Unexpected validation success');
       }
     });
 
@@ -101,7 +101,7 @@ describe('DateOfBirthPattern tests', () => {
         expect(result.data.required).toBe(true);
         expect(result.data.hint).toBe('Enter your date of birth');
       } else {
-        throw new Error('Unexpected validation failure');
+        expect.fail('Unexpected validation failure');
       }
     });
 
@@ -119,7 +119,7 @@ describe('DateOfBirthPattern tests', () => {
       if (!result.success) {
         expect(result.error).toBeDefined();
       } else {
-        throw new Error('Unexpected validation success');
+        expect.fail('Unexpected validation success');
       }
     });
   });

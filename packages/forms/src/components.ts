@@ -24,6 +24,18 @@ export type TextInputProps = PatternProps<{
   error?: FormError;
 }>;
 
+export type AttachmentProps = PatternProps<{
+  type: 'attachment';
+  inputId: string;
+  value: string;
+  label: string;
+  maxAttachments: number;
+  maxFileSizeMB: number;
+  allowedFileTypes: Array<string>;
+  required: boolean;
+  error?: FormError;
+}>;
+
 export type FormSummaryProps = PatternProps<{
   type: 'form-summary';
   title: string;
@@ -110,6 +122,46 @@ export type DateOfBirthProps = PatternProps<{
   hint?: string;
   required: boolean;
   error?: FormError;
+}>;
+
+export type EmailInputProps = PatternProps<{
+  type: 'email-input';
+  emailId: string;
+  label: string;
+  required: boolean;
+  error?: FormError;
+}>;
+
+export type PhoneNumberProps = PatternProps<{
+  type: 'phone-number';
+  phoneId: string;
+  hint?: string;
+  label: string;
+  required: boolean;
+  error?: FormError;
+  value: string;
+}>;
+
+export type SocialSecurityNumberProps = PatternProps<{
+  type: 'social-security-number';
+  ssnId: string;
+  hint?: string;
+  label: string;
+  required: boolean;
+  error?: FormError;
+  value: string;
+}>;
+
+export type GenderIdProps = PatternProps<{
+  type: 'gender-id';
+  genderId: string;
+  hint?: string;
+  label: string;
+  required: boolean;
+  error?: FormError;
+  value: string;
+  preferNotToAnswerText?: string;
+  preferNotToAnswerChecked?: boolean;
 }>;
 
 export type SequenceProps = PatternProps<{

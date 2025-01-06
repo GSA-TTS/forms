@@ -43,7 +43,6 @@ export const getFormSession: GetFormSession = async (ctx, opts) => {
           },
         });
       } else {
-        console.log('using session', result.data.data);
         ctx.setState({
           formSessionResponse: {
             status: 'loaded',

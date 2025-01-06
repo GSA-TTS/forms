@@ -5,6 +5,7 @@ import { type PatternComponent } from '../../../Form/index.js';
 
 const SubmissionConfirmation: PatternComponent<
   SubmissionConfirmationProps
+  // eslint-disable-next-line
 > = props => {
   return (
     <>
@@ -44,24 +45,24 @@ const SubmissionConfirmation: PatternComponent<
           className="usa-accordion__content usa-prose"
           hidden={true}
         >
-          <table className="usa-table usa-table--striped width-full">
-            <thead>
-              <tr>
-                <th scope="col">Form field</th>
-                <th scope="col">Provided value</th>
-              </tr>
-            </thead>
-            <tbody>
-              {props.table.map((row, index) => {
-                return (
-                  <tr key={index}>
-                    <th scope="row">{row.label}</th>
-                    <td>{row.value}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          {/*<table className="usa-table usa-table--striped width-full">*/}
+          {/*  <thead>*/}
+          {/*    <tr>*/}
+          {/*      <th scope="col">Form field</th>*/}
+          {/*      <th scope="col">Provided value</th>*/}
+          {/*    </tr>*/}
+          {/*  </thead>*/}
+          {/*  <tbody>*/}
+          {/*    {props.table.map((row, index) => {*/}
+          {/*      return (*/}
+          {/*        <tr key={index}>*/}
+          {/*          <th scope="row">{row.label}</th>*/}
+          {/*          <td>{row.value}</td>*/}
+          {/*        </tr>*/}
+          {/*      );*/}
+          {/*    })}*/}
+          {/*  </tbody>*/}
+          {/*</table>*/}
         </div>
       </div>
     </>

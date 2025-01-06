@@ -1,6 +1,6 @@
-import { failure, success } from '@atj/common';
+import { failure, success, type Result } from '@atj/common';
 
-import { type Blueprint } from '../..';
+import { type Blueprint, type FormOutput } from '../..';
 import { createFormOutputFieldData, fillPDF } from '../../documents';
 import { sessionIsComplete } from '../../session';
 import { type SubmitHandler } from '../../submission';
@@ -9,17 +9,38 @@ import { type PackageDownloadPattern } from './index';
 
 export const downloadPackageHandler: SubmitHandler<
   PackageDownloadPattern
-> = async (config, opts) => {
-  if (!sessionIsComplete(config, opts.session)) {
+> = async (context, opts) => {
+  if (!sessionIsComplete(context.config, opts.session)) {
     return failure('Form is not complete');
   }
 
+  const outputsResult: Result<(FormOutput & { data: Uint8Array })[]> =
+    await Promise.all(
+      opts.session.form.outputs.map(async output => {
+        const doc = await context.getDocument(output.id);
+        if (!doc.success) {
+          throw new Error(doc.error);
+        }
+        return {
+          id: output.id,
+          path: doc.data.path,
+          fields: output.fields,
+          formFields: output.formFields,
+          data: doc.data.data,
+        };
+      })
+    )
+      .then(values => success(values))
+      .catch(error => failure(error));
+  if (!outputsResult.success) {
+    return failure(outputsResult.error);
+  }
+
   const documentsResult = await generateDocumentPackage(
-    opts.session.form,
+    outputsResult.data,
     opts.session.data.values
   );
   if (!documentsResult.success) {
-    console.log('values', opts.session.data.values);
     return failure(documentsResult.error);
   }
 
@@ -30,12 +51,12 @@ export const downloadPackageHandler: SubmitHandler<
 };
 
 const generateDocumentPackage = async (
-  form: Blueprint,
+  outputs: (FormOutput & { data: Uint8Array })[],
   formData: Record<string, string>
 ) => {
   const errors = new Array<string>();
   const documents = new Array<{ fileName: string; data: Uint8Array }>();
-  for (const document of form.outputs) {
+  for (const document of outputs) {
     const docFieldData = createFormOutputFieldData(document, formData);
     const pdfDocument = await fillPDF(document.data, docFieldData);
     if (!pdfDocument.success) {

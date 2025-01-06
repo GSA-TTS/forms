@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import { useFormContext } from 'react-hook-form';
 import { type DateOfBirthProps } from '@atj/forms';
 import { type PatternComponent } from '../../index.js';
@@ -18,6 +19,14 @@ const months = [
   { value: '12', label: 'December' },
 ];
 
+const getAriaDescribedBy = (
+  errorId: string | null,
+  hintId: string | null
+): string | undefined => {
+  const ids = [errorId, hintId].filter(Boolean).join(' ');
+  return ids || undefined;
+};
+
 export const DateOfBirthPattern: PatternComponent<DateOfBirthProps> = ({
   monthId,
   dayId,
@@ -28,6 +37,8 @@ export const DateOfBirthPattern: PatternComponent<DateOfBirthProps> = ({
   error,
 }) => {
   const { register } = useFormContext();
+  const errorId = `input-error-message-${monthId}`;
+  const hintId = `hint-${monthId}`;
 
   return (
     <fieldset className="usa-fieldset">
@@ -36,9 +47,14 @@ export const DateOfBirthPattern: PatternComponent<DateOfBirthProps> = ({
         {required && <span className="required-indicator">*</span>}
       </legend>
       {hint && (
-        <span className="usa-hint" id="mdHint">
+        <span className="usa-hint" id={hintId}>
           {hint}
         </span>
+      )}
+      {error && (
+        <div className="usa-error-message" id={errorId} role="alert">
+          {error.message}
+        </div>
       )}
       <div className="usa-memorable-date">
         <div className="usa-form-group usa-form-group--month usa-form-group--select">
@@ -46,10 +62,17 @@ export const DateOfBirthPattern: PatternComponent<DateOfBirthProps> = ({
             Month
           </label>
           <select
-            className="usa-select"
+            className={classNames('usa-input', {
+              'usa-input--error': !!error,
+            })}
             id={monthId}
             {...register(monthId)}
-            aria-describedby="mdHint"
+            aria-describedby={
+              getAriaDescribedBy(
+                error ? errorId : null,
+                hint ? hintId : null
+              ) || undefined
+            }
           >
             <option key="default" value="">
               - Select -
@@ -66,14 +89,19 @@ export const DateOfBirthPattern: PatternComponent<DateOfBirthProps> = ({
             Day
           </label>
           <input
-            className="usa-input"
-            aria-describedby="mdHint"
+            className={classNames('usa-input', {
+              'usa-input--error': !!error,
+            })}
             id={dayId}
-            {...register(dayId)}
+            {...register(dayId, { required })}
             minLength={2}
             maxLength={2}
             pattern="[0-9]*"
             inputMode="numeric"
+            aria-describedby={getAriaDescribedBy(
+              error ? `input-error-message-${dayId}` : null,
+              hint ? hintId : null
+            )}
           />
         </div>
         <div className="usa-form-group usa-form-group--year">
@@ -81,22 +109,22 @@ export const DateOfBirthPattern: PatternComponent<DateOfBirthProps> = ({
             Year
           </label>
           <input
-            className="usa-input"
-            aria-describedby="mdHint"
+            className={classNames('usa-input', {
+              'usa-input--error': !!error,
+            })}
             id={yearId}
-            {...register(yearId)}
+            {...register(yearId, { required })}
             minLength={4}
             maxLength={4}
             pattern="[0-9]*"
             inputMode="numeric"
+            aria-describedby={getAriaDescribedBy(
+              error ? `input-error-message-${yearId}` : null,
+              hint ? hintId : null
+            )}
           />
         </div>
       </div>
-      {error && (
-        <span className="error-message" style={{ color: 'red' }}>
-          {error.message}
-        </span>
-      )}
     </fieldset>
   );
 };

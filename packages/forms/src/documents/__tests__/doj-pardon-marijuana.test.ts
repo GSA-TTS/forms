@@ -3,7 +3,8 @@ import { describe, expect, test } from 'vitest';
 import { Success } from '@atj/common';
 
 import { type DocumentFieldMap } from '../index.js';
-import { fillPDF, getDocumentFieldData } from '../pdf/index.js';
+import { fillPDF } from '../pdf/index.js';
+import { getDocumentFieldData } from '../pdf/extract.js';
 
 import { loadSamplePDF } from './sample-data.js';
 

@@ -51,11 +51,12 @@
   padding-left: 1.5rem;
 }
 
-.draggableListItemWrapper .radioFormPattern legend {
-  padding-left: 0;
-}
-
-.draggableListItemWrapper .dateOfBirthPattern legend {
+.draggableListItemWrapper .radioFormPattern legend,
+.draggableListItemWrapper .dateOfBirthPattern legend,
+.draggableListItemWrapper .phoneNumberPattern legend,
+.draggableListItemWrapper .ssnPattern legend,
+.draggableListItemWrapper .genderIdPattern legend,
+.draggableListItemWrapper .emailInputPattern legend {
   padding-left: 0;
 }
 

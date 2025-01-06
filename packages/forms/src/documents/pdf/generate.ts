@@ -107,6 +107,9 @@ const setFormFieldData = (
     } else {
       field.uncheck();
     }
+  } else if (fieldType === 'Attachment') {
+    const field = form.getDropdown(fieldName);
+    field.select(fieldValue);
   } else if (fieldType === 'Dropdown') {
     const field = form.getDropdown(fieldName);
     field.select(fieldValue);

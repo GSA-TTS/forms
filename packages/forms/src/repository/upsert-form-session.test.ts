@@ -2,7 +2,7 @@ import { beforeEach, expect, it } from 'vitest';
 
 import { type DbTestContext, describeDatabase } from '@atj/database/testing';
 
-import { type Blueprint } from '..';
+import { defaultFormConfig, type Blueprint } from '..';
 import { createTestBlueprint } from '../builder/builder.test';
 import { type FormSession } from '../session';
 
@@ -18,7 +18,10 @@ type UpsertTestContext = DbTestContext & {
 describeDatabase('upsertFormSession', () => {
   beforeEach<UpsertTestContext>(async ctx => {
     ctx.form = createTestBlueprint();
-    const addFormResult = await addForm(ctx.db.ctx, ctx.form);
+    const addFormResult = await addForm(
+      { db: ctx.db.ctx, formConfig: defaultFormConfig },
+      ctx.form
+    );
     if (!addFormResult.success) {
       expect.fail('Failed to add test form');
     }
@@ -31,10 +34,13 @@ describeDatabase('upsertFormSession', () => {
   });
 
   it<UpsertTestContext>('creates and updates form session', async ctx => {
-    const result = await upsertFormSession(ctx.db.ctx, {
-      formId: ctx.formId,
-      data: ctx.sessionData,
-    });
+    const result = await upsertFormSession(
+      { db: ctx.db.ctx, formConfig: defaultFormConfig },
+      {
+        formId: ctx.formId,
+        data: ctx.sessionData,
+      }
+    );
     if (!result.success) {
       expect.fail(result.error);
     }
@@ -57,7 +63,10 @@ describeDatabase('upsertFormSession', () => {
         form: ctx.form,
       },
     };
-    const result2 = await upsertFormSession(ctx.db.ctx, formSession);
+    const result2 = await upsertFormSession(
+      { db: ctx.db.ctx, formConfig: defaultFormConfig },
+      formSession
+    );
     if (!result2.success) {
       expect.fail(result2.error);
     }

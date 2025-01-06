@@ -40,9 +40,18 @@ const getNextUrl = (route?: FormRoute) => {
 
 if (Astro.request.method === 'POST') {
   const formData = await Astro.request.formData();
-  const formDataObject: Record<string, string> = {};
+  const formDataObject: Record<string, any> = {}; // Changed to 'any' to handle different types
+
   formData.forEach((value, key) => {
-    formDataObject[key] = value.toString();
+    // Values from the attachment input will either be a typeof File or an array of Files.
+    // They're later normalized into an array during response validation
+    if (value instanceof File) {
+      formDataObject[key] = value;
+    } else if (Array.isArray(value) && value.every(item => item instanceof File)) {
+      formDataObject[key] = value;
+    } else {
+      formDataObject[key] = value.toString();
+    }
   });
 
   const submitFormResult = await ctx.formService.submitForm(
@@ -51,15 +60,33 @@ if (Astro.request.method === 'POST') {
     formDataObject,
     formRoute
   );
+
   if (!submitFormResult.success) {
     return new Response(submitFormResult.error, {
       status: 500,
     });
   }
+
   setFormSessionCookie(submitFormResult.data.sessionId);
 
   if (submitFormResult.data.attachments) {
-    return createMultipartResponse(submitFormResult.data.attachments);
+    if (submitFormResult.data.attachments.length > 1) {
+      return new Response(
+        'Multiple attachments are not supported at this time.',
+        {
+          status: 501,
+        }
+      );
+    }
+    const attachment = submitFormResult.data.attachments[0];
+    return new Response(attachment.data, {
+      headers: {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': `attachment; filename="${attachment.fileName}"`,
+        'Content-Length': attachment.data.length.toString(),
+      },
+      status: 200,
+    });
   }
 
   return Astro.redirect(getNextUrl(submitFormResult.data.session.route));
