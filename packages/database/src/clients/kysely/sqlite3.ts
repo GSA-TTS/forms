@@ -1,27 +1,15 @@
 import { Kysely, SqliteDialect } from 'kysely';
-import BetterSqliteDatabase, {
+import {
   type Database as SqliteDatabase,
 } from 'better-sqlite3';
 
 import { type Database } from './types.js';
 
-type TestDatabase = {
-  kysely: Kysely<Database>;
-  sqlite: SqliteDatabase;
-};
-
-export const createInMemoryDatabase = (): TestDatabase => {
-  const database = new BetterSqliteDatabase(':memory:');
-  return {
-    kysely: new Kysely<Database>({
-      dialect: new SqliteDialect({
-        database,
-      }),
-    }),
-    sqlite: database,
-  };
-};
-
+/**
+ * Creates a query builder instance configured to use SQLite as the database dialect.
+ *
+ * @param {SqliteDatabase} database - The SQLite database connection or configuration object.
+ */
 export const createSqliteDatabase = (database: SqliteDatabase) => {
   return new Kysely<Database>({
     dialect: new SqliteDialect({
