@@ -12,38 +12,48 @@ export const createPrompt: CreatePrompt<RepeaterPattern> = (
   pattern,
   options
 ) => {
-  console.group('repeater/createPrompt');
-  console.log(session);
-  console.log(pattern);
-  console.groupEnd();
+  const isSubmitAction =
+    session.data.lastAction?.startsWith('action/repeater-');
+  const isFormBuilder = !!session.data.isFormBuilder;
 
-  const children = pattern.data.patterns.map((patternId: string) => {
-    let childPattern = getPattern(session.form, patternId);
-    childPattern = {
-      ...childPattern,
-      /**
-       * TODO: Dynamically generate the index here. %%INDEX%% is a placeholder
-       */
-      id: `${pattern.id}.%%INDEX%%.${childPattern.id}`
+  const currentValues = session.data.values[pattern.id];
+  const sessionValues = Array.isArray(currentValues)
+    ? currentValues
+    : Array.isArray(currentValues?.[pattern.id])
+      ? currentValues[pattern.id]
+      : [];
+
+  let children;
+
+  if (isFormBuilder) {
+    children = pattern.data.patterns.map((patternId: string) => {
+      const childPattern = getPattern(session.form, patternId);
+      return createPromptForPattern(config, session, childPattern, options);
+    });
+  } else {
+    children = sessionValues.flatMap((value: any, index: number) => {
+      return pattern.data.patterns.map((patternId: string) => {
+        let childPattern = getPattern(session.form, patternId);
+        childPattern = {
+          ...childPattern,
+          id: `${pattern.id}.${index}.${childPattern.id}`,
+        };
+        return createPromptForPattern(config, session, childPattern, options);
+      });
+    });
+
+    if (sessionValues.length === 0 && !isSubmitAction) {
+      const initialChildren = pattern.data.patterns.map((patternId: string) => {
+        let childPattern = getPattern(session.form, patternId);
+        childPattern = {
+          ...childPattern,
+          id: `${pattern.id}.0.${childPattern.id}`,
+        };
+        return createPromptForPattern(config, session, childPattern, options);
+      });
+      children.push(...initialChildren);
     }
-
-    // {
-    //   "id": "8c8a358d-e977-4d9b-9671-43bf6e847f5d",
-    //   "type": "input",
-    //   "data": {
-    //   "label": "Field label",
-    //     "initial": "",
-    //     "required": true,
-    //     "maxLength": 128
-    // }
-    // }
-    console.group('repeater/createPrompt/children');
-    console.log(childPattern);
-    console.log(options);
-    console.groupEnd();
-    return createPromptForPattern(config, session, childPattern, options);
-  });
-
+  }
 
   return {
     props: {
@@ -51,6 +61,9 @@ export const createPrompt: CreatePrompt<RepeaterPattern> = (
       type: 'repeater',
       legend: pattern.data.legend,
       showControls: true,
+      value: sessionValues,
+      patterns: pattern.data.patterns,
+      error: session.data.errors[pattern.id],
     } satisfies RepeaterProps,
     children,
   };
