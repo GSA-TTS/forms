@@ -35,6 +35,7 @@ export const DateOfBirthPattern: PatternComponent<DateOfBirthProps> = ({
   hint,
   required,
   error,
+  value,
 }) => {
   const { register } = useFormContext();
   const errorId = `input-error-message-${monthId}`;
@@ -42,87 +43,96 @@ export const DateOfBirthPattern: PatternComponent<DateOfBirthProps> = ({
 
   return (
     <fieldset className="usa-fieldset">
-      <legend className="usa-legend">
-        {label}
-        {required && <span className="required-indicator">*</span>}
-      </legend>
-      {hint && (
-        <span className="usa-hint" id={hintId}>
-          {hint}
-        </span>
-      )}
-      {error && (
-        <div className="usa-error-message" id={errorId} role="alert">
-          {error.message}
-        </div>
-      )}
-      <div className="usa-memorable-date">
-        <div className="usa-form-group usa-form-group--month usa-form-group--select">
-          <label className="usa-label" htmlFor={monthId}>
-            Month
-          </label>
-          <select
-            className={classNames('usa-input', {
-              'usa-input--error': !!error,
-            })}
-            id={monthId}
-            {...register(monthId)}
-            aria-describedby={
-              getAriaDescribedBy(
-                error ? errorId : null,
-                hint ? hintId : null
-              ) || undefined
-            }
-          >
-            <option key="default" value="">
-              - Select -
-            </option>
-            {months.map((option, index) => (
-              <option key={index} value={option.value}>
-                {option.label}
+      <div className={classNames('usa-form-group margin-top-2')}>
+        <legend
+          className={classNames('usa-legend', {
+            'usa-legend--error': error,
+          })}
+        >
+          {label}
+          {required && <span className="required-indicator">*</span>}
+        </legend>
+        {hint && (
+          <div className="usa-hint" id={hintId}>
+            {hint}
+          </div>
+        )}
+        {error && (
+          <div className="usa-error-message" id={errorId} role="alert">
+            {error.message}
+          </div>
+        )}
+        <div className="usa-memorable-date">
+          <div className="usa-form-group usa-form-group--month usa-form-group--select">
+            <label className="usa-label" htmlFor={monthId}>
+              Month
+            </label>
+            <select
+              className={classNames('usa-input', {
+                'usa-input--error': !!error,
+              })}
+              id={monthId}
+              {...register(monthId)}
+              defaultValue={value?.month}
+              aria-describedby={
+                getAriaDescribedBy(
+                  error ? errorId : null,
+                  hint ? hintId : null
+                ) || undefined
+              }
+            >
+              <option key="default" value="">
+                - Select -
               </option>
-            ))}
-          </select>
-        </div>
-        <div className="usa-form-group usa-form-group--day">
-          <label className="usa-label" htmlFor={dayId}>
-            Day
-          </label>
-          <input
-            className={classNames('usa-input', {
-              'usa-input--error': !!error,
-            })}
-            id={dayId}
-            {...register(dayId, { required })}
-            minLength={2}
-            maxLength={2}
-            pattern="[0-9]*"
-            inputMode="numeric"
-            aria-describedby={getAriaDescribedBy(
-              error ? `input-error-message-${dayId}` : null,
-              hint ? hintId : null
-            )}
-          />
-        </div>
-        <div className="usa-form-group usa-form-group--year">
-          <label className="usa-label" htmlFor={yearId}>
-            Year
-          </label>
-          <input
-            className={classNames('usa-input', {
-              'usa-input--error': !!error,
-            })}
-            id={yearId}
-            {...register(yearId, { required })}
-            minLength={4}
-            maxLength={4}
-            pattern="[0-9]*"
-            inputMode="numeric"
-            aria-describedby={getAriaDescribedBy(
-              error ? `input-error-message-${yearId}` : null,
-              hint ? hintId : null
-            )}
-          />
+              {months.map((option, index) => (
+                <option key={index} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="usa-form-group usa-form-group--day">
+            <label className="usa-label" htmlFor={dayId}>
+              Day
+            </label>
+            <input
+              className={classNames('usa-input', {
+                'usa-input--error': !!error,
+              })}
+              id={dayId}
+              {...register(dayId, { required })}
+              minLength={2}
+              maxLength={2}
+              pattern="[0-9]*"
+              inputMode="numeric"
+              aria-describedby={getAriaDescribedBy(
+                error ? `input-error-message-${dayId}` : null,
+                hint ? hintId : null
+              )}
+              defaultValue={value?.day}
+            />
+          </div>
+          <div className="usa-form-group usa-form-group--year">
+            <label className="usa-label" htmlFor={yearId}>
+              Year
+            </label>
+            <input
+              className={classNames('usa-input', {
+                'usa-input--error': !!error,
+              })}
+              id={yearId}
+              {...register(yearId, { required })}
+              minLength={4}
+              maxLength={4}
+              pattern="[0-9]*"
+              inputMode="numeric"
+              aria-describedby={getAriaDescribedBy(
+                error ? `input-error-message-${yearId}` : null,
+                hint ? hintId : null
+              )}
+              defaultValue={value?.year}
+            />
+          </div>
         </div>
       </div>
     </fieldset>

@@ -127,7 +127,6 @@ const sidebarPatterns: DropdownPattern[] = [
   ['radio-group', defaultFormConfig.patterns['radio-group']],
   ['rich-text', defaultFormConfig.patterns['rich-text']],
   ['select-dropdown', defaultFormConfig.patterns['select-dropdown']],
-  ['date-of-birth', defaultFormConfig.patterns['date-of-birth']],
   ['attachment', defaultFormConfig.patterns['attachment']],
   [
     'social-security-number',
