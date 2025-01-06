@@ -177,7 +177,7 @@ const Repeater: PatternComponent<RepeaterPatternProps> = props => {
   );
 
   return (
-    <fieldset className="usa-fieldset width-full padding-top-2">
+    <fieldset className="usa-fieldset width-full margin-top-6 margin-bottom-6">
       <input
         type="hidden"
         name="deleteIndex"
@@ -198,7 +198,7 @@ const Repeater: PatternComponent<RepeaterPatternProps> = props => {
         <>
           <ul className="add-list-reset">{renderRows}</ul>
 
-          <div className="usa-button-group margin-bottom-6">
+          <div className="usa-button-group margin-left-0 margin-right-0">
             <button
               type="submit"
               name="action"
