@@ -9,7 +9,14 @@ export type SaveForm = (
   form: Blueprint
 ) => Promise<VoidResult>;
 
-export const saveForm: SaveForm = async (ctx, id, blueprint) => {
+/**
+ * Asynchronously saves a form blueprint by updating the corresponding entry in the database.
+ */
+export const saveForm: SaveForm = async (
+  ctx: FormRepositoryContext,
+  id: string,
+  blueprint: Blueprint
+) => {
   const db = await ctx.db.getKysely();
 
   return await db

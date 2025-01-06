@@ -4,6 +4,9 @@ import { failure, success, type Result } from '@atj/common';
 import type { FormConfig } from '../pattern';
 import type { Blueprint } from '../types';
 
+/**
+ * Parses and validates an object against a form schema defined by the given configuration.
+ */
 export const parseForm = (config: FormConfig, obj: any): Result<Blueprint> => {
   const formSchema = createFormSchema(config);
   const result = formSchema.safeParse(obj);
