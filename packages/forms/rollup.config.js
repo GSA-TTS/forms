@@ -6,8 +6,8 @@ import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import typescript from 'rollup-plugin-typescript2';
 
-import packageJson from './package.json' assert { type: 'json' };
-import workspacePackageJson from '../../package.json' assert { type: 'json' };
+import packageJson from './package.json' with { type: 'json' };
+import workspacePackageJson from '../../package.json' with { type: 'json' };
 
 export default {
   //input: ['src/index.ts', 'src/context/index.ts', 'src/testing.ts'],
