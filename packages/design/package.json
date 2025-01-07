@@ -47,7 +47,6 @@
     "@typescript-eslint/parser": "^7.18.0",
     "@uswds/compile": "1.1.0",
     "@vitejs/plugin-react": "^4.3.4",
-    "@vitest/browser": "^2.1.8",
     "concurrently": "^8.2.2",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.35.0",
