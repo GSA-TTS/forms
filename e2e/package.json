@@ -9,7 +9,7 @@
   "devDependencies": {
     "@playwright/test": "1.48.1",
     "@storybook/test-runner": "^0.19.1",
-    "path-to-regexp": "^8.0.0"
+    "path-to-regexp": "^8.2.0"
   },
   "dependencies": {
     "@atj/common": "workspace:*"
