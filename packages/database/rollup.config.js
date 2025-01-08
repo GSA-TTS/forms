@@ -39,20 +39,6 @@ export default {
       tsconfig: './tsconfig.json',
       useTsconfigDeclarationDir: true,
     }),
-    {
-      name: 'verbose-logging',
-      buildStart() {
-        console.log('Build starting...');
-      },
-      transform(code, id) {
-        console.log(`Processing: ${id}`);
-        return null; // Proceed with normal transformation
-      },
-      generateBundle(options, bundle) {
-        console.log('Generating bundle...');
-        console.log(Object.keys(bundle));
-      },
-    },
   ],
   external: (() => {
     // Externalize all the things
