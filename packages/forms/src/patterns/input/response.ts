@@ -27,9 +27,5 @@ export const parseUserInput: ParseUserInput<
   InputPattern,
   InputPatternOutput
 > = (pattern, obj) => {
-  console.group('parseUserInput');
-  console.log(pattern);
-  console.log(obj);
-  console.groupEnd();
   return safeZodParseToFormError(createSchema(pattern['data']), obj);
 };

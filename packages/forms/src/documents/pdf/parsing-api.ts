@@ -8,7 +8,6 @@ import { type ParagraphPattern } from '../../patterns/paragraph.js';
 import { type CheckboxPattern } from '../../patterns/checkbox.js';
 import { type RadioGroupPattern } from '../../patterns/radio-group.js';
 import { RichTextPattern } from '../../patterns/rich-text.js';
-import { type RepeaterPattern } from '../../patterns/repeater/index.js';
 
 import { uint8ArrayToBase64 } from '../../util/base64.js';
 import { type DocumentFieldMap } from '../types.js';
@@ -80,26 +79,11 @@ const Fieldset = z.object({
   page: z.union([z.number(), z.string()]),
 });
 
-const Repeater = z.object({
-  component_type: z.literal('repeater'),
-  legend: z.string(),
-  fields: z.union([TxInput, Checkbox]).array(),
-  page: z.union([z.number(), z.string()]),
-});
-
 const ExtractedObject = z.object({
   raw_text: z.string(),
   form_summary: FormSummary,
   elements: z
-    .union([
-      TxInput,
-      Checkbox,
-      RadioGroup,
-      Paragraph,
-      Fieldset,
-      RichText,
-      Repeater,
-    ])
+    .union([TxInput, Checkbox, RadioGroup, Paragraph, Fieldset, RichText])
     .array(),
 });
 
@@ -173,7 +157,6 @@ export const processApiResponse = async (json: any): Promise<ParsedPdf> => {
 
   for (const element of extracted.elements) {
     const fieldsetPatterns: PatternId[] = [];
-
     // Add paragraph elements
     if (element.component_type === 'paragraph') {
       const paragraph = processPatternData<ParagraphPattern>(

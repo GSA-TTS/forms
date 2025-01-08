@@ -39,7 +39,7 @@ export const PhoneNumberPattern: PatternComponent<PhoneNumberProps> = ({
           })}
           htmlFor={phoneId}
         >
-          {label || 'Phone Number'}
+          {label}
           {required && <span className="required-indicator">*</span>}
         </label>
         {hint && (

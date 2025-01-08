@@ -7,9 +7,7 @@ import { type PatternComponent } from '../../../Form/index.js';
 
 const TextInput: PatternComponent<TextInputProps> = props => {
   const { register } = useFormContext();
-  const id = props.idSuffix
-    ? `${props.inputId}${props.idSuffix}`
-    : props.inputId;
+  const id = props.inputId;
   return (
     <div className="usa-form-group-wrapper" key={props.inputId}>
       <div

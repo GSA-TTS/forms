@@ -132,11 +132,7 @@ const setFormFieldData = (
         field.uncheck();
       }
     }
-  } else if (
-    fieldType === 'Paragraph' ||
-    fieldType === 'RichText' ||
-    fieldType === 'Repeater'
-  ) {
+  } else if (fieldType === 'Paragraph' || fieldType === 'RichText') {
     // do nothing
   } else {
     const exhaustiveCheck: never = fieldType;

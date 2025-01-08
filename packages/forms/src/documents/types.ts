@@ -45,14 +45,6 @@ export type DocumentFieldValue =
       required: boolean;
     }
   | {
-      type: 'Repeater';
-      name: string;
-      options: string[];
-      label: string;
-      value: string;
-      required: boolean;
-    }
-  | {
       type: 'RichText';
       name: string;
       options: string[];

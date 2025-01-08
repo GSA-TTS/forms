@@ -6,6 +6,8 @@ import {
   type PatternId,
   type PatternValue,
   type PatternValueMap,
+  aggregatePatternSessionValues,
+  aggregateValuesByPrefix,
   getPatternConfig,
   validatePattern,
 } from './pattern.js';

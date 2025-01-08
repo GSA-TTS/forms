@@ -13,16 +13,14 @@ export const RadioGroupPattern: PatternComponent<RadioGroupProps> = props => {
         {props.legend}
       </legend>
       {props.options.map((option, index) => {
-        const id = props.idSuffix ? `${option.id}${props.idSuffix}` : option.id;
+        const id = option.id;
         return (
           <div key={index} className="usa-radio">
             <input
               className="usa-radio__input"
               type="radio"
               id={`input-${id}`}
-              {...register(
-                `${props.groupId}${props.idSuffix ? props.idSuffix : ''}`
-              )}
+              {...register(`${props.groupId}`)}
               value={option.id}
               defaultChecked={option.defaultChecked}
             />

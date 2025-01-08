@@ -173,7 +173,7 @@ const setNestedValue = (
   }, obj);
 };
 
-const aggregateValuesByPrefix = (
+export const aggregateValuesByPrefix = (
   values: Record<string, any>
 ): Record<string, any> => {
   const aggregatedValues: Record<string, any> = {};
@@ -204,7 +204,7 @@ export const aggregatePatternSessionValues = (
   if (patternConfig.parseUserInput) {
     const isRepeaterType = pattern.type === 'repeater';
     const patternValues = aggregatedValues[pattern.id];
-    let parseResult: any = patternConfig.parseUserInput(
+    const parseResult: any = patternConfig.parseUserInput(
       pattern,
       patternValues,
       config,

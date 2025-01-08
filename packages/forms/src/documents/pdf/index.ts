@@ -27,7 +27,6 @@ export type PDFFieldType =
   | 'OptionList'
   | 'RadioGroup'
   | 'Paragraph'
-  | 'Repeater'
   | 'RichText';
 
 export type ParsePdf = (
