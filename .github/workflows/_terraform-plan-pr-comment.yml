@@ -64,7 +64,7 @@ jobs:
           path: /usr/local/bin/terraform
           key: terraform-${{ inputs.terraform_version }}
 
-      - name: Install Terraform CLI (if not cached)
+      - name: Install Terraform CLI
         if: steps.terraform-cache.outputs.cache-hit != 'true'
         run: |
           sudo apt-get update && sudo apt-get install -y wget unzip
