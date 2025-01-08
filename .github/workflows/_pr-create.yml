@@ -29,7 +29,7 @@ jobs:
         id: check-pr
         run: |
           PR=$(gh pr list --base ${BASE} --head ${HEAD} --json number --jq '.[0].number')
-          echo "::set-output name=pr_exists::$PR"
+          echo "pr_exists=$PR" >> $GITHUB_OUTPUT
 
       - name: Create pull request
         if: steps.check-pr.outputs.pr_exists == ''

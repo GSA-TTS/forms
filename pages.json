@@ -1,3 +1,20 @@
 {
-  "cache": false
+  "cache": false,
+  "headers": [
+    {
+      "/*.html": {
+        "cache-control": "public, max-age=60, must-revalidate"
+      }
+    },
+    {
+      "/_astro/*": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "/*": {
+        "cache-control": "public, max-age=180"
+      }
+    }
+  ]
 }
