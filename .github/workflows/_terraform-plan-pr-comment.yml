@@ -58,7 +58,7 @@ jobs:
         run: pnpm install
 
       - uses: actions/cache@v3
-        name: Cache Terraform CLI
+        name: Check Cache for Terraform CLI
         id: terraform-cache
         with:
           path: /usr/local/bin/terraform
