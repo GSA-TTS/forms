@@ -6,6 +6,11 @@ on:
       deploy-env:
         required: true
         type: string
+      terraform_version:
+        description: Terraform version
+        required: false
+        default: "1.10.4"
+        type: string
 
 jobs:
   terraform:
@@ -55,8 +60,8 @@ jobs:
       - name: Install Terraform CLI
         run: |
           sudo apt-get update && sudo apt-get install -y wget unzip
-          wget https://releases.hashicorp.com/terraform/1.8.2/terraform_1.8.2_linux_amd64.zip
-          unzip terraform_1.8.2_linux_amd64.zip
+          wget https://releases.hashicorp.com/terraform/${{ inputs.terraform_version }}/terraform_${{ inputs.terraform_version }}_linux_amd64.zip
+          unzip terraform_${{ inputs.terraform_version }}_linux_amd64.zip
           sudo mv terraform /usr/local/bin/
           terraform --version
 
@@ -64,7 +69,7 @@ jobs:
         shell: bash
         working-directory: infra/cdktf
         run: |
-          pnpm dlx cdktf-cli get
+          pnpm cdktf get
           pnpm build:tsc
 
       - name: Install CloudFoundry CLI
