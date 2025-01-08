@@ -8,6 +8,11 @@ on:
         required: false
         default: "1.48.1"
         type: string
+      terraform_version:
+        description: Terraform version
+        required: false
+        default: "1.10.4"
+        type: string
 
 jobs:
   run-tests:
