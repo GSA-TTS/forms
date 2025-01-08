@@ -56,7 +56,7 @@ jobs:
         shell: bash
         working-directory: infra/cdktf
         run: |
-          pnpm cdktf get
+          pnpm dlx cdktf-cli get
           pnpm build:tsc
 
       - name: Install CloudFoundry CLI
