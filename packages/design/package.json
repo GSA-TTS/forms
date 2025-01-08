@@ -56,7 +56,6 @@
     "@uswds/compile": "1.1.0",
     "@vitejs/plugin-react": "^4.3.4",
     "concurrently": "^8.2.2",
-    "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.35.0",
     "gulp": "^5.0.0",
     "http-server": "^14.1.1",
