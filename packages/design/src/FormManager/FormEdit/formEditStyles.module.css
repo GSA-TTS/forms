@@ -55,6 +55,7 @@
 .draggableListItemWrapper .dateOfBirthPattern legend,
 .draggableListItemWrapper .phoneNumberPattern legend,
 .draggableListItemWrapper .ssnPattern legend,
+.draggableListItemWrapper .genderIdPattern legend,
 .draggableListItemWrapper .emailInputPattern legend {
   padding-left: 0;
 }

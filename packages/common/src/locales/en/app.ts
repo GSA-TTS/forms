@@ -89,5 +89,15 @@ export const en = {
       hint: 'For example, 555-11-0000',
       errorTextMustContainChar: 'String must contain at least 1 character(s)',
     },
+    genderId: {
+      ...defaults,
+      displayName: 'Gender Identity label',
+      fieldLabel: 'Gender Identity label',
+      hintLabel: 'Gender Identity hint label',
+      hint: 'For example, man, woman, non-binary',
+      errorTextMustContainChar: 'String must contain at least 1 character(s)',
+      preferNotToAnswerTextLabel:
+        'Prefer not to share my gender identity checkbox label',
+    },
   },
 };

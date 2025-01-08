@@ -1,8 +1,8 @@
 ---
 import closeSvg from '@atj/design/static/uswds/img/usa-icons/close.svg';
-import logoSvg from '@atj/design/images/logo.svg';
-
 import * as routes from '../routes';
+import { Image } from 'astro:assets';
+import { getPublicDirUrl } from '../routes';
 
 const getNavLinkClasses = (url: string) => {
   if (url === Astro.url.pathname) {
@@ -11,28 +11,39 @@ const getNavLinkClasses = (url: string) => {
     return 'usa-nav-link';
   }
 };
+
+const currentRoute = Astro.url.href;
+const isAboutContent = currentRoute.includes(`/about/`);
+const showAboutContent = false;
 ---
 
 <div class="usa-overlay"></div>
 <header class="usa-header usa-header--extended">
-  <div class="topHeaderBanner bg-yellow">
-    <span class="usa-navbar height-auto display-block padding-2"
+  {!isAboutContent && (
+    <div class="topHeaderBanner bg-yellow">
+      <span class="usa-navbar height-auto display-block padding-2"
       ><strong>STAGING SERVER</strong> - No changes you make here will be visible
-      to the public.</span
-    >
-  </div>
-  <div class="bg-base-darkest">
-    <div class="usa-navbar">
-      <div class="usa-logo">
-        <em class="usa-logo__text">
-          <a href={routes.getHomeUrl()} title="10x Access to Justice">
-            <img src={logoSvg.src} role="img" alt="10x Logo" />
-            <span class="text-white">A2J Forms</span>
-          </a>
-        </em>
-      </div>
-      <button type="button" class="usa-menu-btn">Menu</button>
+        to the public.</span
+      >
     </div>
+  )}
+  <div class="usa-navbar">
+    <div class="usa-logo">
+      <em class="usa-logo__text">
+        <a href={routes.getHomeUrl()} title="10x Forms Platform">
+          <Image
+            src=`${getPublicDirUrl()}images/10x-logo.svg`
+            alt="10x Forms Platform home"
+            width="72"
+            height="34"
+            loading="eager"
+            decoding="sync"
+          />
+          Forms Platform
+        </a>
+      </em>
+    </div>
+    <button type="button" class="usa-menu-btn">Menu</button>
   </div>
   <nav aria-label="Primary navigation" class="usa-nav">
     <div class="usa-nav__inner">
@@ -44,17 +55,38 @@ const getNavLinkClasses = (url: string) => {
           <a
             href={routes.getHomeUrl()}
             class={getNavLinkClasses(routes.getHomeUrl())}
-            ><span>My Forms</span></a
           >
+            <span>My Forms</span>
+          </a>
         </li>
+        {showAboutContent && (
+          <li class="usa-nav__primary-item">
+            <a
+              href={routes.getAboutUrl()}
+              class={getNavLinkClasses(routes.getAboutUrl())}
+            >
+              <span>About</span>
+            </a>
+          </li>
+        )}
         <li class="usa-nav__primary-item">
           <a
             href={routes.getStorybookUrl()}
             class={getNavLinkClasses(routes.getStorybookUrl())}
-            ><span>Storybook</span></a
           >
+            <span>Storybook</span>
+          </a>
         </li>
       </ul>
+      {showAboutContent && (
+        <div class="usa-nav__secondary">
+          <ul class="usa-nav__secondary-links">
+            <li class="usa-nav__secondary-item">
+              <button class="usa-button">Login</button>
+            </li>
+          </ul>
+        </div>
+      )}
     </div>
   </nav>
 </header>

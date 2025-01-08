@@ -8,7 +8,7 @@ export async function up(knex) {
     table.string('type').notNullable();
     table.string('file_name').notNullable();
     table.binary('data').notNullable();
-    table.string('extract').notNullable();
+    table.text('extract').notNullable();
   });
 }
 

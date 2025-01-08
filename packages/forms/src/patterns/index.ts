@@ -7,6 +7,7 @@ import { dateOfBirthConfig } from './date-of-birth/date-of-birth.js';
 import { emailInputConfig } from './email-input/email-input.js';
 import { fieldsetConfig } from './fieldset/index.js';
 import { formSummaryConfig } from './form-summary.js';
+import { genderIdConfig } from './gender-id/gender-id.js';
 import { inputConfig } from './input/index.js';
 import { packageDownloadConfig } from './package-download/index.js';
 import { pageConfig } from './page/index.js';
@@ -31,6 +32,7 @@ export const defaultFormConfig: FormConfig = {
     'email-input': emailInputConfig,
     fieldset: fieldsetConfig,
     'form-summary': formSummaryConfig,
+    'gender-id': genderIdConfig,
     input: inputConfig,
     'package-download': packageDownloadConfig,
     page: pageConfig,
@@ -55,6 +57,7 @@ export * from './email-input/email-input.js';
 export * from './fieldset/index.js';
 export { type FieldsetPattern } from './fieldset/config.js';
 export * from './form-summary.js';
+export * from './gender-id/gender-id.js';
 export * from './input/index.js';
 export { type InputPattern } from './input/config.js';
 export * from './package-download/index.js';

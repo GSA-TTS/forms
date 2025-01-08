@@ -7,6 +7,7 @@ import DateOfBirth from './DateOfBirth/index.js';
 import EmailInput from './EmailInput/index.js';
 import Fieldset from './Fieldset/index.js';
 import FormSummary from './FormSummary/index.js';
+import GenderId from './GenderId/index.js';
 import PackageDownload from './PackageDownload/index.js';
 import Page from './Page/index.js';
 import PageSet from './PageSet/index.js';
@@ -28,6 +29,7 @@ export const defaultPatternComponents: ComponentForPattern = {
   'email-input': EmailInput as PatternComponent,
   fieldset: Fieldset as PatternComponent,
   'form-summary': FormSummary as PatternComponent,
+  'gender-id': GenderId as PatternComponent,
   input: TextInput as PatternComponent,
   'package-download': PackageDownload as PatternComponent,
   page: Page as PatternComponent,
