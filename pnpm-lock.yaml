@@ -194,8 +194,8 @@ importers:
         specifier: ^0.19.1
         version: 0.19.1(@types/node@22.7.4)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(ts-node@10.9.2(@swc/core@1.7.23)(@types/node@22.7.4)(typescript@5.6.2))
       path-to-regexp:
-        specifier: ^7.1.0
-        version: 7.1.0
+        specifier: ^8.2.0
+        version: 8.2.0
 
   infra/cdktf:
     dependencies:
@@ -8841,8 +8841,8 @@ packages:
   path-to-regexp@6.2.2:
     resolution: {integrity: sha512-GQX3SSMokngb36+whdpRXE+3f9V8UzyAorlYvOGx87ufGHehNTn5lCxrKtLyZ4Yl/wEKnNnr98ZzOwwDZV5ogw==}
 
-  path-to-regexp@7.1.0:
-    resolution: {integrity: sha512-ZToe+MbUF4lBqk6dV8GKot4DKfzrxXsplOddH8zN3YK+qw9/McvP7+4ICjZvOne0jQhN4eJwHsX6tT0Ns19fvw==}
+  path-to-regexp@8.2.0:
+    resolution: {integrity: sha512-TdrF7fW9Rphjq4RjrW0Kp2AW0Ahwu9sRGTkS6bvDi0SCwZlEZYmcfDbEsTz8RVk0EHIS/Vd1bv3JhG+1xZuAyQ==}
     engines: {node: '>=16'}
 
   path-type@1.1.0:
@@ -22655,7 +22655,7 @@ snapshots:
 
   path-to-regexp@6.2.2: {}
 
-  path-to-regexp@7.1.0: {}
+  path-to-regexp@8.2.0: {}
 
   path-type@1.1.0:
     dependencies:
