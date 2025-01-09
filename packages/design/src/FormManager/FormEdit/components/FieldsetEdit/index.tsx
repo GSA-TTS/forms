@@ -18,7 +18,7 @@ import styles from '../../formEditStyles.module.css';
 import { FormManagerContext } from '../../../../index.js';
 import { PatternComponent } from '../../../../Form/index.js';
 import Fieldset from '../../../../Form/components/Fieldset/index.js';
-import { renderPromptComponents } from '../../../../Form/form-common.js';
+import { renderEditPromptComponents } from '../../../manager-common.js';
 
 const FieldsetEdit: PatternEditComponent<FieldsetProps> = ({
   context,
@@ -54,7 +54,7 @@ const FieldsetPreview: PatternComponent<FieldsetProps> = props => {
   return (
     <>
       <Fieldset {...props}>
-        {renderPromptComponents(props.context, props.childComponents)}
+        {renderEditPromptComponents(props.context, props.childComponents)}
         {pattern && pattern.data.patterns.length === 0 && (
           <div
             data-pattern-edit-control="true"
