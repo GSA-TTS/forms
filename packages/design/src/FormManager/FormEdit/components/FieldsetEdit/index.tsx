@@ -53,7 +53,12 @@ const FieldsetPreview: PatternComponent<FieldsetProps> = props => {
   );
   return (
     <>
-      <Fieldset {...props}>
+      <fieldset className="usa-fieldset width-full padding-top-2">
+        {props.legend !== '' && props.legend !== undefined && (
+          <legend className="usa-legend text-bold text-uppercase line-height-body-4 width-full margin-top-0 padding-top-3 padding-bottom-1">
+            {props.legend}
+          </legend>
+        )}
         {renderEditPromptComponents(props.context, props.childComponents)}
         {pattern && pattern.data.patterns.length === 0 && (
           <div
@@ -102,7 +107,7 @@ const FieldsetPreview: PatternComponent<FieldsetProps> = props => {
             </div>
           </div>
         )}
-      </Fieldset>
+      </fieldset>
     </>
   );
 };

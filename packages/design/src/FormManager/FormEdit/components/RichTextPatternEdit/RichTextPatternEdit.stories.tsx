@@ -8,7 +8,8 @@ import { en as message } from '@atj/common/src/locales/en/app.js';
 import { createPatternEditStoryMeta } from '../common/story-helper.js';
 import FormEdit from '../../index.js';
 
-const editorText = 'Rich text...';
+const editorText =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
 const pattern: RichTextPattern = {
   id: '1',
@@ -48,7 +49,9 @@ export const Formatting: StoryObj<typeof FormEdit> = {
       'Ordered list': 'listitem',
     };
 
-    const editor = within(canvas.getByRole('textbox'));
+    const textboxes = canvas.getAllByRole('textbox');
+    console.log('********', textboxes);
+    const editor = within(canvas.getAllByRole('textbox')[0]);
 
     async function clickButtonAndCheck(
       buttonName: string,
