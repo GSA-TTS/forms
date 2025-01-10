@@ -27,8 +27,6 @@
     "@atj/design": "workspace:*",
     "@atj/forms": "workspace:*",
     "astro": "^4.16.18",
-    "astro-purgecss": "^5.1.0",
-    "purgecss": "^7.0.2",
     "qs": "^6.13.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
