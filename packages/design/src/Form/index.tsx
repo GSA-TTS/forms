@@ -25,14 +25,6 @@ export type ComponentForPattern<T extends PatternProps = PatternProps> = Record<
   PatternComponent<T>
 >;
 
-/* todo: remove original type
-export type PatternComponent<T extends PatternProps = PatternProps<unknown>> =
-  React.ComponentType<
-    T & {
-      children?: React.ReactNode;
-    }
-  >;
-*/
 export type PatternComponent<T extends PatternProps = PatternProps<unknown>> =
   React.ComponentType<
     T & {
