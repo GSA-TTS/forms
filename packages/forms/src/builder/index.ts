@@ -27,7 +27,7 @@ import type { ParsedPdf } from '../documents/pdf/parsing-api.js';
 
 /**
  * Constructs and manipulates a Blueprint object for forms. A Blueprint
- * defines the structure of an interactive session. It provides methods to dynamically
+ * defines the structure of a form. The `BuildprintBuilder` provides methods to dynamically
  * modify pages, patterns, field sets, and documents within a hierarchical form structure.
  */
 export class BlueprintBuilder {
