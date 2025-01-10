@@ -60,7 +60,6 @@
     "gulp": "^5.0.0",
     "http-server": "^14.1.1",
     "install": "^0.13.0",
-    "jsdom": "^25.0.1",
     "onchange": "^7.1.0",
     "prop-types": "^15.8.1",
     "react-dom": "^18.3.1",
