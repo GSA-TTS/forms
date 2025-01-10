@@ -50,6 +50,9 @@ const actionSchema = z
   });
 
 export type ActionName = `action/${string}/${PatternId}`;
+/**
+ * Constructs an action string based on the provided options.
+ */
 export const getActionString = (opts: {
   handlerId: string;
   patternId: string;
@@ -57,6 +60,10 @@ export const getActionString = (opts: {
   return `action/${opts.handlerId}/${opts.patternId}`;
 };
 
+/**
+ * The SubmissionRegistry class manages submission handlers for forms and provides
+ * mechanisms to register and retrieve them based on specified action identifiers.
+ */
 export class SubmissionRegistry {
   constructor(private config: FormConfig) {}
 

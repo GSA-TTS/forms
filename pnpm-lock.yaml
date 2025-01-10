@@ -476,9 +476,6 @@ importers:
       install:
         specifier: ^0.13.0
         version: 0.13.0
-      jsdom:
-        specifier: ^25.0.1
-        version: 25.0.1
       onchange:
         specifier: ^7.1.0
         version: 7.1.0
@@ -10059,7 +10056,7 @@ packages:
     dependencies:
       semver: 7.6.3
       shelljs: 0.8.5
-      typescript: 5.8.0-dev.20250109
+      typescript: 5.8.0-dev.20250110
     dev: false
 
   /dset@3.1.4:
@@ -19538,8 +19535,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  /typescript@5.8.0-dev.20250109:
-    resolution: {integrity: sha512-p7pWPypjuK2v/76T8q25sTmuG17m53WWranllky9WiG/PUcIJOMXoGfNrRF3r5ufFfi49QM9TipJyfmeKgXRjg==}
+  /typescript@5.8.0-dev.20250110:
+    resolution: {integrity: sha512-+qwHVEvUm4CeQGtZIvlwE8HmRFcBMV4F/8OPKv+mIyGRGx4Chrj2v0VCsReVJwRdjjs6Dat/lPzkJW1E18+eOg==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: false

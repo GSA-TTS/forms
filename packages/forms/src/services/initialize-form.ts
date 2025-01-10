@@ -49,6 +49,10 @@ const optionSchema = z.object({
     .optional(),
 });
 
+/**
+ * Asynchronously initializes a new form based on the provided context and options. Handles schema validation,
+ * document import (parses uploaded PDF), builds a Blueprint, and saves to the repository.
+ */
 export const initializeForm: InitializeForm = async (ctx, opts) => {
   if (!ctx.isUserLoggedIn()) {
     return failure({
