@@ -8,6 +8,9 @@ export type AddForm = (
   form: Blueprint
 ) => Promise<Result<{ timestamp: string; id: string }>>;
 
+/**
+ * Adds a new form entry to the database.
+ */
 export const addForm: AddForm = async (ctx, form) => {
   const uuid = crypto.randomUUID();
   const db = await ctx.db.getKysely();

@@ -1,3 +1,10 @@
+/**
+ * Converts a given string input into its Base64 encoded representation.
+ *
+ * This function uses different methods depending on the environment:
+ * - In Node.js environments, it uses the Buffer API.
+ * - In browser environments, it utilizes the TextEncoder API.
+ */
 export const stringToBase64 = (input: string): string => {
   if (typeof Buffer !== 'undefined') {
     return Buffer.from(input, 'utf-8').toString('base64');
@@ -12,6 +19,13 @@ export const stringToBase64 = (input: string): string => {
   }
 };
 
+/**
+ * Converts a Uint8Array instance into a Base64-encoded string.
+ *
+ * This function uses different methods depending on the environment:
+ * - In Node.js environments, it uses the Buffer API.
+ * - In browser environments, it utilizes the FileReader API.
+ */
 export const uint8ArrayToBase64 = async (uint8Array: Uint8Array) => {
   if (typeof Buffer !== 'undefined') {
     return Buffer.from(uint8Array).toString('base64');
@@ -29,6 +43,9 @@ export const uint8ArrayToBase64 = async (uint8Array: Uint8Array) => {
   });
 };
 
+/**
+ * Converts a base64 encoded string to a Uint8Array.
+ */
 export const base64ToUint8Array = (base64: string) => {
   const binaryString = atob(base64);
   const len = binaryString.length;

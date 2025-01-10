@@ -22,6 +22,10 @@ const getFormIdFromKey = (key: string) => {
 const formSessionKey = (sessionId: string) => `formSessions/${sessionId}`;
 //const isFormSessionKey = (key: string) => key.startsWith('formSessions/');
 
+/**
+ * Repository for managing forms, form sessions, and associated documents in the browser storage.
+ * Provides functionality for CRUD operations on forms, form sessions, and documents.
+ */
 export class BrowserFormRepository implements FormRepository {
   constructor(private storage: Storage) {}
 
@@ -176,6 +180,11 @@ export class BrowserFormRepository implements FormRepository {
   }
 }
 
+/**
+ * Retrieves a list of form IDs stored in the provided storage object.
+ *
+ * @param {Storage} storage - The storage object to retrieve form keys from.
+ */
 export const getFormList = (storage: Storage) => {
   const keys = [];
   for (let i = 0; i < storage.length; i++) {
@@ -191,6 +200,16 @@ export const getFormList = (storage: Storage) => {
   return keys;
 };
 
+/**
+ * Saves a form object to a provided storage mechanism with a specified form ID as the key.
+ *
+ * This function serializes the provided form object into JSON and stores it
+ * in the given storage using the form ID transformed by `formKey` as the key.
+ *
+ * @param {Storage} storage - The storage mechanism where the form data will be saved.
+ * @param {string} formId - The unique identifier for the form, used as the key in storage.
+ * @param {Blueprint} form - The form object to be saved in storage.
+ */
 export const saveForm = (storage: Storage, formId: string, form: Blueprint) => {
   try {
     storage.setItem(formKey(formId), JSON.stringify(form));

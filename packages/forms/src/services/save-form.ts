@@ -15,6 +15,10 @@ export type SaveForm = (
   form: Blueprint
 ) => Promise<Result<{ timestamp: Date }, SaveFormError>>;
 
+/**
+ * This is meant to sit in front of the form repository and manage the HTTP status codes
+ * and message returned in the response when forms are updated or saved in the repository.
+ */
 export const saveForm: SaveForm = async (ctx, formId, form) => {
   if (!ctx.isUserLoggedIn()) {
     return failure({

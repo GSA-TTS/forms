@@ -22,6 +22,11 @@ export type AuthServiceContext = {
   isUserAuthorized: (email: string) => Promise<boolean>;
 };
 
+/**
+ * Factory function to create an authentication service.
+ *
+ * @param {AuthServiceContext} ctx - The context required to initialize the authentication service.
+ */
 export const createAuthService = (ctx: AuthServiceContext) =>
   createService(ctx, {
     getProviderRedirect,

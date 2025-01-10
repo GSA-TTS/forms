@@ -9,8 +9,13 @@ const migrationsDirectory = path.resolve(
   '../../migrations'
 );
 
-export const createKnex = (config: Knex.Config): Knex => knex(config);
-
+/**
+ * Creates and configures a query builder instance configured for a PostgreSQL database.
+ *
+ * @param {string} connectionString - The connection string for the PostgreSQL database.
+ * @param {boolean} [ssl=false] - Indicates whether SSL should be enabled for the connection.
+ * If enabled, `rejectUnauthorized` will be set to `false` to allow self-signed certificates.
+ */
 export const getPostgresKnex = (
   connectionString: string,
   ssl: boolean = false
@@ -33,10 +38,11 @@ export const getInMemoryKnex = (): Knex => {
   return getSqlite3Knex(':memory:');
 };
 
-export const getFileSystemKnex = (path: string): Knex => {
-  return getSqlite3Knex(path);
-};
-
+/**
+ * Creates and configures a query builder instance configured for a SQLite database.
+ *
+ * @param {string} filename - The path to the SQLite database file.
+ */
 const getSqlite3Knex = (filename: string): Knex => {
   return knex({
     client: 'better-sqlite3',

@@ -241,6 +241,11 @@ export type CreatePrompt<T> = (
   options: { validate: boolean }
 ) => PromptComponent;
 
+/**
+ * This variable is a function that generates a prompt based on the provided pattern configuration.
+ * It accepts a specific configuration, session, pattern, and additional options needed to create the prompt.
+ * A prompt defines what is presented to the end user.
+ */
 export const createPromptForPattern: CreatePrompt<Pattern> = (
   config,
   session,

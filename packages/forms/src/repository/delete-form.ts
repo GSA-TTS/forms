@@ -8,6 +8,9 @@ export type DeleteForm = (
   formId: string
 ) => Promise<VoidResult<{ message: string; code: 'not-found' | 'unknown' }>>;
 
+/**
+ * Asynchronously deletes a form and its associated documents from the database.
+ */
 export const deleteForm: DeleteForm = async (ctx, formId) => {
   const db = await ctx.db.getKysely();
 
