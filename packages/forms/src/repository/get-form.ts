@@ -8,6 +8,9 @@ export type GetForm = (
   formId: string
 ) => Promise<Result<Blueprint | null>>;
 
+/**
+ * Retrieves and parses a form from the database using the provided form ID.
+ */
 export const getForm: GetForm = async (ctx, formId) => {
   const db = await ctx.db.getKysely();
   const selectResult = await db

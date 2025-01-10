@@ -9,6 +9,9 @@ export type GetFormList = (ctx: FormRepositoryContext) => Promise<
   | null
 >;
 
+/**
+ * Retrieves a list of forms from the database.
+ */
 export const getFormList: GetFormList = async ctx => {
   const db = await ctx.db.getKysely();
   const rows = await db.selectFrom('forms').select(['id', 'data']).execute();

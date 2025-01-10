@@ -4,6 +4,9 @@ import * as r from '@atj/common';
 
 import { type FormError, type FormErrors, type Pattern } from '../index.js';
 
+/**
+ * Safely parses an unknown object using the provided Zod schema.
+ */
 export const safeZodParse = <T extends Pattern>(
   schema: z.Schema,
   obj: unknown
@@ -16,6 +19,9 @@ export const safeZodParse = <T extends Pattern>(
   }
 };
 
+/**
+ * Safely parses an object against a given Zod schema and converts potential parsing errors into a FormError.
+ */
 export const safeZodParseToFormError = <T extends Pattern>(
   schema: z.Schema,
   obj: unknown
@@ -29,6 +35,10 @@ export const safeZodParseToFormError = <T extends Pattern>(
   }
 };
 
+/**
+ * Parses and validates an object against a given Zod schema, ensuring safe handling of errors,
+ * and converts validation errors into a form-friendly error structure.
+ */
 export const safeZodParseFormErrors = <Schema extends z.Schema>(
   schema: Schema,
   obj: unknown
@@ -42,6 +52,9 @@ export const safeZodParseFormErrors = <Schema extends z.Schema>(
   }
 };
 
+/**
+ * Converts a ZodError into a structured set of form errors.
+ */
 const convertZodErrorToFormErrors = (zodError: z.ZodError): FormErrors => {
   const formErrors: FormErrors = {};
   zodError.errors.forEach(error => {
@@ -61,6 +74,9 @@ const convertZodErrorToFormErrors = (zodError: z.ZodError): FormErrors => {
   return formErrors;
 };
 
+/**
+ * Converts a ZodError into a FormError object.
+ */
 const convertZodErrorToFormError = (zodError: z.ZodError): FormError => {
   return {
     type: 'custom',
