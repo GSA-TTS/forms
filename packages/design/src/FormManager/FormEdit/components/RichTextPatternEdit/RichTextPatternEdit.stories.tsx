@@ -49,8 +49,6 @@ export const Formatting: StoryObj<typeof FormEdit> = {
       'Ordered list': 'listitem',
     };
 
-    const textboxes = canvas.getAllByRole('textbox');
-    console.log('********', textboxes);
     const editor = within(canvas.getAllByRole('textbox')[0]);
 
     async function clickButtonAndCheck(

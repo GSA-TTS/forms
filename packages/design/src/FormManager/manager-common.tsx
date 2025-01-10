@@ -8,7 +8,6 @@ export const renderEditPromptComponents = (
   promptComponents?: PromptComponent[]
 ) => {
   return promptComponents?.map((promptComponent, index) => {
-    //const Component = context.components[promptComponent.props.type];
     return (
       <PreviewPattern
         key={index}
