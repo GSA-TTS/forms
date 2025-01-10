@@ -33,6 +33,9 @@ export const nullBlueprint: Blueprint = {
   outputs: [],
 };
 
+/**
+ * Creates an empty blueprint with 1 page to start a form from scratch.
+ */
 export const createOnePageBlueprint = (): Blueprint => {
   const page1 = generatePatternId();
   return {
@@ -62,6 +65,9 @@ export const createOnePageBlueprint = (): Blueprint => {
   };
 };
 
+/**
+ * Creates a form blueprint based on the provided summary and initial configuration.
+ */
 export const createForm = (
   summary: FormSummary,
   initial: {
@@ -88,10 +94,16 @@ export const createForm = (
   };
 };
 
+/**
+ * Retrieves the root pattern from a Blueprint object. The root pattern is the page set data type.
+ */
 export const getRootPattern = (form: Blueprint) => {
   return form.patterns[form.root];
 };
 
+/**
+ * Updates the form object by adding new patterns and optionally setting a new root pattern.
+ */
 export const addPatternMap = (
   form: Blueprint,
   patterns: PatternMap,
@@ -104,6 +116,9 @@ export const addPatternMap = (
   };
 };
 
+/**
+ * Adds multiple patterns to the given form. Primarily intended for bulk operations like the document import feature.
+ */
 export const addPatterns = (
   form: Blueprint,
   patterns: Pattern[],
@@ -113,6 +128,9 @@ export const addPatterns = (
   return addPatternMap(form, formPatternMap, root);
 };
 
+/**
+ * Adds a pattern to a specific page within the blueprint at the specified index or at the end if no index is provided.
+ */
 export const addPatternToPage = (
   bp: Blueprint,
   pagePatternId: PatternId,
@@ -152,6 +170,10 @@ export const addPatternToPage = (
   };
 };
 
+/**
+ * Moves a pattern from one page to another within a blueprint or repositions it
+ * within the same page based on the specified position.
+ */
 export const movePatternBetweenPages = (
   bp: Blueprint,
   sourcePageId: PatternId,
@@ -230,6 +252,13 @@ export const movePatternBetweenPages = (
   };
 };
 
+/**
+ * Copies a pattern from a blueprint by creating a duplicate with a new ID.
+ *
+ * Depending on the type of pattern, specific properties
+ * such as title, label, text, or legend are modified to indicate a copy,
+ * including a timestamp in their names/descriptions.
+ */
 export const copyPattern = (
   bp: Blueprint,
   parentPatternId: PatternId,
@@ -396,6 +425,11 @@ export const copyPattern = (
   return { bp: updatedBp, pattern: newPattern };
 };
 
+/**
+ * Adds a new pattern to an existing fieldset pattern within a blueprint.
+ * If an index is specified, the pattern is inserted at that position within the fieldset's patterns.
+ * Otherwise, the pattern is appended to the end of the fieldset's patterns.
+ */
 export const addPatternToFieldset = (
   bp: Blueprint,
   fieldsetPatternId: PatternId,
@@ -435,6 +469,13 @@ export const addPatternToFieldset = (
   };
 };
 
+/**
+ * Adds a new pattern (page) to the `pageSet` of a given blueprint.
+ *
+ * This function takes a blueprint and a pattern as arguments, adds the pattern
+ * to the `pages` property of the root page set within the blueprint, and returns
+ * an updated blueprint with the modifications.
+ */
 export const addPageToPageSet = (
   bp: Blueprint,
   pattern: Pattern
@@ -458,6 +499,9 @@ export const addPageToPageSet = (
   };
 };
 
+/**
+ * Replaces the patterns in a given blueprint with a new set of patterns.
+ */
 export const replacePatterns = (
   form: Blueprint,
   patterns: Pattern[]
@@ -474,6 +518,9 @@ export const replacePatterns = (
   };
 };
 
+/**
+ * Updates the patterns within a form's blueprint using the provided configuration and new patterns map.
+ */
 export const updatePatterns = (
   config: FormConfig,
   form: Blueprint,
@@ -493,6 +540,9 @@ export const updatePatterns = (
   };
 };
 
+/**
+ * Adds a new form output to an existing blueprint.
+ */
 export const addFormOutput = (
   form: Blueprint,
   document: FormOutput
@@ -503,6 +553,9 @@ export const addFormOutput = (
   };
 };
 
+/**
+ * Updates the summary of a given form with the provided summary details.
+ */
 export const updateFormSummary = (
   form: Blueprint,
   summary: FormSummary
@@ -513,6 +566,9 @@ export const updateFormSummary = (
   };
 };
 
+/**
+ * Removes a specified pattern and its references from the blueprint.
+ */
 export const removePatternFromBlueprint = (
   config: FormConfig,
   blueprint: Blueprint,

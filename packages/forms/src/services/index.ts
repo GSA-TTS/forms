@@ -11,6 +11,11 @@ import { type InitializeForm, initializeForm } from './initialize-form.js';
 import { type SaveForm, saveForm } from './save-form.js';
 import { type SubmitForm, submitForm } from './submit-form.js';
 
+/**
+ * Factory function to create a form management service.
+ *
+ * @param {FormServiceContext} ctx - The context required to initialize the form service.
+ */
 export const createFormService = (ctx: FormServiceContext) =>
   createService(ctx, {
     addForm,

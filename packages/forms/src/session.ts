@@ -27,6 +27,9 @@ export type FormSession = {
   };
 };
 
+/**
+ * Representation of an initial or empty form session.
+ */
 export const nullSession: FormSession = {
   data: {
     errors: {},
@@ -53,6 +56,9 @@ export const nullSession: FormSession = {
   },
 };
 
+/**
+ * Creates a form session object using the provided form blueprint and optional route.
+ */
 export const createFormSession = (
   form: Blueprint,
   route?: FormRoute
@@ -75,6 +81,9 @@ export const createFormSession = (
   };
 };
 
+/**
+ * Retrieves a specific value from the form session data based on the provided pattern ID.
+ */
 export const getFormSessionValue = (
   session: FormSession,
   patternId: PatternId
@@ -111,6 +120,10 @@ export const updateSessionValue = (
   return nextSession;
 };
 
+/**
+ * Updates a form session with new values and errors, ensuring the
+ * validity of the pattern references provided.
+ */
 export const updateSession = (
   session: FormSession,
   values: PatternValueMap,
@@ -139,6 +152,10 @@ export const updateSession = (
   };
 };
 
+/**
+ * Checks if a form session is complete and valid by validating all patterns
+ * against their corresponding configurations.
+ */
 export const sessionIsComplete = (config: FormConfig, session: FormSession) => {
   return Object.values(session.form.patterns).every(pattern => {
     const patternConfig = getPatternConfig(config, pattern.type);
@@ -154,6 +171,9 @@ export const sessionIsComplete = (config: FormConfig, session: FormSession) => {
   });
 };
 
+/**
+ * Updates the specified form session by adding or updating the value of a specific pattern.
+ */
 const addValue = <T extends Pattern = Pattern>(
   form: FormSession,
   id: PatternId,
@@ -192,6 +212,9 @@ export const mergeSession = (
   ...newSession,
 });
 
+/**
+ * Calculates the total number of pages in the page set of the provided blueprint's root pattern.
+ */
 export const getPageCount = (bp: Blueprint) => {
   const rootPattern = bp.patterns[bp.root];
   if (rootPattern.type !== 'page-set') {
@@ -201,6 +224,9 @@ export const getPageCount = (bp: Blueprint) => {
   return rootPattern.data.pages.length;
 };
 
+/**
+ * Determines the current session page index based on the session's route parameters and form data.
+ */
 export const getSessionPage = (session: FormSession) => {
   const currentPageIndex = parseInt(session.route?.params.page as string) || 0;
   const lastPageIndex = getPageCount(session.form) - 1;

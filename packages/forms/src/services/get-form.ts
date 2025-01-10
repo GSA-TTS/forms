@@ -14,6 +14,10 @@ export type GetForm = (
   formId: string
 ) => Promise<Result<Blueprint, GetFormError>>;
 
+/**
+ * This is meant to sit in front of the form repository and manage the HTTP status codes
+ * and message returned in the response when forms are fetched from the repository.
+ */
 export const getForm: GetForm = async (ctx, formId) => {
   const formResult = await ctx.repository.getForm(formId);
   if (!formResult.success) {

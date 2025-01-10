@@ -17,6 +17,9 @@ export type GetDocument = (
   }>
 >;
 
+/**
+ * Asynchronously retrieves a document from the database and returns its details.
+ */
 export const getDocument: GetDocument = async (ctx, id) => {
   const db = await ctx.db.getKysely();
 

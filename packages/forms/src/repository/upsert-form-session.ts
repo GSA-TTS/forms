@@ -11,6 +11,9 @@ export type UpsertFormSession = (
   }
 ) => Promise<Result<{ timestamp: Date; id: string }>>;
 
+/**
+ * Asynchronously inserts or updates a form session in the database.
+ */
 export const upsertFormSession: UpsertFormSession = async (ctx, opts) => {
   const db = await ctx.db.getKysely();
   const strData = JSON.stringify(opts.data);

@@ -13,7 +13,13 @@ export type GetFormSession = (
   }>
 >;
 
-export const getFormSession: GetFormSession = async (ctx, id) => {
+/**
+ * Asynchronously retrieves a form session by its unique identifier from the database.
+ */
+export const getFormSession: GetFormSession = async (
+  ctx: FormRepositoryContext,
+  id: FormSessionId
+) => {
   const db = await ctx.db.getKysely();
   return await db
     .selectFrom('form_sessions')

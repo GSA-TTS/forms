@@ -16,6 +16,9 @@ export type AddDocument = (
   }
 ) => Promise<Result<{ id: string }>>;
 
+/**
+ * Asynchronously adds a document entry to the database.
+ */
 export const addDocument: AddDocument = async (ctx, document) => {
   const uuid = crypto.randomUUID();
   const db = await ctx.db.getKysely();
