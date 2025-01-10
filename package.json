@@ -15,7 +15,7 @@
     "format": "prettier --write \"packages/*/src/**/*.{js,jsx,ts,tsx,scss,css}\"",
     "lint": "turbo run lint",
     "pages": "rm -rf node_modules && npm i -g pnpm turbo && pnpm i && pnpm build && ln -sf ./apps/spotlight/dist _site",
-    "test": "vitest run && pnpm --filter @atj/design test:ci",
+    "test": "vitest run",
     "test:ci": "vitest run && pnpm --filter @atj/design test:ci # --coverage.enabled --coverage.provider=v8 --coverage.reporter=text --coverage.reporter=json-summary --coverage.reporter=json --coverage.reportOnFailure",
     "test:infra": "turbo run --filter=infra-cdktf test",
     "typecheck": "tsc --build",
