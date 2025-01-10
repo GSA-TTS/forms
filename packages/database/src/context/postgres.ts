@@ -9,6 +9,9 @@ import { migrateDatabase } from '../management/migrate-database.js';
 import { type DatabaseContext } from './types.js';
 import { Pool } from 'pg';
 
+/**
+ * Provides a context for accessing and managing a PostgreSQL database.
+ */
 export class PostgresDatabaseContext implements DatabaseContext {
   public readonly engine = 'postgres';
   knex?: Knex;

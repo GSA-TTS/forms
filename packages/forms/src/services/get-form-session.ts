@@ -23,6 +23,10 @@ export type GetFormSession = (
   }>
 >;
 
+/**
+ * Retrieves or creates a form session based on the provided context and options.
+ * Handles the fetching of an existing form or session and creates a new session if one does not exist.
+ */
 export const getFormSession: GetFormSession = async (ctx, opts) => {
   const formResult = await ctx.repository.getForm(opts.formId);
   if (!formResult.success) {

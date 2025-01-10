@@ -41,6 +41,10 @@ registry.registerHandler({
   handler: downloadPackageHandler,
 });
 
+/**
+ * Asynchronously submits a form by processing the provided data, managing session information, and
+ * invoking the appropriate handler based on the action.
+ */
 export const submitForm: SubmitForm = async (
   ctx,
   sessionId,
@@ -140,6 +144,9 @@ export const submitForm: SubmitForm = async (
   });
 };
 
+/**
+ * Retrieves an existing form session by its id or creates a new form session.
+ */
 const getFormSessionOrCreate = async (
   ctx: FormServiceContext,
   form: Blueprint,

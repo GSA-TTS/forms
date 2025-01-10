@@ -9,6 +9,11 @@ import { migrateDatabase } from '../management/migrate-database.js';
 
 import { type DatabaseContext } from './types.js';
 
+/**
+ * Provides a context for accessing and managing a SQLite database stored in memory.
+ *
+ * This context is implemented for testing or temporary use cases where persistence is not required.
+ */
 export class InMemoryDatabaseContext implements DatabaseContext {
   public readonly engine = 'sqlite';
   knex?: Knex;

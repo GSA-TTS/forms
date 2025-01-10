@@ -4,6 +4,16 @@ import { type VoidResult } from '@atj/common';
 
 import { type AuthServiceContext } from './index.js';
 
+/**
+ * Processes the session cookie in the context of an authentication request.
+ * This function validates the session cookie from the incoming request and
+ * sets the appropriate user session in the given context. It checks the
+ * request's origin for security and handles session expiration or invalidation
+ * by creating blank session cookies when necessary.
+ *
+ * @param {AuthServiceContext} ctx - The authentication service context used to manage sessions and cookies.
+ * @param {Request} request - The incoming HTTP request object containing session and origin information.
+ */
 export const processSessionCookie = async (
   ctx: AuthServiceContext,
   request: Request
