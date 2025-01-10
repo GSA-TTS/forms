@@ -5,6 +5,10 @@ import { CLOUD_GOV_ORG_NAME } from './config';
 import { AstroService } from './node-astro';
 import { getSecret } from '../secrets';
 
+/**
+ * Initializes a [Cloud.gov space](https://cloud.gov/docs/getting-started/concepts/#spaces) within a specified organization
+ * and deploys AstroService instance(s)
+ */
 export class CloudGovSpace extends Construct {
   constructor(scope: Construct, id: string, gitCommitHash: string) {
     super(scope, id);

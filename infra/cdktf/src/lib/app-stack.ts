@@ -8,6 +8,9 @@ import { withBackend } from './backend';
 import { CloudGovSpace } from './cloud.gov/space';
 import { DataAwsSsmParameter } from '../../.gen/providers/aws/data-aws-ssm-parameter';
 
+/**
+ * Register an application stack and translates the IaC to a template format via the `synth` function.
+ */
 export const registerAppStack = (
   stackPrefix: string,
   gitCommitHash: string
@@ -18,6 +21,15 @@ export const registerAppStack = (
   app.synth();
 };
 
+/**
+ * Represents a Terraform stack designed to deploy and manage resources for the application using AWS and Cloud Foundry providers.
+ * This sets up necessary providers and resources specific to the application's deployment needs and handles configuration for the following:
+ *
+ * - AWS as a provider with a specific region.
+ * - Retrieves Cloud Foundry credentials from AWS SSM Parameter Store.
+ * - Sets up the Cloud Foundry provider for integration with the Cloud.gov environment.
+ * - Instantiates a CloudGovSpace resource with the provided git commit hash identifier.
+ */
 class AppStack extends TerraformStack {
   constructor(scope: Construct, id: string, gitCommitHash: string) {
     super(scope, id);
