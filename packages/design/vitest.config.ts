@@ -20,11 +20,9 @@ export default mergeConfig(
         storybookScript: 'storybook dev -p 9011 --no-open',
         storybookUrl: 'http://localhost:9011',
       }),
-      //storybookNextJsPlugin(), // 👈 Apply the framework plugin here
     ],
     test: {
       ...sharedTestConfig.test,
-      //environment: 'jsdom',
       setupFiles: './vitest.setup.ts',
       browser: {
         enabled: true,
@@ -32,7 +30,11 @@ export default mergeConfig(
         headless: true,
         provider: 'playwright',
       },
-      include: ['**/*.test.ts', '**/*.test.tsx', '**/*.stories.tsx'],
+      include: [
+        'src/**/*.test.ts',
+        'src/**/*.test.tsx',
+        'src/**/*.stories.tsx',
+      ],
     },
   })
 );
