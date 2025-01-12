@@ -5,20 +5,28 @@ import { Lucia } from 'lucia';
 
 import { type Database } from '@atj/database';
 
+/**
+ * Factory function to create a SQLite Lucia adapter.
+ *
+ * @param {Sqlite3Database} db - The SQLite3 database instance used to initialize the adapter.
+ */
 export const createSqliteLuciaAdapter = (db: Sqlite3Database) => {
-  const adapter = new BetterSqlite3Adapter(db, {
+  return new BetterSqlite3Adapter(db, {
     user: 'users',
     session: 'sessions',
   });
-  return adapter;
 };
 
+/**
+ * Factory function to create a Postgres Lucia adapter.
+ *
+ * @param {Sqlite3Database} pgPool - The SQLite3 database instance used to initialize the adapter.
+ */
 export const createPostgresLuciaAdapter = (pgPool: any) => {
-  const adapter = new NodePostgresAdapter(pgPool, {
+  return new NodePostgresAdapter(pgPool, {
     user: 'users',
     session: 'sessions',
   });
-  return adapter;
 };
 
 declare module 'lucia' {

@@ -1,6 +1,7 @@
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
+import { Database as SqliteDatabase } from 'better-sqlite3';
 import knex, { type Knex } from 'knex';
 
 const migrationsDirectory = path.resolve(
@@ -8,8 +9,13 @@ const migrationsDirectory = path.resolve(
   '../../migrations'
 );
 
-export const createKnex = (config: Knex.Config): Knex => knex(config);
-
+/**
+ * Creates and configures a query builder instance configured for a PostgreSQL database.
+ *
+ * @param {string} connectionString - The connection string for the PostgreSQL database.
+ * @param {boolean} [ssl=false] - Indicates whether SSL should be enabled for the connection.
+ * If enabled, `rejectUnauthorized` will be set to `false` to allow self-signed certificates.
+ */
 export const getPostgresKnex = (
   connectionString: string,
   ssl: boolean = false
@@ -29,29 +35,37 @@ export const getPostgresKnex = (
 };
 
 export const getInMemoryKnex = (): Knex => {
-  return knex({
-    client: 'better-sqlite3',
-    connection: {
-      filename: ':memory:',
-    },
-    useNullAsDefault: true,
-    migrations: {
-      directory: migrationsDirectory,
-      loadExtensions: ['.mjs'],
-    },
-  });
+  return getSqlite3Knex(':memory:');
 };
 
-export const getFileSystemKnex = (path: string): Knex => {
+/**
+ * Creates and configures a query builder instance configured for a SQLite database.
+ *
+ * @param {string} filename - The path to the SQLite database file.
+ */
+const getSqlite3Knex = (filename: string): Knex => {
   return knex({
     client: 'better-sqlite3',
     connection: {
-      filename: path,
+      filename,
     },
-    useNullAsDefault: true,
     migrations: {
       directory: migrationsDirectory,
       loadExtensions: ['.mjs'],
     },
+    pool: {
+      afterCreate: (
+        conn: SqliteDatabase,
+        done: (err: Error | null, connection?: SqliteDatabase) => void
+      ) => {
+        try {
+          conn.pragma('foreign_keys = ON');
+          done(null, conn);
+        } catch (err) {
+          done(err as Error);
+        }
+      },
+    },
+    useNullAsDefault: true,
   });
 };

@@ -17,7 +17,7 @@ const addQuestions = async (page: Page) => {
 }
 
 test('Create form from scratch', async ({ page }) => {
-  const regexp = pathToRegexp(Create.path);
+  const { regexp } = pathToRegexp(Create.path);
   await createNewForm(page);
   let pageUrl = page.url();
   let pagePath = '';

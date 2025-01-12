@@ -1,8 +1,8 @@
 ---
-import AppFormRouter from '../../components/AppFormRouter';
+import { AppFormPage } from '../../features/form-page';
 import ContentLayout from '../../layouts/ContentLayout.astro';
 ---
 
 <ContentLayout title="10x Access to Justice Spotlight">
-  <AppFormRouter client:only />
+  <AppFormPage client:only="react" />
 </ContentLayout>

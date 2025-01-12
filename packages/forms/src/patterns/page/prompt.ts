@@ -2,8 +2,8 @@ import {
   type CreatePrompt,
   type PageProps,
   createPromptForPattern,
-  getPattern,
-} from '../../index.js';
+} from '../../components.js';
+import { getPattern } from '../../pattern.js';
 
 import { type PagePattern } from './config.js';
 

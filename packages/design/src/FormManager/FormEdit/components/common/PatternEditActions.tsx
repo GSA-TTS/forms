@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { useFormManagerStore } from '../../../store.js';
 import MovePatternDropdown from './MovePatternDropdown.js';
 import styles from '../../formEditStyles.module.css';
+import type { Pattern } from '@atj/forms';
 
 type PatternEditActionsProps = PropsWithChildren<{
   children?: ReactElement;
@@ -19,7 +20,7 @@ export const PatternEditActions = ({ children }: PatternEditActionsProps) => {
     state => state.focus?.pattern.type
   );
   const patterns = useFormManagerStore(state =>
-    Object.values(state.session.form.patterns)
+    Object.values<Pattern>(state.session.form.patterns)
   );
   const focusPatternId = useFormManagerStore(state => state.focus?.pattern.id);
   const isPatternInFieldset = useMemo(() => {
@@ -34,10 +35,12 @@ export const PatternEditActions = ({ children }: PatternEditActionsProps) => {
     copyPattern: state.copyPattern,
   }));
   const pages = useFormManagerStore(state =>
-    Object.values(state.session.form.patterns).filter(p => p.type === 'page')
+    Object.values<Pattern>(state.session.form.patterns).filter(
+      p => p.type === 'page'
+    )
   );
   const fieldsets = useFormManagerStore(state =>
-    Object.values(state.session.form.patterns).filter(
+    Object.values<Pattern>(state.session.form.patterns).filter(
       p => p.type === 'fieldset'
     )
   );

@@ -1,0 +1,120 @@
+---
+import { type FormRoute, getRouteDataFromQueryString } from '@atj/forms';
+
+import { AppForm } from '../../components/AppForm';
+import {
+  getServerContext,
+  getAstroRouteParams,
+  getSearchString,
+} from '../../config/astro.js';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+
+const { id: formId } = getAstroRouteParams(Astro, ['id']);
+const ctx = await getServerContext(Astro);
+
+const sessionId = Astro.cookies.get('form_session_id')?.value;
+
+const setFormSessionCookie = (sessionId?: string) => {
+  if (sessionId) {
+    Astro.cookies.set('form_session_id', sessionId);
+  } else {
+    Astro.cookies.delete('form_session_id');
+  }
+};
+
+const formRoute = {
+  params: getRouteDataFromQueryString(getSearchString(Astro)),
+  url: Astro.url.pathname,
+};
+
+const getNextUrl = (route?: FormRoute) => {
+  if (!route) {
+    return Astro.request.url;
+  } else {
+    const queryString = new URLSearchParams(
+      route.params as Record<string, string>
+    ).toString();
+    return queryString ? `${route.url}?${queryString}` : route.url;
+  }
+};
+
+if (Astro.request.method === 'POST') {
+  const formData = await Astro.request.formData();
+  const formDataObject: Record<string, any> = {}; // Changed to 'any' to handle different types
+
+  formData.forEach((value, key) => {
+    // Values from the attachment input will either be a typeof File or an array of Files.
+    // They're later normalized into an array during response validation
+    if (value instanceof File) {
+      formDataObject[key] = value;
+    } else if (Array.isArray(value) && value.every(item => item instanceof File)) {
+      formDataObject[key] = value;
+    } else {
+      formDataObject[key] = value.toString();
+    }
+  });
+
+  const submitFormResult = await ctx.formService.submitForm(
+    sessionId,
+    formId,
+    formDataObject,
+    formRoute
+  );
+
+  if (!submitFormResult.success) {
+    return new Response(submitFormResult.error, {
+      status: 500,
+    });
+  }
+
+  setFormSessionCookie(submitFormResult.data.sessionId);
+
+  if (submitFormResult.data.attachments) {
+    if (submitFormResult.data.attachments.length > 1) {
+      return new Response(
+        'Multiple attachments are not supported at this time.',
+        {
+          status: 501,
+        }
+      );
+    }
+    const attachment = submitFormResult.data.attachments[0];
+    return new Response(attachment.data, {
+      headers: {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': `attachment; filename="${attachment.fileName}"`,
+        'Content-Length': attachment.data.length.toString(),
+      },
+      status: 200,
+    });
+  }
+
+  return Astro.redirect(getNextUrl(submitFormResult.data.session.route));
+}
+
+const formResult = await ctx.formService.getForm(formId);
+if (!formResult.success) {
+  return new Response(formResult.error.message, {
+    status: 404,
+  });
+}
+
+const sessionResult = await ctx.formService.getFormSession({
+  formId,
+  sessionId,
+  formRoute,
+});
+
+if (!sessionResult.success) {
+  return new Response(sessionResult.error, {
+    status: 500,
+  });
+}
+setFormSessionCookie(sessionResult.data.id);
+
+const formSession = sessionResult.data.data;
+---
+
+<ContentLayout title="10x Access to Justice">
+  <AppForm client:load session={formSession} uswdsRoot={ctx.uswdsRoot} />
+</ContentLayout>

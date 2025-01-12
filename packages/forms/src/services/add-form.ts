@@ -12,11 +12,15 @@ type AddFormResult = {
   id: string;
 };
 
-type AddForm = (
+export type AddForm = (
   ctx: FormServiceContext,
   form: Blueprint
 ) => Promise<Result<AddFormResult, AddFormError>>;
 
+/**
+ * This is meant to sit in front of the form repository and manage the HTTP status codes
+ * and message returned in the response when forms are added to the repository.
+ */
 export const addForm: AddForm = async (ctx, form) => {
   if (!ctx.isUserLoggedIn()) {
     return failure({

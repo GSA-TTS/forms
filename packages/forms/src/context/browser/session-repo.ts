@@ -1,6 +1,9 @@
 import { type Result, type VoidResult } from '@atj/common';
 import { type FormSession } from '../../index.js';
 
+/**
+ * Adds a form session to the specified storage and returns a unique identifier for the session.
+ */
 export const addFormToStorage = (
   storage: Storage,
   session: FormSession

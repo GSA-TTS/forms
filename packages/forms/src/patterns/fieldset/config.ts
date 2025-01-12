@@ -1,7 +1,16 @@
 import { z } from 'zod';
 
 import { safeZodParseFormErrors } from '../../util/zod.js';
-import { ParsePatternConfigData } from '../../pattern.js';
+import {
+  type ParsePatternConfigData,
+  type Pattern,
+  type PatternId,
+} from '../../pattern.js';
+
+export type FieldsetPattern = Pattern<{
+  legend?: string;
+  patterns: PatternId[];
+}>;
 
 const configSchema = z.object({
   legend: z.string().min(1),

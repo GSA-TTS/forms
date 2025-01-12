@@ -39,9 +39,9 @@
     "pg": "^8.12.0"
   },
   "devDependencies": {
-    "@testcontainers/postgresql": "^10.11.0",
+    "@testcontainers/postgresql": "^10.13.2",
     "@types/better-sqlite3": "^7.6.11",
-    "testcontainers": "^10.11.0",
+    "testcontainers": "^10.13.2",
     "vite-tsconfig-paths": "^4.3.2"
   }
 }

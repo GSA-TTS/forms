@@ -21,6 +21,10 @@ type Context = {
   generateLoginGovKey?: GenerateLoginGovKey;
 };
 
+/**
+ * Sets or retrieves Login.gov secrets for the given application key. It retrieves and returns the
+ * existing key pair or generates, stores, and returns new key pair if one didn't exist previously.
+ */
 export const setLoginGovSecrets = async (
   ctx: Context,
   env: DeployEnv,
@@ -54,12 +58,21 @@ export const setLoginGovSecrets = async (
   };
 };
 
+/**
+ * Gets the file path for the Login.gov public key (`.pem`) file.
+ */
 const loginGovPublicKeyPath = (secretsDir: string, appKey: string) =>
   `${secretsDir}/login-gov-${appKey}-key.pem`;
 
+/**
+ * Gets the file path for the Login.gov private key certificate (`.pem`) file.
+ */
 const loginGovPrivateKeyPath = (secretsDir: string, appKey: string) =>
   `${secretsDir}/login-gov-${appKey}-cert.pem`;
 
+/**
+ * Generates a public-private key pair for Login.gov using OpenSSL.
+ */
 const generateLoginGovKey: GenerateLoginGovKey = async (
   privateKeyPath: string,
   publicKeyPath: string

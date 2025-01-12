@@ -1,6 +1,17 @@
 import { Construct } from 'constructs';
 import * as cloudfoundry from '../../../.gen/providers/cloudfoundry';
 
+/**
+ * Represents a service configuration for deploying an application on a Cloud Foundry platform.
+ * The `AstroService` class sets up the required resources, routes, services, and configurations
+ * needed to deploy, run, and maintain the application.
+ *
+ * ### Important Notes:
+ * - The RDS instance is configured to prevent destruction to ensure database persistence.
+ * - Timeout settings for the database instance allow for extended creation, update, and deletion times.
+ * - Routes and services are bound together to enable communication with the database and login service
+ *
+ */
 export class AstroService extends Construct {
   constructor(
     scope: Construct,
@@ -72,7 +83,7 @@ export class AstroService extends Construct {
     new cloudfoundry.app.App(this, `${id}-app`, {
       name: `${id}-app`,
       space: spaceId,
-      dockerImage: `ghcr.io/gsa-tts/atj-platform/${imageName}`,
+      dockerImage: `ghcr.io/gsa-tts/forms/${imageName}`,
       memory: 1024,
       diskQuota: 4096,
       healthCheckType: 'http',

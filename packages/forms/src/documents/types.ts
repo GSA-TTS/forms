@@ -45,6 +45,14 @@ export type DocumentFieldValue =
       required: boolean;
     }
   | {
+      type: 'RichText';
+      name: string;
+      options: string[];
+      label: string;
+      value: string;
+      required: boolean;
+    }
+  | {
       type: 'not-supported';
       name: string;
       error: string;

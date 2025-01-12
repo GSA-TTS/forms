@@ -16,6 +16,9 @@ const migrationsDirectory = path.resolve(
   '../../migrations'
 );
 
+/**
+ * Provides a context for accessing and managing a SQLite database stored on the filesystem.
+ */
 export class FilesystemDatabaseContext implements DatabaseContext {
   public readonly engine = 'sqlite';
   knex?: Knex;

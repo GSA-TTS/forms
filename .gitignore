@@ -16,3 +16,4 @@ packages/form-service
 /e2e/playwright-report/
 /e2e/blob-report/
 /e2e/playwright/.cache/
+__screenshots__/

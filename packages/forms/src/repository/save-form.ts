@@ -1,20 +1,28 @@
-import { failure, success } from '@atj/common';
-import { type DatabaseContext } from '@atj/database';
+import { type VoidResult, failure, success } from '@atj/common';
 
 import { type Blueprint } from '../index.js';
-import { stringifyForm } from './serialize.js';
+import type { FormRepositoryContext } from './index.js';
 
-export const saveForm = async (
-  ctx: DatabaseContext,
+export type SaveForm = (
+  ctx: FormRepositoryContext,
+  formId: string,
+  form: Blueprint
+) => Promise<VoidResult>;
+
+/**
+ * Asynchronously saves a form blueprint by updating the corresponding entry in the database.
+ */
+export const saveForm: SaveForm = async (
+  ctx: FormRepositoryContext,
   id: string,
   blueprint: Blueprint
 ) => {
-  const db = await ctx.getKysely();
+  const db = await ctx.db.getKysely();
 
   return await db
     .updateTable('forms')
     .set({
-      data: stringifyForm(blueprint),
+      data: JSON.stringify(blueprint),
     })
     .where('id', '=', id)
     .execute()

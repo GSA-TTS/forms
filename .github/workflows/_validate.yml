@@ -2,6 +2,17 @@ name: Validate
 
 on:
   workflow_call:
+    inputs:
+      playwright_version:
+        description: Installed playwright version
+        required: false
+        default: "1.48.1"
+        type: string
+      terraform_version:
+        description: Terraform version
+        required: false
+        default: "1.10.4"
+        type: string
 
 jobs:
   run-tests:
@@ -14,7 +25,7 @@ jobs:
       - name: Read node version from `.nvmrc` file
         id: nvmrc
         shell: bash
-        run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
+        run: echo "NODE_VERSION=$(cat .nvmrc)" >> $GITHUB_OUTPUT
 
       - name: Install required node.js version
         uses: actions/setup-node@v4
@@ -44,10 +55,39 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Cache Playwright binaries
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ inputs.playwright_version }}
+
+      - name: Install Playwright
+        run: pnpm dlx playwright@${{ inputs.playwright_version }} install --with-deps
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+
       # While most of the test suite is self-contained, the tests for the demo
       # servers require a prod build of @atj/server.
       - name: Build
         run: pnpm build
+
+      - name: Make directory for build artifacts
+        run: mkdir -p output/build-artifacts
+
+
+      - name: Spotlight app performance budget
+        run: pnpm --filter @atj/spotlight size:ci > output/build-artifacts/spotlight-size-output.txt
+
+      - name: Design package performance budget
+        run: pnpm --filter @atj/design size:ci > output/build-artifacts/design-size-output.txt
+
+      - name: Upload size:ci results
+        uses: actions/upload-artifact@v4
+        with:
+          name: size-limit-results
+          path: |
+            output/build-artifacts/spotlight-size-output.txt
+            output/build-artifacts/design-size-output.txt
 
       - name: Lint source code
         shell: bash
@@ -57,10 +97,28 @@ jobs:
         shell: bash
         run: AUTH_SECRET=not-super-secret pnpm test:ci
 
+      - uses: actions/cache@v3
+        name: Check Cache for Terraform CLI
+        id: terraform-cache
+        with:
+          path: /usr/local/bin/terraform
+          key: terraform-${{ inputs.terraform_version }}
+
+      - name: Install Terraform CLI
+        if: steps.terraform-cache.outputs.cache-hit != 'true'
+        run: |
+          sudo apt-get update && sudo apt-get install -y wget unzip
+          wget https://releases.hashicorp.com/terraform/${{ inputs.terraform_version }}/terraform_${{ inputs.terraform_version }}_linux_amd64.zip
+          unzip terraform_${{ inputs.terraform_version }}_linux_amd64.zip
+          sudo mv terraform /usr/local/bin/
+
+      - name: Verify Terraform Installation
+        run: terraform --version
+
       - name: Initialize Terraform CDK configuration
         shell: bash
+        working-directory: infra/cdktf
         run: |
-          cd infra/cdktf
           pnpm cdktf get
           pnpm build:tsc
 

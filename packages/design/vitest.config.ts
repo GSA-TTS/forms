@@ -11,6 +11,12 @@ export default mergeConfig(
       ...sharedTestConfig.test,
       environment: 'jsdom',
       setupFiles: './vitest.setup.ts',
+      browser: {
+        enabled: true,
+        name: 'chromium',
+        headless: true,
+        provider: 'playwright',
+      },
     },
   })
 );

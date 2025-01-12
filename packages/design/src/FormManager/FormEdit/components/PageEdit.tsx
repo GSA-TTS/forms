@@ -5,7 +5,7 @@ import { PageProps } from '@atj/forms';
 import { enLocale as message } from '@atj/common';
 import { PagePattern } from '@atj/forms';
 
-import { useRouteParams } from '../../../FormRouter/hooks.js';
+import { useRouteParams } from '../../hooks.js';
 import { PatternEditComponent } from '../types.js';
 
 import { PatternEditActions } from './common/PatternEditActions.js';

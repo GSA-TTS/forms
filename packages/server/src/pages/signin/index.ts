@@ -1,10 +1,10 @@
 import type { APIContext } from 'astro';
 import { getProviderRedirect } from '@atj/auth';
 
-import { getAstroAppContext } from '../../context.js';
+import { getServerContext } from '../../config/astro.js';
 
 export async function GET(context: APIContext): Promise<Response> {
-  const { auth } = await getAstroAppContext(context);
+  const { auth } = await getServerContext(context);
 
   const redirect = await getProviderRedirect(auth);
   redirect.cookies.forEach(cookie => {

@@ -19,6 +19,11 @@ export type LoginGovOptions = {
   redirectURI?: string;
 };
 
+/**
+ * The LoginGov class implements the OAuth2ProviderWithPKCE interface
+ * and provides functionality to authenticate users using Login.gov's
+ * OAuth 2.0 with PKCE flow.
+ */
 export class LoginGov implements OAuth2ProviderWithPKCE {
   private client: OAuth2Client;
   //private clientSecret: string;

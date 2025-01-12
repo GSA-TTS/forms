@@ -23,7 +23,7 @@ export default defineConfig({
     checkOrigin: true,
   },
   server: {
-    port: 4322,
+    port: 4321,
   },
   vite: {
     define: {

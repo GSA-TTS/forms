@@ -31,6 +31,7 @@ export const setupPostgresContainer = async ({
   if (global.postgresTestContainer === undefined) {
     process.stdout.write('Starting PostgreSQL test container...');
     global.postgresTestContainer = new PostgreSqlContainer().start();
+    const container = await global.postgresTestContainer;
   } else {
     process.stdout.write(
       'Using already initialized PostgreSQL test container...'

@@ -18,6 +18,15 @@ type Params = {
   state?: string | null;
 };
 
+/**
+ * Processes the provider callback for an OAuth-based authentication flow. Ensures data integrity and security through checks like nonce matching,
+ * state validation, and proper error handling.
+ *
+ * @param {AuthServiceContext} ctx - The context object containing authentication services, database access, and related utilities.
+ * @param {Params} params - The parameters received from the provider as part of the callback request.
+ * @param {Params & { nonce: string | null }} storedParams - Locally stored parameters including the nonce for verification and validation.
+ * @param {function} [fetchUserData=fetchUserDataImpl] - A function to fetch user data from the external provider using the access token.
+ */
 export const processProviderCallback = async (
   ctx: AuthServiceContext,
   params: Params,
@@ -91,6 +100,11 @@ export const processProviderCallback = async (
   });
 };
 
+/**
+ * Fetches user data from the login-provider endpoint using the provided access token with bearer token auth.
+ *
+ * @param {string} accessToken - The access token to authorize the request.
+ */
 const fetchUserDataImpl = (accessToken: string) =>
   fetch('https://idp.int.identitysandbox.gov/api/openid_connect/userinfo', {
     headers: {

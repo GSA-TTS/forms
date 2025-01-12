@@ -1,5 +1,5 @@
 import 'cdktf/lib/testing/adapters/jest';
 
-describe('atj-platform app stack', () => {
+describe('Forms Platform app stack', () => {
   it.todo('should be tested');
 });

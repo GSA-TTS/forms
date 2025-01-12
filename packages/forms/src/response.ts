@@ -1,17 +1,17 @@
 import { type Result } from '@atj/common';
 
-import {
-  type FormConfig,
-  getPattern,
-  getPatternConfig,
-  validatePattern,
-} from './index.js';
 import { type PromptAction } from './components.js';
 import {
   type FormErrorMap,
   type FormSession,
   updateSession,
 } from './session.js';
+import {
+  type FormConfig,
+  getPattern,
+  getPatternConfig,
+  validatePattern,
+} from './pattern.js';
 
 export type PromptResponse = {
   action: PromptAction['type'];

@@ -1,3 +1,4 @@
+import { watch } from 'rollup';
 import { builtinModules } from 'module';
 
 import { nodeResolve } from '@rollup/plugin-node-resolve';
@@ -51,4 +52,8 @@ export default {
       ]),
     ];
   })(),
+  watch: {
+    include: 'src/**/*.ts',
+    clearScreen: false,
+  },
 };

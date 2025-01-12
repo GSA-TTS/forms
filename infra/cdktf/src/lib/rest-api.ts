@@ -4,6 +4,10 @@ import { AssetType, TerraformAsset, TerraformOutput } from 'cdktf';
 import { Construct } from 'constructs';
 import * as aws from '../../.gen/providers/aws';
 
+/**
+ * Creates and deploys infrastructure that includes an AWS Lambda function and API Gateway using Terraform.
+ * It also manages the creation of necessary roles, permissions, and assets required for these components.
+ */
 export class FormService extends Construct {
   readonly url: string;
 
