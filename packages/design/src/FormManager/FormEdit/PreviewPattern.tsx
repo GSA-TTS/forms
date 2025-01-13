@@ -39,7 +39,6 @@ export const PreviewPattern: PatternComponent = function PreviewPattern(props) {
         }
       }}
       onFocus={event => {
-        console.log('on focus event', EditComponent);
         if (EditComponent && !isPatternEditControlEvent(event)) {
           event.stopPropagation();
           setFocus(props._patternId);
