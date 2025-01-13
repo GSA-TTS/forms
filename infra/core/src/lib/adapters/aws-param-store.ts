@@ -16,6 +16,10 @@ import type {
   SecretsVault,
 } from '../types.js';
 
+/**
+ * Provides an implementation of the SecretsVault interface leveraging
+ * AWS Systems Manager Parameter Store to manage secrets securely.
+ */
 export class AWSParameterStoreSecretsVault implements SecretsVault {
   client: SSMClient;
 

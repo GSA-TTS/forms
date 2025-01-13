@@ -75,7 +75,6 @@ describe('SelectDropdownPattern tests', () => {
         expect.fail('selectDropdownConfig.parseUserInput is not undefined');
       }
       const result = selectDropdownConfig.parseUserInput(pattern, inputValue);
-      console.log('Test parse result:', result);
       if (result.success) {
         expect(result.data).toBe('value1');
       } else {
@@ -102,7 +101,6 @@ describe('SelectDropdownPattern tests', () => {
         expect.fail('selectDropdownConfig.parseUserInput is not undefined');
       }
       const result = selectDropdownConfig.parseUserInput(pattern, inputValue);
-      console.log('Test parse result (error case):', result);
       if (!result.success) {
         expect(result.error).toBeDefined();
         expect(result.error?.message).toBe(

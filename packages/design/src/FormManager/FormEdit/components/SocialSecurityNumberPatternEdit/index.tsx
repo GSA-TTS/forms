@@ -15,7 +15,7 @@ import styles from '../../formEditStyles.module.css';
 
 const SocialSecurityNumberPatternEdit: PatternEditComponent<
   SocialSecurityNumberProps
-> = ({ focus, previewProps }) => {
+> = ({ context, focus, previewProps }) => {
   return (
     <>
       {focus ? (
@@ -27,7 +27,7 @@ const SocialSecurityNumberPatternEdit: PatternEditComponent<
         <div
           className={`${styles.ssnPattern} padding-left-3 padding-bottom-3 padding-right-3`}
         >
-          <SocialSecurityNumber {...previewProps} />
+          <SocialSecurityNumber context={context} {...previewProps} />
         </div>
       )}
     </>

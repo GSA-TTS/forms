@@ -2,7 +2,8 @@ import React from 'react';
 
 import { type FieldsetProps } from '@atj/forms';
 
-import { type PatternComponent } from '../../../Form/index.js';
+import { type PatternComponent } from '../../index.js';
+import { renderPromptComponents } from '../../form-common.js';
 
 const Fieldset: PatternComponent<FieldsetProps> = props => {
   return (
@@ -12,8 +13,7 @@ const Fieldset: PatternComponent<FieldsetProps> = props => {
           {props.legend}
         </legend>
       )}
-
-      {props.children}
+      {renderPromptComponents(props.context, props.childComponents)}
     </fieldset>
   );
 };

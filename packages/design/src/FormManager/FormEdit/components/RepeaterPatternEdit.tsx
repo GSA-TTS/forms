@@ -10,7 +10,6 @@ import {
 } from '../AddPatternDropdown.js';
 import { PatternComponent } from '../../../Form/index.js';
 import Repeater from '../../../Form/components/Repeater/index.js';
-import RepeaterEditView from '../../../Form/components/Repeater/edit.js';
 import { useFormManagerStore } from '../../store.js';
 import { PatternEditComponent } from '../types.js';
 
@@ -18,8 +17,11 @@ import { PatternEditActions } from './common/PatternEditActions.js';
 import { PatternEditForm } from './common/PatternEditForm.js';
 import { usePatternEditFormContext } from './common/hooks.js';
 import styles from '../formEditStyles.module.css';
+import { renderEditPromptComponents } from '../../manager-common.js';
+import type { FormManagerContext } from '../../index.js';
 
 const RepeaterEdit: PatternEditComponent<RepeaterProps> = ({
+  context,
   focus,
   previewProps,
 }) => {
@@ -28,10 +30,12 @@ const RepeaterEdit: PatternEditComponent<RepeaterProps> = ({
       {focus ? (
         <PatternEditForm
           pattern={focus.pattern}
-          editComponent={<EditComponent patternId={focus.pattern.id} />}
+          editComponent={
+            <EditComponent context={context} patternId={focus.pattern.id} />
+          }
         ></PatternEditForm>
       ) : (
-        <RepeaterPreview {...previewProps} />
+        <RepeaterPreview context={context} {...previewProps} />
       )}
     </>
   );
@@ -49,8 +53,13 @@ const RepeaterPreview: PatternComponent<RepeaterProps> = props => {
   );
   return (
     <>
-      <RepeaterEditView {...(props as RepeaterProps)}>
-        {props.children}
+      <fieldset className="usa-fieldset width-full padding-top-2">
+        {props.legend !== '' && props.legend !== undefined && (
+          <legend className="usa-legend text-bold text-uppercase line-height-body-4 width-full margin-top-0 padding-top-3 padding-bottom-1">
+            {props.legend}
+          </legend>
+        )}
+        {renderEditPromptComponents(props.context, props.childComponents)}
         {pattern && pattern.data.patterns.length === 0 && (
           <div
             data-pattern-edit-control="true"
@@ -98,7 +107,7 @@ const RepeaterPreview: PatternComponent<RepeaterProps> = props => {
             </div>
           </div>
         )}
-      </RepeaterEditView>
+      </fieldset>
     </>
   );
 };
@@ -108,7 +117,13 @@ const RepeaterPreview: PatternComponent<RepeaterProps> = props => {
   the ID when the component below is mounted.
  */
 
-const EditComponent = ({ patternId }: { patternId: PatternId }) => {
+const EditComponent = ({
+  context,
+  patternId,
+}: {
+  context: FormManagerContext;
+  patternId: PatternId;
+}) => {
   const pattern = useFormManagerStore<RepeaterPattern>(
     state => state.session.form.patterns[patternId]
   );
@@ -147,7 +162,7 @@ const EditComponent = ({ patternId }: { patternId: PatternId }) => {
           autoFocus
         ></input>
       </div>
-      <Repeater type="repeater" _patternId={patternId} />
+      <Repeater type="repeater" context={context} _patternId={patternId} />
       <PatternEditActions />
     </div>
   );

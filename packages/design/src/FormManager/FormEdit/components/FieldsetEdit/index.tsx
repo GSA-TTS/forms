@@ -8,8 +8,6 @@ import {
   CompoundAddPatternButton,
   CompoundAddNewPatternButton,
 } from '../../AddPatternDropdown.js';
-import { PatternComponent } from '../../../../Form/index.js';
-import Fieldset from '../../../../Form/components/Fieldset/index.js';
 import { useFormManagerStore } from '../../../store.js';
 import { PatternEditComponent } from '../../types.js';
 
@@ -17,8 +15,13 @@ import { PatternEditActions } from '../common/PatternEditActions.js';
 import { PatternEditForm } from '../common/PatternEditForm.js';
 import { usePatternEditFormContext } from '../common/hooks.js';
 import styles from '../../formEditStyles.module.css';
+import { FormManagerContext } from '../../../../index.js';
+import { PatternComponent } from '../../../../Form/index.js';
+import Fieldset from '../../../../Form/components/Fieldset/index.js';
+import { renderEditPromptComponents } from '../../../manager-common.js';
 
 const FieldsetEdit: PatternEditComponent<FieldsetProps> = ({
+  context,
   focus,
   previewProps,
 }) => {
@@ -27,10 +30,12 @@ const FieldsetEdit: PatternEditComponent<FieldsetProps> = ({
       {focus ? (
         <PatternEditForm
           pattern={focus.pattern}
-          editComponent={<EditComponent patternId={focus.pattern.id} />}
+          editComponent={
+            <EditComponent patternId={focus.pattern.id} context={context} />
+          }
         ></PatternEditForm>
       ) : (
-        <FieldsetPreview {...previewProps} />
+        <FieldsetPreview context={context} {...previewProps} />
       )}
     </>
   );
@@ -48,8 +53,13 @@ const FieldsetPreview: PatternComponent<FieldsetProps> = props => {
   );
   return (
     <>
-      <Fieldset {...(props as FieldsetProps)}>
-        {props.children}
+      <fieldset className="usa-fieldset width-full padding-top-2">
+        {props.legend !== '' && props.legend !== undefined && (
+          <legend className="usa-legend text-bold text-uppercase line-height-body-4 width-full margin-top-0 padding-top-3 padding-bottom-1">
+            {props.legend}
+          </legend>
+        )}
+        {renderEditPromptComponents(props.context, props.childComponents)}
         {pattern && pattern.data.patterns.length === 0 && (
           <div
             data-pattern-edit-control="true"
@@ -97,12 +107,18 @@ const FieldsetPreview: PatternComponent<FieldsetProps> = props => {
             </div>
           </div>
         )}
-      </Fieldset>
+      </fieldset>
     </>
   );
 };
 
-const EditComponent = ({ patternId }: { patternId: PatternId }) => {
+const EditComponent = ({
+  context,
+  patternId,
+}: {
+  context: FormManagerContext;
+  patternId: PatternId;
+}) => {
   const pattern = useFormManagerStore<FieldsetPattern>(
     state => state.session.form.patterns[patternId]
   );
@@ -141,7 +157,7 @@ const EditComponent = ({ patternId }: { patternId: PatternId }) => {
           autoFocus
         ></input>
       </div>
-      <Fieldset type="fieldset" _patternId={patternId} />
+      <Fieldset type="fieldset" _patternId={patternId} context={context} />
       <PatternEditActions />
     </div>
   );
