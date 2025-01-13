@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - staging
+      - task/terraform-apply
   workflow_dispatch:
 
 jobs:
