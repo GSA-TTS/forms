@@ -57,7 +57,7 @@ export const PhoneNumberPattern: PatternComponent<PhoneNumberProps> = ({
             'usa-input--error': error,
           })}
           id={phoneId}
-          type="text"
+          type="tel"
           defaultValue={value}
           {...register(phoneId, { required })}
           onChange={handlePhoneChange}
