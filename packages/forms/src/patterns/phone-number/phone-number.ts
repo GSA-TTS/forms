@@ -1,11 +1,6 @@
 import * as z from 'zod';
-
 import { type PhoneNumberProps } from '../../components.js';
-import {
-  type Pattern,
-  type PatternConfig,
-  validatePattern,
-} from '../../pattern.js';
+import { type Pattern, type PatternConfig } from '../../pattern.js';
 import { getFormSessionValue } from '../../session.js';
 import {
   safeZodParseFormErrors,
@@ -25,20 +20,20 @@ export type PhoneNumberPatternOutput = z.infer<
 >;
 
 export const createPhoneSchema = (data: PhoneNumberPattern['data']) => {
-  let phoneSchema = z
+  const phoneSchema = z
     .string()
-    .regex(
-      /^[\d+(). -]{1,}$/,
-      'Phone number may only contain digits, spaces, parentheses, hyphens, and periods.'
-    )
+    .regex(/^(\d{3}-\d{3}-\d{4}|\d{10})$/, 'Invalid phone number format.')
+    .transform(value => {
+      const digits = value.replace(/[^\d]/g, '');
+      return `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(6)}`;
+    })
     .refine(value => {
-      const stripped = value.replace(/[^\d]/g, '');
-      return stripped.length >= 10;
-    }, 'Phone number must contain at least 10 digits');
+      const digits = value.replace(/[^\d]/g, '');
+      return digits.length === 10;
+    }, 'Phone number must contain exactly 10 digits.');
 
   if (!data.required) {
-    // Allow empty strings for optional fields
-    return phoneSchema.or(z.literal('').optional()).optional();
+    return z.union([z.literal(''), phoneSchema]);
   }
 
   return phoneSchema;
@@ -52,16 +47,12 @@ export const phoneNumberConfig: PatternConfig<
   iconPath: 'phone-icon.svg',
   initial: {
     label: 'Phone Number',
-    required: true,
-    hint: '10-digit, U.S. only, for example 999-999-9999',
+    required: false,
+    hint: 'Enter a 10-digit U.S. phone number, e.g., 999-999-9999',
   },
 
   parseUserInput: (pattern, inputValue) => {
-    const result = safeZodParseToFormError(
-      createPhoneSchema(pattern.data),
-      inputValue
-    );
-    return result;
+    return safeZodParseToFormError(createPhoneSchema(pattern.data), inputValue);
   },
 
   parseConfigData: obj => {
@@ -75,19 +66,6 @@ export const phoneNumberConfig: PatternConfig<
     const extraAttributes: Record<string, any> = {};
     const sessionValue = getFormSessionValue(session, pattern.id);
     const error = session.data.errors[pattern.id];
-
-    /*
-    if (options.validate) {
-      const isValidResult = validatePattern(
-        phoneNumberConfig,
-        pattern,
-        sessionValue
-      );
-      if (!isValidResult.success) {
-        extraAttributes['error'] = isValidResult.error;
-      }
-    }
-    */
 
     return {
       props: {

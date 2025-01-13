@@ -14,6 +14,7 @@ import PageSet from './PageSet/index.js';
 import Paragraph from './Paragraph/index.js';
 import PhoneNumber from './PhoneNumber/index.js';
 import RadioGroup from './RadioGroup/index.js';
+import Repeater from './Repeater/index.js';
 import RichText from './RichText/index.js';
 import Sequence from './Sequence/index.js';
 import SelectDropdown from './SelectDropdown/index.js';
@@ -37,6 +38,7 @@ export const defaultPatternComponents: ComponentForPattern = {
   paragraph: Paragraph as PatternComponent,
   'phone-number': PhoneNumber as PatternComponent,
   'radio-group': RadioGroup as PatternComponent,
+  repeater: Repeater as PatternComponent,
   'rich-text': RichText as PatternComponent,
   'select-dropdown': SelectDropdown as PatternComponent,
   sequence: Sequence as PatternComponent,

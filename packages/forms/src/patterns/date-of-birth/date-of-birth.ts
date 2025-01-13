@@ -1,11 +1,7 @@
 import * as z from 'zod';
 
 import { type DateOfBirthProps } from '../../components.js';
-import {
-  type Pattern,
-  type PatternConfig,
-  validatePattern,
-} from '../../pattern.js';
+import { type Pattern, type PatternConfig } from '../../pattern.js';
 import { getFormSessionValue } from '../../session.js';
 import {
   safeZodParseFormErrors,
@@ -28,30 +24,46 @@ export const createDOBSchema = (data: DateOfBirthPattern['data']) => {
   const daySchema = z
     .string()
     .regex(/^\d{1,2}$/, 'Invalid day format')
+    .or(z.literal(''))
     .optional();
   const monthSchema = z
     .string()
     .regex(/^(0[1-9]|1[0-2])$/, 'Invalid month format')
+    .or(z.literal(''))
     .optional();
   const yearSchema = z
     .string()
     .regex(/^\d{4}$/, 'Invalid year format')
+    .or(z.literal(''))
     .optional();
 
-  if (!data.required) {
-    return z
-      .object({
-        day: daySchema,
-        month: monthSchema,
-        year: yearSchema,
-      })
-      .optional();
-  }
-
-  return z.object({
+  const schema = z.object({
     day: daySchema,
     month: monthSchema,
     year: yearSchema,
+  });
+
+  return schema.superRefine((fields, ctx) => {
+    const { day, month, year } = fields;
+
+    const allEmpty = !day && !month && !year;
+    const allFilled = day && month && year;
+
+    if (data.required && !allFilled) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'All date fields must be filled',
+        path: [],
+      });
+    }
+
+    if (!data.required && !allEmpty && !allFilled) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'All date fields must be filled or none at all',
+        path: [],
+      });
+    }
   });
 };
 
@@ -63,7 +75,7 @@ export const dateOfBirthConfig: PatternConfig<
   iconPath: 'date-icon.svg',
   initial: {
     label: 'Date of Birth',
-    required: true,
+    required: false,
     hint: 'For example: January 19 2000',
   },
 
@@ -81,16 +93,7 @@ export const dateOfBirthConfig: PatternConfig<
   createPrompt(_, session, pattern, options) {
     const extraAttributes: Record<string, any> = {};
     const sessionValue = getFormSessionValue(session, pattern.id);
-    if (options.validate) {
-      const isValidResult = validatePattern(
-        dateOfBirthConfig,
-        pattern,
-        sessionValue
-      );
-      if (!isValidResult.success) {
-        extraAttributes['error'] = isValidResult.error;
-      }
-    }
+    const error = session.data.errors[pattern.id];
 
     return {
       props: {
@@ -103,6 +106,8 @@ export const dateOfBirthConfig: PatternConfig<
         yearId: `${pattern.id}.year`,
         required: pattern.data.required,
         ...extraAttributes,
+        value: sessionValue,
+        error,
       } as DateOfBirthProps,
       children: [],
     };

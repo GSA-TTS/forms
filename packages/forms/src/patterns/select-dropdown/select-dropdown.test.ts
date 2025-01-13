@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
-  createSchema,
+  createSelectDropdownSchema,
   selectDropdownConfig,
   type SelectDropdownPattern,
 } from './select-dropdown';
@@ -17,7 +17,7 @@ describe('SelectDropdownPattern tests', () => {
         ],
       };
 
-      const schema = createSchema(data);
+      const schema = createSelectDropdownSchema(data);
       expect(schema.safeParse('value1').success).toBe(true);
       expect(schema.safeParse('value2').success).toBe(true);
       expect(schema.safeParse('invalid').success).toBe(false);
@@ -35,7 +35,7 @@ describe('SelectDropdownPattern tests', () => {
         ],
       };
 
-      const schema = createSchema(data);
+      const schema = createSelectDropdownSchema(data);
       expect(schema.safeParse('value1').success).toBe(true);
       expect(schema.safeParse('value2').success).toBe(true);
       expect(schema.safeParse('invalid').success).toBe(false);
@@ -49,7 +49,7 @@ describe('SelectDropdownPattern tests', () => {
         options: [],
       };
 
-      expect(() => createSchema(data)).toThrow(
+      expect(() => createSelectDropdownSchema(data)).toThrow(
         'Options must have at least one value'
       );
     });
@@ -106,7 +106,7 @@ describe('SelectDropdownPattern tests', () => {
       if (!result.success) {
         expect(result.error).toBeDefined();
         expect(result.error?.message).toBe(
-          "Invalid enum value. Expected 'value1' | 'value2', received 'invalid'"
+          'Invalid selection. Please choose a valid option.'
         );
       } else {
         expect.fail('Unexpected validation success');

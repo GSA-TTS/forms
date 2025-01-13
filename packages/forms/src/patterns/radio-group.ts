@@ -87,6 +87,10 @@ export const radioGroupConfig: PatternConfig<RadioGroupPattern, PatternOutput> =
           extraAttributes['error'] = isValidResult.error;
         }
       }
+      console.group('radio/createPrompt');
+      console.log(pattern);
+      console.groupEnd();
+
       return {
         props: {
           _patternId: pattern.id,

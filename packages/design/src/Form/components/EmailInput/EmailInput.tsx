@@ -9,14 +9,20 @@ export const EmailInputPattern: PatternComponent<EmailInputProps> = ({
   label,
   required,
   error,
+  value,
 }) => {
   const { register } = useFormContext();
   const errorId = `input-error-message-${emailId}`;
 
   return (
     <fieldset className="usa-fieldset">
-      <div className="usa-form-group">
-        <label className="usa-label" htmlFor={emailId}>
+      <div className={classNames('usa-form-group margin-top-2')}>
+        <label
+          className={classNames('usa-label', {
+            'usa-label--error': error,
+          })}
+          htmlFor={emailId}
+        >
           {label}
           {required && <span className="required-indicator">*</span>}
         </label>
@@ -26,7 +32,7 @@ export const EmailInputPattern: PatternComponent<EmailInputProps> = ({
           </div>
         )}
         <input
-          className={classNames('usa-input margin-bottom-1', {
+          className={classNames('usa-input usa-input--xl', {
             'usa-input--error': error,
           })}
           id={emailId}
@@ -34,6 +40,7 @@ export const EmailInputPattern: PatternComponent<EmailInputProps> = ({
           autoCapitalize="off"
           autoCorrect="off"
           {...register(emailId, { required })}
+          defaultValue={value?.email || ''}
           aria-describedby={error ? errorId : undefined}
         />
       </div>

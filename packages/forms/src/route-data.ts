@@ -5,6 +5,9 @@ export type RouteData = qs.ParsedQs;
 export type FormRoute = {
   url: string;
   params: RouteData;
+  options?: {
+    isFormBuilder?: boolean;
+  };
 };
 
 export const getRouteDataFromQueryString = (queryString: string): RouteData => {

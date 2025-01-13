@@ -22,7 +22,9 @@ export type GetPattern<T extends Pattern = Pattern> = (
 
 export type ParseUserInput<Pattern, PatternOutput> = (
   pattern: Pattern,
-  obj: unknown
+  obj: unknown,
+  config?: FormConfig,
+  form?: Blueprint
 ) => r.Result<PatternOutput, FormError>;
 
 export type ParsePatternConfigData<PatternConfigData> = (
@@ -154,15 +156,31 @@ export const validatePattern = (
   return r.success(parseResult.data);
 };
 
-const aggregateValuesByPrefix = (
-  values: Record<string, string>
+const setNestedValue = (
+  obj: Record<string, any>,
+  path: string[],
+  value: any
+): void => {
+  path.reduce((acc, key, idx) => {
+    if (idx === path.length - 1) {
+      acc[key] = value;
+    } else {
+      if (!acc[key]) {
+        acc[key] = isNaN(Number(path[idx + 1])) ? {} : [];
+      }
+    }
+    return acc[key];
+  }, obj);
+};
+
+export const aggregateValuesByPrefix = (
+  values: Record<string, any>
 ): Record<string, any> => {
   const aggregatedValues: Record<string, any> = {};
-
   for (const [key, value] of Object.entries(values)) {
-    set(aggregatedValues, key, value);
+    const keys = key.split('.');
+    setNestedValue(aggregatedValues, keys, value);
   }
-
   return aggregatedValues;
 };
 
@@ -176,36 +194,44 @@ export const aggregatePatternSessionValues = (
   form: Blueprint,
   patternConfig: PatternConfig,
   pattern: Pattern,
-  values: Record<string, string>,
+  values: Record<string, any>,
   result: {
     values: Record<PatternId, PatternValue>;
     errors: Record<PatternId, FormError>;
   }
 ) => {
   const aggregatedValues = aggregateValuesByPrefix(values);
-
   if (patternConfig.parseUserInput) {
+    const isRepeaterType = pattern.type === 'repeater';
     const patternValues = aggregatedValues[pattern.id];
-    const parseResult = patternConfig.parseUserInput(pattern, patternValues);
+    const parseResult: any = patternConfig.parseUserInput(
+      pattern,
+      patternValues,
+      config,
+      form
+    );
 
     if (parseResult.success) {
       result.values[pattern.id] = parseResult.data;
       delete result.errors[pattern.id];
     } else {
-      result.values[pattern.id] = values[pattern.id];
+      result.values[pattern.id] = isRepeaterType
+        ? parseResult.data
+        : values[pattern.id];
       result.errors[pattern.id] = parseResult.error;
     }
-  }
-  for (const child of patternConfig.getChildren(pattern, form.patterns)) {
-    const childPatternConfig = getPatternConfig(config, child.type);
-    aggregatePatternSessionValues(
-      config,
-      form,
-      childPatternConfig,
-      child,
-      values,
-      result
-    );
+  } else {
+    for (const child of patternConfig.getChildren(pattern, form.patterns)) {
+      const childPatternConfig = getPatternConfig(config, child.type);
+      aggregatePatternSessionValues(
+        config,
+        form,
+        childPatternConfig,
+        child,
+        values,
+        result
+      );
+    }
   }
   return result;
 };

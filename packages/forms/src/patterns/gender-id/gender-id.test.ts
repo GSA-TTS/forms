@@ -16,8 +16,8 @@ describe('GenderIdPattern tests', () => {
       };
 
       const schema = createGenderIdSchema(data);
-      const validInput = { input: 'Test Gender' };
-      const invalidInput = { input: '' };
+      const validInput = { gender: 'Test Gender' };
+      const invalidInput = { gender: '' };
       const preferNotToAnswerInput = {
         preferNotToAnswer: 'Prefer not to share my gender identity',
       };
@@ -34,8 +34,8 @@ describe('GenderIdPattern tests', () => {
       };
 
       const schema = createGenderIdSchema(data);
-      const validInput = { input: 'Test Gender' };
-      const emptyInput = { input: '' };
+      const validInput = { gender: 'Test Gender' };
+      const emptyInput = { gender: '' };
 
       expect(schema.safeParse(validInput).success).toBe(true);
       expect(schema.safeParse(emptyInput).success).toBe(true);
@@ -54,7 +54,7 @@ describe('GenderIdPattern tests', () => {
         },
       };
 
-      const inputValue = { input: 'Test Gender' };
+      const inputValue = { gender: 'Test Gender' };
       if (!genderIdConfig.parseUserInput) {
         expect.fail('genderIdConfig.parseUserInput is undefined');
       }
@@ -77,7 +77,7 @@ describe('GenderIdPattern tests', () => {
         },
       };
 
-      const inputValue = { input: '' };
+      const inputValue = { gender: '' };
       if (!genderIdConfig.parseUserInput) {
         expect.fail('genderIdConfig.parseUserInput is undefined');
       }

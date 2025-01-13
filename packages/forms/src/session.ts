@@ -6,6 +6,8 @@ import {
   type PatternId,
   type PatternValue,
   type PatternValueMap,
+  aggregatePatternSessionValues,
+  aggregateValuesByPrefix,
   getPatternConfig,
   validatePattern,
 } from './pattern.js';
@@ -19,6 +21,8 @@ export type FormSession = {
   data: {
     errors: FormErrorMap;
     values: PatternValueMap;
+    lastAction?: string;
+    isFormBuilder?: boolean;
   };
   form: Blueprint;
   route?: {
@@ -75,6 +79,7 @@ export const createFormSession = (
         })
       ),
       */
+      isFormBuilder: route?.options?.isFormBuilder ? true : false,
     },
     form,
     route: route,
@@ -157,6 +162,11 @@ export const updateSession = (
  * against their corresponding configurations.
  */
 export const sessionIsComplete = (config: FormConfig, session: FormSession) => {
+  /*
+   * TODO: check to see if the pattern is owned by a repeater field. If so, validate
+   *  each field of the repeater based on the validation rules for the individual field type.
+   */
+
   return Object.values(session.form.patterns).every(pattern => {
     const patternConfig = getPatternConfig(config, pattern.type);
     const value = getFormSessionValue(session, pattern.id);

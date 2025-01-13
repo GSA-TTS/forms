@@ -29,7 +29,7 @@ describe('getFormSession', () => {
       data: {
         form: form,
         route: { url: `/ignored`, params: {} },
-        data: { errors: {}, values: {} },
+        data: { errors: {}, values: {}, isFormBuilder: false },
       },
     });
   });
@@ -55,7 +55,7 @@ describe('getFormSession', () => {
       id: testData.sessionId,
       formId: testData.formId,
       data: {
-        data: { errors: {}, values: {} },
+        data: { errors: {}, values: {}, isFormBuilder: false },
         form: testData.form,
         route: { url: `/ignored`, params: {} },
       },
@@ -83,7 +83,7 @@ describe('getFormSession', () => {
       id: sessionResult.data.id,
       formId: testData.formId,
       data: {
-        data: { errors: {}, values: {} },
+        data: { errors: {}, values: {}, isFormBuilder: false },
         form: testData.form,
         route: { url: `/ignored`, params: {} },
       },

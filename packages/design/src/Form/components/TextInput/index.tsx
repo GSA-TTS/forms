@@ -7,6 +7,7 @@ import { type PatternComponent } from '../../../Form/index.js';
 
 const TextInput: PatternComponent<TextInputProps> = props => {
   const { register } = useFormContext();
+  const id = props.inputId;
   return (
     <div className="usa-form-group-wrapper" key={props.inputId}>
       <div
@@ -18,13 +19,13 @@ const TextInput: PatternComponent<TextInputProps> = props => {
           className={classNames('usa-label', {
             'usa-label--error': props.error,
           })}
-          id={`input-message-${props.inputId}`}
+          id={`input-message-${id}`}
         >
           {props.label}
           {props.error && (
             <span
               className="usa-error-message"
-              id={`input-error-message-${props.inputId}`}
+              id={`input-error-message-${id}`}
               role="alert"
             >
               {props.error.message}
@@ -34,13 +35,13 @@ const TextInput: PatternComponent<TextInputProps> = props => {
             className={classNames('usa-input', {
               'usa-input--error': props.error,
             })}
-            id={`input-${props.inputId}`}
+            id={`input-${id}`}
             defaultValue={props.value}
-            {...register(props.inputId || Math.random().toString(), {
+            {...register(id || Math.random().toString(), {
               //required: props.required,
             })}
             type="text"
-            aria-describedby={`input-message-${props.inputId}`}
+            aria-describedby={`input-message-${id}`}
           />
         </label>
       </div>

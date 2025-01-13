@@ -3,6 +3,7 @@ import {
   addPageToPageSet,
   addPatternToFieldset,
   addPatternToPage,
+  addPatternToRepeater,
   copyPattern,
   createOnePageBlueprint,
   movePatternBetweenPages,
@@ -24,6 +25,7 @@ import { type FieldsetPattern } from '../patterns/fieldset/config.js';
 import { type PageSetPattern } from '../patterns/page-set/config.js';
 import type { Blueprint, FormSummary } from '../types.js';
 import type { ParsedPdf } from '../documents/pdf/parsing-api.js';
+import { type RepeaterPattern } from '../patterns/repeater/index.js';
 
 /**
  * Constructs and manipulates a Blueprint object for forms. A Blueprint
@@ -117,6 +119,11 @@ export class BlueprintBuilder {
     return results.pattern;
   }
 
+  getPatternTypeById(patternId: PatternId) {
+    const root = this.form.patterns[patternId];
+    return root.type;
+  }
+
   addPatternToFieldset(patternType: string, fieldsetPatternId: PatternId) {
     const pattern = createDefaultPattern(this.config, patternType);
     const root = this.form.patterns[fieldsetPatternId] as FieldsetPattern;
@@ -124,6 +131,16 @@ export class BlueprintBuilder {
       throw new Error('expected pattern to be a fieldset');
     }
     this.bp = addPatternToFieldset(this.form, fieldsetPatternId, pattern);
+    return pattern;
+  }
+
+  addPatternToRepeater(patternType: string, patternId: PatternId) {
+    const pattern = createDefaultPattern(this.config, patternType);
+    const root = this.form.patterns[patternId] as RepeaterPattern;
+    if (root.type !== 'repeater') {
+      throw new Error('expected pattern to be a repeater');
+    }
+    this.bp = addPatternToRepeater(this.form, patternId, pattern);
     return pattern;
   }
 

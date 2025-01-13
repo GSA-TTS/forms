@@ -28,20 +28,35 @@ const configSchema = z.object({
 export type SelectDropdownPattern = Pattern<z.infer<typeof configSchema>>;
 
 type SelectDropdownPatternOutput = string;
-export type InputPatternOutput = z.infer<ReturnType<typeof createSchema>>;
+export type InputPatternOutput = z.infer<
+  ReturnType<typeof createSelectDropdownSchema>
+>;
 
-export const createSchema = (data: SelectDropdownPattern['data']) => {
+export const createSelectDropdownSchema = (
+  data: SelectDropdownPattern['data']
+) => {
   const values = data.options.map(option => option.value);
 
   if (values.length === 0) {
     throw new Error('Options must have at least one value');
   }
 
-  const schema = z.enum([values[0], ...values.slice(1)]);
+  const schema = z.custom<string>(
+    val => {
+      if (typeof val !== 'string') {
+        return false;
+      }
 
-  if (!data.required) {
-    return z.union([schema, z.literal('')]).transform(val => val || undefined);
-  }
+      if (!data.required && val === '') {
+        return true;
+      }
+
+      return values.includes(val);
+    },
+    {
+      message: 'Invalid selection. Please choose a valid option.',
+    }
+  );
 
   return schema;
 };
@@ -54,7 +69,7 @@ export const selectDropdownConfig: PatternConfig<
   iconPath: 'dropdown-icon.svg',
   initial: {
     label: 'Select-dropdown-label',
-    required: true,
+    required: false,
     options: [
       { value: 'value1', label: 'Option-1' },
       { value: 'value2', label: 'Option-2' },
@@ -63,7 +78,10 @@ export const selectDropdownConfig: PatternConfig<
   },
 
   parseUserInput: (pattern, inputValue) => {
-    return safeZodParseToFormError(createSchema(pattern['data']), inputValue);
+    return safeZodParseToFormError(
+      createSelectDropdownSchema(pattern.data),
+      inputValue
+    );
   },
 
   parseConfigData: obj => {
@@ -77,16 +95,8 @@ export const selectDropdownConfig: PatternConfig<
   createPrompt(_, session, pattern, options) {
     const extraAttributes: Record<string, any> = {};
     const sessionValue = getFormSessionValue(session, pattern.id);
-    if (options.validate) {
-      const isValidResult = validatePattern(
-        selectDropdownConfig,
-        pattern,
-        sessionValue
-      );
-      if (!isValidResult.success) {
-        extraAttributes['error'] = isValidResult.error;
-      }
-    }
+    const error = session.data.errors[pattern.id];
+
     return {
       props: {
         _patternId: pattern.id,
@@ -100,6 +110,8 @@ export const selectDropdownConfig: PatternConfig<
           };
         }),
         required: pattern.data.required,
+        value: sessionValue,
+        error,
         ...extraAttributes,
       } as SelectDropdownProps,
       children: [],
