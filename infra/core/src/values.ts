@@ -1,6 +1,6 @@
-export type DeployEnv = 'dev' | 'staging';
+export type DeployEnv = 'dev' | 'demo';
 
-const getPathPrefix = (env: DeployEnv) => `/tts-10x-atj-${env}`;
+const getPathPrefix = (env: DeployEnv) => `/tts-10x-forms-${env}`;
 
 /**
  * Generates an object containing the paths for private/public keys pairs

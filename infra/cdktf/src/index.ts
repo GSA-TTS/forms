@@ -8,8 +8,8 @@ switch (deployEnv) {
   case 'main':
     import('./spaces/main');
     break;
-  case 'staging':
-    import('./spaces/staging');
+  case 'demo':
+    import('./spaces/demo');
     break;
   default:
     throw new Error(`Please specify a valid environment (got: "${deployEnv}")`);

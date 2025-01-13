@@ -65,7 +65,7 @@ export const addSecretCommands = (ctx: Context, cli: Command) => {
       'generate and save login.gov keypair; if it already exists, it is not ' +
         'updated (future work might include adding key rotation)'
     )
-    .argument('<deploy-env>', 'deployment environment (dev, staging)')
+    .argument('<deploy-env>', 'deployment environment (dev, demo)')
     .argument('<app-key>', 'application key')
     .action(async (env: DeployEnv, appKey: string) => {
       const vault = await getSecretsVault(ctx.file);

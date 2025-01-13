@@ -1,4 +1,4 @@
-name: Create PR from main to staging
+name: Create PR from main to demo
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  create-pr-to-staging:
+  create-pr-to-demo:
     uses: ./.github/workflows/_pr-create.yml
     secrets: inherit
     with:
-      base: staging
+      base: demo
