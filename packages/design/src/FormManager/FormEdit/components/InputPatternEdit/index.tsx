@@ -14,6 +14,7 @@ import { usePatternEditFormContext } from '../common/hooks.js';
 import { enLocale as message } from '@atj/common';
 
 const InputPatternEdit: PatternEditComponent<TextInputProps> = ({
+  context,
   focus,
   previewProps,
 }) => {
@@ -26,7 +27,7 @@ const InputPatternEdit: PatternEditComponent<TextInputProps> = ({
         ></PatternEditForm>
       ) : (
         <div className="padding-left-3 padding-bottom-3 padding-right-3">
-          <TextInput {...previewProps} />
+          <TextInput context={context} {...previewProps} />
         </div>
       )}
     </>

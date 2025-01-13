@@ -1,9 +1,8 @@
-import React from 'react';
+import { type PatternComponent } from '../../index.js';
+import { renderPromptComponents } from '../../form-common.js';
 
-import { type PatternComponent } from '../../../Form/index.js';
-
-const Sequence: PatternComponent = ({ children }) => {
-  return <>{children}</>;
+const Sequence: PatternComponent = props => {
+  return renderPromptComponents(props.context, props.childComponents);
 };
 
 export default Sequence;

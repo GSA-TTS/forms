@@ -3,9 +3,6 @@ import { it, describe, expect, vi } from 'vitest';
 
 import { onFileInputChangeGetFile } from './file-input.js';
 
-/**
- * @vitest-environment jsdom
- */
 describe('onFileInputChangeGetFile', () => {
   it('returns file details on file select', async () => {
     return new Promise<void>(resolve => {

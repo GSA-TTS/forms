@@ -12,8 +12,13 @@ import { useFormManagerStore } from '../../../store.js';
 import { useSearchParams } from 'react-router-dom';
 import { UniqueIdentifier } from '@dnd-kit/core';
 import { PageMenuProps } from '../../../../Form/components/PageSet/PageMenu/PageMenu.js';
+import { renderEditPromptComponents } from '../../../manager-common.js';
 
-const PageSetEdit: PatternEditComponent<PageSetProps> = ({ previewProps }) => {
+const PageSetEdit: PatternEditComponent<PageSetProps> = ({
+  context,
+  previewProps,
+  childComponents,
+}) => {
   return (
     <div className="grid-row">
       <nav className="tablet:grid-col-3 tablet:padding-y-3 tablet:padding-right-4">
@@ -23,7 +28,7 @@ const PageSetEdit: PatternEditComponent<PageSetProps> = ({ previewProps }) => {
         className="tablet:grid-col-9 tablet:padding-left-4 padding-left-0 padding-bottom-3 padding-top-3 tablet:border-left tablet:border-base-lighter contentWrapper"
         aria-live="polite"
       >
-        {previewProps.children}
+        {renderEditPromptComponents(context, childComponents)}
         <ActionBar actions={previewProps.actions} />
       </div>
     </div>

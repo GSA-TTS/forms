@@ -14,6 +14,7 @@ import { enLocale as message } from '@atj/common';
 import styles from '../../formEditStyles.module.css';
 
 const DateOfBirthPatternEdit: PatternEditComponent<DateOfBirthProps> = ({
+  context,
   focus,
   previewProps,
 }) => {
@@ -28,7 +29,7 @@ const DateOfBirthPatternEdit: PatternEditComponent<DateOfBirthProps> = ({
         <div
           className={`${styles.dateOfBirthPattern} padding-left-3 padding-bottom-3 padding-right-3`}
         >
-          <DateOfBirth {...previewProps} />
+          <DateOfBirth context={context} {...previewProps} />
         </div>
       )}
     </>

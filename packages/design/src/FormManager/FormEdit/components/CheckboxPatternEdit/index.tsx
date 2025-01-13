@@ -13,6 +13,7 @@ import { PatternEditForm } from '../common/PatternEditForm.js';
 import { usePatternEditFormContext } from '../common/hooks.js';
 
 const CheckboxPatternEdit: PatternEditComponent<CheckboxProps> = ({
+  context,
   focus,
   previewProps,
 }) => {
@@ -25,7 +26,7 @@ const CheckboxPatternEdit: PatternEditComponent<CheckboxProps> = ({
         ></PatternEditForm>
       ) : (
         <div className="padding-left-3 padding-bottom-3 padding-right-3">
-          <Checkbox {...previewProps} />
+          <Checkbox context={context} {...previewProps} />
         </div>
       )}
     </>

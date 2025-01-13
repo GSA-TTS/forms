@@ -24,6 +24,6 @@
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.11",
-    "vitest-fetch-mock": "^0.3.0"
+    "vitest-fetch-mock": "^0.4.3"
   }
 }

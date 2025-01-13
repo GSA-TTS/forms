@@ -61,6 +61,7 @@ export const PageEdit: PatternEditComponent<PageProps> = props => {
           _patternId: props.previewProps._patternId,
           children: props.previewProps.children,
         }}
+        childComponents={props.childComponents}
       />
     </>
   );

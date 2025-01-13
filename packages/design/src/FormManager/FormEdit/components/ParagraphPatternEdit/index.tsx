@@ -14,6 +14,7 @@ import { usePatternEditFormContext } from '../common/hooks.js';
 import { useFormManagerStore } from '../../../store.js';
 
 const ParagraphPatternEdit: PatternEditComponent<ParagraphProps> = ({
+  context,
   focus,
   previewProps,
 }) => {
@@ -26,7 +27,7 @@ const ParagraphPatternEdit: PatternEditComponent<ParagraphProps> = ({
         ></PatternEditForm>
       ) : (
         <div className="padding-left-3 padding-bottom-3 padding-right-3">
-          <Paragraph {...previewProps} />
+          <Paragraph context={context} {...previewProps} />
         </div>
       )}
     </>
