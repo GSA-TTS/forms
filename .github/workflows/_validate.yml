@@ -8,11 +8,6 @@ on:
         required: false
         default: "1.48.1"
         type: string
-      terraform_version:
-        description: Terraform version
-        required: false
-        default: "1.10.4"
-        type: string
 
 jobs:
   run-tests:
@@ -97,23 +92,10 @@ jobs:
         shell: bash
         run: AUTH_SECRET=not-super-secret pnpm test:ci
 
-      - uses: actions/cache@v4
-        name: Check Cache for Terraform CLI
-        id: terraform-cache
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
         with:
-          path: /usr/local/bin/terraform
-          key: terraform-${{ inputs.terraform_version }}
-
-      - name: Install Terraform CLI
-        if: steps.terraform-cache.outputs.cache-hit != 'true'
-        run: |
-          sudo apt-get update && sudo apt-get install -y wget unzip
-          wget https://releases.hashicorp.com/terraform/${{ inputs.terraform_version }}/terraform_${{ inputs.terraform_version }}_linux_amd64.zip
-          unzip terraform_${{ inputs.terraform_version }}_linux_amd64.zip
-          sudo mv terraform /usr/local/bin/
-
-      - name: Verify Terraform Installation
-        run: terraform --version
+          terraform_version: "1.10.4"
 
       - name: Initialize Terraform CDK configuration
         shell: bash
