@@ -6,6 +6,11 @@ on:
       deploy-env:
         type: string
         required: true
+      terraform_version:
+        description: Terraform version
+        required: false
+        default: "1.10.4"
+        type: string
 
 env:
   DEPLOY_ENV: ${{ inputs.deploy-env }}
@@ -49,6 +54,24 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      - uses: actions/cache@v3
+        name: Check Cache for Terraform CLI
+        id: terraform-cache
+        with:
+          path: /usr/local/bin/terraform
+          key: terraform-${{ inputs.terraform_version }}
+
+      - name: Install Terraform CLI
+        if: steps.terraform-cache.outputs.cache-hit != 'true'
+        run: |
+          sudo apt-get update && sudo apt-get install -y wget unzip
+          wget https://releases.hashicorp.com/terraform/${{ inputs.terraform_version }}/terraform_${{ inputs.terraform_version }}_linux_amd64.zip
+          unzip terraform_${{ inputs.terraform_version }}_linux_amd64.zip
+          sudo mv terraform /usr/local/bin/
+
+      - name: Verify Terraform Installation
+        run: terraform --version
 
       - name: Initialize Terraform CDK configuration
         shell: bash
