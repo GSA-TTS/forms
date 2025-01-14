@@ -90,14 +90,6 @@ const Repeater: PatternComponent<RepeaterPatternProps> = props => {
     );
     Children.forEach(children, (child, idx) => {
       if (!React.isValidElement<ChildElementProps>(child)) return;
-
-      /*
-      const childProps = child.props?.component?.props;
-      if (!childProps) return;
-
-      const patternId = childProps._patternId;
-      if (!patternId) return;
-      */
       const childProps = (props.childComponents as PromptComponent[])[idx]
         .props;
       const patternId = childProps._patternId;
