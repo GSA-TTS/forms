@@ -1,3 +1,4 @@
+import { promises as fs } from 'fs';
 import path from 'path';
 import { Command } from 'commander';
 
@@ -39,6 +40,17 @@ export const addSecretCommands = (ctx: Context, cli: Command) => {
     .action(async (key: string, value: string) => {
       const vault = await getSecretsVault(ctx.file);
       await commands.setSecret(vault, key, value);
+    });
+
+  cmd
+    .command('set-bulk')
+    .description('sets secret values from a JSON file')
+    .argument('<string>', 'Source JSON file for secrets.')
+    .action(async inputFile => {
+      const vault = await getSecretsVault(ctx.file);
+      const maybeJsonString = (await fs.readFile(inputFile)).toString();
+      const secrets = JSON.parse(maybeJsonString);
+      await commands.setSecrets(vault, secrets);
     });
 
   cmd
