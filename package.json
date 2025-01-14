@@ -18,7 +18,7 @@
     "test": "vitest run",
     "test:ci": "vitest run # --coverage.enabled --coverage.provider=v8 --coverage.reporter=text --coverage.reporter=json-summary --coverage.reporter=json --coverage.reportOnFailure",
     "test:infra": "turbo run --filter=infra-cdktf test",
-    "typecheck": "tsc --build",
+    "typecheck": "tsc --build --noEmit",
     "prepare": "husky"
   },
   "hooks": {
