@@ -3,6 +3,7 @@ import { Control, useFieldArray } from 'react-hook-form';
 import { type RepeaterProps as BaseRepeaterProps } from '@atj/forms';
 
 import { type PatternComponent } from '../../index.js';
+import { renderPromptComponents } from '../../form-common.js';
 
 type RepeaterPatternProps = BaseRepeaterProps & {
   control?: Control;
@@ -80,7 +81,11 @@ const Repeater: PatternComponent<RepeaterPatternProps> = props => {
   const groupChildrenByIndex = useMemo(() => {
     const groups: ChildrenGroups = {};
 
-    Children.forEach(props.children, child => {
+    const children = renderPromptComponents(
+      props.context,
+      props.childComponents
+    );
+    Children.forEach(children, child => {
       if (!React.isValidElement<ChildElementProps>(child)) return;
 
       const childProps = child.props?.component?.props;
@@ -116,7 +121,7 @@ const Repeater: PatternComponent<RepeaterPatternProps> = props => {
     });
 
     return groups;
-  }, [props.children, props.value, props.error, props._patternId]);
+  }, [props.childComponents, props.value, props.error, props._patternId]);
 
   const hasFields = Object.keys(groupChildrenByIndex).length > 0;
 
