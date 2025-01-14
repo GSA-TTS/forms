@@ -6,7 +6,7 @@ import { createSession } from './create-session.js';
 
 describeDatabase('create session', () => {
   it<DbTestContext>('fails with unknown userId', async ({ db }) => {
-    expect(() =>
+    await expect(() =>
       createSession(db.ctx, {
         id: '31b72aca-116e-412d-b9b8-467300a53748',
         expiresAt: new Date(),

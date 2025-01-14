@@ -14,6 +14,7 @@ import { enLocale as message } from '@atj/common';
 import styles from '../../formEditStyles.module.css';
 
 const RadioGroupPatternEdit: PatternEditComponent<RadioGroupProps> = ({
+  context,
   focus,
   previewProps,
 }) => {
@@ -28,7 +29,7 @@ const RadioGroupPatternEdit: PatternEditComponent<RadioGroupProps> = ({
         <div
           className={`${styles.radioFormPattern} padding-left-3 padding-bottom-3 padding-right-3`}
         >
-          <RadioGroup {...previewProps} />
+          <RadioGroup context={context} {...previewProps} />
         </div>
       )}
     </>

@@ -14,6 +14,7 @@ import { enLocale as message } from '@atj/common';
 import styles from '../../formEditStyles.module.css';
 
 const PhoneNumberPatternEdit: PatternEditComponent<PhoneNumberProps> = ({
+  context,
   focus,
   previewProps,
 }) => {
@@ -28,7 +29,7 @@ const PhoneNumberPatternEdit: PatternEditComponent<PhoneNumberProps> = ({
         <div
           className={`${styles.phoneNumberPattern} padding-left-3 padding-bottom-3 padding-right-3`}
         >
-          <PhoneNumber {...previewProps} />
+          <PhoneNumber context={context} {...previewProps} />
         </div>
       )}
     </>

@@ -12,6 +12,7 @@ import { enLocale as message } from '@atj/common';
 import styles from './attachmentPatternEditStyles.module.css';
 
 const AttachmentPatternEdit: PatternEditComponent<AttachmentProps> = ({
+  context,
   focus,
   previewProps,
 }) => {
@@ -24,7 +25,7 @@ const AttachmentPatternEdit: PatternEditComponent<AttachmentProps> = ({
         ></PatternEditForm>
       ) : (
         <div className="padding-left-3 padding-bottom-3 padding-right-3">
-          <Attachment {...previewProps} />
+          <Attachment context={context} {...previewProps} />
         </div>
       )}
     </>

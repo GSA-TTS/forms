@@ -45,7 +45,12 @@ export const PreviewPattern: PatternComponent = function PreviewPattern(props) {
         }
       }}
     >
-      <EditComponent context={context} previewProps={props} focus={focus} />
+      <EditComponent
+        context={context}
+        previewProps={props}
+        childComponents={props.childComponents}
+        focus={focus}
+      />
     </div>
   );
 };

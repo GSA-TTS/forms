@@ -12,6 +12,7 @@ import {
   type Prompt,
   type PromptComponent,
 } from '@atj/forms';
+import { renderPromptComponents } from './form-common.js';
 
 export type FormUIContext = {
   config: FormConfig;
@@ -27,7 +28,8 @@ export type ComponentForPattern<T extends PatternProps = PatternProps> = Record<
 export type PatternComponent<T extends PatternProps = PatternProps<unknown>> =
   React.ComponentType<
     T & {
-      children?: React.ReactNode;
+      context: FormUIContext;
+      childComponents?: PromptComponent[];
     }
   >;
 
@@ -154,39 +156,8 @@ const FormContents = ({
   return (
     <>
       <fieldset className="usa-fieldset width-full">
-        {prompt.components.map((component, index) => {
-          return (
-            <PromptComponent
-              key={index}
-              context={context}
-              component={component}
-            />
-          );
-        })}
+        {renderPromptComponents(context, prompt.components)};
       </fieldset>
     </>
-  );
-};
-
-const PromptComponent = ({
-  context,
-  component,
-}: {
-  context: FormUIContext;
-  component: PromptComponent;
-}) => {
-  const Component = context.components[component.props.type];
-  return (
-    <Component {...component.props}>
-      {component.children?.map((childPromptComponent, index) => {
-        return (
-          <PromptComponent
-            key={index}
-            context={context}
-            component={childPromptComponent}
-          />
-        );
-      })}
-    </Component>
   );
 };
