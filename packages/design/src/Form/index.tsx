@@ -156,7 +156,7 @@ const FormContents = ({
   return (
     <>
       <fieldset className="usa-fieldset width-full">
-        {renderPromptComponents(context, prompt.components)};
+        {renderPromptComponents(context, prompt.components)}
       </fieldset>
     </>
   );
