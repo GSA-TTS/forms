@@ -1,6 +1,9 @@
 import React, { Children, useMemo } from 'react';
 import { Control, useFieldArray } from 'react-hook-form';
-import { type RepeaterProps as BaseRepeaterProps } from '@atj/forms';
+import {
+  type RepeaterProps as BaseRepeaterProps,
+  type PromptComponent,
+} from '@atj/forms';
 
 import { type PatternComponent } from '../../index.js';
 import { renderPromptComponents } from '../../form-common.js';
@@ -85,14 +88,19 @@ const Repeater: PatternComponent<RepeaterPatternProps> = props => {
       props.context,
       props.childComponents
     );
-    Children.forEach(children, child => {
+    Children.forEach(children, (child, idx) => {
       if (!React.isValidElement<ChildElementProps>(child)) return;
 
+      /*
       const childProps = child.props?.component?.props;
       if (!childProps) return;
 
       const patternId = childProps._patternId;
       if (!patternId) return;
+      */
+      const childProps = (props.childComponents as PromptComponent[])[idx]
+        .props;
+      const patternId = childProps._patternId;
 
       const parts = patternId.split('.');
       const index = parts[1];
