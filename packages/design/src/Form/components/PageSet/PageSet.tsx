@@ -6,6 +6,7 @@ import { type PatternComponent } from '../../index.js';
 import ActionBar from '../../../Form/ActionBar/index.js';
 
 import { PageMenu } from './PageMenu/index.js';
+import { renderPromptComponents } from '../../form-common.js';
 
 const PageSet: PatternComponent<PageSetProps> = props => {
   return (
@@ -17,7 +18,7 @@ const PageSet: PatternComponent<PageSetProps> = props => {
         className="tablet:grid-col-9 tablet:padding-left-4 padding-left-0 padding-bottom-3 padding-top-3 tablet:border-left tablet:border-base-lighter contentWrapper"
         aria-live="polite"
       >
-        {props.children}
+        {renderPromptComponents(props.context, props.childComponents)}
         <ActionBar actions={props.actions} />
       </div>
     </div>

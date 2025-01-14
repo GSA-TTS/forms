@@ -5,6 +5,7 @@ import { type SequenceProps, getPattern } from '@atj/forms';
 import { DraggableList } from './DraggableList.js';
 import { useFormManagerStore } from '../../../store.js';
 import { PatternEditComponent } from '../../types.js';
+import { renderEditPromptComponents } from '../../../manager-common.js';
 
 // TODO: consider merging this component with DraggableList, to clean up
 // sematics around how its children are handled.
@@ -48,7 +49,7 @@ export const PatternPreviewSequence: PatternEditComponent<
         });
       }}
     >
-      {props.previewProps.children}
+      {renderEditPromptComponents(props.context, props.childComponents)}
     </DraggableList>
   );
 };

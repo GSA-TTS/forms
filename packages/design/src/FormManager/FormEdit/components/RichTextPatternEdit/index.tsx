@@ -63,6 +63,7 @@ interface EditorActions {
 }
 
 const RichTextPatternEdit: PatternEditComponent<RichTextProps> = ({
+  context,
   focus,
   previewProps,
 }) => {
@@ -76,7 +77,7 @@ const RichTextPatternEdit: PatternEditComponent<RichTextProps> = ({
       ) : (
         <div className="padding-left-3 padding-bottom-3 padding-right-3">
           <p>{message.patterns.richText.displayName}</p>
-          <RichText {...previewProps} />
+          <RichText context={context} {...previewProps} />
         </div>
       )}
     </>

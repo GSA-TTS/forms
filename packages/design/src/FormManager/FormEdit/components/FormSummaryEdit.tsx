@@ -13,6 +13,7 @@ import { usePatternEditFormContext } from './common/hooks.js';
 import { PatternEditActions } from './common/PatternEditActions.js';
 
 const FormSummaryEdit: PatternEditComponent<FormSummaryProps> = ({
+  context,
   focus,
   previewProps,
 }) => {
@@ -25,7 +26,7 @@ const FormSummaryEdit: PatternEditComponent<FormSummaryProps> = ({
         ></PatternEditForm>
       ) : (
         <div className="padding-left-3 padding-bottom-3 padding-right-3">
-          <FormSummary {...previewProps} />
+          <FormSummary context={context} {...previewProps} />
         </div>
       )}
     </>

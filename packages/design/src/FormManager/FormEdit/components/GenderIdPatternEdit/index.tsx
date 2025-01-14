@@ -14,6 +14,7 @@ import { enLocale as message } from '@atj/common';
 import styles from '../../formEditStyles.module.css';
 
 const GenderIdPatternEdit: PatternEditComponent<GenderIdProps> = ({
+  context,
   focus,
   previewProps,
 }) => {
@@ -28,7 +29,7 @@ const GenderIdPatternEdit: PatternEditComponent<GenderIdProps> = ({
         <div
           className={`${styles.genderIdPattern} padding-left-3 padding-bottom-3 padding-right-3`}
         >
-          <GenderId {...previewProps} />
+          <GenderId context={context} {...previewProps} />
         </div>
       )}
     </>

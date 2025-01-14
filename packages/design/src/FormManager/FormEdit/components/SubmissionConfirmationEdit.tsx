@@ -10,7 +10,7 @@ import { usePatternEditFormContext } from './common/hooks.js';
 
 const SubmissionConfirmationEdit: PatternEditComponent<
   SubmissionConfirmationProps
-> = ({ focus, previewProps }) => {
+> = ({ context, focus, previewProps }) => {
   return (
     <>
       {focus ? (
@@ -19,7 +19,7 @@ const SubmissionConfirmationEdit: PatternEditComponent<
           editComponent={<EditComponent patternId={focus.pattern.id} />}
         ></PatternEditForm>
       ) : (
-        <SubmissionConfirmation {...previewProps} />
+        <SubmissionConfirmation context={context} {...previewProps} />
       )}
     </>
   );
