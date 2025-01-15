@@ -27,7 +27,7 @@ export default {
       filename: './dev.sqlite3',
     },
   },
-  staging: {
+  demo: {
     client: 'postgresql',
     connection: {
       database: 'my_db',

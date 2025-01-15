@@ -6,14 +6,14 @@
   "scripts": {
     "build": "pnpm build:tsc && pnpm build:synth",
     "build:get": "cdktf get",
-    "build:synth": "pnpm build:synth:main && pnpm build:synth:staging",
+    "build:synth": "pnpm build:synth:main && pnpm build:synth:demo",
     "build:synth:main": "DEPLOY_ENV=main cdktf synth",
-    "build:synth:staging": "DEPLOY_ENV=staging cdktf synth",
+    "build:synth:demo": "DEPLOY_ENV=demo cdktf synth",
     "build:tsc": "tsc --pretty",
     "clean": "rimraf cdktf.out dist tsconfig.tsbuildinfo",
     "clean:gen": "rimraf .gen",
     "deploy:main": "DEPLOY_ENV=main cdktf deploy",
-    "deploy:staging": "DEPLOY_ENV=staging cdktf deploy",
+    "deploy:demo": "DEPLOY_ENV=demo cdktf deploy",
     "dev": "tsc -w",
     "test": "jest",
     "test:watch": "jest --watch"

@@ -3,7 +3,7 @@ name: Post Terraform plan to PR comment
 on:
   pull_request:
     branches:
-      - staging
+      - demo
       - main
     types:
       - opened
@@ -11,7 +11,7 @@ on:
       - reopened
 
 jobs:
-  add-terraform-plan-to-staging-pr:
+  add-terraform-plan-to-demo-pr:
     uses: ./.github/workflows/_terraform-plan-pr-comment.yml
     secrets: inherit
     with:

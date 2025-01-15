@@ -1,3 +1,4 @@
+import { promises as fs } from 'fs';
 import path from 'path';
 import { Command } from 'commander';
 
@@ -42,6 +43,17 @@ export const addSecretCommands = (ctx: Context, cli: Command) => {
     });
 
   cmd
+    .command('set-bulk')
+    .description('sets secret values from a JSON file')
+    .argument('<string>', 'Source JSON file for secrets.')
+    .action(async inputFile => {
+      const vault = await getSecretsVault(ctx.file);
+      const maybeJsonString = (await fs.readFile(inputFile)).toString();
+      const secrets = JSON.parse(maybeJsonString);
+      await commands.setSecrets(vault, secrets);
+    });
+
+  cmd
     .command('list')
     .description('list all secret keys')
     .action(async () => {
@@ -65,7 +77,7 @@ export const addSecretCommands = (ctx: Context, cli: Command) => {
       'generate and save login.gov keypair; if it already exists, it is not ' +
         'updated (future work might include adding key rotation)'
     )
-    .argument('<deploy-env>', 'deployment environment (dev, staging)')
+    .argument('<deploy-env>', 'deployment environment (dev, demo)')
     .argument('<app-key>', 'application key')
     .action(async (env: DeployEnv, appKey: string) => {
       const vault = await getSecretsVault(ctx.file);

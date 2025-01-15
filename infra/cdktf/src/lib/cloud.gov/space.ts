@@ -34,17 +34,5 @@ export class CloudGovSpace extends Construct {
         ),
       }
     );
-    new AstroService(
-      scope,
-      `${id}-server-kansas`,
-      space.id,
-      `server-kansas:${gitCommitHash}`,
-      {
-        loginGovPrivateKey: getSecret(
-          this,
-          `/${id}/server-kansas/login.gov/private-key`
-        ),
-      }
-    );
   }
 }
