@@ -31,7 +31,7 @@ const RepeaterEdit: PatternEditComponent<RepeaterProps> = ({
         <PatternEditForm
           pattern={focus.pattern}
           editComponent={
-            <EditComponent context={context} patternId={focus.pattern.id} />
+            <EditComponent patternId={focus.pattern.id} context={context} />
           }
         ></PatternEditForm>
       ) : (
@@ -112,11 +112,6 @@ const RepeaterPreview: PatternComponent<RepeaterProps> = props => {
   );
 };
 
-/*
-  TODO: make sure the edit UI can have focus if there is the index of the row. You may need to transform
-  the ID when the component below is mounted.
- */
-
 const EditComponent = ({
   context,
   patternId,
@@ -162,7 +157,7 @@ const EditComponent = ({
           autoFocus
         ></input>
       </div>
-      <Repeater type="repeater" context={context} _patternId={patternId} />
+      <Repeater type="repeater" _patternId={patternId} context={context} />
       <PatternEditActions />
     </div>
   );

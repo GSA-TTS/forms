@@ -1,16 +1,12 @@
 import React, { Children, useMemo } from 'react';
-import { Control, useFieldArray } from 'react-hook-form';
+import { useFieldArray } from 'react-hook-form';
 import {
-  type RepeaterProps as BaseRepeaterProps,
+  type RepeaterProps,
   type PromptComponent,
 } from '@atj/forms';
 
 import { type PatternComponent } from '../../index.js';
 import { renderPromptComponents } from '../../form-common.js';
-
-type RepeaterPatternProps = BaseRepeaterProps & {
-  control?: Control;
-};
 
 interface RepeaterRowProps {
   children: React.ReactNode[];
@@ -75,9 +71,8 @@ interface ChildElementProps {
   component: ComponentProps;
 }
 
-const Repeater: PatternComponent<RepeaterPatternProps> = props => {
+const Repeater: PatternComponent<RepeaterProps> = props => {
   const { fields, append } = useFieldArray({
-    control: props.control,
     name: `${props._patternId}.fields`,
   });
 
@@ -202,7 +197,6 @@ const Repeater: PatternComponent<RepeaterPatternProps> = props => {
       {hasFields && (
         <>
           <ul className="add-list-reset">{renderRows}</ul>
-
           <div className="usa-button-group margin-left-0 margin-right-0">
             <button
               type="submit"

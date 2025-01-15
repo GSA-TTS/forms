@@ -179,8 +179,6 @@ export type RepeaterProps = PatternProps<{
   subHeading?: string;
   error?: FormError;
   value?: unknown;
-  patterns?: PatternId[];
-  control?: unknown;
 }>;
 
 export type SequenceProps = PatternProps<{

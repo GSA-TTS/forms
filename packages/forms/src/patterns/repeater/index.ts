@@ -11,7 +11,6 @@ import {
 } from '../../pattern.js';
 import { safeZodParseFormErrors } from '../../util/zod.js';
 import { createPrompt } from './prompt.js';
-import { Blueprint } from '../../types.js';
 
 export type RepeaterPattern = Pattern<{
   legend?: string;
@@ -198,6 +197,21 @@ export const repeaterConfig: PatternConfig<RepeaterPattern> = {
     return pattern.data.patterns
       .map((patternId: string) => patterns[patternId])
       .filter(Boolean);
+  },
+  removeChildPattern(pattern, patternId) {
+    const newPatterns = pattern.data.patterns.filter(
+      (id: string) => patternId !== id
+    );
+    if (newPatterns.length === pattern.data.patterns.length) {
+      return pattern;
+    }
+    return {
+      ...pattern,
+      data: {
+        ...pattern.data,
+        patterns: newPatterns,
+      },
+    };
   },
   createPrompt,
 };

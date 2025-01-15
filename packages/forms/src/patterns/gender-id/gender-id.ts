@@ -76,8 +76,6 @@ export const genderIdConfig: PatternConfig<
     const sessionValue = getFormSessionValue(session, pattern.id);
     const value = sessionValue?.input || '';
 
-    console.log('TEST gender id value: ', value);
-
     const preferNotToAnswerChecked =
       sessionValue?.preferNotToAnswer === pattern.data.preferNotToAnswerText;
     const error = session.data.errors[pattern.id];
