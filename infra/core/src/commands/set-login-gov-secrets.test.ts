@@ -30,8 +30,8 @@ describe('set-login-gov-secrets command', () => {
     expect(
       await context.vault.getSecrets(await context.vault.getSecretKeys())
     ).toEqual({
-      [`/tts-10x-atj-dev/${appKey}/login.gov/public-key`]: 'mock public key',
-      [`/tts-10x-atj-dev/${appKey}/login.gov/private-key`]: 'mock private key',
+      [`/tts-10x-forms-dev/${appKey}/login.gov/public-key`]: 'mock public key',
+      [`/tts-10x-forms-dev/${appKey}/login.gov/private-key`]: 'mock private key',
     });
   });
 
@@ -69,9 +69,9 @@ describe('set-login-gov-secrets command', () => {
     expect(
       await context.vault.getSecrets(await context.vault.getSecretKeys())
     ).toEqual({
-      [`/tts-10x-atj-dev/${appKey}/login.gov/public-key`]:
+      [`/tts-10x-forms-dev/${appKey}/login.gov/public-key`]:
         'mock public key - 1',
-      [`/tts-10x-atj-dev/${appKey}/login.gov/private-key`]:
+      [`/tts-10x-forms-dev/${appKey}/login.gov/private-key`]:
         'mock private key - 1',
     });
   });

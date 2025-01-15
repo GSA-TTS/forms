@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - staging
+      - demo
   workflow_dispatch:
 
 jobs:

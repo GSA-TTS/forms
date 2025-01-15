@@ -1,4 +1,4 @@
-# 10x-atj sample form - marijuana pardon
+# 10x-forms sample form - marijuana pardon
 
 Application for Certificate of Pardon for Simple Possession, Attempted Possession, and Use of Marijuana
 
