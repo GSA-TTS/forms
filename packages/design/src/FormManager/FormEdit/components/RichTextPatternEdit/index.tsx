@@ -76,7 +76,7 @@ const RichTextPatternEdit: PatternEditComponent<RichTextProps> = ({
         ></PatternEditForm>
       ) : (
         <div className="padding-left-3 padding-bottom-3 padding-right-3">
-          <p>{message.patterns.richText.displayName}</p>
+          <p style={{display: 'none'}}>{message.patterns.richText.displayName}</p>
           <RichText context={context} {...previewProps} />
         </div>
       )}

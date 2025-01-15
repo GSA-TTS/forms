@@ -1,4 +1,9 @@
-import { PDFDocument, type PDFForm } from 'pdf-lib';
+import {
+  PDFDocument,
+  PDFName,
+  createPDFAcroFields,
+  type PDFForm,
+} from 'pdf-lib';
 
 import { Result } from '@atj/common';
 import { type FormOutput } from '../../index.js';
@@ -38,7 +43,6 @@ export const fillPDF = async (
       setFormFieldData(form, value.type, name, value.value);
     });
   } catch (error: any) {
-    // console.log('fieldData is:', fieldData);
     const fieldDataNames = Object.keys(fieldData); // names we got from API
     const fields = form.getFields();
     const fieldNames = fields.map(field => field.getName()); // fieldnames we ripped from the PDF
@@ -64,15 +68,6 @@ export const fillPDF = async (
       .map(([name, sources]) => ({ name, sources }))
       .sort((a, b) => a.name.localeCompare(b.name));
 
-    // Console log the resulting array
-    console.log('uniqueNamesArray:', uniqueNamesArray);
-
-    // fields.map(field => {
-    //   console.log('field name is:', field.getName());
-    // });
-
-    // console.log('form.getFields() is:', form.getFields());
-    // console.log('pdf form is:', form);
     if (error?.message) {
       return {
         success: false,
@@ -117,19 +112,24 @@ const setFormFieldData = (
     const field = form.getDropdown(fieldName);
     field.select(fieldValue);
   } else if (fieldType === 'RadioGroup') {
-    // TODO: remove this when we have a better way to handle radio groups
+    // TODO: harmonize the option ids between pdf-lib and the API at ingestion time
     try {
       const field = form.getRadioGroup(fieldName);
       field.select(fieldValue);
     } catch (error: any) {
-      console.error(
-        `error setting radio field: ${fieldName}: ${error.message}`
-      );
-      const field = form.getCheckBox(fieldName);
-      if (fieldValue) {
-        field.check();
-      } else {
-        field.uncheck();
+      // This logic should work even if pdf-lib misidentifies the field type
+      // TODO: radioParent should contain the name, not the id
+      const [radioParent, radioChild] = fieldValue.split('.');
+      if (radioChild) {
+        // TODO: resolve import failure when spaces are present in name, id
+        const radioChildWithSpace = radioChild.replace('_', ' ');
+        const field = form.getField(fieldName);
+        const acroField = field.acroField;
+        acroField.dict.set(PDFName.of('V'), PDFName.of(radioChildWithSpace));
+        const kids = createPDFAcroFields(acroField.Kids()).map(_ => _[0]);
+        kids.forEach(kid => {
+          kid.dict.set(PDFName.of('AS'), PDFName.of(radioChildWithSpace));
+        });
       }
     }
   } else if (fieldType === 'Paragraph' || fieldType === 'RichText') {
