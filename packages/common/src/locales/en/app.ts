@@ -99,5 +99,10 @@ export const en = {
       preferNotToAnswerTextLabel:
         'Prefer not to share my gender identity checkbox label',
     },
+    repeater: {
+      ...defaults,
+      displayName: 'Repeatable Group',
+      errorTextMustContainChar: 'String must contain at least 1 character(s)',
+    },
   },
 };

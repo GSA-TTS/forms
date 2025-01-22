@@ -6,6 +6,7 @@ import { checkboxConfig } from './checkbox.js';
 import { dateOfBirthConfig } from './date-of-birth/date-of-birth.js';
 import { emailInputConfig } from './email-input/email-input.js';
 import { fieldsetConfig } from './fieldset/index.js';
+import { repeaterConfig } from './repeater/index.js';
 import { formSummaryConfig } from './form-summary.js';
 import { genderIdConfig } from './gender-id/gender-id.js';
 import { inputConfig } from './input/index.js';
@@ -38,6 +39,7 @@ export const defaultFormConfig: FormConfig = {
     page: pageConfig,
     'page-set': pageSetConfig,
     paragraph: paragraphConfig,
+    repeater: repeaterConfig,
     'phone-number': phoneNumberConfig,
     'radio-group': radioGroupConfig,
     'rich-text': richTextConfig,
@@ -68,6 +70,7 @@ export { type PageSetPattern } from './page-set/config.js';
 export * from './paragraph.js';
 export * from './phone-number/phone-number.js';
 export * from './radio-group.js';
+export * from './repeater/index.js';
 export * from './select-dropdown/select-dropdown.js';
 export * from './social-security-number/social-security-number.js';
 export * from './sequence.js';

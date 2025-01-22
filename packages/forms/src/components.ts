@@ -122,6 +122,11 @@ export type DateOfBirthProps = PatternProps<{
   hint?: string;
   required: boolean;
   error?: FormError;
+  value?: {
+    day: string;
+    month: string;
+    year: string;
+  };
 }>;
 
 export type EmailInputProps = PatternProps<{
@@ -130,6 +135,9 @@ export type EmailInputProps = PatternProps<{
   label: string;
   required: boolean;
   error?: FormError;
+  value: {
+    email: string;
+  };
 }>;
 
 export type PhoneNumberProps = PatternProps<{
@@ -162,6 +170,15 @@ export type GenderIdProps = PatternProps<{
   value: string;
   preferNotToAnswerText?: string;
   preferNotToAnswerChecked?: boolean;
+}>;
+
+export type RepeaterProps = PatternProps<{
+  type: 'repeater';
+  legend?: string;
+  showControls?: boolean;
+  subHeading?: string;
+  error?: FormError;
+  value?: unknown;
 }>;
 
 export type SequenceProps = PatternProps<{

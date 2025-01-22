@@ -167,6 +167,7 @@ export default function FormManager(props: FormManagerProps) {
                 session={createFormSession(form, {
                   params: Object.fromEntries(searchParams),
                   url: AppRoutes.Create.getUrl(formId),
+                  options: { isFormBuilder: true },
                 })}
                 savePeriodically={true}
               >

@@ -3,6 +3,10 @@ import { failure, success, type Result } from '@atj/common';
 import { type FormServiceContext } from '../context/index.js';
 import { submitPage } from '../patterns/page-set/submit';
 import { downloadPackageHandler } from '../patterns/package-download/submit';
+import {
+  repeaterAddRowHandler,
+  repeaterDeleteRowHandler,
+} from '../patterns/repeater/submit';
 import { type FormRoute } from '../route-data.js';
 import { SubmissionRegistry } from '../submission';
 import {
@@ -39,6 +43,14 @@ registry.registerHandler({
 registry.registerHandler({
   handlerId: 'package-download',
   handler: downloadPackageHandler,
+});
+registry.registerHandler({
+  handlerId: 'repeater-add-row',
+  handler: repeaterAddRowHandler,
+});
+registry.registerHandler({
+  handlerId: 'repeater-delete-row',
+  handler: repeaterDeleteRowHandler,
 });
 
 /**

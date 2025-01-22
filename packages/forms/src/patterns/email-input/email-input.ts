@@ -33,11 +33,16 @@ export const createEmailSchema = (data: EmailInputPattern['data']) => {
     .optional();
 
   if (!data.required) {
-    return z
-      .object({
-        email: emailSchema,
-      })
-      .optional();
+    return z.object({
+      email: z
+        .string()
+        .or(z.literal(''))
+        .transform(value => (value === '' ? undefined : value))
+        .refine(
+          value => value === undefined || emailSchema.safeParse(value).success,
+          'Invalid email format'
+        ),
+    });
   }
 
   return z.object({
@@ -53,11 +58,10 @@ export const emailInputConfig: PatternConfig<
   iconPath: 'email-icon.svg',
   initial: {
     label: 'Email Input',
-    required: true,
+    required: false,
   },
 
   parseUserInput: (pattern, inputValue) => {
-    console.log('TEST Parsing user input:', inputValue);
     return safeZodParseToFormError(createEmailSchema(pattern.data), inputValue);
   },
 
@@ -71,16 +75,7 @@ export const emailInputConfig: PatternConfig<
   createPrompt(_, session, pattern, options) {
     const extraAttributes: Record<string, any> = {};
     const sessionValue = getFormSessionValue(session, pattern.id);
-    if (options.validate) {
-      const isValidResult = validatePattern(
-        emailInputConfig,
-        pattern,
-        sessionValue
-      );
-      if (!isValidResult.success) {
-        extraAttributes['error'] = isValidResult.error;
-      }
-    }
+    const error = session.data.errors[pattern.id];
 
     return {
       props: {
@@ -89,6 +84,8 @@ export const emailInputConfig: PatternConfig<
         label: pattern.data.label,
         emailId: `${pattern.id}.email`,
         required: pattern.data.required,
+        error,
+        value: sessionValue,
         ...extraAttributes,
       } as EmailInputProps,
       children: [],

@@ -1,4 +1,4 @@
 #!/bin/sh
 pnpm lint
 pnpm format
-pnpm test
+pnpm test:ci

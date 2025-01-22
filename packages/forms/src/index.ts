@@ -20,6 +20,7 @@ import { type PageSetPattern } from './patterns/page-set/config.js';
 export { type RichTextPattern } from './patterns/rich-text.js';
 import { type SequencePattern } from './patterns/sequence.js';
 import { FieldsetPattern } from './patterns/index.js';
+import { RepeaterPattern } from './patterns/index.js';
 export {
   type FormRepository,
   createFormsRepository,

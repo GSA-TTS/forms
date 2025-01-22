@@ -92,7 +92,7 @@ export const socialSecurityNumberConfig: PatternConfig<
   iconPath: 'ssn-icon.svg',
   initial: {
     label: 'Social Security Number',
-    required: true,
+    required: false,
     hint: 'For example, 555-11-0000',
   },
 

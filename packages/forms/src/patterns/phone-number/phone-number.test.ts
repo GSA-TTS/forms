@@ -14,14 +14,21 @@ describe('PhoneNumberPattern tests', () => {
       };
 
       const schema = createPhoneSchema(data);
-      const validInput = '+12223334444';
+      const validInputs = ['2223334444', '222-333-4444'];
       const invalidInput = '123456abc';
 
-      expect(schema.safeParse(validInput).success).toBe(true);
+      validInputs.forEach(input => {
+        const result = schema.safeParse(input);
+        expect(result.success).toBe(true);
+        if (result.success) {
+          expect(result.data).toBe('222-333-4444');
+        }
+      });
+
       const invalidResult = schema.safeParse(invalidInput);
       expect(invalidResult.success).toBe(false);
       expect(invalidResult.error?.issues[0].message).toBe(
-        'Phone number may only contain digits, spaces, parentheses, hyphens, and periods.'
+        'Invalid phone number format.'
       );
     });
 
@@ -32,17 +39,22 @@ describe('PhoneNumberPattern tests', () => {
       };
 
       const schema = createPhoneSchema(data);
-      const validInput = '+12223334444';
+      const validInput = '2223334444';
       const emptyInput = '';
       const invalidInput = '123456abc';
 
-      expect(schema.safeParse(validInput).success).toBe(true);
+      const validResult = schema.safeParse(validInput);
+      expect(validResult.success).toBe(true);
+      if (validResult.success) {
+        expect(validResult.data).toBe('222-333-4444');
+      }
+
       expect(schema.safeParse(emptyInput).success).toBe(true);
 
       const invalidResult = schema.safeParse(invalidInput);
       expect(invalidResult.success).toBe(false);
       expect(invalidResult.error?.issues[0].message).toBe(
-        'Phone number may only contain digits, spaces, parentheses, hyphens, and periods.'
+        'Invalid phone number format.'
       );
     });
 
@@ -58,7 +70,23 @@ describe('PhoneNumberPattern tests', () => {
       const shortInputResult = schema.safeParse(shortInput);
       expect(shortInputResult.success).toBe(false);
       expect(shortInputResult.error?.issues[0].message).toBe(
-        'Phone number must contain at least 10 digits'
+        'Invalid phone number format.'
+      );
+    });
+
+    it('should fail with more than 10 digits', () => {
+      const data: PhoneNumberPattern['data'] = {
+        label: 'Test Phone Input Label',
+        required: true,
+      };
+
+      const schema = createPhoneSchema(data);
+      const longInput = '12345678901';
+
+      const longInputResult = schema.safeParse(longInput);
+      expect(longInputResult.success).toBe(false);
+      expect(longInputResult.error?.issues[0].message).toBe(
+        'Invalid phone number format.'
       );
     });
   });
@@ -74,13 +102,14 @@ describe('PhoneNumberPattern tests', () => {
         },
       };
 
-      const inputValue = '+12223334444';
+      const inputValue = '2223334444';
       if (!phoneNumberConfig.parseUserInput) {
         expect.fail('phoneNumberConfig.parseUserInput is undefined');
       }
       const result = phoneNumberConfig.parseUserInput(pattern, inputValue);
+
       if (result.success) {
-        expect(result.data).toBe(inputValue);
+        expect(result.data).toBe('222-333-4444');
       } else {
         expect.fail('Unexpected validation failure');
       }
@@ -101,11 +130,10 @@ describe('PhoneNumberPattern tests', () => {
         expect.fail('phoneNumberConfig.parseUserInput is undefined');
       }
       const result = phoneNumberConfig.parseUserInput(pattern, invalidInput);
+
       if (!result.success) {
         expect(result.error).toBeDefined();
-        expect(result.error?.message).toContain(
-          'Phone number may only contain digits, spaces, parentheses, hyphens, and periods.'
-        );
+        expect(result.error?.message).toContain('Invalid phone number format.');
       } else {
         expect.fail('Unexpected validation success');
       }
@@ -115,15 +143,20 @@ describe('PhoneNumberPattern tests', () => {
       const obj = {
         label: 'Test Phone Input Label',
         required: true,
+        hint: 'Enter a 10-digit U.S. phone number, e.g., 999-999-9999',
       };
 
       if (!phoneNumberConfig.parseConfigData) {
         expect.fail('phoneNumberConfig.parseConfigData is undefined');
       }
       const result = phoneNumberConfig.parseConfigData(obj);
+
       if (result.success) {
         expect(result.data.label).toBe('Test Phone Input Label');
         expect(result.data.required).toBe(true);
+        expect(result.data.hint).toBe(
+          'Enter a 10-digit U.S. phone number, e.g., 999-999-9999'
+        );
       } else {
         expect.fail('Unexpected validation failure');
       }
@@ -139,6 +172,7 @@ describe('PhoneNumberPattern tests', () => {
         expect.fail('phoneNumberConfig.parseConfigData is undefined');
       }
       const result = phoneNumberConfig.parseConfigData(obj);
+
       if (!result.success) {
         expect(result.error).toBeDefined();
       } else {

@@ -18,7 +18,11 @@ describe('EmailInputPattern tests', () => {
       const invalidInput = { email: 'testEmail.com' };
 
       expect(schema.safeParse(validInput).success).toBe(true);
-      expect(schema.safeParse(invalidInput).success).toBe(false);
+      const invalidResult = schema.safeParse(invalidInput);
+      expect(invalidResult.success).toBe(false);
+      expect(invalidResult.error?.issues[0]?.message).toBe(
+        'Invalid email format'
+      );
     });
 
     it('should create schema for optional email input', () => {
@@ -29,7 +33,7 @@ describe('EmailInputPattern tests', () => {
 
       const schema = createEmailSchema(data);
       const validInput = { email: 'testEmail@test.com' };
-      const emptyInput = {};
+      const emptyInput = { email: '' };
 
       expect(schema.safeParse(validInput).success).toBe(true);
       expect(schema.safeParse(emptyInput).success).toBe(true);

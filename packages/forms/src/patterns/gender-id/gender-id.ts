@@ -23,15 +23,15 @@ export type GenderIdPatternOutput = z.infer<
 export const createGenderIdSchema = (data: GenderIdPattern['data']) => {
   return z
     .object({
-      input: z.string().optional(),
+      gender: z.string().optional(),
       preferNotToAnswer: z.string().optional(),
     })
     .superRefine((value, ctx) => {
-      const { input, preferNotToAnswer } = value;
+      const { gender, preferNotToAnswer } = value;
 
       if (
         data.required &&
-        !input?.trim() &&
+        !gender?.trim() &&
         preferNotToAnswer !== data.preferNotToAnswerText
       ) {
         ctx.addIssue({
@@ -51,7 +51,7 @@ export const genderIdConfig: PatternConfig<
   iconPath: 'gender-id-icon.svg',
   initial: {
     label: 'Gender identity',
-    required: true,
+    required: false,
     hint: 'For example, man, woman, non-binary',
     preferNotToAnswerText: 'Prefer not to share my gender identity',
   },
@@ -75,6 +75,7 @@ export const genderIdConfig: PatternConfig<
     const extraAttributes: Record<string, any> = {};
     const sessionValue = getFormSessionValue(session, pattern.id);
     const value = sessionValue?.input || '';
+
     const preferNotToAnswerChecked =
       sessionValue?.preferNotToAnswer === pattern.data.preferNotToAnswerText;
     const error = session.data.errors[pattern.id];

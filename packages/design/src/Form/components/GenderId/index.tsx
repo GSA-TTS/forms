@@ -10,7 +10,7 @@ const GenderIdPattern: PatternComponent<GenderIdProps> = ({
   label,
   required,
   error,
-  value = '',
+  value,
   preferNotToAnswerText,
   preferNotToAnswerChecked: initialPreferNotToAnswerChecked = false,
 }) => {
@@ -22,7 +22,7 @@ const GenderIdPattern: PatternComponent<GenderIdProps> = ({
   const errorId = `input-error-message-${genderId}`;
   const hintId = `hint-${genderId}`;
   const preferNotToAnswerId = `${genderId}.preferNotToAnswer`;
-  const inputId = `${genderId}.input`;
+  const inputId = `${genderId}.gender`;
 
   const watchedValue = useWatch({ name: inputId, defaultValue: value });
 
