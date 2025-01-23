@@ -21,6 +21,7 @@ import SelectDropdown from './SelectDropdown/index.js';
 import SocialSecurityNumber from './SocialSecurityNumber/index.js';
 import SubmissionConfirmation from './SubmissionConfirmation/index.js';
 import TextInput from './TextInput/index.js';
+import TextArea from './TextArea/index.js';
 
 export const defaultPatternComponents: ComponentForPattern = {
   attachment: Attachment as PatternComponent,
@@ -44,4 +45,5 @@ export const defaultPatternComponents: ComponentForPattern = {
   sequence: Sequence as PatternComponent,
   'social-security-number': SocialSecurityNumber as PatternComponent,
   'submission-confirmation': SubmissionConfirmation as PatternComponent,
+  'text-area': TextArea as PatternComponent,
 };
