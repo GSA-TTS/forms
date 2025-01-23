@@ -121,6 +121,7 @@ const sidebarPatterns: DropdownPattern[] = [
   ['form-summary', defaultFormConfig.patterns['form-summary']],
   ['gender-id', defaultFormConfig.patterns['gender-id']],
   ['input', defaultFormConfig.patterns['input']],
+  ['text-area', defaultFormConfig.patterns['text-area']],
   ['package-download', defaultFormConfig.patterns['package-download']],
   ['paragraph', defaultFormConfig.patterns['paragraph']],
   ['phone-number', defaultFormConfig.patterns['phone-number']],
