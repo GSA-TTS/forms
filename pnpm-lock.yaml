@@ -479,12 +479,6 @@ importers:
         specifier: ^7.2.0
         version: 7.2.0
 
-  packages/docassemble:
-    dependencies:
-      '@atj/forms':
-        specifier: workspace:*
-        version: link:../forms
-
   packages/forms:
     dependencies:
       '@atj/common':
