@@ -14,6 +14,7 @@ jobs:
     with:
       app-name: server-doj
       tag-name: ${{ github.ref_name }}
+      deploy-key: "${{ github.ref_name == 'main' && 'dev' || 'demo' }}"
 
   build-image-kansas:
     uses: ./.github/workflows/_docker-build-image.yml
@@ -21,6 +22,7 @@ jobs:
     with:
       app-name: server-kansas
       tag-name: ${{ github.ref_name }}
+      deploy-key: "${{ github.ref_name == 'main' && 'dev' || 'demo' }}"
 
   deploy:
     needs: [build-image-doj, build-image-kansas]
