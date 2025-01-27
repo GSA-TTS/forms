@@ -51,7 +51,7 @@ describe('downloadPackageHandler', async () => {
           success({
             id: 'id',
             data: await loadSamplePDF(
-              'doj-pardon-marijuana/application_for_certificate_of_pardon_for_simple_marijuana_possession.pdf'
+              'doj-pardon-marijuana/demo-application_for_certificate_of_pardon_for_simple_marijuana_possession.pdf'
             ),
             path: 'test.pdf',
             fields: {},
@@ -82,7 +82,7 @@ describe('downloadPackageHandler', async () => {
 
 const createTestForm = async (): Promise<Blueprint> => {
   const pdfBytes = await loadSamplePDF(
-    'doj-pardon-marijuana/application_for_certificate_of_pardon_for_simple_marijuana_possession.pdf'
+    'doj-pardon-marijuana/demo-application_for_certificate_of_pardon_for_simple_marijuana_possession.pdf'
   );
   const input1 = new Input(
     { label: 'Input 1', required: true, maxLength: 10 },

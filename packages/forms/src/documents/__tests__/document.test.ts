@@ -13,7 +13,7 @@ describe('addDocument document processing', () => {
   it('creates expected blueprint', async () => {
     const builder = new BlueprintBuilder(defaultFormConfig);
     const pdfBytes = await loadSamplePDF(
-      'doj-pardon-marijuana/application_for_certificate_of_pardon_for_simple_marijuana_possession.pdf'
+      'doj-pardon-marijuana/demo-application_for_certificate_of_pardon_for_simple_marijuana_possession.pdf'
     );
     const { updatedForm, errors } = await addDocument(
       builder.form,

@@ -7,7 +7,7 @@ import { loadSamplePDF } from './sample-data';
 
 export const createTestFormWithPDF = async () => {
   const pdfBytes = await loadSamplePDF(
-    'doj-pardon-marijuana/application_for_certificate_of_pardon_for_simple_marijuana_possession.pdf'
+    'doj-pardon-marijuana/demo-application_for_certificate_of_pardon_for_simple_marijuana_possession.pdf'
   );
   const builder = new BlueprintBuilder(defaultFormConfig);
   const { updatedForm } = await addDocument(
