@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/playwright:v1.50.0-noble as base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV NODE_ENV=test
-RUN apt-get -y update && apt-get install -y netcat-openbsd make
+RUN apt-get -y update && apt-get install -y netcat-openbsd make g++
 WORKDIR /srv/apps/atj-platform
 COPY ./pnpm-lock.yaml ./pnpm-lock.yaml
 COPY ./package.json ./package.json
