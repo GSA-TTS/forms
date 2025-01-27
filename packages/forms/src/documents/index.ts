@@ -12,7 +12,7 @@ export const SAMPLE_DOCUMENTS = [
     title: 'Alabama PS-12 (name change)',
   },
   {
-    path: 'sample-documents/doj-pardon-marijuana/application_for_certificate_of_pardon_for_simple_marijuana_possession.pdf',
+    path: 'sample-documents/doj-pardon-marijuana/demo-application_for_certificate_of_pardon_for_simple_marijuana_possession.pdf',
     title: 'DOJ Marijuana Pardon Application',
   },
 ] as const;
