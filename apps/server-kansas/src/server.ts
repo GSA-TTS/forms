@@ -20,6 +20,7 @@ export const createCustomServer = async (db: DatabaseContext): Promise<any> => {
         'natasha.pierre-louis@gsa.gov',
         'emily.lordahl@gsa.gov',
         'khayal.alasgarov@gsa.gov',
+        'jenny.richards@gsa.gov',
       ].includes(email.toLowerCase());
     },
   });
