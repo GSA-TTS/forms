@@ -17,6 +17,7 @@ RUN npm install -g serve
 EXPOSE 9090
 EXPOSE 9191
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN pnpm exec playwright install
 RUN pnpm build --filter=@atj/spotlight --filter=@atj/design
 WORKDIR ./e2e
 RUN serve ../apps/spotlight/dist -p 9090 -L & while ! nc -z localhost 9090; do sleep 1; done; pnpm playwright test;

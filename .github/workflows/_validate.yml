@@ -6,7 +6,7 @@ on:
       playwright_version:
         description: Installed playwright version
         required: false
-        default: '1.48.1'
+        default: '1.50.0'
         type: string
 
 jobs:
@@ -86,9 +86,6 @@ jobs:
       - name: Lint source code
         shell: bash
         run: pnpm lint
-
-      - name: Install Playwright browsers
-        run: pnpm exec playwright install
 
       - name: Run test suite
         shell: bash
