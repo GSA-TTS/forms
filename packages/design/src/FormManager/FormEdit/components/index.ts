@@ -23,6 +23,7 @@ import RichTextPatternEdit from './RichTextPatternEdit/index.js';
 import SelectDropdownPatternEdit from './SelectDropdownPatternEdit/index.js';
 import SocialSecurityNumberPatternEdit from './SocialSecurityNumberPatternEdit/index.js';
 import SubmissionConfirmationEdit from './SubmissionConfirmationEdit.js';
+import TextAreaPatternEdit from './TextAreaPatternEdit/index.js';
 
 export const defaultPatternEditComponents: EditComponentForPattern = {
   attachment: AttachmentPatternEdit as PatternEditComponent,
@@ -46,4 +47,5 @@ export const defaultPatternEditComponents: EditComponentForPattern = {
   'social-security-number':
     SocialSecurityNumberPatternEdit as PatternEditComponent,
   'submission-confirmation': SubmissionConfirmationEdit as PatternEditComponent,
+  'text-area': TextAreaPatternEdit as PatternEditComponent,
 };
