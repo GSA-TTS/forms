@@ -6,7 +6,6 @@ export default defineWorkspace([
   'packages/auth',
   'packages/common',
   'packages/database',
-  'packages/dependency-graph',
   'packages/design',
   'packages/forms',
   //'packages/server/vitest.config.ts',
