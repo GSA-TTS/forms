@@ -4,23 +4,23 @@ Test bed for 10x forms tooling, completed as part of the [10x Forms Platform](ht
 
 ## Overview
 
-A C4-like architectural diagram is [available here](documents/diagram.md).
+An architectural overview is [available here](documents/architecture.md).
 
 Additional documentation:
 
 - [Architectural Decision Records (ADRs)](./documents/adr/)
 - [Release process](./documents/release-process.md)
 
-## Overview
-
-The platform is made up of the following high-level terms.
-
 ### Key personas
+
+The platform is targeted to the following user groups:
 
 - Form Builders: government program office staff or UX experts who create and publish "guided interview" web experiences for members of the public and fellow government staff via a friendly browser-based app, no coding necessary. For examples of "guided interview" style web experiences, check out [IRS Direct File](https://coforma.io/case-studies/irs-direct-file#results) (filing your taxes), [GetCalFresh](https://codeforamerica.org/news/overcoming-barriers-setting-expectations-for-calfresh-eligibility/) (Applying for food benefits) and [Court Forms Online](https://courtformsonline.org/) (filing court documents).
 - Form Fillers: folks who provide info to the government via guided interviews created by Form Builders
 
 ### Things
+
+Key concepts if the platform
 
 - **Blueprint**: produced by a form builder, the blueprint defines the structure of an interactive session between a government office and a form filler.
 - **Conversation**: one instance of a blueprint; the interactive session between a government office and a form filler. Other terms for this concept include dialogue or session.
@@ -62,9 +62,8 @@ If you start having unexplained build errors, the following commands are useful 
 pnpm clean:dist # removes previously built files recursively
 pnpm clean:modules # removes node_module directories recursively
 
-# ... run more commands like pnpm install and pnpm build after you have run these 
-```
-
+# ... run more commands like pnpm install and pnpm build after you have run these
+``
 
 To start developing with hot reloading, use:
 
