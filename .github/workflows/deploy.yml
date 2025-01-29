@@ -15,15 +15,8 @@ jobs:
       app-name: server-doj
       tag-name: ${{ github.ref_name }}
 
-  build-image-kansas:
-    uses: ./.github/workflows/_docker-build-image.yml
-    secrets: inherit
-    with:
-      app-name: server-kansas
-      tag-name: ${{ github.ref_name }}
-
   deploy:
-    needs: [build-image-doj, build-image-kansas]
+    needs: [build-image-doj]
     uses: ./.github/workflows/_terraform-apply.yml
     secrets: inherit
     with:
