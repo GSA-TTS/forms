@@ -20,7 +20,7 @@ The platform is targeted to the following user groups:
 
 ### Things
 
-Key concepts if the platform
+Key concepts in the platform
 
 - **Blueprint**: produced by a form builder, the blueprint defines the structure of an interactive session between a government office and a form filler.
 - **Conversation**: one instance of a blueprint; the interactive session between a government office and a form filler. Other terms for this concept include dialogue or session.
@@ -63,7 +63,7 @@ pnpm clean:dist # removes previously built files recursively
 pnpm clean:modules # removes node_module directories recursively
 
 # ... run more commands like pnpm install and pnpm build after you have run these
-``
+```
 
 To start developing with hot reloading, use:
 
