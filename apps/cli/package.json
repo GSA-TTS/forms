@@ -13,7 +13,6 @@
     "test": "vitest run --coverage"
   },
   "dependencies": {
-    "@atj/dependency-graph": "workspace:*",
     "@atj/infra-core": "workspace:*",
     "commander": "^11.1.0"
   }

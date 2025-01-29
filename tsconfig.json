@@ -9,7 +9,6 @@
     { "path": "./packages/auth" },
     { "path": "./packages/common" },
     { "path": "./packages/database" },
-    { "path": "./packages/dependency-graph" },
     { "path": "./packages/design/tsconfig.build.json" },
     { "path": "./packages/forms" },
     { "path": "./packages/server" }

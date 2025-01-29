@@ -24,6 +24,17 @@ export type TextInputProps = PatternProps<{
   error?: FormError;
 }>;
 
+export type TextAreaProps = PatternProps<{
+  type: 'text-area';
+  inputId: string;
+  value: string;
+  label: string;
+  required: boolean;
+  error?: FormError;
+  hint?: string;
+  maxLength: number;
+}>;
+
 export type AttachmentProps = PatternProps<{
   type: 'attachment';
   inputId: string;

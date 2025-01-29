@@ -6,7 +6,7 @@ on:
       playwright_version:
         description: Installed playwright version
         required: false
-        default: "1.48.1"
+        default: '1.50.0'
         type: string
 
 jobs:
@@ -69,7 +69,6 @@ jobs:
       - name: Make directory for build artifacts
         run: mkdir -p output/build-artifacts
 
-
       - name: Spotlight app performance budget
         run: pnpm --filter @atj/spotlight size:ci > output/build-artifacts/spotlight-size-output.txt
 
@@ -95,7 +94,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: "1.10.4"
+          terraform_version: '1.10.4'
 
       - name: Initialize Terraform CDK configuration
         shell: bash
