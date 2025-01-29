@@ -2,8 +2,8 @@ import * as z from 'zod';
 
 import { type FieldsetPattern } from '../../patterns/fieldset/config.js';
 import { type InputPattern } from '../../patterns/input/config.js';
-import { PagePattern } from '../../patterns/page/config.js';
-import { PageSetPattern } from '../../patterns/page-set/config.js';
+import { PagePattern } from '../../patterns/pages/page/config.js';
+import { PageSetPattern } from '../../patterns/pages/page-set/config.js';
 import { type ParagraphPattern } from '../../patterns/paragraph.js';
 import { type CheckboxPattern } from '../../patterns/checkbox.js';
 import { type RadioGroupPattern } from '../../patterns/radio-group.js';
@@ -332,6 +332,7 @@ export const processApiResponse = async (json: any): Promise<ParsedPdf> => {
         {
           title: `${page}`,
           patterns,
+          rules: [],
         },
         undefined,
         idx

@@ -4,6 +4,7 @@ import set from 'set-value';
 import { type CreatePrompt } from './components.js';
 import { type FormError, type FormErrors } from './error.js';
 import { type Blueprint } from './types.js';
+import type { FormRoute } from './route-data.js';
 
 export type Pattern<C = any> = {
   type: string;
@@ -39,13 +40,20 @@ type RemoveChildPattern<P extends Pattern> = (
 export abstract class PatternBuilder<P extends Pattern> {
   public readonly id: PatternId;
   public readonly data: P['data'];
+  public abstract readonly type: P['type'];
 
   constructor(data: P['data'], id?: PatternId) {
     this.id = id || generatePatternId();
     this.data = data;
   }
 
-  abstract toPattern(): P;
+  toPattern(): P {
+    return {
+      id: this.id,
+      type: this.type,
+      data: this.data,
+    } as P;
+  }
 }
 
 /**
@@ -108,6 +116,7 @@ export type PatternConfig<
   ) => Pattern[];
   removeChildPattern?: RemoveChildPattern<ThisPattern>;
   createPrompt: CreatePrompt<ThisPattern>;
+  getInitialFormRoute?: (pattern: ThisPattern) => FormRoute;
 };
 
 export type FormConfig<T extends Pattern = Pattern, PatternOutput = unknown> = {

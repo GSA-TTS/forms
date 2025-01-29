@@ -1,4 +1,4 @@
-import { type PatternConfig, type PatternId } from '../../pattern.js';
+import { type PatternConfig, type PatternId } from '../../../pattern.js';
 
 import { type PageSetPattern, parseConfigData } from './config.js';
 import { createPrompt } from './prompt.js';
@@ -40,6 +40,15 @@ export const pageSetConfig: PatternConfig<PageSetPattern> = {
         ...pattern.data,
         pages: newPatterns,
       },
+    };
+  },
+  getInitialFormRoute(pattern) {
+    if (pattern.data.pages.length === 0) {
+      throw new Error('No route for empty page-set.');
+    }
+    return {
+      url: '#',
+      params: { page: '0' },
     };
   },
 };

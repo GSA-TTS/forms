@@ -6,8 +6,8 @@ import { type Blueprint, type FormSession, defaultFormConfig } from '../..';
 
 import { downloadPackageHandler } from './submit';
 import { PackageDownload } from './builder';
-import { PageSet } from '../page-set/builder';
-import { Page } from '../page/builder';
+import { PageSet } from '../pages/page-set/builder';
+import { Page } from '../pages/page/builder';
 import { Input } from '../input/builder';
 import { loadSamplePDF } from '../../documents/__tests__/sample-data';
 
@@ -88,7 +88,10 @@ const createTestForm = async (): Promise<Blueprint> => {
     { label: 'Input 1', required: true, maxLength: 10 },
     'input-1'
   );
-  const page1 = new Page({ title: 'Page 1', patterns: [input1.id] }, 'page-1');
+  const page1 = new Page(
+    { title: 'Page 1', patterns: [input1.id], rules: [] },
+    'page-1'
+  );
   const pageSet = new PageSet({ pages: [page1.id] }, 'page-set');
   return {
     summary: {

@@ -59,7 +59,6 @@ export const PageEdit: PatternEditComponent<PageProps> = props => {
         previewProps={{
           type: 'sequence',
           _patternId: props.previewProps._patternId,
-          children: props.previewProps.children,
         }}
         childComponents={props.childComponents}
       />

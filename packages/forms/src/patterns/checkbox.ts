@@ -2,6 +2,7 @@ import * as z from 'zod';
 
 import {
   type Pattern,
+  PatternBuilder,
   type PatternConfig,
   validatePattern,
 } from '../pattern.js';
@@ -73,3 +74,7 @@ export const checkboxConfig: PatternConfig<CheckboxPattern, PatternOutput> = {
     };
   },
 };
+
+export class Checkbox extends PatternBuilder<CheckboxPattern> {
+  type = 'checkbox';
+}

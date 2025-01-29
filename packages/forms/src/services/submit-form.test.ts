@@ -8,10 +8,16 @@ import {
 } from '../documents/__tests__/test-documents.js';
 import { createFormSession } from '../session.js';
 import { createForm } from '../blueprint.js';
-import { type PageSetPattern } from '../patterns/page-set/config.js';
-import { type PagePattern } from '../patterns/page/config.js';
+import { type PageSetPattern } from '../patterns/pages/page-set/config.js';
+import { type PagePattern } from '../patterns/pages/page/config.js';
 import { type InputPattern } from '../patterns/input/config.js';
 import { type Blueprint } from '../types.js';
+import { Checkbox } from '../patterns/checkbox.js';
+import { FieldSet } from '../patterns/fieldset/builder.js';
+import { Page } from '../patterns/pages/page/builder.js';
+import { PageSet } from '../patterns/pages/page-set/builder.js';
+import { Form } from '../builder/index.js';
+import { defaultFormConfig } from '../patterns/index.js';
 
 describe('submitForm', () => {
   it('fails with missing action string', async () => {
@@ -198,6 +204,7 @@ describe('multi-page form', () => {
             data: {
               title: 'Page 1',
               patterns: ['element-1'],
+              rules: [],
             },
           } satisfies PagePattern,
           {
@@ -216,6 +223,7 @@ describe('multi-page form', () => {
             data: {
               title: 'Page 2',
               patterns: ['element-2'],
+              rules: [],
             },
           } satisfies PagePattern,
           {
@@ -364,8 +372,59 @@ describe('multi-page form', () => {
       },
     });
   });
+});
 
-  // You can add more tests here using the setupMultiPageForm function
+describe('multi-page form with skip logic', () => {
+  const setupMultiPageFormWithSkipLogic = async () => {
+    const form = createMultiPageFormWithSkipLogic();
+    const { ctx, id } = await setupTestForm(form);
+    const session = createFormSession(form);
+    const formSessionResult = await ctx.repository.upsertFormSession({
+      formId: id,
+      data: session,
+    });
+    if (!formSessionResult.success) {
+      expect.fail('upsertFormSession failed');
+    }
+    return { ctx, id, formSessionResult, session };
+  };
+
+  it('falls back to next page when rule does not match', async () => {
+    const { ctx, id, formSessionResult, session } =
+      await setupMultiPageFormWithSkipLogic();
+    const result = await submitForm(
+      ctx,
+      formSessionResult.data.id,
+      id,
+      {
+        action: 'action/page-set/root',
+      },
+      { url: '#', params: { page: '0' } }
+    );
+    expect(result).toEqual({
+      success: true,
+      data: {
+        attachments: undefined,
+        session: {
+          data: {
+            errors: {},
+            values: {
+              checkbox1: false,
+              checkbox2: false,
+            },
+          },
+          form: session.form,
+          route: {
+            params: {
+              page: '1',
+            },
+            url: '#',
+          },
+        },
+        sessionId: formSessionResult.data.id,
+      },
+    });
+  });
 });
 
 const setupTestForm = async (form?: Blueprint) => {
@@ -389,6 +448,7 @@ const setupTestForm = async (form?: Blueprint) => {
             data: {
               title: 'Page 1',
               patterns: [],
+              rules: [],
             },
           } satisfies PagePattern,
         ],
@@ -426,6 +486,7 @@ const createOnePatternTestForm = () => {
           data: {
             title: 'Page 1',
             patterns: ['element-1', 'element-2'],
+            rules: [],
           },
         } satisfies PagePattern,
         {
@@ -451,4 +512,70 @@ const createOnePatternTestForm = () => {
       ],
     }
   );
+};
+
+const createMultiPageFormWithSkipLogic = () => {
+  const checkbox1 = new Checkbox(
+    { label: 'Checkbox1', defaultChecked: false },
+    'checkbox1'
+  );
+  const checkbox2 = new Checkbox(
+    { label: 'Checkbox2', defaultChecked: false },
+    'checkbox2'
+  );
+  const fieldset = new FieldSet({
+    legend: 'Constraints',
+    patterns: [checkbox1.id, checkbox2.id],
+  });
+  const page1 = new Page({
+    title: 'Page 1',
+    patterns: [fieldset.id],
+    rules: [
+      {
+        patternId: 'rule1',
+        condition: { operator: '=', value: '' },
+        next: 'Eligible',
+      },
+    ],
+  });
+  const checkbox3 = new Checkbox({ label: 'Checkbox3', defaultChecked: false });
+  const checkbox4 = new Checkbox({ label: 'Checkbox4', defaultChecked: false });
+  const fieldset2 = new FieldSet({
+    legend: 'Constraints',
+    patterns: [checkbox3.id, checkbox4.id],
+  });
+  const page2 = new Page({
+    title: 'Page 2',
+    patterns: [fieldset2.id],
+    rules: [],
+  });
+  const page3 = new Page({
+    title: 'Page 3',
+    patterns: [],
+    rules: [],
+  });
+  const pageSet = new PageSet(
+    {
+      pages: [page1.id, page2.id, page3.id],
+    },
+    'root'
+  );
+  const form = new Form(defaultFormConfig, {
+    summary: {
+      title: 'Test form',
+      description: 'Test description',
+    },
+    root: pageSet.id,
+    patterns: {
+      [pageSet.id]: pageSet.toPattern(),
+      [page1.id]: page1.toPattern(),
+      [page2.id]: page2.toPattern(),
+      [page3.id]: page3.toPattern(),
+      [fieldset.id]: fieldset.toPattern(),
+      [checkbox1.id]: checkbox1.toPattern(),
+      [checkbox2.id]: checkbox2.toPattern(),
+    },
+    outputs: [],
+  });
+  return form.bp;
 };

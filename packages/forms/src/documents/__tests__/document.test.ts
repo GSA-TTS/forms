@@ -3,8 +3,8 @@ import { describe, expect, it } from 'vitest';
 import { getPattern } from '../../index.js';
 import { BlueprintBuilder } from '../../builder/index.js';
 import { defaultFormConfig } from '../../patterns/index.js';
-import { type PageSetPattern } from '../../patterns/page-set/config.js';
-import { type PagePattern } from '../../patterns/page/config.js';
+import { type PageSetPattern } from '../../patterns/pages/page-set/config.js';
+import { type PagePattern } from '../../patterns/pages/page/config.js';
 
 import { addDocument } from '../document.js';
 import { loadSamplePDF } from './sample-data.js';
