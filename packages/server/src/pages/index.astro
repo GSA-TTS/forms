@@ -1,11 +1,25 @@
 ---
 import AppFormManager from '../components/AppFormManager';
-import { getServerContext } from '../config/astro.js';
+import { getServerContext, getUserSession } from '../config/astro.js';
 import Layout from '../layouts/Layout.astro';
+import * as routes from '../routes.js';
 
 const { baseUrl, uswdsRoot } = await getServerContext(Astro);
+const loggedIn = !!(await getUserSession(Astro)).session;
 ---
 
 <Layout title="10x Forms Platform">
-  <AppFormManager client:only="react" ctx={{ baseUrl, uswdsRoot }} />
+  {
+    loggedIn ? (
+      <AppFormManager client:only="react" ctx={{ baseUrl, uswdsRoot }} />
+    ) : (
+      <div class="grid-container">
+        <h1>10x Forms Platform</h1>
+        <p class="usa-prose">
+          Authorized users may <a href={routes.getLoginUrl(baseUrl)}>sign in</a>{' '}
+          to test the Forms Platform.
+        </p>
+      </div>
+    )
+  }
 </Layout>
