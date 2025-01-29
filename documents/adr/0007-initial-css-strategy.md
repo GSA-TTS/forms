@@ -8,7 +8,7 @@ Accepted
 
 ## Context
 
-The 10x Digital Access to Justice Platform project will produce many frontend components that leverage the [U.S. Web Design System](https://designsystem.digital.gov/).
+The Forms Platform project will produce many frontend components that leverage the [U.S. Web Design System](https://designsystem.digital.gov/).
 
 The project team desires a method of managing CSS using a method that maximizes utility outside this project.
 

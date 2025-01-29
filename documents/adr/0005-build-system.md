@@ -8,7 +8,7 @@ Accepted
 
 ## Context
 
-The development phase of "10x Digital Access to Justice Platform" has started. The development effort will focus on building modular form system components.
+The development phase of Forms Platform has started. The development effort will focus on building modular form system components.
 
 A method of structuring cohesive and well-encapsulated modules is required. Additionally, the module system should enable efficient builds and integrate with other goals, such as [generating dependency diagrams](./0002-generate-dependency-diagram.md).
 

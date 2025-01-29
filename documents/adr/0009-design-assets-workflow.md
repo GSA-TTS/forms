@@ -8,9 +8,9 @@ Accepted
 
 ## Context
 
-The 10x Digital Access to Justice Platform project will produce user interface components for form lifecycle operations including creating and filling web-based form. These components will be demo'd as part of the project's phase 3 work, and are intended to be leveraged by third-parties. These components inherit the stylesheet strategy outlined in ADR [./0007-initial-css-strategy.md](./0007-initial-css-strategy.md).
+Forms Platform requires user interface components for form lifecycle operations, including creating and filling web-based forms. These components will be demo'd as part of the project's phase 3 work, and are intended to be leveraged by third-parties. These components inherit the stylesheet strategy outlined in ADR [./0007-initial-css-strategy.md](./0007-initial-css-strategy.md).
 
-The project team desires a method of organizing frontend components in a manner that facilitates rapid development and collaboration use cases.
+The project team requires a method of organizing frontend components that facilitates rapid development and collaboration.
 
 ## Decision
 

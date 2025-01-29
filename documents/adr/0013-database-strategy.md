@@ -8,7 +8,7 @@ Approved
 
 ## Context
 
-During the prototyping and demo phase, the Form Platform used browser-local storage in lieu of a database. This allowed the team to limit development efforts to a simple static site, avoiding the cost of building a backend system.
+During the prototyping and demo phase, Forms Platform used browser-local storage in lieu of a database. This allowed the team to limit development efforts to a simple static site, avoiding the cost of building a backend system.
 
 As we prepare to support our first government use case, we require a database to persist users, forms, form sessions, form submissions, and other future data.
 

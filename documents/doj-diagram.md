@@ -1,6 +1,6 @@
 # Forms Platform - DOJ architecture diagram
 
-Sample diagram of a potential DOJ deployment of the Forms Platform.
+Sample diagram of a potential DOJ deployment of Forms Platform.
 
 ```mermaid
 flowchart TB

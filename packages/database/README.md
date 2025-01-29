@@ -1,6 +1,6 @@
 # @atj/database
 
-This package maintains the supporting infrastructure for the Form Platform's
+This package maintains the supporting infrastructure for the Forms Platform
 database.
 
 PostgreSQL is the supported production database. Sqlite3 is also supported,

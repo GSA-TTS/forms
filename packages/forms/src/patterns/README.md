@@ -1,6 +1,6 @@
 # Forms Platform - Patterns
 
-Patterns are the Forms Platform's primary building block, a reusable module that may be configured via the no-code form builder to craft custom user experiences.
+Patterns are the platform's primary building block, a reusable module that may be configured via the no-code form builder to craft custom user experiences.
 
 Patterns are stored on the form `Blueprint`'s pattern attribute.
 

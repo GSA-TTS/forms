@@ -4,11 +4,11 @@ Date: 2023-09-13
 
 ## Status
 
-Accepted
+Deprecated - replaced with manual documentation [available here](../architecture.md).
 
 ## Context
 
-The 10x Digital Access to Justice Platform project is kicking off, and we need to document our system and software architecture for both internal and external stakeholders.
+The Forms Platform project is kicking off, and we need to document our system and software architecture for both internal and external stakeholders.
 
 ## Decision
 

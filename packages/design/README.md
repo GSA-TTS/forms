@@ -1,6 +1,6 @@
 # @atj/design
 
-This package encapsulates all the design components used in 10x Digital Access to Justice frontend applications.
+This package encapsulates all the design components used in Forms Platform frontend applications.
 
 This includes:
 

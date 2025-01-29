@@ -8,7 +8,7 @@ Approved
 
 ## Context
 
-The Form Platform requires a method of authenticating users. We are inclined to default to [Login.gov](https://login.gov/), a government-wide federated service hosted by [TTS](https://www.gsa.gov/about-us/organization/federal-acquisition-service/technology-transformation-services), unless circumstances prevent its usage.
+Forms Platform requires a method of authenticating users. We are inclined to default to [Login.gov](https://login.gov/), a government-wide federated service hosted by [TTS](https://www.gsa.gov/about-us/organization/federal-acquisition-service/technology-transformation-services), unless circumstances prevent its usage.
 
 When using Login.gov, we need to choose which library and other integration details we will leverage.
 
@@ -23,3 +23,5 @@ Lucia and Arctic will provide us will a solid workable solution, and provides us
 Lucia manages sessions, but in the future we may find it preferable to manage them ourselves.
 
 Additionally, Arctic does not support JWT-based auth. We may want to consider node-openid-client, or an alternative, for a simpler approach. This would require our own session management.
+
+This decision should be reevaluated once Forms Platform integrates with an identity provider other than login.gov.

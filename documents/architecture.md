@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Forms Platform is organized into several packages:
+Forms Platform is organized into several packages:
 
 | Package                        | Description                        | Dependencies                                                                                                                             |
 | ------------------------------ | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |

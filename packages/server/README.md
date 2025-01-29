@@ -1,6 +1,6 @@
 # @atj/server
 
-The form platform's web server.
+The Forms Platform web server.
 
 ## Build
 
