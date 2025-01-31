@@ -20,7 +20,7 @@ This C4-like architectural diagram documents data flows in a typical deployment 
 ```mermaid
 flowchart TB
     %% Style definitions
-    classDef blue fill:#2374ab
+    classDef blue fill:#2374ab,color:#fff
     classDef invisible opacity:0
 
     subgraph "External Users"
