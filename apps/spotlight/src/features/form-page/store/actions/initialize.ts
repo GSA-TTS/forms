@@ -1,4 +1,4 @@
-import { type FormRoute } from '@atj/forms';
+import { type FormRoute } from '@gsa-tts/forms-core';
 import { type FormPageContext } from './index.js';
 import { getFormSession } from './get-form-session.js';
 

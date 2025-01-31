@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { useFormContext } from 'react-hook-form';
 
-import { type TextAreaProps } from '@atj/forms';
+import { type TextAreaProps } from '@gsa-tts/forms-core';
 import { type PatternComponent } from '../../../Form/index.js';
 
 const TextArea: PatternComponent<TextAreaProps> = ({

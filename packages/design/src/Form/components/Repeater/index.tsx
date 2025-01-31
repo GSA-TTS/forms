@@ -1,6 +1,6 @@
 import React, { Children, useMemo } from 'react';
 import { useFieldArray } from 'react-hook-form';
-import { type RepeaterProps, type PromptComponent } from '@atj/forms';
+import { type RepeaterProps, type PromptComponent } from '@gsa-tts/forms-core';
 
 import { type PatternComponent } from '../../index.js';
 import { renderPromptComponents } from '../../form-common.js';

@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { type PatternId, type RepeaterProps } from '@atj/forms';
-import { RepeaterPattern } from '@atj/forms';
+import { type PatternId, type RepeaterProps } from '@gsa-tts/forms-core';
+import { RepeaterPattern } from '@gsa-tts/forms-core';
 
 import {
   CompoundAddPatternButton,

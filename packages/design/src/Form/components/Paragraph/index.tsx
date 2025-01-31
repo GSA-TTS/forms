@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { type ParagraphProps } from '@atj/forms';
+import { type ParagraphProps } from '@gsa-tts/forms-core';
 
 import { type PatternComponent } from '../../../Form/index.js';
 

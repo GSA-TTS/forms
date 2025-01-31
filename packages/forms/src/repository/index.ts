@@ -1,5 +1,5 @@
-import { type ServiceMethod, createService } from '@atj/common';
-import { type DatabaseContext } from '@atj/database';
+import { type ServiceMethod, createService } from '@gsa-tts/forms-common';
+import { type DatabaseContext } from '@gsa-tts/forms-database';
 
 import type { FormConfig } from '../pattern.js';
 

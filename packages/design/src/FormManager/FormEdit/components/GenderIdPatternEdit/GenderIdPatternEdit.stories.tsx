@@ -2,10 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, expect } from '@storybook/test';
 import { within } from '@testing-library/react';
 
-import { type GenderIdPattern } from '@atj/forms';
+import { type GenderIdPattern } from '@gsa-tts/forms-core';
 import { createPatternEditStoryMeta } from '../common/story-helper.js';
 import FormEdit from '../../index.js';
-import { enLocale as message } from '@atj/common';
+import { enLocale as message } from '@gsa-tts/forms-common';
 
 const pattern: GenderIdPattern = {
   id: 'gender-identity-1',

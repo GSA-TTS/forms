@@ -1,7 +1,7 @@
 {
-  "name": "@atj/infra-core",
+  "name": "@gsa-tts/forms-infra-core",
   "version": "1.0.0",
-  "description": "10x ATJ secrets storage backend",
+  "description": "10x Forms Platform core infrastructure management",
   "type": "module",
   "license": "CC0",
   "main": "dist/index.js",
@@ -13,8 +13,8 @@
     "test": "vitest run --coverage"
   },
   "dependencies": {
-    "@atj/common": "workspace:*",
-    "@atj/forms": "workspace:*",
+    "@gsa-tts/forms-common": "workspace:*",
+    "@gsa-tts/forms-core": "workspace:*",
     "@aws-sdk/client-ssm": "^3.624.0",
     "zod": "^3.23.8"
   }

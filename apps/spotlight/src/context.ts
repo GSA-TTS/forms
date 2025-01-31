@@ -3,12 +3,12 @@ import {
   type FormService,
   createFormService,
   parsePdf,
-} from '@atj/forms';
-import { defaultFormConfig } from '@atj/forms';
-import { BrowserFormRepository } from '@atj/forms/context';
+} from '@gsa-tts/forms-core';
+import { defaultFormConfig } from '@gsa-tts/forms-core';
+import { BrowserFormRepository } from '@gsa-tts/forms-core/context';
 
 import { type GithubRepository } from './lib/github.js';
-import { createTestBrowserFormService } from '@atj/forms/context';
+import { createTestBrowserFormService } from '@gsa-tts/forms-core/context';
 
 export type AppContext = {
   baseUrl: `${string}/`;

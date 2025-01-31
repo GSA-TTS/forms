@@ -1,6 +1,9 @@
 import { expect, it } from 'vitest';
 
-import { type DbTestContext, describeDatabase } from '@atj/database/testing';
+import {
+  type DbTestContext,
+  describeDatabase,
+} from '@gsa-tts/forms-database/testing';
 import { createUser } from './create-user.js';
 import { createSession } from './create-session.js';
 

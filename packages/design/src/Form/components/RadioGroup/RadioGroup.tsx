@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import { type RadioGroupProps } from '@atj/forms';
+import { type RadioGroupProps } from '@gsa-tts/forms-core';
 
 import { type PatternComponent } from '../../../Form/index.js';
 

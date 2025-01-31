@@ -8,7 +8,7 @@ Approved
 
 ## Context
 
-The Form Platform requires a method of managing secrets. During the early prototyping phase, we used Terraform with AWS Systems Manager Parameter Store. Secrets were manually created via the AWS console, and lookups were handled by Terraform's corresponding data provider.
+The Forms Platform requires a method of managing secrets. During the early prototyping phase, we used Terraform with AWS Systems Manager Parameter Store. Secrets were manually created via the AWS console, and lookups were handled by Terraform's corresponding data provider.
 
 As we look to operationalize management processes, tooling for working with secrets will become increasingly helpful. This has become apparent with our first scenario, the login.gov keypair, which needs to be unique for each deployed application.
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { useFormContext } from 'react-hook-form';
-import { type SocialSecurityNumberProps } from '@atj/forms';
+import { type SocialSecurityNumberProps } from '@gsa-tts/forms-core';
 
 import { type PatternComponent } from '../../index.js';
 

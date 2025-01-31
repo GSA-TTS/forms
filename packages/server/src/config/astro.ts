@@ -4,8 +4,8 @@ import {
   type AuthRepository,
   type LoginGovOptions,
   createAuthRepository,
-} from '@atj/auth';
-import { defaultFormConfig } from '@atj/forms';
+} from '@gsa-tts/forms-auth';
+import { defaultFormConfig } from '@gsa-tts/forms-core';
 
 import { type AppContext } from './context.js';
 import { type ServerOptions, createDevServerOptions } from './options.js';
@@ -64,7 +64,7 @@ const createDefaultAuthContext = async ({
   loginGovOptions: LoginGovOptions;
   isUserAuthorized: (email: string) => Promise<boolean>;
 }) => {
-  const { LoginGov, BaseAuthContext } = await import('@atj/auth');
+  const { LoginGov, BaseAuthContext } = await import('@gsa-tts/forms-auth');
   return new BaseAuthContext(
     authRepository,
     new LoginGov({

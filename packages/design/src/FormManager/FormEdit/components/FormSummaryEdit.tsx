@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { type FormSummaryProps } from '@atj/forms';
-import { type Pattern } from '@atj/forms';
-import { type FormSummaryPattern } from '@atj/forms';
+import { type FormSummaryProps } from '@gsa-tts/forms-core';
+import { type Pattern } from '@gsa-tts/forms-core';
+import { type FormSummaryPattern } from '@gsa-tts/forms-core';
 
 import FormSummary from '../../../Form/components/FormSummary/index.js';
 import { PatternEditComponent } from '../types.js';

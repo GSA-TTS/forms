@@ -1,7 +1,7 @@
 {
-  "name": "@atj/common",
+  "name": "@gsa-tts/forms-common",
   "version": "1.0.0",
-  "description": "10x ATJ shared resources",
+  "description": "10x Forms Platform shared resources",
   "type": "module",
   "license": "CC0",
   "main": "dist/index.js",

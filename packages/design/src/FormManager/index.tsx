@@ -13,8 +13,8 @@ import {
   nullSession,
   defaultFormConfig,
   Blueprint,
-} from '@atj/forms';
-import { type FormService } from '@atj/forms';
+} from '@gsa-tts/forms-core';
+import { type FormService } from '@gsa-tts/forms-core';
 
 import { type ComponentForPattern } from '../Form/index.js';
 

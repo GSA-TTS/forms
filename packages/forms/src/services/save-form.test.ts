@@ -4,7 +4,7 @@ import { createForm } from '../index.js';
 import { createTestFormServiceContext } from '../testing.js';
 
 import { saveForm } from './save-form.js';
-import { success } from '@atj/common';
+import { success } from '@gsa-tts/forms-common';
 
 const TEST_FORM = createForm({ title: 'Form Title', description: '' });
 const TEST_FORM_2 = {

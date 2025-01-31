@@ -1,7 +1,7 @@
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
-import { AvailableFormList } from '@atj/design';
+import { AvailableFormList } from '@gsa-tts/forms-design';
 
 import { type AppContext } from '../config/context.js';
 import { getFormManagerUrlById, getFormUrl } from '../routes.js';

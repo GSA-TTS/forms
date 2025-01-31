@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useFormManagerStore } from '../../../store.js';
 import styles from '../../formEditStyles.module.css';
-import type { Pattern } from '@atj/forms';
+import type { Pattern } from '@gsa-tts/forms-core';
 
 interface MovePatternDropdownProps {
   isCompound: boolean;

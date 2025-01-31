@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { defaultFormConfig, type PatternConfig } from '@atj/forms';
+import { defaultFormConfig, type PatternConfig } from '@gsa-tts/forms-core';
 import { useFormManagerStore } from '../store.js';
 import styles from './formEditStyles.module.css';
 import attachmentIcon from './images/page-icon.svg';

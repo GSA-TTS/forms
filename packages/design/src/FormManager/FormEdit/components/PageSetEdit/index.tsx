@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getPattern, type PageSetProps } from '@atj/forms';
+import { getPattern, type PageSetProps } from '@gsa-tts/forms-core';
 
 import { PatternEditComponent } from '../../types.js';
 

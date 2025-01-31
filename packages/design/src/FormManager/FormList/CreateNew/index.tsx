@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { SAMPLE_DOCUMENTS } from '@atj/forms';
+import { SAMPLE_DOCUMENTS } from '@gsa-tts/forms-core';
 
 import { useFormManagerStore } from '../../store.js';
 import { onFileInputChangeGetFile } from './file-input.js';

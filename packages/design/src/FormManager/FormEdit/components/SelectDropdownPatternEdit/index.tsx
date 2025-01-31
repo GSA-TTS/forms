@@ -1,8 +1,8 @@
 import classnames from 'classnames';
 import React, { useState } from 'react';
 
-import { type SelectDropdownProps } from '@atj/forms';
-import { type SelectDropdownPattern } from '@atj/forms';
+import { type SelectDropdownProps } from '@gsa-tts/forms-core';
+import { type SelectDropdownPattern } from '@gsa-tts/forms-core';
 
 import SelectDropdown from '../../../../Form/components/SelectDropdown/index.js';
 import { PatternEditComponent } from '../../types.js';
@@ -10,7 +10,7 @@ import { PatternEditComponent } from '../../types.js';
 import { PatternEditActions } from '../common/PatternEditActions.js';
 import { PatternEditForm } from '../common/PatternEditForm.js';
 import { usePatternEditFormContext } from '../common/hooks.js';
-import { enLocale as message } from '@atj/common';
+import { enLocale as message } from '@gsa-tts/forms-common';
 import styles from '../../formEditStyles.module.css';
 
 const SelectDropdownPatternEdit: PatternEditComponent<SelectDropdownProps> = ({

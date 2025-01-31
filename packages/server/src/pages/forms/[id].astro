@@ -1,5 +1,8 @@
 ---
-import { type FormRoute, getRouteDataFromQueryString } from '@atj/forms';
+import {
+  type FormRoute,
+  getRouteDataFromQueryString,
+} from '@gsa-tts/forms-core';
 
 import { AppForm } from '../../components/AppForm';
 import {
@@ -47,7 +50,10 @@ if (Astro.request.method === 'POST') {
     // They're later normalized into an array during response validation
     if (value instanceof File) {
       formDataObject[key] = value;
-    } else if (Array.isArray(value) && value.every(item => item instanceof File)) {
+    } else if (
+      Array.isArray(value) &&
+      value.every(item => item instanceof File)
+    ) {
       formDataObject[key] = value;
     } else {
       formDataObject[key] = value.toString();
@@ -115,6 +121,6 @@ setFormSessionCookie(sessionResult.data.id);
 const formSession = sessionResult.data.data;
 ---
 
-<ContentLayout title="10x Access to Justice">
+<ContentLayout title="10x Forms Platform">
   <AppForm client:load session={formSession} uswdsRoot={ctx.uswdsRoot} />
 </ContentLayout>

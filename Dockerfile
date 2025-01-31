@@ -18,7 +18,7 @@ RUN pnpm --filter=$APP_DIR --prod deploy /app/$APP_DIR
 FROM base AS app
 ARG APP_DIR
 
-LABEL org.opencontainers.image.description 10x Access to Justice Form Builder
+LABEL org.opencontainers.image.description 10x Forms Platform
 
 COPY --from=build /app/$APP_DIR /app/$APP_DIR
 COPY --from=build /usr/src/app/apps/$APP_DIR/dist /app/$APP_DIR/dist

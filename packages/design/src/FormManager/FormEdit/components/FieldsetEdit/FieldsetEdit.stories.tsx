@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { expect, userEvent } from '@storybook/test';
 import { within } from '@testing-library/react';
 
-import { enLocale as message } from '@atj/common';
-import { type FieldsetPattern } from '@atj/forms';
+import { enLocale as message } from '@gsa-tts/forms-common';
+import { type FieldsetPattern } from '@gsa-tts/forms-core';
 
 import {
   createPatternEditStoryMeta,

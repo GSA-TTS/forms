@@ -1,6 +1,6 @@
 import type { APIContext } from 'astro';
 
-import { processProviderCallback } from '@atj/auth';
+import { processProviderCallback } from '@gsa-tts/forms-auth';
 import { getServerContext } from '../../config/astro.js';
 import * as routes from '../../routes.js';
 

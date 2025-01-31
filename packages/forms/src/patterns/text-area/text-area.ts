@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { enLocale as message } from '@atj/common';
+import { enLocale as message } from '@gsa-tts/forms-common';
 import {
   PatternBuilder,
   type Pattern,

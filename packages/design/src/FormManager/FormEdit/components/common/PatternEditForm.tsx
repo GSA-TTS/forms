@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { type ErrorOption, FormProvider, useForm } from 'react-hook-form';
 
-import { type FormError, type Pattern, type PatternMap } from '@atj/forms';
+import {
+  type FormError,
+  type Pattern,
+  type PatternMap,
+} from '@gsa-tts/forms-core';
 
 import { useFormManagerStore } from '../../../store.js';
 

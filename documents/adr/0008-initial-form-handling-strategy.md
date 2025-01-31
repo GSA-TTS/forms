@@ -8,7 +8,7 @@ Accepted
 
 ## Context
 
-The 10x Digital Access to Justice Platform project will require a strategy of organizing form-handling logic and presentation.
+Forms Platform will require a strategy of organizing form-handling logic and presentation.
 
 We aim to deliver utilities to aid in the creation of accessible, user-friendly forms. These forms will be defined using a declarative format that may be integrated with tools like a no-code form builder and a UI component library.
 

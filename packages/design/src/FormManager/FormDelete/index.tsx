@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import type { Blueprint, FormService } from '@atj/forms';
+import type { Blueprint, FormService } from '@gsa-tts/forms-core';
 
 export default function FormDelete({
   formId,

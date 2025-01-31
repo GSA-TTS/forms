@@ -18,4 +18,4 @@ Quill was originally installed, but there was a known issue in being able to exe
 
 ## Consequences
 
-TipTap is a popular package that works outside the React ecosystem, so it is portable if there is ever a need to move to a different JS framework. The plugin does operate on a freemium model with the subset of features being free with additional, more advanced features having a cost. However, based on the features we use at the time of this ADR, the free features are robust enough to current requirements as well as the most likely requirements in the future. 
+TipTap is a popular package that works outside the React ecosystem, so it is portable if there is ever a need to move to a different JS framework. The plugin does operate on a freemium model with the subset of features being free with additional, more advanced features having a cost. However, based on the features we use at the time of this ADR, the free features are robust enough to current requirements as well as the most likely requirements in the future.

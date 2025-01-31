@@ -1,4 +1,4 @@
-import { type FormSession, type RouteData } from '@atj/forms';
+import { type FormSession, type RouteData } from '@gsa-tts/forms-core';
 import { type FormPageContext } from './index.js';
 
 export type FormSessionResponse =

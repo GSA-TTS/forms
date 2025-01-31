@@ -7,7 +7,7 @@ import { createFormSession } from '../../session';
 
 import { PageSet } from './builder';
 import { submitPage } from './submit';
-import { success } from '@atj/common';
+import { success } from '@gsa-tts/forms-common';
 
 describe('Page-set submission', () => {
   it('stores session data for valid page data', async () => {

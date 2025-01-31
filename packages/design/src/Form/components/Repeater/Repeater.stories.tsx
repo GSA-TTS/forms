@@ -7,7 +7,7 @@ import type {
   DateOfBirthProps,
   EmailInputProps,
   RepeaterProps,
-} from '@atj/forms';
+} from '@gsa-tts/forms-core';
 import { expect, within } from '@storybook/test';
 
 const defaultArgs = {

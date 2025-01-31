@@ -1,8 +1,8 @@
 import classnames from 'classnames';
 import React, { useState } from 'react';
 
-import { type RadioGroupProps } from '@atj/forms';
-import { type RadioGroupPattern } from '@atj/forms';
+import { type RadioGroupProps } from '@gsa-tts/forms-core';
+import { type RadioGroupPattern } from '@gsa-tts/forms-core';
 
 import RadioGroup from '../../../../Form/components/RadioGroup/index.js';
 import { PatternEditComponent } from '../../types.js';
@@ -10,7 +10,7 @@ import { PatternEditComponent } from '../../types.js';
 import { PatternEditActions } from '../common/PatternEditActions.js';
 import { PatternEditForm } from '../common/PatternEditForm.js';
 import { usePatternEditFormContext } from '../common/hooks.js';
-import { enLocale as message } from '@atj/common';
+import { enLocale as message } from '@gsa-tts/forms-common';
 import styles from '../../formEditStyles.module.css';
 
 const RadioGroupPatternEdit: PatternEditComponent<RadioGroupProps> = ({

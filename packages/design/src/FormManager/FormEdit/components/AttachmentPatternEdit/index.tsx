@@ -1,14 +1,17 @@
 import classNames from 'classnames';
 import React from 'react';
-import { PatternId, AttachmentProps } from '@atj/forms';
-import { AttachmentPattern, attachmentFileTypeOptions } from '@atj/forms';
+import { PatternId, AttachmentProps } from '@gsa-tts/forms-core';
+import {
+  AttachmentPattern,
+  attachmentFileTypeOptions,
+} from '@gsa-tts/forms-core';
 import Attachment from '../../../../Form/components/Attachment/index.js';
 import { useFormManagerStore } from '../../../store.js';
 import { PatternEditComponent } from '../../types.js';
 import { PatternEditActions } from '../common/PatternEditActions.js';
 import { PatternEditForm } from '../common/PatternEditForm.js';
 import { usePatternEditFormContext } from '../common/hooks.js';
-import { enLocale as message } from '@atj/common';
+import { enLocale as message } from '@gsa-tts/forms-common';
 import styles from './attachmentPatternEditStyles.module.css';
 
 const AttachmentPatternEdit: PatternEditComponent<AttachmentProps> = ({
