@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { failure, success } from '@atj/common';
+import { failure, success } from '@gsa-tts/forms-common';
 
 import { parseForm, parseFormString } from './parse-form';
 import { defaultFormConfig, type InputPattern } from '../patterns';

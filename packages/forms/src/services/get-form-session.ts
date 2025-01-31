@@ -1,4 +1,4 @@
-import { type Result, failure, success } from '@atj/common';
+import { type Result, failure, success } from '@gsa-tts/forms-common';
 
 import { type FormServiceContext } from '../context/index.js';
 import { type FormRoute } from '../route-data.js';

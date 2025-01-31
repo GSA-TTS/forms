@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { type PageProps } from '@atj/forms';
+import { type PageProps } from '@gsa-tts/forms-core';
 
 import { type PatternComponent } from '../../index.js';
 import { renderPromptComponents } from '../../form-common.js';

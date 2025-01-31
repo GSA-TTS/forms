@@ -11,6 +11,6 @@
     "path-to-regexp": "^8.2.0"
   },
   "dependencies": {
-    "@atj/common": "workspace:*"
+    "@gsa-tts/forms-common": "workspace:*"
   }
 }

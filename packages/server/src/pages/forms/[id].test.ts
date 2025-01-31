@@ -11,7 +11,7 @@ import {
   type PagePattern,
   type PageSetPattern,
   createForm,
-} from '@atj/forms';
+} from '@gsa-tts/forms-core';
 
 import {
   type ServerOptions,

@@ -1,6 +1,6 @@
 import * as z from 'zod';
 
-import * as r from '@atj/common';
+import * as r from '@gsa-tts/forms-common';
 
 import { type FormError, type FormErrors, type Pattern } from '../index.js';
 

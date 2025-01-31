@@ -2,7 +2,11 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { Command } from 'commander';
 
-import { type DeployEnv, commands, getSecretsVault } from '@atj/infra-core';
+import {
+  type DeployEnv,
+  commands,
+  getSecretsVault,
+} from '@gsa-tts/forms-infra-core';
 import { type Context } from './types.js';
 
 export const addSecretCommands = (ctx: Context, cli: Command) => {

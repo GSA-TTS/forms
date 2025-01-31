@@ -1,6 +1,9 @@
 import { beforeEach, expect, it } from 'vitest';
 
-import { type DbTestContext, describeDatabase } from '@atj/database/testing';
+import {
+  type DbTestContext,
+  describeDatabase,
+} from '@gsa-tts/forms-database/testing';
 
 import { defaultFormConfig, type Blueprint } from '..';
 import { createTestBlueprint } from '../builder/builder.test';

@@ -1,5 +1,5 @@
 {
-  "name": "@atj/design",
+  "name": "@gsa-tts/forms-design",
   "version": "0.0.1",
   "main": "src/index.ts",
   "type": "module",
@@ -67,8 +67,8 @@
     "wait-on": "^7.2.0"
   },
   "dependencies": {
-    "@atj/common": "workspace:*",
-    "@atj/forms": "workspace:*",
+    "@gsa-tts/forms-common": "workspace:*",
+    "@gsa-tts/forms-core": "workspace:*",
     "@dnd-kit/core": "^6.1.0",
     "@dnd-kit/sortable": "^8.0.0",
     "@dnd-kit/utilities": "^3.2.2",

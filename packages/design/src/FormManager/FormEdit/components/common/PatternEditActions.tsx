@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { useFormManagerStore } from '../../../store.js';
 import MovePatternDropdown from './MovePatternDropdown.js';
 import styles from '../../formEditStyles.module.css';
-import type { Pattern } from '@atj/forms';
+import type { Pattern } from '@gsa-tts/forms-core';
 
 type PatternEditActionsProps = PropsWithChildren<{
   children?: ReactElement;

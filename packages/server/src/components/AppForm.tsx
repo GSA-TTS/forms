@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { defaultPatternComponents, Form } from '@atj/design';
-import { type FormSession, defaultFormConfig } from '@atj/forms';
+import { defaultPatternComponents, Form } from '@gsa-tts/forms-design';
+import { type FormSession, defaultFormConfig } from '@gsa-tts/forms-core';
 
 type AppFormProps = {
   uswdsRoot: `${string}/`;

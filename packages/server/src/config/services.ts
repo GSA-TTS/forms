@@ -4,7 +4,7 @@ import {
   createFormsRepository,
   defaultFormConfig,
   parsePdf,
-} from '@atj/forms';
+} from '@gsa-tts/forms-core';
 import { type ServerOptions } from './options.js';
 
 export const createServerFormService = (

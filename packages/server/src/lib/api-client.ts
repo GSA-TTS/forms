@@ -1,4 +1,4 @@
-import { type Result } from '@atj/common';
+import { type Result } from '@gsa-tts/forms-common';
 import {
   type FormRoute,
   type FormSession,
@@ -6,8 +6,8 @@ import {
   type Blueprint,
   type FormService,
   type FormSummary,
-} from '@atj/forms';
-import { type FormServiceContext } from '@atj/forms/context';
+} from '@gsa-tts/forms-core';
+import { type FormServiceContext } from '@gsa-tts/forms-core/context';
 
 type FormServiceClientContext = {
   baseUrl: string;

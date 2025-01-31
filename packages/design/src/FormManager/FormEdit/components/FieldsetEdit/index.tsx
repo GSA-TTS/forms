@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { type PatternId, type FieldsetProps } from '@atj/forms';
-import { FieldsetPattern } from '@atj/forms';
+import { type PatternId, type FieldsetProps } from '@gsa-tts/forms-core';
+import { FieldsetPattern } from '@gsa-tts/forms-core';
 
 import {
   CompoundAddPatternButton,

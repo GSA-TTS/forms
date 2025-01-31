@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { failure, success } from '@atj/common';
+import { failure, success } from '@gsa-tts/forms-common';
 
 import { type Blueprint, type FormSession, defaultFormConfig } from '../..';
 

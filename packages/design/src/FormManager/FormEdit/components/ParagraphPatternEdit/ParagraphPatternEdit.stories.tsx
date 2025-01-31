@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { type ParagraphPattern } from '@atj/forms';
-import { enLocale as message } from '@atj/common';
+import { type ParagraphPattern } from '@gsa-tts/forms-core';
+import { enLocale as message } from '@gsa-tts/forms-common';
 
 import { createPatternEditStoryMeta } from '../common/story-helper.js';
 import FormEdit from '../../index.js';

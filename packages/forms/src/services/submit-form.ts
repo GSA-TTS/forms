@@ -1,4 +1,4 @@
-import { failure, success, type Result } from '@atj/common';
+import { failure, success, type Result } from '@gsa-tts/forms-common';
 
 import { type FormServiceContext } from '../context/index.js';
 import { submitPage } from '../patterns/page-set/submit';

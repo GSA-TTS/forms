@@ -5,7 +5,7 @@ import { configDefaults } from 'vitest/config';
 export default getViteConfig({
   test: {
     ...configDefaults,
-    name: '@atj/server:node',
+    name: '@gsa-tts/forms-server:node',
     setupFiles: ['./vitest.setup.ts'],
     environment: 'node',
     include: ['src/**/*.test.ts'],

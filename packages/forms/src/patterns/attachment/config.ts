@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { enLocale as message } from '@atj/common';
+import { enLocale as message } from '@gsa-tts/forms-common';
 import { ParsePatternConfigData, type Pattern } from '../../pattern.js';
 import { safeZodParseFormErrors } from '../../util/zod.js';
 import { attachmentFileTypeMimes } from './file-type-options';

@@ -1,4 +1,4 @@
-import { type Result, failure } from '@atj/common';
+import { type Result, failure } from '@gsa-tts/forms-common';
 import { Blueprint } from '../index.js';
 
 import { type FormServiceContext } from '../context/index.js';

@@ -1,7 +1,7 @@
 {
-  "name": "@atj/auth",
+  "name": "@gsa-tts/forms-auth",
   "version": "1.0.0",
-  "description": "10x ATJ auth module",
+  "description": "10x Forms Platform auth module",
   "type": "module",
   "license": "CC0",
   "main": "dist/index.js",
@@ -13,8 +13,8 @@
     "test": "vitest run --coverage"
   },
   "dependencies": {
-    "@atj/common": "workspace:^",
-    "@atj/database": "workspace:*",
+    "@gsa-tts/forms-common": "workspace:^",
+    "@gsa-tts/forms-database": "workspace:*",
     "@lucia-auth/adapter-postgresql": "^3.1.2",
     "@lucia-auth/adapter-sqlite": "^3.0.2",
     "arctic": "^1.9.2",

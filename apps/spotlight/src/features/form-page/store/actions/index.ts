@@ -1,4 +1,4 @@
-import { type ServiceMethod, createService } from '@atj/common';
+import { type ServiceMethod, createService } from '@gsa-tts/forms-common';
 
 import { type AppContext, getAppContext } from '../../../../context.js';
 import { type GetFormSession, getFormSession } from './get-form-session.js';

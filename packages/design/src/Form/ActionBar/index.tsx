@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PromptAction } from '@atj/forms';
+import { PromptAction } from '@gsa-tts/forms-core';
 
 export default function ActionBar({ actions }: { actions: PromptAction[] }) {
   return (

@@ -1,4 +1,4 @@
-import { type VoidResult, failure, success } from '@atj/common';
+import { type VoidResult, failure, success } from '@gsa-tts/forms-common';
 
 import { type Blueprint } from '../index.js';
 import type { FormRepositoryContext } from './index.js';

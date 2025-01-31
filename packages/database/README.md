@@ -1,4 +1,4 @@
-# @atj/database
+# @gsa-tts/forms-database
 
 This package maintains the supporting infrastructure for the Forms Platform
 database.
@@ -19,7 +19,7 @@ Application of database migrations are orchestrated by the application via
 
 ## Testing
 
-Packages that leverage `@atj/database` may use provided helpers for testing
+Packages that leverage `@gsa-tts/forms-database` may use provided helpers for testing
 purposes.
 
 ### Testing database gateway routines
@@ -30,7 +30,7 @@ a clean database on both Sqlite3 and PostgreSQL:
 ```typescript
 import { expect, it } from 'vitest';
 
-import { type DbTestContext, describeDatabase } from '@atj/database/testing';
+import { type DbTestContext, describeDatabase } from '@gsa-tts/forms-database/testing';
 
 describeDatabase('database connection', () => {
   it<DbTestContext>('selects all via kysely', async ({ db }) => {
@@ -52,7 +52,7 @@ the `createInMemoryDatabaseContext` factory. This will provide an ephemeral
 in-memory Sqlite3 database.
 
 ```typescript
-import { createInMemoryDatabaseContext } from '@atj/database/context';
+import { createInMemoryDatabaseContext } from '@gsa-tts/forms-database/context';
 
 describe('business logic tested with in-memory database', () => {
   it('context helper has a connection to a sqlite database', async () => {

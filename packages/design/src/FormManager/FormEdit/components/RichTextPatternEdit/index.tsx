@@ -5,13 +5,13 @@ import { EditorContent, useEditor } from '@tiptap/react';
 import { Editor } from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';
 
-import { enLocale as message } from '@atj/common';
+import { enLocale as message } from '@gsa-tts/forms-common';
 import {
   type PatternId,
   type PatternMap,
   type RichTextPattern,
   type RichTextProps,
-} from '@atj/forms';
+} from '@gsa-tts/forms-core';
 
 import RichText from '../../../../Form/components/RichText/index.js';
 import { PatternEditActions } from '../common/PatternEditActions.js';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { type Decorator, type Meta } from '@storybook/react';
 
-import { type Blueprint, type Pattern } from '@atj/forms';
+import { type Blueprint, type Pattern } from '@gsa-tts/forms-core';
 
 import {
   createSimpleTestBlueprint,

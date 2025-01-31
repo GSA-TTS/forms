@@ -14,7 +14,7 @@ The project team requires a method of organizing frontend components that facili
 
 ## Decision
 
-The project team will use [Storybook](https://storybook.js.org/) as development aid, component documentation, and collaboration tool. Storybook and corresponding React components will be located in the @atj/design namespace. The Storybook build will be bundled with the Spotlight build and deployed to Cloud.gov Pages.
+The project team will use [Storybook](https://storybook.js.org/) as development aid, component documentation, and collaboration tool. Storybook and corresponding React components will be located in the @gsa-tts/forms-design namespace. The Storybook build will be bundled with the Spotlight build and deployed to Cloud.gov Pages.
 
 The Spotlight frontend will leverage this package via CSS imports. Where necessary, the Spotlight frontend application will use straight CSS.
 

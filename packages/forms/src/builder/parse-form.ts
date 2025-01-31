@@ -1,6 +1,6 @@
 import * as z from 'zod';
 
-import { failure, success, type Result } from '@atj/common';
+import { failure, success, type Result } from '@gsa-tts/forms-common';
 import type { FormConfig } from '../pattern';
 import type { Blueprint } from '../types';
 

@@ -1,6 +1,6 @@
 import { verifyRequestOrigin } from 'lucia';
 
-import { type VoidResult } from '@atj/common';
+import { type VoidResult } from '@gsa-tts/forms-common';
 
 import { type AuthServiceContext } from './index.js';
 

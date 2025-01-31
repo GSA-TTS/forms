@@ -1,5 +1,5 @@
 {
-  "name": "@atj/form-rest-api",
+  "name": "@gsa-tts/forms-form-rest-api",
   "private": true,
   "description": "backend service for handling submitted forms",
   "main": "src/index.ts",
@@ -10,7 +10,7 @@
     "dev": "tsup src/* --watch"
   },
   "dependencies": {
-    "@atj/forms": "workspace:*"
+    "@gsa-tts/forms-core": "workspace:*"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.143",

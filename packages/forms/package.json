@@ -1,7 +1,7 @@
 {
-  "name": "@atj/forms",
+  "name": "@gsa-tts/forms-core",
   "version": "1.0.0",
-  "description": "10x ATJ form handling",
+  "description": "10x Forms Platform form handling",
   "type": "module",
   "license": "CC0",
   "main": "dist/cjs/index.js",
@@ -26,8 +26,8 @@
     "test": "vitest run --coverage"
   },
   "dependencies": {
-    "@atj/common": "workspace:*",
-    "@atj/database": "workspace:*",
+    "@gsa-tts/forms-common": "workspace:*",
+    "@gsa-tts/forms-database": "workspace:*",
     "pdf-lib": "^1.17.1",
     "qs": "^6.13.0",
     "set-value": "^4.1.0",

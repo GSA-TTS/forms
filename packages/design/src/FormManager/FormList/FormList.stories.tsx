@@ -2,7 +2,7 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { createTestBrowserFormService } from '@atj/forms/context';
+import { createTestBrowserFormService } from '@gsa-tts/forms-core/context';
 
 import FormList from './index.js';
 import {

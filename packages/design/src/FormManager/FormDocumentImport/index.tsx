@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Blueprint, type FormService } from '@atj/forms';
+import { Blueprint, type FormService } from '@gsa-tts/forms-core';
 
 import { type FormUIContext } from '../../Form/index.js';
 import DocumentImporter from './DocumentImporter/index.js';

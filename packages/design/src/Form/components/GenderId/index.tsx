@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { type GenderIdProps } from '@atj/forms';
+import { type GenderIdProps } from '@gsa-tts/forms-core';
 import { type PatternComponent } from '../../index.js';
 
 const GenderIdPattern: PatternComponent<GenderIdProps> = ({

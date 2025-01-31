@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FormManager } from '@atj/design';
+import { FormManager } from '@gsa-tts/forms-design';
 
 import { FormServiceClient } from '../lib/api-client.js';
 import { type AppContext } from '../config/context.js';

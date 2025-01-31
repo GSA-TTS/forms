@@ -1,5 +1,5 @@
 {
-  "name": "@atj/server-doj",
+  "name": "@gsa-tts/forms-server-doj",
   "version": "1.0.0",
   "description": "Form server instance for DOJ",
   "type": "module",
@@ -13,8 +13,8 @@
     "test": "vitest run --coverage"
   },
   "dependencies": {
-    "@atj/database": "workspace:*",
-    "@atj/server": "workspace:*"
+    "@gsa-tts/forms-database": "workspace:*",
+    "@gsa-tts/forms-server": "workspace:*"
   },
   "devDependencies": {
     "@types/supertest": "^6.0.2",

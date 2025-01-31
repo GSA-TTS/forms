@@ -1,4 +1,4 @@
-import { type Result, type VoidResult } from '@atj/common';
+import { type Result, type VoidResult } from '@gsa-tts/forms-common';
 import { type FormSession } from '../../index.js';
 
 /**

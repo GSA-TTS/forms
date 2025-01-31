@@ -1,4 +1,4 @@
-import { success } from '@atj/common';
+import { success } from '@gsa-tts/forms-common';
 
 import { type RepeaterPattern } from '../..';
 import { type SubmitHandler } from '../../submission';

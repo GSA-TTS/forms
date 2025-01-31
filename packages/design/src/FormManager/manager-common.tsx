@@ -1,5 +1,5 @@
 import React from 'react';
-import type { PromptComponent } from '@atj/forms';
+import type { PromptComponent } from '@gsa-tts/forms-core';
 import type { FormUIContext } from '../Form/index.js';
 import { PreviewPattern } from './FormEdit/PreviewPattern.js';
 

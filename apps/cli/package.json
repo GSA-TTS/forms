@@ -1,7 +1,7 @@
 {
-  "name": "@atj/cli-app",
+  "name": "@gsa-tts/forms-cli-app",
   "version": "1.0.0",
-  "description": "10x ATJ command-line interface",
+  "description": "10x Forms Platform command-line interface",
   "type": "module",
   "license": "CC0",
   "main": "src/index.ts",
@@ -13,7 +13,7 @@
     "test": "vitest run --coverage"
   },
   "dependencies": {
-    "@atj/infra-core": "workspace:*",
+    "@gsa-tts/forms-infra-core": "workspace:*",
     "commander": "^11.1.0"
   }
 }

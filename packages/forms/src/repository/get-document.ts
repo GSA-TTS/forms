@@ -1,4 +1,4 @@
-import { type Result, failure, success } from '@atj/common';
+import { type Result, failure, success } from '@gsa-tts/forms-common';
 
 import type { ParsedPdf } from '../documents/pdf/parsing-api';
 import type { DocumentFieldMap } from '../documents/types';

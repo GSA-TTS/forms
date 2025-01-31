@@ -1,4 +1,4 @@
-import { enLocale as message } from '@atj/common';
+import { enLocale as message } from '@gsa-tts/forms-common';
 
 import { type PatternConfig } from '../../pattern.js';
 

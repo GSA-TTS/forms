@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import { type AddressComponentProps } from '@atj/forms';
+import { type AddressComponentProps } from '@gsa-tts/forms-core';
 
 import { type PatternComponent } from '../../index.js';
 

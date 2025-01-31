@@ -1,6 +1,6 @@
 import * as z from 'zod';
 
-import { Result } from '@atj/common';
+import { Result } from '@gsa-tts/forms-common';
 
 import { type RadioGroupProps } from '../components.js';
 import { type FormError } from '../error.js';

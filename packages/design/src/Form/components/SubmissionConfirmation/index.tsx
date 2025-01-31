@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { type SubmissionConfirmationProps } from '@atj/forms';
+import { type SubmissionConfirmationProps } from '@gsa-tts/forms-core';
 import { type PatternComponent } from '../../../Form/index.js';
 
 const SubmissionConfirmation: PatternComponent<

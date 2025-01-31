@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs';
 
-import * as r from '@atj/common';
+import * as r from '@gsa-tts/forms-common';
 
 import { AWSParameterStoreSecretsVault } from './aws-param-store.js';
 import { getSecretMapFromJsonString, type SecretsVault } from '../types.js';

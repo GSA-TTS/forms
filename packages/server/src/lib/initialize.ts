@@ -1,4 +1,4 @@
 /**
  * Global initialization script.
  */
-import '@atj/design';
+import '@gsa-tts/forms-design';

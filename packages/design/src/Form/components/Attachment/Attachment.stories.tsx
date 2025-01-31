@@ -1,8 +1,8 @@
 import React from 'react';
 import { within, userEvent } from '@storybook/test';
 import { expect } from '@storybook/test';
-import { attachmentFileTypeMimes } from '@atj/forms';
-import { type AttachmentProps } from '@atj/forms';
+import { attachmentFileTypeMimes } from '@gsa-tts/forms-core';
+import { type AttachmentProps } from '@gsa-tts/forms-core';
 import { FormProvider, useForm } from 'react-hook-form';
 import type { Meta, StoryObj } from '@storybook/react';
 

@@ -1,9 +1,9 @@
 import classnames from 'classnames';
 import React from 'react';
 
-import { enLocale as message } from '@atj/common';
-import { type CheckboxProps } from '@atj/forms';
-import { type CheckboxPattern } from '@atj/forms';
+import { enLocale as message } from '@gsa-tts/forms-common';
+import { type CheckboxProps } from '@gsa-tts/forms-core';
+import { type CheckboxPattern } from '@gsa-tts/forms-core';
 
 import Checkbox from '../../../../Form/components/Checkbox/index.js';
 import { PatternEditComponent } from '../../types.js';

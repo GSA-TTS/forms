@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { type PackageDownloadProps } from '@atj/forms';
+import { type PackageDownloadProps } from '@gsa-tts/forms-core';
 
 import { type PatternComponent } from '../../../Form/index.js';
 import ActionBar from '../../../Form/ActionBar/index.js';

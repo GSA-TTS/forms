@@ -1,8 +1,8 @@
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
-import { type LoginGovOptions } from '@atj/auth';
-import { DatabaseContext } from '@atj/database';
+import { type LoginGovOptions } from '@gsa-tts/forms-auth';
+import { DatabaseContext } from '@gsa-tts/forms-database';
 
 export type ServerOptions = {
   title: string;
@@ -13,7 +13,7 @@ export type ServerOptions = {
 
 export const createDevServerOptions = async (): Promise<ServerOptions> => {
   const { createFilesystemDatabaseContext } = await import(
-    '@atj/database/context'
+    '@gsa-tts/forms-database/context'
   );
   const db = await createFilesystemDatabaseContext(
     join(dirname(fileURLToPath(import.meta.url)), '../main.db')
@@ -36,7 +36,7 @@ export const createDevServerOptions = async (): Promise<ServerOptions> => {
 
 export const createTestServerOptions = async (): Promise<ServerOptions> => {
   const { createInMemoryDatabaseContext } = await import(
-    '@atj/database/context'
+    '@gsa-tts/forms-database/context'
   );
   const db = await createInMemoryDatabaseContext();
   return {

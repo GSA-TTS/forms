@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto';
 
-import { type DatabaseContext } from '@atj/database';
+import { type DatabaseContext } from '@gsa-tts/forms-database';
 
 /**
  * Asynchronously creates a new user record in the database.

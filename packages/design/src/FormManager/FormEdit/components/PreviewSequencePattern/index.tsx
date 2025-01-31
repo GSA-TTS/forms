@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { type SequenceProps, getPattern } from '@atj/forms';
+import { type SequenceProps, getPattern } from '@gsa-tts/forms-core';
 
 import { DraggableList } from './DraggableList.js';
 import { useFormManagerStore } from '../../../store.js';

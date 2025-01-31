@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { type PageSetProps } from '@atj/forms';
+import { type PageSetProps } from '@gsa-tts/forms-core';
 
 import { type PatternComponent } from '../../index.js';
 import ActionBar from '../../../Form/ActionBar/index.js';

@@ -7,7 +7,7 @@
   "license": "CC0",
   "packageManager": "pnpm@9.8.0",
   "scripts": {
-    "build": "turbo run build --filter=!@atj/infra-cdktf",
+    "build": "turbo run build --filter=!@gsa-tts/forms-infra-cdktf",
     "clean": "turbo run clean",
     "clean:modules": "find $(git rev-parse --show-toplevel) -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
     "clean:dist": "find $(git rev-parse --show-toplevel) -name 'dist' -type d -prune -exec rm -rf '{}' +",

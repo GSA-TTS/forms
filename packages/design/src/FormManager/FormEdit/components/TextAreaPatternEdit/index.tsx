@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { PatternId, TextAreaProps } from '@atj/forms';
-import { TextAreaPattern } from '@atj/forms';
+import { PatternId, TextAreaProps } from '@gsa-tts/forms-core';
+import { TextAreaPattern } from '@gsa-tts/forms-core';
 
 import TextArea from '../../../../Form/components/TextArea/index.js';
 import { useFormManagerStore } from '../../../store.js';
@@ -11,7 +11,7 @@ import { PatternEditComponent } from '../../types.js';
 import { PatternEditActions } from '../common/PatternEditActions.js';
 import { PatternEditForm } from '../common/PatternEditForm.js';
 import { usePatternEditFormContext } from '../common/hooks.js';
-import { enLocale as message } from '@atj/common';
+import { enLocale as message } from '@gsa-tts/forms-common';
 
 const TextAreaPatternEdit: PatternEditComponent<TextAreaProps> = ({
   context,

@@ -1,8 +1,8 @@
 import classnames from 'classnames';
 import React from 'react';
 
-import { type DateOfBirthProps } from '@atj/forms';
-import { type DateOfBirthPattern } from '@atj/forms';
+import { type DateOfBirthProps } from '@gsa-tts/forms-core';
+import { type DateOfBirthPattern } from '@gsa-tts/forms-core';
 
 import DateOfBirth from '../../../../Form/components/DateOfBirth/index.js';
 import { PatternEditComponent } from '../../types.js';
@@ -10,7 +10,7 @@ import { PatternEditComponent } from '../../types.js';
 import { PatternEditActions } from '../common/PatternEditActions.js';
 import { PatternEditForm } from '../common/PatternEditForm.js';
 import { usePatternEditFormContext } from '../common/hooks.js';
-import { enLocale as message } from '@atj/common';
+import { enLocale as message } from '@gsa-tts/forms-common';
 import styles from '../../formEditStyles.module.css';
 
 const DateOfBirthPatternEdit: PatternEditComponent<DateOfBirthProps> = ({

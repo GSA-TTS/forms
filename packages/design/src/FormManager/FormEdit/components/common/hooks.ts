@@ -5,7 +5,7 @@ import {
   type PatternId,
   type PatternMap,
   type PatternValue,
-} from '@atj/forms';
+} from '@gsa-tts/forms-core';
 
 type NestedKeys<T extends object> = {
   [K in keyof T & (string | number)]: T[K] extends object

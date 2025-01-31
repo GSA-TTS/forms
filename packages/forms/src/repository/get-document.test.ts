@@ -1,6 +1,9 @@
 import { beforeAll, expect, it, vi } from 'vitest';
 
-import { type DbTestContext, describeDatabase } from '@atj/database/testing';
+import {
+  type DbTestContext,
+  describeDatabase,
+} from '@gsa-tts/forms-database/testing';
 import { addDocument } from './add-document';
 import type { DocumentFieldMap } from '../documents/types';
 import type { ParsedPdf } from '../documents/pdf/parsing-api';

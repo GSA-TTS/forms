@@ -1,5 +1,5 @@
 import * as z from 'zod';
-import { type Result } from '@atj/common';
+import { type Result } from '@gsa-tts/forms-common';
 
 export type SecretKey = string;
 export type SecretValue = string | undefined;

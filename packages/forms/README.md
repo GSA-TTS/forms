@@ -1,4 +1,4 @@
-# @atj/forms
+# @gsa-tts/forms-core
 
 This library includes all of the core business logic of Forms Platform.
 

@@ -1,4 +1,4 @@
-import { type VoidResult, failure } from '@atj/common';
+import { type VoidResult, failure } from '@gsa-tts/forms-common';
 
 import { type FormServiceContext } from '../context/index.js';
 

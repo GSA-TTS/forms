@@ -1,5 +1,5 @@
-import { type DatabaseContext } from '@atj/database';
-import { createServer } from '@atj/server';
+import { type DatabaseContext } from '@gsa-tts/forms-database';
+import { createServer } from '@gsa-tts/forms-server';
 
 export const createCustomServer = async (db: DatabaseContext): Promise<any> => {
   return createServer({

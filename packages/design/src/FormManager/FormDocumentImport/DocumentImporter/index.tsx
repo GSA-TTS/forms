@@ -8,7 +8,7 @@ import {
   addDocument,
   addDocumentFieldsToForm,
   createFormSession,
-} from '@atj/forms';
+} from '@gsa-tts/forms-core';
 
 import Form, { FormUIContext } from '../../../Form/index.js';
 import { onFileInputChangeGetFile } from '../../FormList/CreateNew/file-input.js';

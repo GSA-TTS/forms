@@ -1,4 +1,4 @@
-# @atj/server
+# @gsa-tts/forms-server
 
 The Forms Platform web server.
 
@@ -21,7 +21,7 @@ pnpm dev
 To start the provided Express server:
 
 ```typescript
-import { createServer } from '@atj/server';
+import { createServer } from '@gsa-tts/forms-server';
 
 const port = process.env.PORT || 4321;
 

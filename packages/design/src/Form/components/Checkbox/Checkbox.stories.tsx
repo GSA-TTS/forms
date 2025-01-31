@@ -3,7 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { type Meta, type StoryObj } from '@storybook/react';
 
 import { CheckboxPattern } from './Checkbox.js';
-import { CheckboxProps } from '@atj/forms';
+import { CheckboxProps } from '@gsa-tts/forms-core';
 
 const meta: Meta<typeof CheckboxPattern> = {
   title: 'patterns/CheckboxPattern',
