@@ -2,8 +2,7 @@
 dist/
 # generated types
 .astro/
-
-# database
+# development database
 main.db
 
 # dependencies

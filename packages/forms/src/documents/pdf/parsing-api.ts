@@ -53,7 +53,7 @@ const RadioGroupOption = z.object({
 });
 
 const RadioGroup = z.object({
-  // id: z.string(),
+  id: z.string(),
   component_type: z.literal('radio_group'),
   legend: z.string(),
   options: RadioGroupOption.array(),
@@ -236,7 +236,6 @@ export const processApiResponse = async (json: any): Promise<ParsedPdf> => {
         pagePatterns[element.page] = (pagePatterns[element.page] || []).concat(
           radioGroupPattern.id
         );
-        /*
         parsedPdf.outputs[radioGroupPattern.id] = {
           type: 'RadioGroup',
           name: element.id,
@@ -250,7 +249,6 @@ export const processApiResponse = async (json: any): Promise<ParsedPdf> => {
           value: '',
           required: true,
         };
-        */
       }
       continue;
     }
