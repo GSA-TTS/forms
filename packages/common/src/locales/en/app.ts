@@ -7,6 +7,13 @@ const defaults = {
 
 export const en = {
   patterns: {
+    address: {
+      ...defaults,
+      displayName: 'Address',
+      fieldLabel: 'Address label',
+      legend: 'Physical Address',
+      errorTextMustContainChar: 'String must contain at least 1 character(s)',
+    },
     attachment: {
       ...defaults,
       displayName: 'Attachment',
