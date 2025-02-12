@@ -81,7 +81,7 @@ export const repeaterConfig: PatternConfig<RepeaterPattern> = {
     patterns: [],
     showControls: true,
   },
-  // @ts-ignore
+
   parseUserInput: ((
     pattern: RepeaterPattern,
     input: unknown,
