@@ -8,6 +8,7 @@ import {
 } from './pattern.js';
 import { type FormSession, nullSession, sessionIsComplete } from './session.js';
 import { type ActionName } from './submission.js';
+import { stateTerritoryOrMilitaryPostList } from './patterns/address/jurisdictions.js';
 
 export type PackageDownloadProps = PatternProps<{
   type: 'package-download';
@@ -33,6 +34,31 @@ export type TextAreaProps = PatternProps<{
   error?: FormError;
   hint?: string;
   maxLength: number;
+}>;
+
+export type AddressFieldProps = {
+  type: 'input' | 'select';
+  inputId: string;
+  value: string;
+  label: string;
+  required?: boolean;
+  pattern?: string;
+  options?: typeof stateTerritoryOrMilitaryPostList;
+  error?: FormError;
+  hint?: string;
+};
+
+export type AddressComponentProps = PatternProps<{
+  type: 'address';
+  error?: {
+    physical?: FormError;
+    mailing?: FormError;
+  };
+  legend?: string;
+  required?: boolean;
+  addMailingAddress?: boolean;
+  childProps: Record<string, AddressFieldProps>;
+  _patternId?: string;
 }>;
 
 export type AttachmentProps = PatternProps<{
