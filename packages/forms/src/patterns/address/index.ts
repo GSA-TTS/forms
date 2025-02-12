@@ -78,8 +78,6 @@ export type AddressPatternOutput = z.infer<typeof AddressSchema>;
 
 const parseUserInput = (_: unknown, obj: z.infer<typeof AddressSchema>) => {
   const result = AddressSchema.safeParse(obj);
-  console.log('TEST ADDRESS result', result);
-
   if (result.success) {
     return {
       success: true,
@@ -99,9 +97,7 @@ const parseUserInput = (_: unknown, obj: z.infer<typeof AddressSchema>) => {
       },
       {} as Partial<z.infer<typeof AddressSchema>>
     );
-
-    console.log('TEST ADDRESS validData', validData);
-    console.log('TEST ADDRESS fieldErrors', fieldErrors);
+    
     return {
       success: false,
       error: {

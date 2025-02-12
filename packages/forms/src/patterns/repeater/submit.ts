@@ -8,7 +8,6 @@ export const repeaterAddRowHandler: SubmitHandler<RepeaterPattern> = async (
   opts
 ) => {
   const currentData = opts.session.data.values[opts.pattern.id];
-  console.log('TEST currentData in submit', currentData);
   const repeaterPatternData = Array.isArray(currentData)
     ? currentData
     : Array.isArray(currentData?.[opts.pattern.id])
@@ -37,8 +36,6 @@ export const repeaterAddRowHandler: SubmitHandler<RepeaterPattern> = async (
     ...opts.session.data.values,
     [opts.pattern.id]: Object.freeze([...repeaterPatternData, ...newRows]),
   };
-
-  console.log('TEST newValues in submit', newValues);
   // Only create new session object if values actually changed
   if (
     opts.session.data.values[opts.pattern.id] !== newValues[opts.pattern.id]
