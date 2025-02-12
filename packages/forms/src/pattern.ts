@@ -202,7 +202,8 @@ export const aggregatePatternSessionValues = (
 ) => {
   const aggregatedValues = aggregateValuesByPrefix(values);
   if (patternConfig.parseUserInput) {
-    const isRepeaterType = pattern.type === 'repeater';
+    const isRepeaterOrAddressType =
+      pattern.type === 'repeater' || pattern.type === 'address';
     const patternValues = aggregatedValues[pattern.id];
     const parseResult: any = patternConfig.parseUserInput(
       pattern,
@@ -215,7 +216,7 @@ export const aggregatePatternSessionValues = (
       result.values[pattern.id] = parseResult.data;
       delete result.errors[pattern.id];
     } else {
-      result.values[pattern.id] = isRepeaterType
+      result.values[pattern.id] = isRepeaterOrAddressType
         ? parseResult.data
         : values[pattern.id];
       result.errors[pattern.id] = parseResult.error;
