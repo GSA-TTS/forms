@@ -11,7 +11,7 @@ export const en = {
       ...defaults,
       displayName: 'Address',
       fieldLabel: 'Address label',
-      legend: 'Physical Address',
+      legend: 'Physical address',
       errorTextMustContainChar: 'String must contain at least 1 character(s)',
     },
     attachment: {

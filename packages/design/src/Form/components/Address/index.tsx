@@ -107,11 +107,7 @@ const AddressPattern: PatternComponent<AddressComponentProps> = ({
         <React.Fragment key={key}>
           <label className={classNames('usa-label')} htmlFor={props.inputId}>
             {props.label}
-            {props.required && (
-              <abbr title="required" className="usa-hint usa-hint--required">
-                *
-              </abbr>
-            )}
+            {props.required && <span className="required-indicator">*</span>}
           </label>
           {props.error && (
             <div
@@ -197,18 +193,10 @@ const AddressPattern: PatternComponent<AddressComponentProps> = ({
             })}
           >
             {legend || 'Physical address'}
-            {required && (
-              <abbr title="required" className="usa-hint usa-hint--required">
-                *
-              </abbr>
-            )}
+            {required && <span className="required-indicator">*</span>}
           </legend>
           <span className="usa-hint pb-2 ">
-            Required fields are marked with an asterisk (
-            <abbr title="required" className="usa-hint usa-hint--required">
-              *
-            </abbr>
-            ).
+            Required fields are marked with an asterisk (*).
           </span>
           {error?.physical && (
             <div
@@ -235,18 +223,10 @@ const AddressPattern: PatternComponent<AddressComponentProps> = ({
               })}
             >
               Mailing address
-              {required && (
-                <abbr title="required" className="usa-hint usa-hint--required">
-                  *
-                </abbr>
-              )}
+              {required && <span className="required-indicator">*</span>}
             </legend>
             <span className="usa-hint pb-2 ">
-              Required fields are marked with an asterisk (
-              <abbr title="required" className="usa-hint usa-hint--required">
-                *
-              </abbr>
-              ).
+              Required fields are marked with an asterisk (*).
             </span>
             {error?.mailing && (
               <div

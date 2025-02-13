@@ -63,7 +63,6 @@ export const AddressSchema = z.object({
     .string()
     .max(128, { message: 'Urbanization code must be less than 128 characters' })
     .optional(),
-  mailingGooglePlusCode: z.string().max(8),
 });
 
 const configSchema = z.object({
@@ -117,76 +116,85 @@ const createPromptProps = (
   pattern: { id: string },
   error: FormErrors,
   prefix: string
-) => ({
-  [`${prefix}StreetAddress`]: {
-    type: 'input' as const,
-    inputId: `${pattern.id}.${prefix}StreetAddress`,
-    value:
-      sessionValue?.[`${prefix}StreetAddress` as keyof typeof sessionValue] ??
-      '',
-    label: 'Street address',
-    required: true,
-    error: error?.[`${prefix}StreetAddress`],
-  },
-  [`${prefix}StreetAddress2`]: {
-    type: 'input' as const,
-    inputId: `${pattern.id}.${prefix}StreetAddress2`,
-    value:
-      sessionValue?.[`${prefix}StreetAddress2` as keyof typeof sessionValue] ??
-      '',
-    label: 'Street address line 2',
-    required: false,
-    error: error?.[`${prefix}StreetAddress2`],
-  },
-  [`${prefix}City`]: {
-    type: 'input' as const,
-    inputId: `${pattern.id}.${prefix}City`,
-    value: sessionValue?.[`${prefix}City` as keyof typeof sessionValue] ?? '',
-    label: 'City',
-    required: true,
-    error: error?.[`${prefix}City`],
-  },
-  [`${prefix}StateTerritoryOrMilitaryPost`]: {
-    type: 'select' as const,
-    inputId: `${pattern.id}.${prefix}StateTerritoryOrMilitaryPost`,
-    value:
-      sessionValue?.[
-        `${prefix}StateTerritoryOrMilitaryPost` as keyof typeof sessionValue
-      ] ?? '',
-    label: 'State, territory, or military post',
-    required: true,
-    options: stateTerritoryOrMilitaryPostList,
-    error: error?.[`${prefix}StateTerritoryOrMilitaryPost`],
-  },
-  [`${prefix}ZipCode`]: {
-    type: 'input' as const,
-    inputId: `${pattern.id}.${prefix}ZipCode`,
-    value:
-      sessionValue?.[`${prefix}ZipCode` as keyof typeof sessionValue] ?? '',
-    label: 'ZIP code',
-    required: true,
-    error: error?.[`${prefix}ZipCode`],
-  },
-  [`${prefix}UrbanizationCode`]: {
-    type: 'input' as const,
-    inputId: `${pattern.id}.${prefix}UrbanizationCode`,
-    value:
-      sessionValue?.[
-        `${prefix}UrbanizationCode` as keyof typeof sessionValue
-      ] ?? '',
-    label: 'Urbanization (Puerto Rico only)',
-    required: false,
-    error: error?.[`${prefix}UrbanizationCode`],
-  },
-  [`${prefix}GooglePlusCode`]: {
-    type: 'input' as const,
-    inputId: `${pattern.id}.${prefix}GooglePlusCode`,
-    value:
-      sessionValue?.[`${prefix}GooglePlusCode` as keyof typeof sessionValue] ??
-      '',
-    label: 'Google Plus Code',
-  },
-});
+) => {
+  const props = {
+    [`${prefix}StreetAddress`]: {
+      type: 'input' as const,
+      inputId: `${pattern.id}.${prefix}StreetAddress`,
+      value:
+        sessionValue?.[`${prefix}StreetAddress` as keyof typeof sessionValue] ??
+        '',
+      label: 'Street address',
+      required: prefix !== 'physical',
+      error: error?.[`${prefix}StreetAddress`],
+    },
+    [`${prefix}StreetAddress2`]: {
+      type: 'input' as const,
+      inputId: `${pattern.id}.${prefix}StreetAddress2`,
+      value:
+        sessionValue?.[`${prefix}StreetAddress2` as keyof typeof sessionValue] ??
+        '',
+      label: 'Street address line 2',
+      required: false,
+      error: error?.[`${prefix}StreetAddress2`],
+    },
+    [`${prefix}City`]: {
+      type: 'input' as const,
+      inputId: `${pattern.id}.${prefix}City`,
+      value: sessionValue?.[`${prefix}City` as keyof typeof sessionValue] ?? '',
+      label: 'City',
+      required: true,
+      error: error?.[`${prefix}City`],
+    },
+    [`${prefix}StateTerritoryOrMilitaryPost`]: {
+      type: 'select' as const,
+      inputId: `${pattern.id}.${prefix}StateTerritoryOrMilitaryPost`,
+      value:
+        sessionValue?.[
+          `${prefix}StateTerritoryOrMilitaryPost` as keyof typeof sessionValue
+        ] ?? '',
+      label: 'State, territory, or military post',
+      required: true,
+      options: stateTerritoryOrMilitaryPostList,
+      error: error?.[`${prefix}StateTerritoryOrMilitaryPost`],
+    },
+    [`${prefix}ZipCode`]: {
+      type: 'input' as const,
+      inputId: `${pattern.id}.${prefix}ZipCode`,
+      value:
+        sessionValue?.[`${prefix}ZipCode` as keyof typeof sessionValue] ?? '',
+      label: 'ZIP code',
+      required: false,
+      error: error?.[`${prefix}ZipCode`],
+    },
+    [`${prefix}UrbanizationCode`]: {
+      type: 'input' as const,
+      inputId: `${pattern.id}.${prefix}UrbanizationCode`,
+      value:
+        sessionValue?.[
+          `${prefix}UrbanizationCode` as keyof typeof sessionValue
+        ] ?? '',
+      label: 'Urbanization (Puerto Rico only)',
+      required: false,
+      error: error?.[`${prefix}UrbanizationCode`],
+    },
+  };
+
+  if (prefix !== 'mailing') {
+    props[`${prefix}GooglePlusCode`] = {
+      type: 'input' as const,
+      inputId: `${pattern.id}.${prefix}GooglePlusCode`,
+      value:
+        sessionValue?.[`${prefix}GooglePlusCode` as keyof typeof sessionValue] ??
+        '',
+      label: 'Google Plus Code',
+      required: false,
+      error: error?.[`${prefix}GooglePlusCode`],
+    };
+  }
+
+  return props;
+};
 
 export const addressConfig: PatternConfig<
   AddressPattern,
@@ -195,7 +203,7 @@ export const addressConfig: PatternConfig<
   displayName: 'Address',
   iconPath: 'block-icon.svg',
   initial: {
-    legend: 'Physical Address',
+    legend: 'Physical address',
     required: true,
     addMailingAddress: false,
   },
