@@ -96,7 +96,7 @@ const parseUserInput = (_: unknown, obj: z.infer<typeof AddressSchema>) => {
       },
       {} as Partial<z.infer<typeof AddressSchema>>
     );
-    
+
     return {
       success: false,
       error: {
@@ -132,8 +132,9 @@ const createPromptProps = (
       type: 'input' as const,
       inputId: `${pattern.id}.${prefix}StreetAddress2`,
       value:
-        sessionValue?.[`${prefix}StreetAddress2` as keyof typeof sessionValue] ??
-        '',
+        sessionValue?.[
+          `${prefix}StreetAddress2` as keyof typeof sessionValue
+        ] ?? '',
       label: 'Street address line 2',
       required: false,
       error: error?.[`${prefix}StreetAddress2`],
@@ -185,8 +186,9 @@ const createPromptProps = (
       type: 'input' as const,
       inputId: `${pattern.id}.${prefix}GooglePlusCode`,
       value:
-        sessionValue?.[`${prefix}GooglePlusCode` as keyof typeof sessionValue] ??
-        '',
+        sessionValue?.[
+          `${prefix}GooglePlusCode` as keyof typeof sessionValue
+        ] ?? '',
       label: 'Google Plus Code',
       required: false,
       error: error?.[`${prefix}GooglePlusCode`],
