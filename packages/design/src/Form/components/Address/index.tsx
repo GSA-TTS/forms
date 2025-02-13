@@ -50,7 +50,7 @@ const AddressPattern: PatternComponent<AddressComponentProps> = ({
       // Copy physical address to mailing address
       if (addressValues && addressId) {
         Object.entries(addressValues).forEach(([key, value]) => {
-          if (key.startsWith('physical')) {
+          if (key.startsWith('physical') && !key.includes('GooglePlusCode')) {
             const mailingKey = key.replace('physical', 'mailing');
             setValue(`${addressId}.${mailingKey}`, value, {
               shouldValidate: true,
