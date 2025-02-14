@@ -2,10 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { expect, userEvent } from '@storybook/test';
 import { within } from '@testing-library/react';
 
-import { type AddressPattern } from '@atj/forms';
+import { type AddressPattern } from '@gsa-tts/forms-core';
 import { createPatternEditStoryMeta } from '../common/story-helper.js';
 import FormEdit from '../../index.js';
-import { enLocale as message } from '@atj/common';
+import { enLocale as message } from '@gsa-tts/forms-common';
 
 const pattern: AddressPattern = {
   id: 'address-1',

@@ -1,8 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import { type AddressComponentProps } from '@atj/forms';
-import { type AddressPattern } from '@atj/forms';
+import { type AddressComponentProps } from '@gsa-tts/forms-core';
+import { type AddressPattern } from '@gsa-tts/forms-core';
 
 import Address from '../../../../Form/components/Address/index.js';
 import { PatternEditComponent } from '../../types.js';
@@ -10,7 +10,7 @@ import { PatternEditComponent } from '../../types.js';
 import { PatternEditActions } from '../common/PatternEditActions.js';
 import { PatternEditForm } from '../common/PatternEditForm.js';
 import { usePatternEditFormContext } from '../common/hooks.js';
-import { enLocale as message } from '@atj/common';
+import { enLocale as message } from '@gsa-tts/forms-common';
 import styles from '../../formEditStyles.module.css';
 
 const AddressPatternEdit: PatternEditComponent<AddressComponentProps> = ({
