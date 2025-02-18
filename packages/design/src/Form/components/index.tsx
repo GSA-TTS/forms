@@ -22,6 +22,7 @@ import SocialSecurityNumber from './SocialSecurityNumber/index.js';
 import SubmissionConfirmation from './SubmissionConfirmation/index.js';
 import TextInput from './TextInput/index.js';
 import TextArea from './TextArea/index.js';
+import Name from './Name/index.js';
 
 export const defaultPatternComponents: ComponentForPattern = {
   attachment: Attachment as PatternComponent,
@@ -46,4 +47,5 @@ export const defaultPatternComponents: ComponentForPattern = {
   'social-security-number': SocialSecurityNumber as PatternComponent,
   'submission-confirmation': SubmissionConfirmation as PatternComponent,
   'text-area': TextArea as PatternComponent,
+  'name-input': Name as PatternComponent,
 };
