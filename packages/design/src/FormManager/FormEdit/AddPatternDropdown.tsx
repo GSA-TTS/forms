@@ -9,8 +9,9 @@ import dateIcon from './images/date-icon.svg';
 import dropDownIcon from './images/dropdown-icon.svg';
 import dropDownOptionIcon from './images/dropdownoption-icon.svg';
 import emailInputIcon from './images/email-icon.svg';
-import genderId from './images/gender-id-icon.svg';
+import genderIdIcon from './images/gender-id-icon.svg';
 import longanswerIcon from './images/longanswer-icon.svg';
+import nameIcon from './images/name-icon.svg';
 import pageIcon from './images/page-icon.svg';
 import phoneIcon from './images/phone-icon.svg';
 import richTextIcon from './images/richtext-icon.svg';
@@ -30,7 +31,8 @@ const icons: Record<string, string | any> = {
   'dropdown-icon.svg': dropDownIcon,
   'dropdownoption-icon.svg': dropDownOptionIcon,
   'email-icon.svg': emailInputIcon,
-  'gender-id-icon.svg': genderId,
+  'gender-id-icon.svg': genderIdIcon,
+  'name-icon.svg': nameIcon,
   'longanswer-icon.svg': longanswerIcon,
   'page-icon.svg': pageIcon,
   'phone-icon.svg': phoneIcon,
@@ -129,6 +131,7 @@ const sidebarPatterns: DropdownPattern[] = [
   ['rich-text', defaultFormConfig.patterns['rich-text']],
   ['select-dropdown', defaultFormConfig.patterns['select-dropdown']],
   ['attachment', defaultFormConfig.patterns['attachment']],
+  ['name-input', defaultFormConfig.patterns['name-input']],
   [
     'social-security-number',
     defaultFormConfig.patterns['social-security-number'],
