@@ -81,6 +81,14 @@ export const en = {
       fieldLabel: 'Email Input label',
       errorTextMustContainChar: 'String must contain at least 1 character(s)',
     },
+    nameInput: {
+      ...defaults,
+      displayName: 'Name label',
+      fieldLabel: 'Name field label',
+      givenNameHint: 'First or given name hint',
+      familyNameHint: 'Last or family name hint',
+      errorTextMustContainChar: 'String must contain at least 1 character(s)',
+    },
     phoneNumber: {
       ...defaults,
       displayName: 'Phone number label',

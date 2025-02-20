@@ -8,7 +8,6 @@ export const repeaterAddRowHandler: SubmitHandler<RepeaterPattern> = async (
   opts
 ) => {
   const currentData = opts.session.data.values[opts.pattern.id];
-  console.log('TEST currentData in submit', currentData);
   const repeaterPatternData = Array.isArray(currentData)
     ? currentData
     : Array.isArray(currentData?.[opts.pattern.id])
