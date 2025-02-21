@@ -52,6 +52,7 @@ describe('NamePattern tests', () => {
         expect.fail('nameConfig.parseUserInput is undefined');
       }
       const result = nameConfig.parseUserInput(pattern, inputValue);
+
       if (result.success) {
         expect(result.data).toEqual(inputValue);
       } else {
