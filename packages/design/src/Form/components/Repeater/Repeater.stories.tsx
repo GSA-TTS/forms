@@ -21,7 +21,7 @@ const mockChildComponents = (index: number, withError = false) => [
     props: {
       _patternId: `3fdb2cb6-5d65-4de1-b773-3fb8636f5d09.${index}.a6c217f0-fe84-44ef-b606-69142ecb3365`,
       type: 'date-of-birth',
-      label: 'Date of Birth',
+      label: 'Date of birth',
       hint: 'For example: January 19 2000',
       dayId: `3fdb2cb6-5d65-4de1-b773-3fb8636f5d09.${index}.a6c217f0-fe84-44ef-b606-69142ecb3365.day`,
       monthId: `3fdb2cb6-5d65-4de1-b773-3fb8636f5d09.${index}.a6c217f0-fe84-44ef-b606-69142ecb3365.month`,
@@ -40,7 +40,7 @@ const mockChildComponents = (index: number, withError = false) => [
     props: {
       _patternId: `3fdb2cb6-5d65-4de1-b773-3fb8636f5d09.${index}.7d5df1c1-ca92-488c-81ca-8bb180f952b6`,
       type: 'email-input',
-      label: 'Email Input',
+      label: 'Email',
       emailId: `3fdb2cb6-5d65-4de1-b773-3fb8636f5d09.${index}.7d5df1c1-ca92-488c-81ca-8bb180f952b6.email`,
       required: false,
       error: withError
@@ -105,10 +105,10 @@ export const WithContents = {
     const listItems = canvas.getAllByRole('list');
     expect(listItems.length).toBe(1);
 
-    const dobLabel = await canvas.findByText('Date of Birth');
+    const dobLabel = await canvas.findByText('Date of birth');
     expect(dobLabel).toBeInTheDocument();
 
-    const emailLabel = await canvas.findByText('Email Input');
+    const emailLabel = await canvas.findByText('Email');
     expect(emailLabel).toBeInTheDocument();
   },
 } satisfies StoryObj<typeof Repeater>;

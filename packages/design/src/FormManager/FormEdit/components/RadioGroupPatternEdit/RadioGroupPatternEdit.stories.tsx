@@ -33,7 +33,7 @@ export default storyConfig;
 export const Basic: StoryObj<typeof FormEdit> = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const updatedLabel = 'Radio group update';
+    const updatedLabel = 'Multiple choice update';
 
     await userEvent.click(
       canvas.getByText(message.patterns.radioGroup.displayName)

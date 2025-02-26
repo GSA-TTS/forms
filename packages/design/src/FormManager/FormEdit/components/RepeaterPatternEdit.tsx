@@ -99,7 +99,7 @@ const RepeaterPreview: PatternComponent<RepeaterProps> = props => {
           >
             <div className={classNames(styles.usaAlertBody, 'usa-alert__body')}>
               <CompoundAddPatternButton
-                title="Add question to repeater"
+                title="Add question to repeater set"
                 patternSelected={patternType =>
                   addPatternToCompoundField(patternType, props._patternId)
                 }

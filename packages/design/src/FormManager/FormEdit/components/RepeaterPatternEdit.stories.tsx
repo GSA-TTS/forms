@@ -16,7 +16,7 @@ const pattern: RepeaterPattern = {
   id: '1',
   type: 'repeater',
   data: {
-    legend: 'Repeater pattern description',
+    legend: 'Repeater question set pattern description',
     patterns: [],
   },
 };
@@ -34,7 +34,7 @@ export const Basic: StoryObj<typeof FormEdit> = {
     const canvas = within(canvasElement);
     await testUpdateFormFieldOnSubmitByElement(
       canvasElement,
-      await canvas.findByText('Repeater pattern description'),
+      await canvas.findByText('Repeater question set pattern description'),
       'Legend Text Element',
       'Updated repeater pattern'
     );
@@ -46,7 +46,7 @@ export const Error: StoryObj<typeof FormEdit> = {
     const canvas = within(canvasElement);
     await testEmptyFormLabelErrorByElement(
       canvasElement,
-      await canvas.findByText('Repeater pattern description'),
+      await canvas.findByText('Repeater question set pattern description'),
       'Legend Text Element',
       message.patterns.repeater.errorTextMustContainChar
     );
@@ -73,12 +73,12 @@ export const AddPattern: StoryObj<typeof FormEdit> = {
     await userEvent.type(input, 'Repeater short question');
 
     const addQuestionToRepeaterButton = canvas.getByRole('button', {
-      name: /Add question to repeater/,
+      name: /Add question to repeater set/,
     });
     await userEvent.click(addQuestionToRepeaterButton);
 
     const dateOfBirthButton = canvas.getByRole('button', {
-      name: /Date of Birth/,
+      name: /Date of birth/,
     });
     await userEvent.click(dateOfBirthButton);
 
@@ -90,8 +90,8 @@ export const AddPattern: StoryObj<typeof FormEdit> = {
     });
     await expect(fieldLabel).toBeInTheDocument();
 
-    // Confirm that the "Date of Birth" legend exists
-    const dateOfBirthLegend = await canvas.findByText('Date of Birth', {
+    // Confirm that the "Date of birth" legend exists
+    const dateOfBirthLegend = await canvas.findByText('Date of birth', {
       selector: 'legend',
     });
     await expect(dateOfBirthLegend).toBeInTheDocument();
@@ -105,7 +105,7 @@ export const RemovePattern: StoryObj<typeof FormEdit> = {
     // Confirm that the expected repeater legend exists
     expect(
       canvas.queryAllByRole('group', {
-        name: /Repeater pattern description/i,
+        name: /Repeater question set pattern description/i,
       })
     ).toHaveLength(1);
 
@@ -117,7 +117,7 @@ export const RemovePattern: StoryObj<typeof FormEdit> = {
 
     // Confirm that the repeater was removed
     const test = await canvas.queryAllByRole('group', {
-      name: /Repeater pattern description/i,
+      name: /Repeater question set pattern description/i,
     });
     expect(test).toHaveLength(0);
   },

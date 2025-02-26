@@ -29,8 +29,8 @@ export default storyConfig;
 export const Basic: StoryObj<typeof FormEdit> = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const updatedLabel = 'Social Security Number update';
-    const updatedHint = 'Updated hint for Social Security Number';
+    const updatedLabel = 'Social Security number update';
+    const updatedHint = 'Updated hint for Social Security number';
 
     await userEvent.click(canvas.getByText(message.patterns.ssn.displayName));
 
@@ -53,7 +53,7 @@ export const Basic: StoryObj<typeof FormEdit> = {
 export const WithoutHint: StoryObj<typeof FormEdit> = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const updatedLabel = 'Social Security Number update';
+    const updatedLabel = 'Social Security number update';
 
     await userEvent.click(canvas.getByText(message.patterns.ssn.displayName));
 
@@ -82,9 +82,7 @@ export const Error: StoryObj<typeof FormEdit> = {
     labelInput.blur();
 
     await expect(
-      await canvas.findByText(
-        message.patterns.selectDropdown.errorTextMustContainChar
-      )
+      await canvas.findByText(message.patterns.ssn.errorTextMustContainChar)
     ).toBeInTheDocument();
   },
 };

@@ -34,7 +34,7 @@ export default storyConfig;
 export const Basic: StoryObj<typeof FormEdit> = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const updatedLabel = 'Select Dropdown update';
+    const updatedLabel = 'Dropdown update';
 
     await userEvent.click(
       canvas.getByText(message.patterns.selectDropdown.displayName)

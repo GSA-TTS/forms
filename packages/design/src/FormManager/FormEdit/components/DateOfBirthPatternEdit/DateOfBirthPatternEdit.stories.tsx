@@ -29,8 +29,8 @@ export default storyConfig;
 export const Basic: StoryObj<typeof FormEdit> = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const updatedLabel = 'Date of Birth update';
-    const updatedHint = 'Updated hint for Date of Birth';
+    const updatedLabel = 'Date of birth update';
+    const updatedHint = 'Updated hint for Date of birth';
 
     await userEvent.click(
       canvas.getByText(message.patterns.dateOfBirth.displayName)
@@ -59,7 +59,7 @@ export const Basic: StoryObj<typeof FormEdit> = {
 export const WithoutHint: StoryObj<typeof FormEdit> = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const updatedLabel = 'Date of Birth update';
+    const updatedLabel = 'Date of birth update';
 
     await userEvent.click(
       canvas.getByText(message.patterns.dateOfBirth.displayName)

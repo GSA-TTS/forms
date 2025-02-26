@@ -34,7 +34,7 @@ export const SocialSecurityNumberPattern: PatternComponent<
           })}
           htmlFor={ssnId}
         >
-          {label || 'Social Security Number'}
+          {label || 'Social Security number'}
           {required && <span className="required-indicator">*</span>}
         </label>
         {hint && (

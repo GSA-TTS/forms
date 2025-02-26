@@ -29,8 +29,8 @@ export default storyConfig;
 export const Basic: StoryObj<typeof FormEdit> = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const updatedLabel = 'Phone Number update';
-    const updatedHint = 'Updated hint for Phone Number';
+    const updatedLabel = 'Phone number update';
+    const updatedHint = 'Updated hint for phone number';
 
     await userEvent.click(
       canvas.getByText(message.patterns.phoneNumber.displayName)
@@ -59,7 +59,7 @@ export const Basic: StoryObj<typeof FormEdit> = {
 export const WithoutHint: StoryObj<typeof FormEdit> = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const updatedLabel = 'Phone Number update';
+    const updatedLabel = 'Phone number update';
 
     await userEvent.click(
       canvas.getByText(message.patterns.phoneNumber.displayName)
@@ -97,7 +97,7 @@ export const Error: StoryObj<typeof FormEdit> = {
 
     await expect(
       await canvas.findByText(
-        message.patterns.selectDropdown.errorTextMustContainChar
+        message.patterns.phoneNumber.errorTextMustContainChar
       )
     ).toBeInTheDocument();
   },

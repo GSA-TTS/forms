@@ -12,6 +12,9 @@
   background-color: #fff;
   font-weight: bold;
 }
+.dropdownButton:focus {
+  outline: none;
+}
 
 .dropdownMenu:hover li,
 .dropdownItem:hover {
@@ -199,4 +202,25 @@
     overflow: auto;
     left: 32px;
   }
+}
+
+.addPatternDropdown ul,
+.addPatternDropdown li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.category-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdownItem {
+  margin-left: 0;
+}
+
+.categoryDivider {
+  border-top: 1px solid #ccc; /* Increase thickness for visibility */
+  margin: 0.5rem 0;
 }

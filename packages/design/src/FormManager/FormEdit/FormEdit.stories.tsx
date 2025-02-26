@@ -56,7 +56,7 @@ export const FormEditAddPattern: StoryObj<typeof FormEdit> = {
     // Get the initial count of inputs
     const initialCount = (await canvas.findAllByRole('textbox')).length;
 
-    const select = canvas.getAllByText('Add Element');
+    const select = canvas.getAllByText('Add element');
     await userEvent.click(canvas.getByText('Pattern 1'));
     //await userEvent.selectOptions(select, 'Text input');
 
@@ -83,7 +83,7 @@ const editFieldLabel = async (
 
   // Enter new text for first field
   const input = canvas.getByLabelText('Field label');
-  const select = canvas.getAllByText('Add Element');
+  const select = canvas.getAllByText('Add element');
 
   await userEvent.clear(input);
   await userEvent.type(input, updatedLabel);
@@ -110,12 +110,10 @@ export const FormEditReorderPattern: StoryObj<typeof FormEdit> = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const grabber = canvas.getAllByRole('button')[3];
-    await grabber.focus();
+    const grabber = canvas.getAllByRole('button')[2];
 
     // Enter reordering mode with the spacebar
     await userEvent.type(grabber, ' ');
-    await new Promise(r => setTimeout(r, 1000));
 
     // Press the arrow down, to move the first pattern to the second position
     await userEvent.type(grabber, '[ArrowDown]');
@@ -128,6 +126,7 @@ export const FormEditReorderPattern: StoryObj<typeof FormEdit> = {
     // Pattern 1 should be after pattern 2 in the document
     const pattern1 = canvas.getByText('Pattern 1');
     const pattern2 = canvas.getByText('Pattern 2');
+
     expect(pattern2.compareDocumentPosition(pattern1)).toBe(
       Node.DOCUMENT_POSITION_FOLLOWING
     );
