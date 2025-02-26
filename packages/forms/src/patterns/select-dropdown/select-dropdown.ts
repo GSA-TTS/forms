@@ -65,10 +65,10 @@ export const selectDropdownConfig: PatternConfig<
   SelectDropdownPattern,
   SelectDropdownPatternOutput
 > = {
-  displayName: 'Select Dropdown',
+  displayName: 'Dropdown',
   iconPath: 'dropdown-icon.svg',
   initial: {
-    label: 'Select-dropdown-label',
+    label: 'Dropdown-label',
     required: false,
     options: [
       { value: 'value1', label: 'Option-1' },

@@ -12,7 +12,7 @@ export const attachmentConfig: PatternConfig<
   AttachmentPatternOutput
 > = {
   displayName: message.patterns.attachment.displayName,
-  iconPath: 'shortanswer-icon.svg',
+  iconPath: 'attachment-icon.svg',
   initial: {
     label: 'File upload',
     required: true,

@@ -51,7 +51,7 @@ export const createSSNSchema = (data: SocialSecurityNumberPattern['data']) => {
       }
 
       if (issues.length > 0) {
-        let enhancedMessage = 'Social Security Number must ';
+        let enhancedMessage = 'Social Security number must ';
         if (issues.length === 1) {
           enhancedMessage += issues[0];
         } else if (issues.length === 2) {
@@ -88,10 +88,10 @@ export const socialSecurityNumberConfig: PatternConfig<
   SocialSecurityNumberPattern,
   SocialSecurityNumberPatternOutput
 > = {
-  displayName: 'Social Security Number',
+  displayName: 'Social Security number',
   iconPath: 'ssn-icon.svg',
   initial: {
-    label: 'Social Security Number',
+    label: 'Social Security number',
     required: false,
     hint: 'For example, 555-11-0000',
   },

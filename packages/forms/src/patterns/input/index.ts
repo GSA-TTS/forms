@@ -8,7 +8,7 @@ import { type InputPatternOutput, parseUserInput } from './response.js';
 
 export const inputConfig: PatternConfig<InputPattern, InputPatternOutput> = {
   displayName: message.patterns.input.displayName,
-  iconPath: 'shortanswer-icon.svg',
+  iconPath: 'short-answer-icon.svg',
   initial: {
     label: message.patterns.input.fieldLabel,
     initial: '',

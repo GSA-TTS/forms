@@ -11,7 +11,7 @@ const configSchema = z.object({
 export type FormSummaryPattern = Pattern<z.infer<typeof configSchema>>;
 
 export const formSummaryConfig: PatternConfig<FormSummaryPattern> = {
-  displayName: 'Form summary',
+  displayName: 'Title',
   iconPath: 'block-icon.svg',
   initial: {
     title: 'Form title',

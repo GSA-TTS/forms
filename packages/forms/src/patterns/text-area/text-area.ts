@@ -47,7 +47,7 @@ export const textAreaConfig: PatternConfig<
   TextAreaPatternOutput
 > = {
   displayName: message.patterns.textarea.displayName,
-  iconPath: 'longanswer-icon.svg',
+  iconPath: 'long-answer-icon.svg',
   initial: {
     label: message.patterns.textarea.fieldLabel,
     initial: '',
