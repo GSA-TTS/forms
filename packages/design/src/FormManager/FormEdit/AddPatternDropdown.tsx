@@ -12,9 +12,8 @@ import templateIcon from './images/template-icon.svg';
 
 import classNames from 'classnames';
 
-type IconValue = string | { [key: string]: string };
-
-const icons: Record<string, IconValue> = {
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+const icons: Record<string, string | any> = {
   'attachment-icon.svg': 'img/sprite.svg#attach_file',
   'block-icon.svg': blockIcon,
   'checkbox-icon.svg': checkboxIcon,

@@ -13,7 +13,7 @@ const addQuestions = async (page: Page) => {
   await menuButton.click();
   await page.getByRole('button', { name: 'Short Answer' }).click();
   await menuButton.click();
-  await page.getByRole('button', { name: 'Radio Buttons' }).click();
+  await page.getByRole('button', { name: 'Multiple choice' }).click();
 }
 
 test('Create form from scratch', async ({ page }) => {
@@ -41,7 +41,7 @@ test('Add questions', async ({ page }) => {
   // Create locators for both elements
   const fields = page.locator('.usa-label');
   const element1 = fields.filter({ hasText: 'Field label' });
-  const element2 = fields.filter({ hasText: 'Radio group label' });
+  const element2 = fields.filter({ hasText: 'Multiple choice question label' });
   expect(element1.first()).toBeTruthy();
   expect(element2.first()).toBeTruthy();
 

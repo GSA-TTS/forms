@@ -44,7 +44,7 @@ describe('DateOfBirthPattern tests', () => {
         type: 'date-of-birth',
         id: 'test',
         data: {
-          label: 'Test Date of Birth',
+          label: 'Test Date of birth',
           required: true,
           hint: 'Enter your date of birth',
         },
@@ -67,7 +67,7 @@ describe('DateOfBirthPattern tests', () => {
         type: 'date-of-birth',
         id: 'test',
         data: {
-          label: 'Test Date of Birth',
+          label: 'Test Date of birth',
           required: true,
           hint: 'Enter your date of birth',
         },
@@ -87,7 +87,7 @@ describe('DateOfBirthPattern tests', () => {
 
     it('should parse config data correctly', () => {
       const obj = {
-        label: 'Test Date of Birth',
+        label: 'Test Date of birth',
         required: true,
         hint: 'Enter your date of birth',
       };
@@ -97,7 +97,7 @@ describe('DateOfBirthPattern tests', () => {
       }
       const result = dateOfBirthConfig.parseConfigData(obj);
       if (result.success) {
-        expect(result.data.label).toBe('Test Date of Birth');
+        expect(result.data.label).toBe('Test Date of birth');
         expect(result.data.required).toBe(true);
         expect(result.data.hint).toBe('Enter your date of birth');
       } else {

@@ -9,7 +9,7 @@ describe('EmailInputPattern tests', () => {
   describe('createEmailSchema', () => {
     it('should create schema for required email input', () => {
       const data: EmailInputPattern['data'] = {
-        label: 'Test Email Input Label',
+        label: 'Test Email Label',
         required: true,
       };
 
@@ -27,7 +27,7 @@ describe('EmailInputPattern tests', () => {
 
     it('should create schema for optional email input', () => {
       const data: EmailInputPattern['data'] = {
-        label: 'Test Email Input Label',
+        label: 'Test Email Label',
         required: false,
       };
 
@@ -46,7 +46,7 @@ describe('EmailInputPattern tests', () => {
         type: 'email-input',
         id: 'test',
         data: {
-          label: 'Test Email Input Label',
+          label: 'Test Email Label',
           required: true,
         },
       };
@@ -68,7 +68,7 @@ describe('EmailInputPattern tests', () => {
         type: 'email-input',
         id: 'test',
         data: {
-          label: 'Test Email Input Label',
+          label: 'Test Email Label',
           required: true,
         },
       };
@@ -87,7 +87,7 @@ describe('EmailInputPattern tests', () => {
 
     it('should parse config data correctly', () => {
       const obj = {
-        label: 'Test Email Input Label',
+        label: 'Test Email Label',
         required: true,
       };
 
@@ -96,7 +96,7 @@ describe('EmailInputPattern tests', () => {
       }
       const result = emailInputConfig.parseConfigData(obj);
       if (result.success) {
-        expect(result.data.label).toBe('Test Email Input Label');
+        expect(result.data.label).toBe('Test Email Label');
         expect(result.data.required).toBe(true);
       } else {
         expect.fail('Unexpected validation failure');
