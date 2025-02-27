@@ -9,9 +9,9 @@ const createNewForm = async (page: Page) => {
 }
 
 const addQuestions = async (page: Page) => {
-  const menuButton = page.getByRole('button', { name: 'Question', exact: true });
+  const menuButton = page.getByRole('button', { name: 'Add element', exact: true });
   await menuButton.click();
-  await page.getByRole('button', { name: 'Short Answer' }).click();
+  await page.getByRole('button', { name: 'Short answer' }).click();
   await menuButton.click();
   await page.getByRole('button', { name: 'Multiple choice' }).click();
 }
