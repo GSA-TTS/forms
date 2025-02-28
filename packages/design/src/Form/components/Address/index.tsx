@@ -7,15 +7,29 @@ import { type AddressComponentProps } from '@gsa-tts/forms-core';
 import { type PatternComponent } from '../../index.js';
 
 const AddressPattern: PatternComponent<AddressComponentProps> = ({
-  childProps,
-  error = { physical: undefined, mailing: undefined },
+  childProps, // Child fields have their own errors
+  errors, // Top level pattern errors
   legend,
   required,
   _patternId,
   addMailingAddress,
+  isMailingAddressSameAsPhysical,
 }) => {
-  const { register, setValue, getValues } = useFormContext();
-  const [sameAsPhysical, setSameAsPhysical] = useState(false);
+  const { register, setValue, getValues, watch } = useFormContext();
+  const [sameAsPhysical, setSameAsPhysical] = useState(
+    isMailingAddressSameAsPhysical
+  );
+  const [childPatternsProps, setChildPatternsProps] = useState(childProps);
+
+  const physicalAddressError = errors?.physical; // Physical address section error
+  const [mailingAddressError, setMailingAddressError] = useState(
+    errors?.mailing
+  ); // Mailing address section error
+
+  const physicalAddressKeys = Object.keys(childPatternsProps)
+    .filter(key => key.startsWith('physical'))
+    .map(key => `${_patternId}.${key}`);
+  const physicalAddressValues = watch(physicalAddressKeys);
 
   const getAriaDescribedBy = (
     errorId: string | null,
@@ -29,6 +43,14 @@ const AddressPattern: PatternComponent<AddressComponentProps> = ({
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setSameAsPhysical(event.target.checked);
+    if (event.target.checked) {
+      copyPhysicalToMailing();
+    } else {
+      resetMailingAddress();
+    }
+  };
+
+  const copyPhysicalToMailing = () => {
     const formValues = getValues();
     let addressId;
     let addressValues;
@@ -46,41 +68,67 @@ const AddressPattern: PatternComponent<AddressComponentProps> = ({
       }
     }
 
-    if (event.target.checked) {
-      // Copy physical address to mailing address
-      if (addressValues && addressId) {
-        Object.entries(addressValues).forEach(([key, value]) => {
-          if (key.startsWith('physical') && !key.includes('GooglePlusCode')) {
-            const mailingKey = key.replace('physical', 'mailing');
-            setValue(`${addressId}.${mailingKey}`, value, {
-              shouldValidate: true,
-              shouldDirty: true,
-            });
-          }
-        });
+    if (addressValues && addressId) {
+      Object.entries(addressValues).forEach(([key, value]) => {
+        if (key.startsWith('physical') && !key.includes('GooglePlusCode')) {
+          const mailingKey = key.replace('physical', 'mailing');
+          setValue(`${addressId}.${mailingKey}`, value, {
+            shouldValidate: true,
+            shouldDirty: true,
+          });
+        }
+      });
+    }
+  };
+
+  const resetMailingAddress = () => {
+    const formValues = getValues();
+    let addressId;
+    let addressValues;
+
+    for (const key of Object.keys(formValues)) {
+      const value = formValues[key];
+      if (
+        value &&
+        typeof value === 'object' &&
+        'physicalStreetAddress' in value
+      ) {
+        addressValues = value;
+        addressId = key;
+        break;
       }
-    } else {
-      // Reset mailing address to default values
-      if (addressValues && addressId) {
-        Object.entries(addressValues).forEach(([key]) => {
-          if (key.startsWith('mailing')) {
-            setValue(`${addressId}.${key}`, childProps[key].value, {
-              shouldValidate: true,
-              shouldDirty: true,
-            });
-          }
-        });
-      }
+    }
+
+    if (addressValues && addressId) {
+      Object.entries(addressValues).forEach(([key]) => {
+        if (key.startsWith('mailing')) {
+          setValue(`${addressId}.${key}`, '', {
+            shouldValidate: true,
+            shouldDirty: true,
+          });
+        }
+      });
+
+      // Reset the error for the mailing address
+      setMailingAddressError(undefined);
+
+      // Reset the errors for the mailing address child patterns
+      const newChildPatternsProps = { ...childPatternsProps };
+      Object.keys({ ...childPatternsProps }).forEach(key => {
+        if (key.startsWith('mailing')) {
+          newChildPatternsProps[key].error = undefined;
+        }
+      });
+
+      setChildPatternsProps(newChildPatternsProps);
     }
   };
 
   useEffect(() => {
     if (sameAsPhysical) {
-      handleSameAsPhysicalChange({
-        target: { checked: true },
-      } as React.ChangeEvent<HTMLInputElement>);
+      copyPhysicalToMailing();
     }
-  }, [sameAsPhysical]);
+  }, [physicalAddressValues, sameAsPhysical]);
 
   const formatZipCode = (value: string) => {
     // Remove all non-digit characters
@@ -101,7 +149,7 @@ const AddressPattern: PatternComponent<AddressComponentProps> = ({
   };
 
   const renderFields = (prefix: string) => {
-    return Object.entries(childProps).map(([key, props]) => {
+    return Object.entries(childPatternsProps).map(([key, props]) => {
       if (!key.startsWith(prefix)) return null;
       return (
         <React.Fragment key={key}>
@@ -126,10 +174,8 @@ const AddressPattern: PatternComponent<AddressComponentProps> = ({
                   'usa-input--error': !!props.error,
                 })}
                 defaultValue={props.value}
-                {...register(props.inputId, {
-                  required: props.required,
-                  onChange: e => handleZipCodeChange(e, props.inputId),
-                })}
+                {...register(props.inputId)}
+                onChange={e => handleZipCodeChange(e, props.inputId)}
                 aria-describedby={getAriaDescribedBy(
                   props.error ? `error-${props.inputId}` : null,
                   props.hint ? `hint-${props.inputId}` : null
@@ -142,9 +188,7 @@ const AddressPattern: PatternComponent<AddressComponentProps> = ({
                   'usa-input--error': !!props.error,
                 })}
                 defaultValue={props.value}
-                {...register(props.inputId, {
-                  required: props.required,
-                })}
+                {...register(props.inputId)}
                 {...('pattern' in props ? { pattern: props.pattern } : {})}
                 aria-describedby={getAriaDescribedBy(
                   props.error ? `error-${props.inputId}` : null,
@@ -158,13 +202,11 @@ const AddressPattern: PatternComponent<AddressComponentProps> = ({
                 'usa-input--error': !!props.error,
               })}
               defaultValue={props.value}
-              {...register(props.inputId, {
-                required: props.required,
-              })}
               aria-describedby={getAriaDescribedBy(
                 props.error ? `error-${props.inputId}` : null,
                 props.hint ? `hint-${props.inputId}` : null
               )}
+              {...register(props.inputId)}
             >
               <option value="">- Select -</option>
               {props.options?.map((option, index) => (
@@ -183,13 +225,13 @@ const AddressPattern: PatternComponent<AddressComponentProps> = ({
     <fieldset className="usa-fieldset width-full">
       <div
         className={classNames('usa-form-group margin-top-2', {
-          'usa-form-group--error': error?.physical?.type,
+          'usa-form-group--error': physicalAddressError?.type,
         })}
       >
         <div className={classNames('usa-form-group margin-top-2')}>
           <legend
             className={classNames('usa-legend text-bold', {
-              'usa-legend--error': error?.physical,
+              'usa-legend--error': physicalAddressError?.type,
             })}
           >
             {legend || 'Physical address'}
@@ -198,13 +240,13 @@ const AddressPattern: PatternComponent<AddressComponentProps> = ({
           <span className="usa-hint pb-2 ">
             Required fields are marked with an asterisk (*).
           </span>
-          {error?.physical && (
+          {physicalAddressError && (
             <div
               className="usa-error-message"
               id={'error-' + _patternId}
               role="alert"
             >
-              {error.physical.message}
+              {physicalAddressError?.message}
             </div>
           )}
           {renderFields('physical')}
@@ -212,14 +254,36 @@ const AddressPattern: PatternComponent<AddressComponentProps> = ({
       </div>
       <div
         className={classNames('usa-form-group margin-top-2', {
-          'usa-form-group--error': error?.mailing,
+          'usa-form-group--error': mailingAddressError && !sameAsPhysical,
         })}
       >
         {addMailingAddress && (
-          <div className={classNames('usa-form-group margin-top-2')}>
+          <div className="usa-checkbox margin-top-5">
+            <input
+              className="usa-checkbox__input"
+              type="checkbox"
+              id={`${_patternId}.isMailingAddressSameAsPhysical`}
+              defaultChecked={sameAsPhysical}
+              {...register(`${_patternId}.isMailingAddressSameAsPhysical`)}
+              onChange={handleSameAsPhysicalChange}
+            />
+            <label
+              className="usa-checkbox__label"
+              htmlFor={`${_patternId}.isMailingAddressSameAsPhysical`}
+            >
+              Mailing address is same as physical address
+            </label>
+          </div>
+        )}
+        {addMailingAddress && (
+          <div
+            className={classNames('usa-form-group margin-top-2', {
+              'usa-sr-only': sameAsPhysical, // Visually hide when sameAsPhysical is true
+            })}
+          >
             <legend
               className={classNames('usa-legend text-bold', {
-                'usa-legend--error': error?.mailing,
+                'usa-legend--error': mailingAddressError,
               })}
             >
               Mailing address
@@ -228,27 +292,15 @@ const AddressPattern: PatternComponent<AddressComponentProps> = ({
             <span className="usa-hint pb-2 ">
               Required fields are marked with an asterisk (*).
             </span>
-            {error?.mailing && (
+            {mailingAddressError && (
               <div
                 className="usa-error-message"
                 id={'error-' + _patternId}
                 role="alert"
               >
-                {error.mailing.message}
+                {mailingAddressError?.message}
               </div>
             )}
-            <div className="usa-checkbox">
-              <input
-                className="usa-checkbox__input"
-                type="checkbox"
-                id="sameAsPhysical"
-                checked={sameAsPhysical}
-                onChange={handleSameAsPhysicalChange}
-              />
-              <label className="usa-checkbox__label" htmlFor="sameAsPhysical">
-                Same as physical address
-              </label>
-            </div>
             {renderFields('mailing')}
           </div>
         )}
