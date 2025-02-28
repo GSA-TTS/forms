@@ -14,23 +14,25 @@ import classNames from 'classnames';
 
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
 const icons: Record<string, string | any> = {
-  'attachment-icon.svg': 'img/sprite.svg#attach_file',
+  'attachment-icon.svg': '#attach_file',
   'block-icon.svg': blockIcon,
   'checkbox-icon.svg': checkboxIcon,
-  'date-icon.svg': 'img/sprite.svg#calendar_today',
-  'dropdown-icon.svg': 'img/sprite.svg#expand_more',
-  'dropdownoption-icon.svg': 'img/sprite.svg#expand_more',
-  'email-icon.svg': 'img/sprite.svg#alternate_email',
-  'gender-id-icon.svg': 'img/sprite.svg#person',
+  'date-icon.svg': '#calendar_today',
+  'dropdown-icon.svg': '#expand_more',
+  'dropdownoption-icon.svg': '#expand_more',
+  'email-icon.svg': '#alternate_email',
+  'gender-id-icon.svg': '#person',
   'long-answer-icon.svg': longAnswerIcon,
-  'list-icon.svg': 'img/sprite.svg#list',
+  'list-icon.svg': '#list',
   'page-icon.svg': pageIcon,
-  'phone-icon.svg': 'img/sprite.svg#phone',
-  'richtext-icon.svg': 'img/sprite.svg#text_fields',
+  'phone-icon.svg': '#phone',
+  'richtext-icon.svg': '#text_fields',
   'short-answer-icon.svg': shortAnswerIcon,
-  'ssn-icon.svg': 'img/sprite.svg#person',
+  'ssn-icon.svg': '#person',
   'radio-options-icon.svg': multipleChoiceIcon,
   'template-icon.svg': templateIcon,
+  'add-element-icon.svg': '#add_circle',
+  'add-arrow-down-icon.svg': '#arrow_drop_down',
 };
 
 const getIconPath = (iconPath: string): string => {
@@ -45,7 +47,7 @@ const getIconPath = (iconPath: string): string => {
   }
 
   return typeof iconValue === 'string'
-    ? `${uswdsRoot}${iconValue}`
+    ? `${uswdsRoot}img/sprite.svg${iconValue}`
     : (Object.values(iconValue)[0] as string);
 };
 
@@ -138,9 +140,6 @@ export const SidebarAddPatternMenuItem = ({
   title,
 }: PatternMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { uswdsRoot } = useFormManagerStore(state => ({
-    uswdsRoot: state.context.uswdsRoot,
-  }));
 
   return (
     <AddPatternDropdown
@@ -160,7 +159,7 @@ export const SidebarAddPatternMenuItem = ({
             focusable="false"
             role="img"
           >
-            <use xlinkHref={`${uswdsRoot}img/sprite.svg#add_circle`}></use>
+            <use xlinkHref={getIconPath('add-element-icon.svg')}></use>
           </svg>
         </span>
         <span className="display-inline-block text-ttop tablet:width-auto text-center">
@@ -173,7 +172,7 @@ export const SidebarAddPatternMenuItem = ({
             focusable="false"
             role="img"
           >
-            <use xlinkHref={`${uswdsRoot}img/sprite.svg#arrow_drop_down`}></use>
+            <use xlinkHref={getIconPath('add-arrow-down-icon.svg')}></use>
           </svg>
         </span>
       </button>
@@ -185,9 +184,6 @@ export const CompoundAddPatternButton = ({
   patternSelected,
   title,
 }: PatternMenuProps) => {
-  const { uswdsRoot } = useFormManagerStore(state => ({
-    uswdsRoot: state.context.uswdsRoot,
-  }));
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -214,7 +210,7 @@ export const CompoundAddPatternButton = ({
             focusable="false"
             role="img"
           >
-            <use xlinkHref={`${uswdsRoot}img/sprite.svg#add_circle`}></use>
+            <use xlinkHref={getIconPath('add-element-icon.svg')}></use>
           </svg>{' '}
           <span className="display-inline-block text-ttop tablet:width-auto text-center">
             <span className="display-inline-block text-ttop margin-right-1">
