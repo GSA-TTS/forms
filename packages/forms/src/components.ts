@@ -50,13 +50,14 @@ export type AddressFieldProps = {
 
 export type AddressComponentProps = PatternProps<{
   type: 'address';
-  error?: {
+  errors?: {
     physical?: FormError;
     mailing?: FormError;
   };
   legend?: string;
   required?: boolean;
   addMailingAddress?: boolean;
+  isMailingAddressSameAsPhysical?: boolean;
   childProps: Record<string, AddressFieldProps>;
   _patternId?: string;
 }>;

@@ -63,6 +63,7 @@ export const AddressSchema = z.object({
     .string()
     .max(128, { message: 'Urbanization code must be less than 128 characters' })
     .optional(),
+  isMailingAddressSameAsPhysical: z.string().optional(),
 });
 
 const configSchema = z.object({
@@ -249,7 +250,7 @@ export const addressConfig: PatternConfig<
             ? createPromptProps(sessionValue, pattern, mailingErrors, 'mailing')
             : {}),
         },
-        error: {
+        errors: {
           physical:
             Object.keys(physicalErrors).length > 0
               ? {
@@ -268,6 +269,8 @@ export const addressConfig: PatternConfig<
         legend: pattern.data.legend,
         required: pattern.data.required,
         addMailingAddress: pattern.data.addMailingAddress,
+        isMailingAddressSameAsPhysical:
+          sessionValue?.isMailingAddressSameAsPhysical === 'on',
       } satisfies AddressComponentProps,
       children: [],
     };
