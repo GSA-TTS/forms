@@ -1,6 +1,6 @@
 {
-  "name": "end-to-end-tests",
-  "version": "1.0.0",
+  "name": "@gsa-tts/forms-e2e",
+  "version": "1.0.0-beta",
   "scripts": {
     "dev": "tsc -w",
     "test:storybook": "test-storybook",
