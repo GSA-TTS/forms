@@ -6,6 +6,7 @@ on:
       - main
       - demo
       - release/**
+      - aws-cdk-starter
 
 jobs:
   publish:
