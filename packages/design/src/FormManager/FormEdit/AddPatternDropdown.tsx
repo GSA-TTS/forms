@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { defaultFormConfig, type PatternConfig } from '@gsa-tts/forms-core';
 import { useFormManagerStore } from '../store.js';
 import styles from './formEditStyles.module.css';
-import addressIcon from './images/address-icon.svg';
 import blockIcon from './images/block-icon.svg';
 import checkboxIcon from './images/checkbox-icon.svg';
 import longAnswerIcon from './images/long-answer-icon.svg';
@@ -16,12 +15,11 @@ import classNames from 'classnames';
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
 const icons: Record<string, string | any> = {
   'attachment-icon.svg': '#attach_file',
-  'address-icon.svg': addressIcon,
+  'address-icon.svg': '#home',
   'block-icon.svg': blockIcon,
   'checkbox-icon.svg': checkboxIcon,
   'date-icon.svg': '#calendar_today',
   'dropdown-icon.svg': '#expand_more',
-  'dropdownoption-icon.svg': '#expand_more',
   'email-icon.svg': '#alternate_email',
   'gender-id-icon.svg': '#person',
   'long-answer-icon.svg': longAnswerIcon,
@@ -35,6 +33,7 @@ const icons: Record<string, string | any> = {
   'template-icon.svg': templateIcon,
   'add-element-icon.svg': '#add_circle',
   'add-arrow-down-icon.svg': '#arrow_drop_down',
+  'package-download-icon.svg': '#file_download',
 };
 
 const getIconPath = (iconPath: string): string => {
