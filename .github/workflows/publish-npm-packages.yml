@@ -1,12 +1,12 @@
 name: Publish to GitHub Packages
 
 on:
-  push:
-    branches:
-      - main
-      - demo
-      - release/**
-      - aws-cdk-starter
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - main
+  #     - demo
+  #     - release/**
 
 jobs:
   publish:
