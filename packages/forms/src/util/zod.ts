@@ -1,6 +1,6 @@
 import * as z from 'zod';
 
-import * as r from '@atj/common';
+import * as r from '@gsa-tts/forms-common';
 
 import { type FormError, type FormErrors, type Pattern } from '../index.js';
 
@@ -55,7 +55,9 @@ export const safeZodParseFormErrors = <Schema extends z.Schema>(
 /**
  * Converts a ZodError into a structured set of form errors.
  */
-const convertZodErrorToFormErrors = (zodError: z.ZodError): FormErrors => {
+export const convertZodErrorToFormErrors = (
+  zodError: z.ZodError
+): FormErrors => {
   const formErrors: FormErrors = {};
   zodError.errors.forEach(error => {
     const path = error.path.join('.');

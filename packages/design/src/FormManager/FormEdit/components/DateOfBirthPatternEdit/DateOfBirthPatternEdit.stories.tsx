@@ -2,10 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { expect, userEvent } from '@storybook/test';
 import { within } from '@testing-library/react';
 
-import { type DateOfBirthPattern } from '@atj/forms';
+import { type DateOfBirthPattern } from '@gsa-tts/forms-core';
 import { createPatternEditStoryMeta } from '../common/story-helper.js';
 import FormEdit from '../../index.js';
-import { enLocale as message } from '@atj/common';
+import { enLocale as message } from '@gsa-tts/forms-common';
 
 const pattern: DateOfBirthPattern = {
   id: 'date-of-birth-1',
@@ -29,8 +29,8 @@ export default storyConfig;
 export const Basic: StoryObj<typeof FormEdit> = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const updatedLabel = 'Date of Birth update';
-    const updatedHint = 'Updated hint for Date of Birth';
+    const updatedLabel = 'Date of birth update';
+    const updatedHint = 'Updated hint for Date of birth';
 
     await userEvent.click(
       canvas.getByText(message.patterns.dateOfBirth.displayName)
@@ -59,7 +59,7 @@ export const Basic: StoryObj<typeof FormEdit> = {
 export const WithoutHint: StoryObj<typeof FormEdit> = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const updatedLabel = 'Date of Birth update';
+    const updatedLabel = 'Date of birth update';
 
     await userEvent.click(
       canvas.getByText(message.patterns.dateOfBirth.displayName)

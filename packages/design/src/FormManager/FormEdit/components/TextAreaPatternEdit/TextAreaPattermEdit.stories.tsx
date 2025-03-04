@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { enLocale as message } from '@atj/common';
-import { type TextAreaPattern } from '@atj/forms';
+import { enLocale as message } from '@gsa-tts/forms-common';
+import { type TextAreaPattern } from '@gsa-tts/forms-core';
 
 import {
   createPatternEditStoryMeta,

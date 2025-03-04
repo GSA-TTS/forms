@@ -1,7 +1,10 @@
 import { beforeAll, expect, it, vi } from 'vitest';
 
-import type { Result } from '@atj/common';
-import { type DbTestContext, describeDatabase } from '@atj/database/testing';
+import type { Result } from '@gsa-tts/forms-common';
+import {
+  type DbTestContext,
+  describeDatabase,
+} from '@gsa-tts/forms-database/testing';
 
 import { createTestBlueprint } from '../builder/builder.test.js';
 import type { Blueprint } from '../types.js';

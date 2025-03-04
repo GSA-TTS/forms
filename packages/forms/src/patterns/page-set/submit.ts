@@ -1,4 +1,4 @@
-import { failure, success } from '@atj/common';
+import { failure, success } from '@gsa-tts/forms-common';
 
 import {
   getPatternConfig,

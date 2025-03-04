@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { enLocale as message } from '@atj/common';
+import { enLocale as message } from '@gsa-tts/forms-common';
 import {
   PatternBuilder,
   type Pattern,
@@ -47,7 +47,7 @@ export const textAreaConfig: PatternConfig<
   TextAreaPatternOutput
 > = {
   displayName: message.patterns.textarea.displayName,
-  iconPath: 'longanswer-icon.svg',
+  iconPath: 'long-answer-icon.svg',
   initial: {
     label: message.patterns.textarea.fieldLabel,
     initial: '',

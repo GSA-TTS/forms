@@ -71,10 +71,10 @@ export const dateOfBirthConfig: PatternConfig<
   DateOfBirthPattern,
   DateOfBirthPatternOutput
 > = {
-  displayName: 'Date of Birth',
+  displayName: 'Date of birth',
   iconPath: 'date-icon.svg',
   initial: {
-    label: 'Date of Birth',
+    label: 'Date of birth',
     required: false,
     hint: 'For example: January 19 2000',
   },

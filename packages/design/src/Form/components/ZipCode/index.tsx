@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import { type ZipcodeProps } from '@atj/forms';
+import { type ZipcodeProps } from '@gsa-tts/forms-core';
 
 export const ZipCode = (props: ZipcodeProps) => {
   const { register } = useFormContext();

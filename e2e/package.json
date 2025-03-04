@@ -1,6 +1,7 @@
 {
-  "name": "end-to-end-tests",
-  "version": "1.0.0",
+  "name": "@gsa-tts/forms-e2e",
+  "version": "1.0.0-beta",
+  "private": true,
   "scripts": {
     "dev": "tsc -w",
     "test:storybook": "test-storybook",
@@ -11,6 +12,6 @@
     "path-to-regexp": "^8.2.0"
   },
   "dependencies": {
-    "@atj/common": "workspace:*"
+    "@gsa-tts/forms-common": "workspace:*"
   }
 }

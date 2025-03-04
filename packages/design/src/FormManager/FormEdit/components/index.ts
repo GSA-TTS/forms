@@ -11,6 +11,7 @@ import FieldsetEdit from './FieldsetEdit/index.js';
 import FormSummaryEdit from './FormSummaryEdit.js';
 import InputPatternEdit from './InputPatternEdit/index.js';
 import GenderIdPatternEdit from './GenderIdPatternEdit/index.js';
+import NamePatternEdit from './NamePatternEdit/index.js';
 import PackageDownloadPatternEdit from './PackageDownloadPatternEdit.js';
 import PageSetEdit from './PageSetEdit/index.js';
 import { PageEdit } from './PageEdit.js';
@@ -34,6 +35,7 @@ export const defaultPatternEditComponents: EditComponentForPattern = {
   'form-summary': FormSummaryEdit as PatternEditComponent,
   'gender-id': GenderIdPatternEdit as PatternEditComponent,
   input: InputPatternEdit as PatternEditComponent,
+  'name-input': NamePatternEdit as PatternEditComponent,
   'package-download': PackageDownloadPatternEdit as PatternEditComponent,
   page: PageEdit as PatternEditComponent,
   'page-set': PageSetEdit as PatternEditComponent,

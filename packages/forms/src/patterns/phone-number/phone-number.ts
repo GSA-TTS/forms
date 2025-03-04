@@ -43,10 +43,10 @@ export const phoneNumberConfig: PatternConfig<
   PhoneNumberPattern,
   PhoneNumberPatternOutput
 > = {
-  displayName: 'Phone Number',
+  displayName: 'Phone number',
   iconPath: 'phone-icon.svg',
   initial: {
-    label: 'Phone Number',
+    label: 'Phone number',
     required: false,
     hint: 'Enter a 10-digit U.S. phone number, e.g., 999-999-9999',
   },

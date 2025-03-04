@@ -3,8 +3,8 @@ import { type FieldsetPattern, parseConfigData } from './config.js';
 import { createPrompt } from './prompt.js';
 
 export const fieldsetConfig: PatternConfig<FieldsetPattern> = {
-  displayName: 'Fieldset',
-  iconPath: 'block-icon.svg',
+  displayName: 'Question set',
+  iconPath: 'list-icon.svg',
   initial: {
     legend: 'Default Heading',
     patterns: [],

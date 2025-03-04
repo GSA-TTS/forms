@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { describe, expect, test } from 'vitest';
 
-import { createInMemoryDatabaseContext } from '@atj/database/context';
+import { createInMemoryDatabaseContext } from '@gsa-tts/forms-database/context';
 
 import { createCustomServer } from '../src/server';
 

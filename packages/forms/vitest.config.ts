@@ -1,6 +1,6 @@
 import { defineConfig, mergeConfig } from 'vitest/config';
 
-import { getVitestDatabaseContainerGlobalSetupPath } from '@atj/database';
+import { getVitestDatabaseContainerGlobalSetupPath } from '@gsa-tts/forms-database';
 import sharedTestConfig from '../../vitest.shared';
 
 export default mergeConfig(

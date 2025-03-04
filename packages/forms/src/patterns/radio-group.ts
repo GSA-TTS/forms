@@ -1,6 +1,6 @@
 import * as z from 'zod';
 
-import { Result } from '@atj/common';
+import { Result } from '@gsa-tts/forms-common';
 
 import { type RadioGroupProps } from '../components.js';
 import { type FormError } from '../error.js';
@@ -28,10 +28,10 @@ type PatternOutput = z.infer<typeof PatternOutput>;
 
 export const radioGroupConfig: PatternConfig<RadioGroupPattern, PatternOutput> =
   {
-    displayName: 'Radio Buttons',
-    iconPath: 'singleselect-icon.svg',
+    displayName: 'Multiple choice',
+    iconPath: 'radio-options-icon.svg',
     initial: {
-      label: 'Radio group label',
+      label: 'Multiple choice question label',
       options: [
         { id: 'option-1', label: 'Option 1' },
         { id: 'option-2', label: 'Option 2' },

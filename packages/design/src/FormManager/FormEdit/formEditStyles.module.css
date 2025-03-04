@@ -2,6 +2,8 @@
 
 .dropdownMenu {
   min-width: 315px;
+  max-height: 19.688rem;
+  overflow-y: auto;
 }
 
 .dropdownMenu:active,
@@ -11,6 +13,9 @@
   color: #1b1b1b;
   background-color: #fff;
   font-weight: bold;
+}
+.dropdownButton:focus {
+  outline: none;
 }
 
 .dropdownMenu:hover li,
@@ -56,7 +61,8 @@
 .draggableListItemWrapper .phoneNumberPattern legend,
 .draggableListItemWrapper .ssnPattern legend,
 .draggableListItemWrapper .genderIdPattern legend,
-.draggableListItemWrapper .emailInputPattern legend {
+.draggableListItemWrapper .emailInputPattern legend,
+.draggableListItemWrapper .namePattern legend {
   padding-left: 0;
 }
 
@@ -198,4 +204,25 @@
     overflow: auto;
     left: 32px;
   }
+}
+
+.addPatternDropdown ul,
+.addPatternDropdown li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.category-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdownItem {
+  margin-left: 0;
+}
+
+.categoryDivider {
+  border-top: 1px solid #ccc; /* Increase thickness for visibility */
+  margin: 0.5rem 0;
 }

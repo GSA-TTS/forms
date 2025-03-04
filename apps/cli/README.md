@@ -1,4 +1,4 @@
-# @atj/cli-app
+# @gsa-tts/forms-cli-app
 
 This package defines the platform's command-line interface.
 

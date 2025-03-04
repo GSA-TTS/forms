@@ -1,6 +1,9 @@
 import { beforeAll, expect, it, vi } from 'vitest';
 
-import { type DbTestContext, describeDatabase } from '@atj/database/testing';
+import {
+  type DbTestContext,
+  describeDatabase,
+} from '@gsa-tts/forms-database/testing';
 import { addForm } from './add-form.js';
 import { defaultFormConfig } from '../patterns/index.js';
 

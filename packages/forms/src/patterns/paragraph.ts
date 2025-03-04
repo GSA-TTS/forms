@@ -11,7 +11,7 @@ export type ParagraphPattern = Pattern<z.infer<typeof configSchema>>;
 
 export const paragraphConfig: PatternConfig<ParagraphPattern> = {
   displayName: 'Paragraph',
-  iconPath: 'longanswer-icon.svg',
+  iconPath: 'long-answer-icon.svg',
   initial: {
     text: 'Paragraph text...',
   },

@@ -28,7 +28,7 @@ export default meta;
 export const Default: StoryObj<typeof SocialSecurityNumberPattern> = {
   args: {
     ssnId: 'ssn',
-    label: 'Social Security Number',
+    label: 'Social Security number',
     required: false,
   },
 };
@@ -36,7 +36,7 @@ export const Default: StoryObj<typeof SocialSecurityNumberPattern> = {
 export const WithRequired: StoryObj<typeof SocialSecurityNumberPattern> = {
   args: {
     ssnId: 'ssn',
-    label: 'Social Security Number',
+    label: 'Social Security number',
     required: true,
   },
 };
@@ -44,7 +44,7 @@ export const WithRequired: StoryObj<typeof SocialSecurityNumberPattern> = {
 export const WithError: StoryObj<typeof SocialSecurityNumberPattern> = {
   args: {
     ssnId: 'ssn',
-    label: 'Social Security Number with error',
+    label: 'Social Security number with error',
     required: true,
     error: {
       type: 'custom',
@@ -56,7 +56,7 @@ export const WithError: StoryObj<typeof SocialSecurityNumberPattern> = {
 export const WithHint: StoryObj<typeof SocialSecurityNumberPattern> = {
   args: {
     ssnId: 'ssn',
-    label: 'Social Security Number',
+    label: 'Social Security number',
     hint: 'For example, 555-11-0000',
     required: true,
   },
@@ -65,7 +65,7 @@ export const WithHint: StoryObj<typeof SocialSecurityNumberPattern> = {
 export const WithHintAndError: StoryObj<typeof SocialSecurityNumberPattern> = {
   args: {
     ssnId: 'ssn',
-    label: 'Social Security Number',
+    label: 'Social Security number',
     hint: 'For example, 555-11-0000',
     required: true,
     error: {

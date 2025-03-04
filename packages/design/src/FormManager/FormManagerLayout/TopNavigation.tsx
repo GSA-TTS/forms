@@ -6,11 +6,10 @@ import { useFormManagerStore } from '../store.js';
 import styles from './formManagerStyles.module.css';
 
 export enum NavPage {
-  upload = 1,
-  create = 2,
-  configure = 3,
-  publish = 4,
-  preview = 5,
+  edit = 1,
+  settings = 2,
+  publish = 3,
+  preview = 4,
 }
 
 const stepClass = (page: NavPage, curPage: NavPage) => {
@@ -68,33 +67,23 @@ export const TopNavigation = ({
             <ol className="usa-step-indicator__segments desktop:grid-col-6 tablet:grid-col-5">
               <li
                 className={classNames(
-                  'usa-step-indicator__segment',
-                  stepClass(NavPage.upload, curPage)
+                  'usa-step-indicator__segment font-body-xs',
+                  stepClass(NavPage.edit, curPage)
                 )}
               >
                 <span className="usa-step-indicator__segment-label">
-                  Upload {srHint(NavPage.upload, curPage)}
+                  Edit {srHint(NavPage.edit, curPage)}
                 </span>
               </li>
               <li
                 className={classNames(
                   'usa-step-indicator__segment font-body-xs',
-                  stepClass(NavPage.create, curPage)
-                )}
-              >
-                <span className="usa-step-indicator__segment-label">
-                  Create {srHint(NavPage.create, curPage)}
-                </span>
-              </li>
-              <li
-                className={classNames(
-                  'usa-step-indicator__segment font-body-xs',
-                  stepClass(NavPage.configure, curPage)
+                  stepClass(NavPage.settings, curPage)
                 )}
                 aria-current="true"
               >
                 <span className="usa-step-indicator__segment-label">
-                  Configure {srHint(NavPage.configure, curPage)}
+                  Settings {srHint(NavPage.settings, curPage)}
                 </span>
               </li>
               <li
@@ -191,9 +180,8 @@ const MobileStepIndicator = ({ curPage }: { curPage: NavPage }) => (
         id="options"
         defaultValue={curPage}
       >
-        <option value={NavPage.upload}>Upload</option>
-        <option value={NavPage.create}>Create</option>
-        <option value={NavPage.configure}>Configure</option>
+        <option value={NavPage.edit}>Edit</option>
+        <option value={NavPage.settings}>Settings</option>
         <option value={NavPage.publish}>Publish</option>
       </select>
     </div>

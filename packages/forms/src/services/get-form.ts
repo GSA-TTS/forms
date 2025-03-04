@@ -1,4 +1,4 @@
-import { type Result, failure, success } from '@atj/common';
+import { type Result, failure, success } from '@gsa-tts/forms-common';
 
 import { parseForm } from '../builder/parse-form.js';
 import { type FormServiceContext } from '../context/index.js';

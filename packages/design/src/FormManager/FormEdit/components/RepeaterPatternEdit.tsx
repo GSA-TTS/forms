@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { type PatternId, type RepeaterProps } from '@atj/forms';
-import { RepeaterPattern } from '@atj/forms';
+import { type PatternId, type RepeaterProps } from '@gsa-tts/forms-core';
+import { RepeaterPattern } from '@gsa-tts/forms-core';
 
 import {
   CompoundAddPatternButton,
@@ -99,7 +99,7 @@ const RepeaterPreview: PatternComponent<RepeaterProps> = props => {
           >
             <div className={classNames(styles.usaAlertBody, 'usa-alert__body')}>
               <CompoundAddPatternButton
-                title="Add question to repeater"
+                title="Add question to repeater set"
                 patternSelected={patternType =>
                   addPatternToCompoundField(patternType, props._patternId)
                 }

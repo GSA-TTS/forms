@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { type RichTextProps } from '@atj/forms';
+import { type RichTextProps } from '@gsa-tts/forms-core';
 import { type PatternComponent } from '../../../Form/index.js';
 import styles from './richTextStyles.module.css';
 

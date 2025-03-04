@@ -10,7 +10,7 @@ describe('GenderIdPattern tests', () => {
   describe('createGenderIdSchema', () => {
     it('should create schema for required gender identity input', () => {
       const data: GenderIdPattern['data'] = {
-        label: 'Test Gender Identity Label',
+        label: 'Test Gender identity Label',
         required: true,
         preferNotToAnswerText: 'Prefer not to share my gender identity',
       };
@@ -29,7 +29,7 @@ describe('GenderIdPattern tests', () => {
 
     it('should create schema for optional gender identity input', () => {
       const data: GenderIdPattern['data'] = {
-        label: 'Test Gender Identity Label',
+        label: 'Test Gender identity Label',
         required: false,
       };
 
@@ -48,7 +48,7 @@ describe('GenderIdPattern tests', () => {
         id: 'gender-identity-1',
         type: 'gender-id',
         data: {
-          label: 'Test Gender Identity Label',
+          label: 'Test Gender identity Label',
           required: true,
           preferNotToAnswerText: 'Prefer not to share my gender identity',
         },
@@ -71,7 +71,7 @@ describe('GenderIdPattern tests', () => {
         id: 'gender-identity-1',
         type: 'gender-id',
         data: {
-          label: 'Test Gender Identity Label',
+          label: 'Test Gender identity Label',
           required: true,
           preferNotToAnswerText: 'Prefer not to share my gender identity',
         },
@@ -91,7 +91,7 @@ describe('GenderIdPattern tests', () => {
 
     it('should parse config data correctly', () => {
       const obj = {
-        label: 'Test Gender Identity Label',
+        label: 'Test Gender identity Label',
         required: true,
         hint: 'For example, man, woman, non-binary',
         preferNotToAnswerText: 'Prefer not to share my gender identity',
@@ -102,7 +102,7 @@ describe('GenderIdPattern tests', () => {
       }
       const result = genderIdConfig.parseConfigData(obj);
       if (result.success) {
-        expect(result.data.label).toBe('Test Gender Identity Label');
+        expect(result.data.label).toBe('Test Gender identity Label');
         expect(result.data.required).toBe(true);
         expect(result.data.hint).toBe('For example, man, woman, non-binary');
         expect(result.data.preferNotToAnswerText).toBe(

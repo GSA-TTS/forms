@@ -1,6 +1,9 @@
 import React from 'react';
 
-import { type PatternId, SubmissionConfirmationProps } from '@atj/forms';
+import {
+  type PatternId,
+  SubmissionConfirmationProps,
+} from '@gsa-tts/forms-core';
 
 import SubmissionConfirmation from '../../../Form/components/SubmissionConfirmation/index.js';
 import { PatternEditComponent } from '../types.js';

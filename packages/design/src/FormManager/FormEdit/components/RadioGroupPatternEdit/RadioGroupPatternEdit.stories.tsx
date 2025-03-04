@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { type RadioGroupPattern } from '@atj/forms';
+import { type RadioGroupPattern } from '@gsa-tts/forms-core';
 
 import { createPatternEditStoryMeta } from '../common/story-helper.js';
 import FormEdit from '../../index.js';
 import CheckboxPatternEdit from '../CheckboxPatternEdit/index.js';
-import { enLocale as message } from '@atj/common';
+import { enLocale as message } from '@gsa-tts/forms-common';
 import { expect, userEvent } from '@storybook/test';
 import { within } from '@testing-library/react';
 
@@ -33,7 +33,7 @@ export default storyConfig;
 export const Basic: StoryObj<typeof FormEdit> = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const updatedLabel = 'Radio group update';
+    const updatedLabel = 'Multiple choice update';
 
     await userEvent.click(
       canvas.getByText(message.patterns.radioGroup.displayName)

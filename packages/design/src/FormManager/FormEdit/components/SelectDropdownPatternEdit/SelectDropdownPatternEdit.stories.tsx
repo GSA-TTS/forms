@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { type SelectDropdownPattern } from '@atj/forms';
+import { type SelectDropdownPattern } from '@gsa-tts/forms-core';
 
 import { createPatternEditStoryMeta } from '../common/story-helper.js';
 import FormEdit from '../../index.js';
 import CheckboxPatternEdit from '../CheckboxPatternEdit/index.js';
-import { enLocale as message } from '@atj/common';
+import { enLocale as message } from '@gsa-tts/forms-common';
 import { expect, userEvent } from '@storybook/test';
 import { within } from '@testing-library/react';
 
@@ -34,7 +34,7 @@ export default storyConfig;
 export const Basic: StoryObj<typeof FormEdit> = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const updatedLabel = 'Select Dropdown update';
+    const updatedLabel = 'Dropdown update';
 
     await userEvent.click(
       canvas.getByText(message.patterns.selectDropdown.displayName)

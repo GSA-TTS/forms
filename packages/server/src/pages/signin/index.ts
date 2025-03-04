@@ -1,5 +1,5 @@
 import type { APIContext } from 'astro';
-import { getProviderRedirect } from '@atj/auth';
+import { getProviderRedirect } from '@gsa-tts/forms-auth';
 
 import { getServerContext } from '../../config/astro.js';
 

@@ -35,34 +35,27 @@ jobs:
         with:
           run_install: false
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v4
-        name: Setup pnpm cache
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install
-
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: "1.10.4"
+          terraform_version: "1.10.5"
 
-      - name: Initialize Terraform CDK configuration
-        shell: bash
-        working-directory: infra/cdktf
-        run: |
-          pnpm cdktf get
-          pnpm build:tsc
+      # - name: Get pnpm store directory
+      #   id: pnpm-cache
+      #   shell: bash
+      #   run: |
+      #     echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      # - uses: actions/cache@v4
+      #   name: Setup pnpm cache
+      #   with:
+      #     path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+      #     key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Install CloudFoundry CLI
         run: |
@@ -73,10 +66,13 @@ jobs:
         run: |
           cf api https://api.fr.cloud.gov
 
-      - name: Synthesize Terraform configuration
-        working-directory: infra/cdktf
-        run: |
-          DEPLOY_ENV=${DEPLOY_ENV} pnpm cdktf synth
+      - name: Generate Terraform CDK provider constructs
+        shell: bash
+        run: pnpm --filter @gsa-tts/forms-infra-cdktf build:get
+
+      - name: Build Terraform configuration
+        shell: bash
+        run: pnpm turbo run --filter @gsa-tts/forms-infra-cdktf build
 
       - name: Get Terraform stack name
         id: get_stack_name
@@ -85,8 +81,57 @@ jobs:
           DEPLOY_ENV=${DEPLOY_ENV} pnpm cdktf output --outputs-file outputs.json
           echo "stack_name=$(jq -r 'keys[0]' outputs.json)" >> $GITHUB_OUTPUT
 
-      - name: Create Terraform plan
-        uses: dflook/terraform-plan@v1
+      - name: Generate Terraform plan
+        id: generate_terraform_plan
+        working-directory: infra/cdktf/cdktf.out/stacks/${{ steps.get_stack_name.outputs.stack_name }}
+        run: |
+          terraform plan -out=tfplan -input=false
+          terraform show -no-color tfplan | awk '
+          {
+              if (heredoc && $0 ~ /^[[:space:]]*EOT/) {
+                  heredoc = 0;
+                  print;
+                  next;
+              } else if (heredoc) {
+                  print;
+                  next;
+              } else if ($0 ~ /EOT$/) {
+                  heredoc = 1;
+              }
+
+              # Move Terraform diff markers (-, +, ~) to the beginning while preserving indentation
+              if ($0 ~ /^[[:space:]]+[-+~]/) {
+                  leading_ws = substr($0, 1, match($0, "[-+~]") - 1);  # Extract leading whitespace
+                  op = substr($0, match($0, "[-+~]"), 1);             # Extract the first change symbol (-, +, ~)
+                  rest = substr($0, match($0, "[-+~]") + 1);          # Extract the rest of the line after the symbol
+
+                  print op leading_ws rest;  # Print with the marker moved to the beginning
+                  next;
+              }
+
+              # Replace "~ " at the start with "!~ " to highlight modifications distinctly
+              sub(/^[[:space:]]*~ /, "!~ ");
+
+              # Ensure lines starting with "# (" keep their indentation properly
+              if ($0 ~ /^[[:space:]]+# \(.*/) {
+                  leading_ws = substr($0, 1, match($0, "#") - 1);  # Extract indentation
+                  rest = substr($0, match($0, "#"));              # Extract the `# (hidden elements)`
+                  print leading_ws rest;                          # Print correctly formatted line
+                  next;
+              }
+
+              print;
+          }' > tf-plan.txt
+          echo "<details><summary>$(tail -n 1 tf-plan.txt)</summary>" > pr-comment.txt
+          echo '' >> pr-comment.txt
+          echo '```diff' >> pr-comment.txt
+          cat tf-plan.txt >> pr-comment.txt
+          echo '```' >> pr-comment.txt
+          echo '</details>' >> pr-comment.txt
+
+      - name: Add comment to PR with Terraform plan
+        uses: marocchino/sticky-pull-request-comment@v2
         with:
-          path: infra/cdktf/cdktf.out/stacks/${{ steps.get_stack_name.outputs.stack_name }}
-          label: ${{ steps.get_stack_name.outputs.stack_name }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          header: terraform-plan
+          path: infra/cdktf/cdktf.out/stacks/${{ steps.get_stack_name.outputs.stack_name }}/pr-comment.txt

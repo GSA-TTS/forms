@@ -33,14 +33,14 @@ const meta: Meta<typeof FormManagerLayout> = {
 export default meta;
 export const Configure = {
   args: {
-    step: NavPage.configure,
+    step: NavPage.settings,
     next: '#',
   },
 } satisfies StoryObj<typeof FormManagerLayout>;
 
-export const Create = {
+export const Edit = {
   args: {
-    step: NavPage.create,
+    step: NavPage.edit,
     next: '#',
     back: '#',
     preview: '#',
@@ -50,15 +50,6 @@ export const Create = {
 export const Publish = {
   args: {
     step: NavPage.publish,
-    next: '#',
-    back: '#',
-    preview: '#',
-  },
-} satisfies StoryObj<typeof FormManagerLayout>;
-
-export const Upload = {
-  args: {
-    step: NavPage.upload,
     next: '#',
     back: '#',
     preview: '#',

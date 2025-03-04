@@ -8,8 +8,11 @@ import {
   useParams,
 } from 'react-router-dom';
 
-import { defaultPatternComponents, Form } from '@atj/design';
-import { defaultFormConfig, getRouteDataFromQueryString } from '@atj/forms';
+import { defaultPatternComponents, Form } from '@gsa-tts/forms-design';
+import {
+  defaultFormConfig,
+  getRouteDataFromQueryString,
+} from '@gsa-tts/forms-core';
 
 import { getAppContext } from '../../../context.js';
 import { useFormPageStore } from '../store/index.js';

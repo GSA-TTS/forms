@@ -2,10 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { expect, userEvent } from '@storybook/test';
 import { within } from '@testing-library/react';
 
-import { type PhoneNumberPattern } from '@atj/forms';
+import { type PhoneNumberPattern } from '@gsa-tts/forms-core';
 import { createPatternEditStoryMeta } from '../common/story-helper.js';
 import FormEdit from '../../index.js';
-import { enLocale as message } from '@atj/common';
+import { enLocale as message } from '@gsa-tts/forms-common';
 
 const pattern: PhoneNumberPattern = {
   id: 'phone-number-1',
@@ -29,8 +29,8 @@ export default storyConfig;
 export const Basic: StoryObj<typeof FormEdit> = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const updatedLabel = 'Phone Number update';
-    const updatedHint = 'Updated hint for Phone Number';
+    const updatedLabel = 'Phone number update';
+    const updatedHint = 'Updated hint for phone number';
 
     await userEvent.click(
       canvas.getByText(message.patterns.phoneNumber.displayName)
@@ -59,7 +59,7 @@ export const Basic: StoryObj<typeof FormEdit> = {
 export const WithoutHint: StoryObj<typeof FormEdit> = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const updatedLabel = 'Phone Number update';
+    const updatedLabel = 'Phone number update';
 
     await userEvent.click(
       canvas.getByText(message.patterns.phoneNumber.displayName)
@@ -97,7 +97,7 @@ export const Error: StoryObj<typeof FormEdit> = {
 
     await expect(
       await canvas.findByText(
-        message.patterns.selectDropdown.errorTextMustContainChar
+        message.patterns.phoneNumber.errorTextMustContainChar
       )
     ).toBeInTheDocument();
   },

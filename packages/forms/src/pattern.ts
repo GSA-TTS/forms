@@ -1,4 +1,4 @@
-import * as r from '@atj/common';
+import * as r from '@gsa-tts/forms-common';
 import set from 'set-value';
 
 import { type CreatePrompt } from './components.js';
@@ -202,7 +202,9 @@ export const aggregatePatternSessionValues = (
 ) => {
   const aggregatedValues = aggregateValuesByPrefix(values);
   if (patternConfig.parseUserInput) {
-    const isRepeaterType = pattern.type === 'repeater';
+    const compoundPatterns = ['repeater', 'name-input'];
+
+    const isCompoundPattern = compoundPatterns.includes(pattern.type);
     const patternValues = aggregatedValues[pattern.id];
     const parseResult: any = patternConfig.parseUserInput(
       pattern,
@@ -215,7 +217,7 @@ export const aggregatePatternSessionValues = (
       result.values[pattern.id] = parseResult.data;
       delete result.errors[pattern.id];
     } else {
-      result.values[pattern.id] = isRepeaterType
+      result.values[pattern.id] = isCompoundPattern
         ? parseResult.data
         : values[pattern.id];
       result.errors[pattern.id] = parseResult.error;

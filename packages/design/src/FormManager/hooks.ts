@@ -1,6 +1,9 @@
 import { useLocation } from 'react-router-dom';
 
-import { type RouteData, getRouteDataFromQueryString } from '@atj/forms';
+import {
+  type RouteData,
+  getRouteDataFromQueryString,
+} from '@gsa-tts/forms-core';
 
 export const useRouteParams = (): {
   routeParams: RouteData;

@@ -1,9 +1,12 @@
 {
-  "name": "@atj/server",
+  "name": "@gsa-tts/forms-server",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0-beta.1",
   "main": "dist/handler.js",
   "types": "handler.ts",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "files": [
     "dist"
   ],
@@ -20,11 +23,11 @@
     "@astrojs/check": "^0.9.4",
     "@astrojs/node": "^9.0.0",
     "@astrojs/react": "^4.1.2",
-    "@atj/auth": "workspace:^",
-    "@atj/common": "workspace:*",
-    "@atj/database": "workspace:*",
-    "@atj/design": "workspace:*",
-    "@atj/forms": "workspace:*",
+    "@gsa-tts/forms-auth": "workspace:^",
+    "@gsa-tts/forms-common": "workspace:*",
+    "@gsa-tts/forms-database": "workspace:*",
+    "@gsa-tts/forms-design": "workspace:*",
+    "@gsa-tts/forms-core": "workspace:*",
     "astro": "^5.1.3",
     "express": "^4.21.0",
     "jwt-decode": "^4.0.0",

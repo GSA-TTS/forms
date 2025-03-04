@@ -8,7 +8,7 @@ Accepted
 
 ## Context
 
-The 10x Digital Access to Justice Platform project requires a public web presence to communicate project details and as a host for prototypes and demos.
+The Forms Platform project requires a public web presence to communicate project details and as a host for prototypes and demos.
 
 Additionally, the project team aspires to create modular components that are flexible and easy-to-leverage by software development teams throughout government. The project's web presence is a convenient place to dogfood any components that are built for wider consumption.
 

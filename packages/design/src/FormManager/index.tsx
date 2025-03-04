@@ -13,8 +13,8 @@ import {
   nullSession,
   defaultFormConfig,
   Blueprint,
-} from '@atj/forms';
-import { type FormService } from '@atj/forms';
+} from '@gsa-tts/forms-core';
+import { type FormService } from '@gsa-tts/forms-core';
 
 import { type ComponentForPattern } from '../Form/index.js';
 
@@ -172,7 +172,7 @@ export default function FormManager(props: FormManagerProps) {
                 savePeriodically={true}
               >
                 <FormManagerLayout
-                  step={NavPage.create}
+                  step={NavPage.edit}
                   back={AppRoutes.GuidedFormCreation.getUrl()}
                   next={AppRoutes.Configure.getUrl(formId)}
                   preview={AppRoutes.Preview.getUrl(formId)}
@@ -201,7 +201,7 @@ export default function FormManager(props: FormManagerProps) {
                 session={createFormSession(form)}
               >
                 <FormManagerLayout
-                  step={NavPage.configure}
+                  step={NavPage.settings}
                   back={AppRoutes.Create.getUrl(formId)}
                   next={AppRoutes.Publish.getUrl(formId)}
                   preview={AppRoutes.Preview.getUrl(formId)}

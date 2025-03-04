@@ -1,12 +1,12 @@
 import classnames from 'classnames';
 import React from 'react';
 
-import { enLocale as message } from '@atj/common';
+import { enLocale as message } from '@gsa-tts/forms-common';
 import {
   type PackageDownloadPattern,
   type PackageDownloadProps,
   type PatternId,
-} from '@atj/forms';
+} from '@gsa-tts/forms-core';
 
 import PackageDownload from '../../../Form/components/PackageDownload/index.js';
 import { PatternEditComponent } from '../types.js';

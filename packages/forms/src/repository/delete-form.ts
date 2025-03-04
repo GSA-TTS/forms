@@ -1,4 +1,4 @@
-import { type VoidResult, failure, voidSuccess } from '@atj/common';
+import { type VoidResult, failure, voidSuccess } from '@gsa-tts/forms-common';
 
 import type { FormOutput } from '../types';
 import type { FormRepositoryContext } from '.';

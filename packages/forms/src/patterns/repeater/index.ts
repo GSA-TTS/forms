@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { type Result } from '@atj/common';
+import { type Result } from '@gsa-tts/forms-common';
 import { type FormError } from '../../error.js';
 import {
   type FormConfig,
@@ -74,8 +74,8 @@ interface RepeaterFailure {
 type RepeaterResult = RepeaterSuccess | RepeaterFailure;
 
 export const repeaterConfig: PatternConfig<RepeaterPattern> = {
-  displayName: 'Repeater',
-  iconPath: 'block-icon.svg',
+  displayName: 'Repeater question set',
+  iconPath: 'list-icon.svg',
   initial: {
     legend: 'Default Heading',
     patterns: [],

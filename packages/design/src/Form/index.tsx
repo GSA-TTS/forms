@@ -11,7 +11,7 @@ import {
   type PatternProps,
   type Prompt,
   type PromptComponent,
-} from '@atj/forms';
+} from '@gsa-tts/forms-core';
 import { renderPromptComponents } from './form-common.js';
 
 export type FormUIContext = {

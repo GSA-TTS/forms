@@ -1,5 +1,5 @@
 import { getRootPattern } from './blueprint.js';
-import { type FormError } from './error.js';
+import { type FormErrors, type FormError } from './error.js';
 import {
   type FormConfig,
   type Pattern,
@@ -148,6 +148,23 @@ export type EmailInputProps = PatternProps<{
   error?: FormError;
   value: {
     email: string;
+  };
+}>;
+
+export type NameProps = PatternProps<{
+  type: 'name-input';
+  givenNameId: string;
+  middleNameId: string;
+  familyNameId: string;
+  label: string;
+  givenNameHint: string;
+  familyNameHint: string;
+  required?: boolean;
+  errors?: FormErrors;
+  values?: {
+    givenName?: string;
+    middleName?: string;
+    familyName?: string;
   };
 }>;
 

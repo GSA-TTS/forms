@@ -54,10 +54,10 @@ export const emailInputConfig: PatternConfig<
   EmailInputPattern,
   EmailInputPatternOutput
 > = {
-  displayName: 'Email Input',
+  displayName: 'Email',
   iconPath: 'email-icon.svg',
   initial: {
-    label: 'Email Input',
+    label: 'Email',
     required: false,
   },
 

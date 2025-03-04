@@ -21,7 +21,7 @@ import { selectDropdownConfig } from './select-dropdown/select-dropdown.js';
 import { sequenceConfig } from './sequence.js';
 import { socialSecurityNumberConfig } from './social-security-number/social-security-number.js';
 import { textAreaConfig } from './text-area/text-area.js';
-
+import { nameConfig } from './name/index.js';
 // This configuration reflects what a user of this library would provide for
 // their usage scenarios. For now, keep here in the form service until we
 // understand the usage scenarios better.
@@ -48,6 +48,7 @@ export const defaultFormConfig: FormConfig = {
     'social-security-number': socialSecurityNumberConfig,
     sequence: sequenceConfig,
     'text-area': textAreaConfig,
+    'name-input': nameConfig,
   },
 } as const;
 
@@ -77,3 +78,4 @@ export * from './select-dropdown/select-dropdown.js';
 export * from './social-security-number/social-security-number.js';
 export * from './sequence.js';
 export * from './text-area/text-area.js';
+export * from './name/index.js';

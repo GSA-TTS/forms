@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { type FormService } from '@atj/forms';
+import { type FormService } from '@gsa-tts/forms-core';
 
 import * as AppRoutes from '../FormManager/routes.js';
 

@@ -8,14 +8,13 @@ const { baseUrl, uswdsRoot } = await getServerContext(Astro);
 const loggedIn = !!(await getUserSession(Astro)).session;
 ---
 
-<Layout title="10x Access to Justice">
+<Layout title="10x Forms Platform">
   {
     loggedIn ? (
       <AppFormManager client:only="react" ctx={{ baseUrl, uswdsRoot }} />
     ) : (
       <div class="grid-container">
         <h1>10x Forms Platform</h1>
-        <p class="usa-prose">Welcome to the 10x Forms Platform web server.</p>
         <p class="usa-prose">
           Authorized users may <a href={routes.getLoginUrl(baseUrl)}>sign in</a>{' '}
           to test the Forms Platform.
