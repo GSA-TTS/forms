@@ -15,11 +15,11 @@ import classNames from 'classnames';
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
 const icons: Record<string, string | any> = {
   'attachment-icon.svg': '#attach_file',
+  'address-icon.svg': '#home',
   'block-icon.svg': blockIcon,
   'checkbox-icon.svg': checkboxIcon,
   'date-icon.svg': '#calendar_today',
   'dropdown-icon.svg': '#expand_more',
-  'dropdownoption-icon.svg': '#expand_more',
   'email-icon.svg': '#alternate_email',
   'gender-id-icon.svg': '#person',
   'long-answer-icon.svg': longAnswerIcon,
@@ -33,6 +33,7 @@ const icons: Record<string, string | any> = {
   'template-icon.svg': templateIcon,
   'add-element-icon.svg': '#add_circle',
   'add-arrow-down-icon.svg': '#arrow_drop_down',
+  'package-download-icon.svg': '#file_download',
 };
 
 const getIconPath = (iconPath: string): string => {
@@ -113,6 +114,7 @@ const sidebarPatterns: DropdownPattern[] = [
     defaultFormConfig.patterns['gender-id'],
     'Personal information',
   ],
+  ['address', defaultFormConfig.patterns['address'], 'Personal information'],
   ['fieldset', defaultFormConfig.patterns['fieldset'], 'Form structure'],
   ['repeater', defaultFormConfig.patterns['repeater'], 'Form structure'],
   ['page', defaultFormConfig.patterns['page'], 'Form structure'],
@@ -149,10 +151,10 @@ export const SidebarAddPatternMenuItem = ({
       patternSelected={patternSelected}
     >
       <button
-        className={`${styles.dropdownButton} tablet:width-full text-left width-auto text-base-darkest text-normal padding-0 bg-white border-0 cursor-pointer margin-bottom-3`}
+        className={`${styles.dropdownButton} display-flex flex-align-center text-base-darkest bg-white border-0 cursor-pointer margin-bottom-3`}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="tablet:display-inline-block tablet:width-auto tablet:margin-right-1 display-block width-full text-ttop text-center">
+        <span className="display-flex flex-align-center margin-right-1">
           <svg
             className="usa-icon--size-3"
             aria-hidden="true"
@@ -162,12 +164,10 @@ export const SidebarAddPatternMenuItem = ({
             <use xlinkHref={getIconPath('add-element-icon.svg')}></use>
           </svg>
         </span>
-        <span className="display-inline-block text-ttop tablet:width-auto text-center">
-          <span className="display-inline-block text-ttop margin-right-1">
-            {title}
-          </span>
+        <span className="display-flex flex-align-center">
+          <span className="display-inline-block margin-right-1">{title}</span>
           <svg
-            className="usa-icon"
+            className="usa-icon--size-3"
             aria-hidden="true"
             focusable="false"
             role="img"

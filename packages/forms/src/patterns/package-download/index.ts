@@ -12,7 +12,7 @@ export type PackageDownloadPattern = Pattern<z.infer<typeof configSchema>>;
 
 export const packageDownloadConfig: PatternConfig<PackageDownloadPattern> = {
   displayName: 'Package download',
-  iconPath: 'block-icon.svg',
+  iconPath: 'package-download-icon.svg',
   initial: {
     text: 'Description text...',
   },

@@ -202,7 +202,7 @@ export const aggregatePatternSessionValues = (
 ) => {
   const aggregatedValues = aggregateValuesByPrefix(values);
   if (patternConfig.parseUserInput) {
-    const compoundPatterns = ['repeater', 'name-input'];
+    const compoundPatterns = ['repeater', 'name-input', 'address'];
 
     const isCompoundPattern = compoundPatterns.includes(pattern.type);
     const patternValues = aggregatedValues[pattern.id];
