@@ -2,6 +2,7 @@
   "name": "@gsa-tts/forms-spotlight",
   "type": "module",
   "version": "1.0.0-beta.1",
+  "private": true,
   "scripts": {
     "astro": "astro",
     "build": "astro build",

@@ -1,16 +1,11 @@
 {
-  "name": "10x-forms",
+  "name": "@gsa-tts/forms",
   "version": "1.0.0-beta.1",
-  "private": true,
   "description": "10x Forms Platform",
   "type": "module",
   "main": "index.js",
   "license": "CC0",
   "packageManager": "pnpm@9.8.0",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/",
-    "access": "public"
-  },
   "scripts": {
     "build": "turbo run build --filter=!@gsa-tts/forms-infra-cdktf --filter=!@gsa-tts/forms-infra-aws-cdk",
     "clean": "turbo run clean",

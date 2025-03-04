@@ -5,6 +5,7 @@
   "type": "module",
   "license": "CC0",
   "main": "src/index.ts",
+  "private": true,
   "scripts": {
     "build": "tsup src/* --format esm",
     "clean": "rimraf dist tsconfig.tsbuildinfo coverage",

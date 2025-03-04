@@ -7,6 +7,9 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",

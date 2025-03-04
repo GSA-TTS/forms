@@ -6,6 +6,9 @@
   "license": "CC0",
   "main": "dist/index.js",
   "types": "dist/index.d.js",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "scripts": {
     "build": "tsc",
     "clean": "rimraf dist tsconfig.tsbuildinfo coverage",
