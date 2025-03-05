@@ -108,11 +108,11 @@ const sidebarPatterns: DropdownPattern[] = [
     defaultFormConfig.patterns['social-security-number'],
     'Personal information',
   ],
-  [
-    'gender-id',
-    defaultFormConfig.patterns['gender-id'],
-    'Personal information',
-  ],
+  // [
+  //   'gender-id',
+  //   defaultFormConfig.patterns['gender-id'],
+  //   'Personal information',
+  // ],
   ['fieldset', defaultFormConfig.patterns['fieldset'], 'Form structure'],
   ['repeater', defaultFormConfig.patterns['repeater'], 'Form structure'],
   ['page', defaultFormConfig.patterns['page'], 'Form structure'],
