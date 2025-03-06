@@ -114,6 +114,7 @@ export type CheckboxProps = PatternProps<{
   id: string;
   label: string;
   defaultChecked: boolean;
+  error?: FormError;
 }>;
 
 export type PageSetProps = PatternProps<{

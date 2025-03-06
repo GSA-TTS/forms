@@ -4,12 +4,8 @@ import { Result } from '@gsa-tts/forms-common';
 
 import { type RadioGroupProps } from '../components.js';
 import { type FormError } from '../error.js';
-import {
-  type Pattern,
-  type PatternConfig,
-  validatePattern,
-} from '../pattern.js';
-import { getFormSessionValue } from '../session.js';
+import { type Pattern, type PatternConfig } from '../pattern.js';
+import { getFormSessionError, getFormSessionValue } from '../session.js';
 import { safeZodParseFormErrors } from '../util/zod.js';
 
 const configSchema = z.object({
@@ -75,21 +71,8 @@ export const radioGroupConfig: PatternConfig<RadioGroupPattern, PatternOutput> =
       return [];
     },
     createPrompt(_, session, pattern, options) {
-      const extraAttributes: Record<string, any> = {};
       const sessionValue = getFormSessionValue(session, pattern.id);
-      if (options.validate) {
-        const isValidResult = validatePattern(
-          radioGroupConfig,
-          pattern,
-          sessionValue
-        );
-        if (!isValidResult.success) {
-          extraAttributes['error'] = isValidResult.error;
-        }
-      }
-      console.group('radio/createPrompt');
-      console.log(pattern);
-      console.groupEnd();
+      const sessionError = getFormSessionError(session, pattern.id);
 
       return {
         props: {
@@ -106,7 +89,7 @@ export const radioGroupConfig: PatternConfig<RadioGroupPattern, PatternOutput> =
               defaultChecked: sessionValue === optionId,
             };
           }),
-          ...extraAttributes,
+          error: sessionError,
         } as RadioGroupProps,
         children: [],
       };
