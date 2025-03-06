@@ -1,12 +1,8 @@
 import * as z from 'zod';
 
 import { type EmailInputProps } from '../../components.js';
-import {
-  type Pattern,
-  type PatternConfig,
-  validatePattern,
-} from '../../pattern.js';
-import { getFormSessionValue } from '../../session.js';
+import { type Pattern, type PatternConfig } from '../../pattern.js';
+import { getFormSessionError, getFormSessionValue } from '../../session.js';
 import {
   safeZodParseFormErrors,
   safeZodParseToFormError,
@@ -73,9 +69,8 @@ export const emailInputConfig: PatternConfig<
   },
 
   createPrompt(_, session, pattern, options) {
-    const extraAttributes: Record<string, any> = {};
     const sessionValue = getFormSessionValue(session, pattern.id);
-    const error = session.data.errors[pattern.id];
+    const sessionError = getFormSessionError(session, pattern.id);
 
     return {
       props: {
@@ -84,9 +79,8 @@ export const emailInputConfig: PatternConfig<
         label: pattern.data.label,
         emailId: `${pattern.id}.email`,
         required: pattern.data.required,
-        error,
+        error: sessionError,
         value: sessionValue,
-        ...extraAttributes,
       } as EmailInputProps,
       children: [],
     };

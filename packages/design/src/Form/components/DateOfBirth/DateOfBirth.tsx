@@ -43,15 +43,20 @@ export const DateOfBirthPattern: PatternComponent<DateOfBirthProps> = ({
 
   return (
     <fieldset className="usa-fieldset">
-      <div className={classNames('usa-form-group margin-top-2')}>
-        <legend
-          className={classNames('usa-legend', {
-            'usa-legend--error': error,
+      <div
+        className={classNames('usa-form-group margin-top-2', {
+          'usa-form-group--error': error,
+        })}
+      >
+        <label
+          className={classNames('usa-label', {
+            'usa-label--error': error,
           })}
+          htmlFor={monthId}
         >
           {label}
           {required && <span className="required-indicator">*</span>}
-        </legend>
+        </label>
         {hint && (
           <div className="usa-hint" id={hintId}>
             {hint}

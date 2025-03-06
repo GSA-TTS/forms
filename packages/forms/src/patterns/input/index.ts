@@ -12,7 +12,7 @@ export const inputConfig: PatternConfig<InputPattern, InputPatternOutput> = {
   initial: {
     label: message.patterns.input.fieldLabel,
     initial: '',
-    required: true,
+    required: false,
     maxLength: 128,
   },
   parseUserInput,

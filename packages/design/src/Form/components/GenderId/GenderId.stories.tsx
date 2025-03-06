@@ -11,9 +11,11 @@ const meta: Meta<typeof GenderIdPattern> = {
       const FormDecorator = () => {
         const formMethods = useForm();
         return (
-          <FormProvider {...formMethods}>
-            <Story {...args} />
-          </FormProvider>
+          <div style={{ padding: '10px' }}>
+            <FormProvider {...formMethods}>
+              <Story {...args} />
+            </FormProvider>
+          </div>
         );
       };
       return <FormDecorator />;

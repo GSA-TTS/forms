@@ -5,47 +5,53 @@ import { useFormContext } from 'react-hook-form';
 import { type TextInputProps } from '@gsa-tts/forms-core';
 import { type PatternComponent } from '../../../Form/index.js';
 
-const TextInput: PatternComponent<TextInputProps> = props => {
+const TextInput: PatternComponent<TextInputProps> = ({
+  inputId,
+  label,
+  required,
+  error,
+  value,
+}) => {
+  console.log('TextInput', inputId, label, required, error, value);
   const { register } = useFormContext();
-  const id = props.inputId;
+  const id = inputId;
   return (
-    <div className="usa-form-group-wrapper" key={props.inputId}>
+    <fieldset className="usa-fieldset">
       <div
         className={classNames('usa-form-group margin-top-2', {
-          'usa-form-group--error': props.error,
+          'usa-form-group--error': error,
         })}
       >
         <label
           className={classNames('usa-label', {
-            'usa-label--error': props.error,
+            'usa-label--error': error,
           })}
-          id={`input-message-${id}`}
+          htmlFor={`input-${id}`}
         >
-          {props.label}
-          {props.error && (
-            <span
-              className="usa-error-message"
-              id={`input-error-message-${id}`}
-              role="alert"
-            >
-              {props.error.message}
-            </span>
-          )}
-          <input
-            className={classNames('usa-input', {
-              'usa-input--error': props.error,
-            })}
-            id={`input-${id}`}
-            defaultValue={props.value}
-            {...register(id || Math.random().toString(), {
-              //required: props.required,
-            })}
-            type="text"
-            aria-describedby={`input-message-${id}`}
-          />
+          {label}
+          {required && <span className="required-indicator">*</span>}
         </label>
+        {error && (
+          <div
+            className="usa-error-message"
+            id={`input-error-message-${id}`}
+            role="alert"
+          >
+            {error.message}
+          </div>
+        )}
+        <input
+          className={classNames('usa-input', {
+            'usa-input--error': error,
+          })}
+          id={`input-${id}`}
+          defaultValue={value}
+          {...register(id || Math.random().toString())}
+          type="text"
+          aria-describedby={`input-message-${id}`}
+        />
       </div>
-    </div>
+    </fieldset>
   );
 };
 

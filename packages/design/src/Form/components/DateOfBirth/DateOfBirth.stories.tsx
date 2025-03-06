@@ -18,9 +18,11 @@ const meta: Meta<typeof DateOfBirthPattern> = {
           },
         });
         return (
-          <FormProvider {...formMethods}>
-            <Story {...args} />
-          </FormProvider>
+          <div style={{ padding: '10px' }}>
+            <FormProvider {...formMethods}>
+              <Story {...args} />
+            </FormProvider>
+          </div>
         );
       };
       return <FormDecorator />;

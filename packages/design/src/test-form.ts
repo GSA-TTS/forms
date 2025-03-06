@@ -47,7 +47,7 @@ export const createOnePageTwoPatternTestForm = () => {
           data: {
             label: 'Pattern 1',
             initial: '',
-            required: true,
+            required: false,
             maxLength: 128,
           },
         } satisfies InputPattern,
@@ -57,7 +57,7 @@ export const createOnePageTwoPatternTestForm = () => {
           data: {
             label: 'Pattern 2',
             initial: 'test',
-            required: true,
+            required: false,
             maxLength: 128,
           },
         } satisfies InputPattern,

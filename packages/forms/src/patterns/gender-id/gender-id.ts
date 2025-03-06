@@ -1,7 +1,7 @@
 import * as z from 'zod';
 import { type GenderIdProps } from '../../components.js';
 import { type Pattern, type PatternConfig } from '../../pattern.js';
-import { getFormSessionValue } from '../../session.js';
+import { getFormSessionError, getFormSessionValue } from '../../session.js';
 import {
   safeZodParseFormErrors,
   safeZodParseToFormError,
@@ -72,13 +72,11 @@ export const genderIdConfig: PatternConfig<
   },
 
   createPrompt(_, session, pattern, options) {
-    const extraAttributes: Record<string, any> = {};
     const sessionValue = getFormSessionValue(session, pattern.id);
-    const value = sessionValue?.input || '';
+    const sessionError = getFormSessionError(session, pattern.id);
 
     const preferNotToAnswerChecked =
       sessionValue?.preferNotToAnswer === pattern.data.preferNotToAnswerText;
-    const error = session.data.errors[pattern.id];
 
     return {
       props: {
@@ -90,9 +88,8 @@ export const genderIdConfig: PatternConfig<
         hint: pattern.data.hint,
         preferNotToAnswerText: pattern.data.preferNotToAnswerText,
         preferNotToAnswerChecked,
-        value,
-        error,
-        ...extraAttributes,
+        value: sessionValue,
+        error: sessionError,
       } as GenderIdProps,
       children: [],
     };

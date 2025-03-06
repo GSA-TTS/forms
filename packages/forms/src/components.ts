@@ -114,6 +114,7 @@ export type CheckboxProps = PatternProps<{
   id: string;
   label: string;
   defaultChecked: boolean;
+  error?: FormError;
 }>;
 
 export type PageSetProps = PatternProps<{
@@ -222,7 +223,9 @@ export type GenderIdProps = PatternProps<{
   label: string;
   required: boolean;
   error?: FormError;
-  value: string;
+  value: {
+    gender: string;
+  };
   preferNotToAnswerText?: string;
   preferNotToAnswerChecked?: boolean;
 }>;

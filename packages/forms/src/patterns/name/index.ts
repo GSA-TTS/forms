@@ -2,7 +2,7 @@ import * as z from 'zod';
 
 import { type NameProps } from '../../components.js';
 import { type Pattern, type PatternConfig } from '../../pattern.js';
-import { getFormSessionValue } from '../../session.js';
+import { getFormSessionError, getFormSessionValue } from '../../session.js';
 import {
   safeZodParseFormErrors,
   safeZodParseToFormError,
@@ -104,9 +104,8 @@ export const nameConfig: PatternConfig<NamePattern, NamePatternOutput> = {
   },
 
   createPrompt(_, session, pattern, options) {
-    const extraAttributes: Record<string, any> = {};
     const sessionValues = getFormSessionValue(session, pattern.id);
-    const errors = session.data.errors[pattern.id];
+    const sessionError = getFormSessionError(session, pattern.id);
 
     return {
       props: {
@@ -119,9 +118,8 @@ export const nameConfig: PatternConfig<NamePattern, NamePatternOutput> = {
         givenNameHint: pattern.data.givenNameHint,
         familyNameHint: pattern.data.familyNameHint,
         required: pattern.data.required,
-        ...extraAttributes,
         values: sessionValues,
-        errors: errors?.fields,
+        errors: sessionError?.fields,
       } as NameProps,
       children: [],
     };
