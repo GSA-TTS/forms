@@ -27,7 +27,11 @@ export const SocialSecurityNumberPattern: PatternComponent<
 
   return (
     <fieldset className="usa-fieldset">
-      <div className={classNames('usa-form-group margin-top-2')}>
+      <div
+        className={classNames('usa-form-group margin-top-2', {
+          'usa-form-group--error': error,
+        })}
+      >
         <label
           className={classNames('usa-label', {
             'usa-label--error': error,
