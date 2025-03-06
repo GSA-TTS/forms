@@ -12,7 +12,7 @@ import {
   safeZodParseToFormError,
 } from '../../util/zod.js';
 import type { CreatePrompt, TextAreaProps } from '../../components.js';
-import { getFormSessionValue } from '../../session.js';
+import { getFormSessionError, getFormSessionValue } from '../../session.js';
 
 const textAreaConfigSchema = z.object({
   label: z.string().min(1, message.patterns.textarea.fieldLabelRequired),
@@ -72,9 +72,8 @@ export const textAreaConfig: PatternConfig<
   },
 
   createPrompt(config, session, pattern, options) {
-    const extraAttributes: Record<string, any> = {};
     const sessionValue = getFormSessionValue(session, pattern.id);
-    const error = session.data.errors[pattern.id];
+    const sessionError = getFormSessionError(session, pattern.id);
 
     return {
       props: {
@@ -82,12 +81,11 @@ export const textAreaConfig: PatternConfig<
         type: 'text-area',
         inputId: pattern.id,
         value: sessionValue,
-        error,
+        error: sessionError,
         label: pattern.data.label,
         required: pattern.data.required,
         maxLength: pattern.data.maxLength,
         hint: pattern.data.hint,
-        ...extraAttributes,
       } as TextAreaProps,
       children: [],
     };
