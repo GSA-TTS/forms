@@ -222,7 +222,9 @@ export type GenderIdProps = PatternProps<{
   label: string;
   required: boolean;
   error?: FormError;
-  value: string;
+  value: {
+    gender: string;
+  };
   preferNotToAnswerText?: string;
   preferNotToAnswerChecked?: boolean;
 }>;
