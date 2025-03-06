@@ -1,7 +1,7 @@
 import * as z from 'zod';
 import { type PhoneNumberProps } from '../../components.js';
 import { type Pattern, type PatternConfig } from '../../pattern.js';
-import { getFormSessionValue } from '../../session.js';
+import { getFormSessionError, getFormSessionValue } from '../../session.js';
 import {
   safeZodParseFormErrors,
   safeZodParseToFormError,
@@ -22,7 +22,7 @@ export type PhoneNumberPatternOutput = z.infer<
 export const createPhoneSchema = (data: PhoneNumberPattern['data']) => {
   const phoneSchema = z
     .string()
-    .regex(/^(\d{3}-\d{3}-\d{4}|\d{10})$/, 'Invalid phone number format.')
+    .regex(/^(\d{3}-\d{3}-\d{4}|\d{10})$/, 'Invalid phone number format')
     .transform(value => {
       const digits = value.replace(/[^\d]/g, '');
       return `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(6)}`;
@@ -30,7 +30,7 @@ export const createPhoneSchema = (data: PhoneNumberPattern['data']) => {
     .refine(value => {
       const digits = value.replace(/[^\d]/g, '');
       return digits.length === 10;
-    }, 'Phone number must contain exactly 10 digits.');
+    }, 'Phone number must contain exactly 10 digits');
 
   if (!data.required) {
     return z.union([z.literal(''), phoneSchema]);
@@ -63,9 +63,8 @@ export const phoneNumberConfig: PatternConfig<
   },
 
   createPrompt(_, session, pattern, options) {
-    const extraAttributes: Record<string, any> = {};
     const sessionValue = getFormSessionValue(session, pattern.id);
-    const error = session.data.errors[pattern.id];
+    const sessionError = getFormSessionError(session, pattern.id);
 
     return {
       props: {
@@ -76,8 +75,7 @@ export const phoneNumberConfig: PatternConfig<
         required: pattern.data.required,
         hint: pattern.data.hint,
         value: sessionValue,
-        error,
-        ...extraAttributes,
+        error: sessionError,
       } as PhoneNumberProps,
       children: [],
     };
