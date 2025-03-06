@@ -21,7 +21,8 @@ const icons: Record<string, string | any> = {
   'date-icon.svg': '#calendar_today',
   'dropdown-icon.svg': '#expand_more',
   'email-icon.svg': '#alternate_email',
-  'gender-id-icon.svg': '#person',
+  // 'gender-id-icon.svg': '#person',
+  'name-icon.svg': '#person',
   'long-answer-icon.svg': longAnswerIcon,
   'list-icon.svg': '#list',
   'page-icon.svg': pageIcon,
@@ -89,6 +90,11 @@ const sidebarPatterns: DropdownPattern[] = [
   ['input', defaultFormConfig.patterns['input'], 'Freeform answer'],
   ['text-area', defaultFormConfig.patterns['text-area'], 'Freeform answer'],
   ['paragraph', defaultFormConfig.patterns['paragraph'], 'Freeform answer'],
+  [
+    'name-input',
+    defaultFormConfig.patterns['name-input'],
+    'Personal information',
+  ],
   [
     'email-input',
     defaultFormConfig.patterns['email-input'],
