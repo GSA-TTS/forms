@@ -1,12 +1,15 @@
 {
   "name": "@gsa-tts/forms-infra-aws-cdk",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.4",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },
   "bin": {
     "aws-cdk": "bin/aws-cdk.js"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "pnpm build:typescript && pnpm build:synth",
     "build:typescript": "tsc",

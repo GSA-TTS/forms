@@ -18,16 +18,41 @@ export class FormsPlatformStack extends cdk.Stack {
     const environment = new cdk.CfnParameter(this, 'Environment', {
       type: 'String',
       description: 'The environment for the stack (e.g., dev, prod)',
+      allowedPattern: '.+',
     });
     const dockerImagePath = new cdk.CfnParameter(this, 'DockerImagePath', {
       type: 'String',
       description: 'The Docker image url for the App Runner service',
+      allowedPattern: '.+',
     });
 
     // Networking configuration
     const vpc = new ec2.Vpc(this, `${id}-vpc`, {
       maxAzs: 2,
     });
+
+    // Get the default security group
+    const defaultSecurityGroup = ec2.SecurityGroup.fromSecurityGroupId(
+      this,
+      'DefaultSecurityGroup',
+      vpc.vpcDefaultSecurityGroup
+    );
+
+    // Explicitly remove inbound and outbound rules.
+    // This is an alternative to the cdk.json setting:
+    //  "@aws-cdk/aws-ec2:restrictDefaultSecurityGroup": true
+    defaultSecurityGroup.addEgressRule(
+      ec2.Peer.anyIpv4(),
+      ec2.Port.allTraffic(),
+      'Remove all egress traffic',
+      false
+    );
+    defaultSecurityGroup.addIngressRule(
+      ec2.Peer.anyIpv4(),
+      ec2.Port.allTraffic(),
+      'Remove all ingress traffic',
+      false
+    );
 
     // Security group for RDS
     const rdsSecurityGroup = new ec2.SecurityGroup(this, `${id}-rds-sg`, {
@@ -37,23 +62,37 @@ export class FormsPlatformStack extends cdk.Stack {
     });
 
     // Security group for App Runner
-    const appRunnerSecurityGroup = new ec2.SecurityGroup(this, `${id}-apprunner-sg`, {
-      vpc,
-      description: 'Security group for App Runner service',
-      allowAllOutbound: true,
-    });
+    const appRunnerSecurityGroup = new ec2.SecurityGroup(
+      this,
+      `${id}-apprunner-sg`,
+      {
+        vpc,
+        description: 'Security group for App Runner service',
+        allowAllOutbound: true,
+      }
+    );
 
     // Allow App Runner security group to access RDS security group
+    /*
     rdsSecurityGroup.addIngressRule(
       appRunnerSecurityGroup,
       ec2.Port.tcp(5432),
       'Allow postgres access from App Runner'
     );
+    */
+    new ec2.CfnSecurityGroupIngress(this, `${id}-apprunner-rds-ingress`, {
+      groupId: rdsSecurityGroup.securityGroupId,
+      sourceSecurityGroupId: appRunnerSecurityGroup.securityGroupId,
+      ipProtocol: 'tcp',
+      fromPort: 5432,
+      toPort: 5432,
+      description: 'Allow postgres access from App Runner',
+    });
 
     const dbSecret = new secretsmanager.Secret(this, `${id}-rds-secret`, {
       secretName: getDatabaseSecretKey(environment.valueAsString),
       generateSecretString: {
-        secretStringTemplate: JSON.stringify({ username: 'postgres',  }),
+        secretStringTemplate: JSON.stringify({ username: 'postgres' }),
         generateStringKey: 'password',
         excludeCharacters: '/@" ',
       },
@@ -90,11 +129,11 @@ export class FormsPlatformStack extends cdk.Stack {
           environmentVariables: {
             DB_HOST: rdsInstance.dbInstanceEndpointAddress,
             DB_PORT: rdsInstance.dbInstanceEndpointPort,
-            DB_NAME: 'postgres'
+            DB_NAME: 'postgres',
           },
           environmentSecrets: {
             DB_SECRET_ARN: apprunner.Secret.fromSecretsManager(dbSecret),
-          }
+          },
         },
         imageIdentifier: dockerImagePath.valueAsString,
       }),

@@ -1,7 +1,7 @@
 {
   "name": "@gsa-tts/forms-server",
   "type": "module",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "main": "dist/handler.js",
   "types": "handler.ts",
   "publishConfig": {
