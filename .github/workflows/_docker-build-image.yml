@@ -15,12 +15,20 @@ on:
       tag-name:
         type: string
         default: ${{ github.ref_name }}
+      deploy-key:
+        type: string
+        required: true
 
 env:
   TAG_NAME: ${{ inputs.tag-name }}
   APP_DIR: ${{ inputs.app-name }}
   REGISTRY_PATH: ghcr.io/${{ inputs.org-name }}/${{ inputs.repo-name }}/${{ inputs.app-name }}
   COMMIT_SHA: ${{github.sha}}
+  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  AWS_REGION: us-east-2
+  ECR_REPOSITORY: tts-10x-forms-${{ inputs.deploy-key }}-image-${{ inputs.app-name }}
 
 jobs:
   setup:
@@ -48,3 +56,17 @@ jobs:
       - name: Publish to container registry
         run: |
           docker push --all-tags ${REGISTRY_PATH}
+
+      # - name: Log in to AWS ECR
+      #   run: |
+      #     aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
+
+      # - name: Tag Docker image for ECR
+      #   run: |
+      #     docker tag ${REGISTRY_PATH}:${COMMIT_SHA} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:${COMMIT_SHA}
+      #     docker tag ${REGISTRY_PATH}:${TAG_NAME} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:${TAG_NAME}
+
+      # - name: Push Docker image to ECR
+      #   run: |
+      #     docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:${COMMIT_SHA}
+      #     docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:${TAG_NAME}

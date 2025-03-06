@@ -10,7 +10,7 @@ import { getSecret } from '../secrets';
  * and deploys AstroService instance(s)
  */
 export class CloudGovSpace extends Construct {
-  constructor(scope: Construct, id: string, gitCommitHash: string) {
+  constructor(scope: Construct, id: string, gitRef: string) {
     super(scope, id);
 
     const space = new cloudfoundry.dataCloudfoundrySpace.DataCloudfoundrySpace(
@@ -26,7 +26,7 @@ export class CloudGovSpace extends Construct {
       scope,
       `${id}-server-doj`,
       space.id,
-      `server-doj:${gitCommitHash}`,
+      `server-doj:${gitRef}`,
       {
         loginGovPrivateKey: getSecret(
           this,

@@ -1,10 +1,11 @@
 {
   "name": "@gsa-tts/forms-server-doj",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.1",
   "description": "Form server instance for DOJ",
   "type": "module",
   "license": "CC0",
   "main": "src/index.ts",
+  "private": true,
   "scripts": {
     "build": "tsup src/* --format esm",
     "clean": "rimraf dist tsconfig.tsbuildinfo coverage",
@@ -14,6 +15,7 @@
   },
   "dependencies": {
     "@gsa-tts/forms-database": "workspace:*",
+    "@gsa-tts/forms-infra-core": "workspace:*",
     "@gsa-tts/forms-server": "workspace:*"
   },
   "devDependencies": {

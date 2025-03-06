@@ -55,12 +55,13 @@ jobs:
         with:
           terraform_version: "1.10.4"
 
+      - name: Generate Terraform CDK provider constructs
+        shell: bash
+        run: pnpm --filter @gsa-tts/forms-infra-cdktf build:get
+
       - name: Initialize Terraform CDK configuration
         shell: bash
-        working-directory: infra/cdktf
-        run: |
-          pnpm cdktf get
-          pnpm build:tsc
+        run: pnpm turbo run --filter @gsa-tts/forms-infra-cdktf build
 
       - name: Install CloudFoundry CLI
         run: |

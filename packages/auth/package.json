@@ -1,11 +1,14 @@
 {
   "name": "@gsa-tts/forms-auth",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.1",
   "description": "10x Forms Platform auth module",
   "type": "module",
   "license": "CC0",
   "main": "dist/index.js",
   "types": "dist/index.d.js",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "scripts": {
     "build": "tsc",
     "clean": "rimraf dist tsconfig.tsbuildinfo coverage",

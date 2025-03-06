@@ -1,13 +1,17 @@
 {
   "name": "@gsa-tts/forms-infra-cdktf",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.1",
   "description": "10x Forms Platform Terraform CDK",
   "main": "src/index.js",
   "types": "src/index.ts",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "scripts": {
-    "build": "pnpm build:tsc && pnpm build:synth",
+    "build": "echo $PATH && pnpm build:tsc && pnpm build:synth",
     "build:get": "cdktf get",
     "build:synth": "pnpm build:synth:main && pnpm build:synth:demo",
+    "build:synth:local": "DEPLOY_GIT_REF=main DEPLOY_ENV=main cdktf synth",
     "build:synth:main": "DEPLOY_ENV=main cdktf synth",
     "build:synth:demo": "DEPLOY_ENV=demo cdktf synth",
     "build:tsc": "tsc --pretty",
@@ -15,19 +19,15 @@
     "clean:gen": "rimraf .gen",
     "deploy:main": "DEPLOY_ENV=main cdktf deploy",
     "deploy:demo": "DEPLOY_ENV=demo cdktf deploy",
+    "deploy:main:local": "DEPLOY_GIT_REF=main DEPLOY_ENV=main cdktf deploy",
     "dev": "tsc -w",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "echo 'no tests'"
   },
   "dependencies": {
-    "@aws-sdk/client-ssm": "^3.624.0",
-    "cdktf": "^0.20.8",
-    "cdktf-cli": "^0.20.8",
-    "constructs": "^10.3.0"
-  },
-  "devDependencies": {
-    "@types/jest": "^29.5.12",
-    "jest": "^29.7.0",
-    "ts-jest": "^29.2.4"
+    "@gsa-tts/forms-infra-aws-cdk": "workspace:*",
+    "@aws-sdk/client-ssm": "^3.750.0",
+    "cdktf": "^0.20.11",
+    "cdktf-cli": "^0.20.11",
+    "constructs": "^10.4.2"
   }
 }

@@ -1,11 +1,14 @@
 {
   "name": "@gsa-tts/forms-common",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.1",
   "description": "10x Forms Platform shared resources",
   "type": "module",
   "license": "CC0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "scripts": {
     "build": "tsc",
     "clean": "rimraf dist tsconfig.tsbuildinfo coverage",

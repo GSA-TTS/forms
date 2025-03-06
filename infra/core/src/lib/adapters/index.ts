@@ -5,6 +5,7 @@ import * as r from '@gsa-tts/forms-common';
 import { AWSParameterStoreSecretsVault } from './aws-param-store.js';
 import { getSecretMapFromJsonString, type SecretsVault } from '../types.js';
 import { InMemorySecretsVault } from './in-memory.js';
+import { AWSSecretsManagerSecretsVault } from './aws-secrets-manager.js';
 
 /**
  * Returns either a production vault or an in-memory vault initialized with the
@@ -29,6 +30,10 @@ export const getSecretsVault = async (jsonFilePath?: string) => {
 
 export const getAWSSecretsVault = (): SecretsVault => {
   return new AWSParameterStoreSecretsVault();
+};
+
+export const getAWSSecretsManagerVault = (): SecretsVault => {
+  return new AWSSecretsManagerSecretsVault();
 };
 
 export const createInMemorySecretsVault = (

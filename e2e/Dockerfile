@@ -1,5 +1,5 @@
 # base image with Node.js and playwright preinstalled
-FROM mcr.microsoft.com/playwright:v1.50.0-noble as base
+FROM mcr.microsoft.com/playwright:v1.50.1-noble as base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV NODE_ENV=test
