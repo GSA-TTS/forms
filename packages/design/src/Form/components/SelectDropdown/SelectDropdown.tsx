@@ -10,6 +10,7 @@ export const SelectDropdownPattern: PatternComponent<SelectDropdownProps> = ({
   required,
   options,
   error,
+  value,
 }) => {
   const { register } = useFormContext();
   const errorId = `input-error-message-${selectId}`;
@@ -42,6 +43,7 @@ export const SelectDropdownPattern: PatternComponent<SelectDropdownProps> = ({
           id={selectId}
           {...register(selectId, { required })}
           aria-describedby={error ? errorId : undefined}
+          defaultValue={value}
         >
           <option key="default" value="">
             - Select -

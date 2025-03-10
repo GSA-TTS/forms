@@ -15,7 +15,7 @@ const pattern: InputPattern = {
   type: 'input',
   data: {
     label: message.patterns.input.displayName,
-    required: true,
+    required: false,
     maxLength: 128,
   },
 };
