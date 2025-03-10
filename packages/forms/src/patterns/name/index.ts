@@ -35,17 +35,7 @@ export const createNameSchema = (data: NamePattern['data']) => {
     familyName: familyNameSchema,
   });
 
-  return schema.superRefine((fields, ctx) => {
-    const { givenName, familyName } = fields;
-
-    if (data.required && (!givenName || !familyName)) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: 'Given and family names must be filled',
-        path: ['nameInput'],
-      });
-    }
-  });
+  return schema;
 };
 
 export const nameConfig: PatternConfig<NamePattern, NamePatternOutput> = {
@@ -71,7 +61,6 @@ export const nameConfig: PatternConfig<NamePattern, NamePatternOutput> = {
       };
     } else {
       const fieldErrors = convertZodErrorToFormErrors(result.error);
-
       const validData = Object.keys(inputValue).reduce(
         (acc, key) => {
           const typedKey = key as keyof z.infer<
@@ -89,6 +78,7 @@ export const nameConfig: PatternConfig<NamePattern, NamePatternOutput> = {
         success: false,
         error: {
           type: 'custom',
+          message: 'Given and family names must be filled',
           fields: fieldErrors,
         },
         data: validData,
@@ -118,8 +108,8 @@ export const nameConfig: PatternConfig<NamePattern, NamePatternOutput> = {
         givenNameHint: pattern.data.givenNameHint,
         familyNameHint: pattern.data.familyNameHint,
         required: pattern.data.required,
-        values: sessionValues,
-        errors: sessionError?.fields,
+        value: sessionValues,
+        error: sessionError,
       } as NameProps,
       children: [],
     };
