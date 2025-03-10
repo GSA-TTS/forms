@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { addressConfig, type AddressPattern } from './index';
-import { AddressSchema } from './index';
+import { createAddressSchema } from './index';
 
 describe('AddressPattern tests', () => {
   describe('AddressSchema', () => {
@@ -21,7 +21,8 @@ describe('AddressPattern tests', () => {
         mailingUrbanizationCode: 'URB123',
       };
 
-      expect(AddressSchema.safeParse(validInput).success).toBe(true);
+      const schema = createAddressSchema({ required: true });
+      expect(schema.safeParse(validInput).success).toBe(true);
     });
 
     it('should fail validation for an incomplete address', () => {
@@ -36,7 +37,8 @@ describe('AddressPattern tests', () => {
         mailingZipCode: '',
       };
 
-      expect(AddressSchema.safeParse(invalidInput).success).toBe(false);
+      const schema = createAddressSchema({ required: true });
+      expect(schema.safeParse(invalidInput).success).toBe(false);
     });
   });
 
