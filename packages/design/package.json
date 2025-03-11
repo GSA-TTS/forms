@@ -4,6 +4,7 @@
   "main": "src/index.ts",
   "type": "module",
   "publishConfig": {
+    "access": "public",
     "registry": "https://npm.pkg.github.com/"
   },
   "scripts": {

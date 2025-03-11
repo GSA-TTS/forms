@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "types": "src/index.ts",
   "publishConfig": {
+    "access": "public",
     "registry": "https://npm.pkg.github.com/"
   },
   "scripts": {

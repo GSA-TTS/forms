@@ -1,11 +1,14 @@
 {
   "name": "@gsa-tts/forms-infra-aws-cdk",
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0-beta.7",
   "publishConfig": {
+    "access": "public",
     "registry": "https://npm.pkg.github.com/"
   },
   "bin": {
-    "aws-cdk": "bin/aws-cdk.js"
+    "aws-cdk": "bin/aws-cdk.js",
+    "forms-apply-stack": "bin/forms-apply-stack",
+    "forms-update-stack-imag": "bin/forms-update-stack-image"
   },
   "files": [
     "dist"
@@ -19,10 +22,10 @@
     "watch": "tsc -w"
   },
   "dependencies": {
-    "@aws-cdk/aws-apprunner-alpha": "2.181.0-alpha.0",
+    "@aws-cdk/aws-apprunner-alpha": "2.182.0-alpha.0",
     "@gsa-tts/forms-infra-core": "workspace:*",
-    "aws-cdk": "2.1001.0",
-    "aws-cdk-lib": "2.181.0",
+    "aws-cdk": "2.1003.0",
+    "aws-cdk-lib": "2.182.0",
     "change-case": "^5.4.4",
     "constructs": "^10.4.2"
   },
