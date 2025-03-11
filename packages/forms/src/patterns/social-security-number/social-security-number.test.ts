@@ -22,7 +22,7 @@ describe('SocialSecurityNumberPattern tests', () => {
       const invalidResult = schema.safeParse(invalidInput);
       expect(invalidResult.success).toBe(false);
       expect(invalidResult.error?.issues[0].message).toBe(
-        'Social Security number must have exactly 9 digits'
+        'Enter a valid Social Security number'
       );
     });
 
@@ -43,7 +43,7 @@ describe('SocialSecurityNumberPattern tests', () => {
       const invalidResult = schema.safeParse(invalidInput);
       expect(invalidResult.success).toBe(false);
       expect(invalidResult.error?.issues[0].message).toBe(
-        'Social Security number must have exactly 9 digits'
+        'Enter a valid Social Security number'
       );
     });
 
@@ -59,7 +59,7 @@ describe('SocialSecurityNumberPattern tests', () => {
       const shortInputResult = schema.safeParse(shortInput);
       expect(shortInputResult.success).toBe(false);
       expect(shortInputResult.error?.issues[0].message).toBe(
-        'Social Security number must have exactly 9 digits'
+        'Enter a valid Social Security number'
       );
     });
 
@@ -76,7 +76,7 @@ describe('SocialSecurityNumberPattern tests', () => {
         const result = schema.safeParse(ssn);
         expect(result.success).toBe(false);
         expect(result.error?.issues[0].message).toBe(
-          'Social Security number must start with a valid prefix (not 9, 666, or 000)'
+          'Enter a valid Social Security number'
         );
       });
     });
@@ -93,16 +93,9 @@ describe('SocialSecurityNumberPattern tests', () => {
       invalidSSNs.forEach(ssn => {
         const result = schema.safeParse(ssn);
         expect(result.success).toBe(false);
-        const errorMessage = result.error?.issues[0].message;
-        if (ssn === '555-00-6789') {
-          expect(errorMessage).toBe(
-            'Social Security number must have a valid middle segment (not 00)'
-          );
-        } else if (ssn === '555-12-0000') {
-          expect(errorMessage).toBe(
-            'Social Security number must have a valid suffix (not 0000)'
-          );
-        }
+        expect(result.error?.issues[0].message).toBe(
+          'Enter a valid Social Security number'
+        );
       });
     });
   });
@@ -154,7 +147,7 @@ describe('SocialSecurityNumberPattern tests', () => {
       if (!result.success) {
         expect(result.error).toBeDefined();
         expect(result.error?.message).toContain(
-          'Social Security number must have exactly 9 digits'
+          'Enter a valid Social Security number'
         );
       } else {
         expect.fail('Unexpected validation success');
