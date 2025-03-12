@@ -1,6 +1,6 @@
 {
   "name": "@gsa-tts/forms-core",
-  "version": "1.0.0-beta.1",
+  "version": "0.1.0",
   "description": "10x Forms Platform form handling",
   "type": "module",
   "license": "CC0",

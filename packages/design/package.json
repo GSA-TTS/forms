@@ -1,6 +1,6 @@
 {
   "name": "@gsa-tts/forms-design",
-  "version": "1.0.0-beta.1",
+  "version": "0.1.0",
   "main": "src/index.ts",
   "type": "module",
   "publishConfig": {

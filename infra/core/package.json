@@ -1,6 +1,6 @@
 {
   "name": "@gsa-tts/forms-infra-core",
-  "version": "1.0.0-beta.1",
+  "version": "0.1.0",
   "description": "10x Forms Platform core infrastructure management",
   "type": "module",
   "license": "CC0",
