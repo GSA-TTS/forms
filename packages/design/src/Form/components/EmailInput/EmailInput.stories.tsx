@@ -16,7 +16,7 @@ const meta: Meta<typeof EmailInputPattern> = {
           },
         });
         return (
-          <div style={{ padding: '10px' }}>
+          <div className="padding-left-2">
             <FormProvider {...formMethods}>
               <Story {...args} />
             </FormProvider>

@@ -50,7 +50,7 @@ export default {
       const FormDecorator = () => {
         const formMethods = useForm();
         return (
-          <div style={{ padding: '10px' }}>
+          <div className="padding-left-2">
             <FormProvider {...formMethods}>
               <div className="usa-form margin-bottom-3 maxw-full">
                 <Story {...args} />
