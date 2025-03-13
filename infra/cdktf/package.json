@@ -1,13 +1,9 @@
 {
   "name": "@gsa-tts/forms-infra-cdktf",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "10x Forms Platform Terraform CDK",
   "main": "src/index.js",
   "types": "src/index.ts",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://npm.pkg.github.com/"
-  },
   "scripts": {
     "build": "echo $PATH && pnpm build:tsc && pnpm build:synth",
     "build:get": "cdktf get",

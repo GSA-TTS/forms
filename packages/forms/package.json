@@ -1,16 +1,12 @@
 {
   "name": "@gsa-tts/forms-core",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "10x Forms Platform form handling",
   "type": "module",
   "license": "CC0",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://npm.pkg.github.com/"
-  },
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",

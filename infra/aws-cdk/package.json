@@ -1,10 +1,6 @@
 {
   "name": "@gsa-tts/forms-infra-aws-cdk",
-  "version": "0.1.0",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://npm.pkg.github.com/"
-  },
+  "version": "0.1.2",
   "bin": {
     "aws-cdk": "bin/aws-cdk.js",
     "forms-apply-stack": "bin/forms-apply-stack",

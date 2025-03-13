@@ -1,13 +1,9 @@
 {
   "name": "@gsa-tts/forms-server",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "main": "dist/handler.js",
   "types": "handler.ts",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://npm.pkg.github.com/"
-  },
   "files": [
     "dist"
   ],

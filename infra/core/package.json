@@ -1,15 +1,11 @@
 {
   "name": "@gsa-tts/forms-infra-core",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "10x Forms Platform core infrastructure management",
   "type": "module",
   "license": "CC0",
   "main": "dist/index.js",
   "types": "dist/index.d.js",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://npm.pkg.github.com/"
-  },
   "scripts": {
     "build": "tsc",
     "clean": "rimraf dist tsconfig.tsbuildinfo coverage",
