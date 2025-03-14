@@ -32,6 +32,7 @@ export const Default = {
     type: 'radio-group',
     groupId: 'radio-group-1',
     legend: 'This is a multiple choice question',
+    hint: '',
     options: [
       {
         id: 'option-1',
@@ -46,5 +47,6 @@ export const Default = {
         defaultChecked: false,
       },
     ],
+    required: false,
   },
 } satisfies StoryObj<typeof RadioGroupPattern>;

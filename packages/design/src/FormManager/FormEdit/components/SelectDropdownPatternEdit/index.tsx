@@ -42,14 +42,19 @@ const EditComponent = ({ pattern }: { pattern: SelectDropdownPattern }) => {
     usePatternEditFormContext<SelectDropdownPattern>(pattern.id);
   const [options, setOptions] = useState(pattern.data.options);
   const label = getFieldState('label');
+  const hint = getFieldState('hint');
 
   return (
     <div className="grid-row grid-gap">
-      <div className="tablet:grid-col-6 mobile-lg:grid-col-12 margin-bottom-2">
+      <div className="mobile-lg:grid-col-12 margin-bottom-2">
         <label
-          className={classnames('usa-label', {
-            'usa-label--error': label.error,
-          })}
+          className={classnames(
+            'usa-label',
+            {
+              'usa-label--error': label.error,
+            },
+            `${styles.patternChoiceFieldWrapper}`
+          )}
         >
           {message.patterns.selectDropdown.fieldLabel}
           {label.error ? (
@@ -58,12 +63,39 @@ const EditComponent = ({ pattern }: { pattern: SelectDropdownPattern }) => {
             </span>
           ) : null}
           <input
-            className="usa-input"
+            className={`usa-input ${styles.patternChoiceFieldWrapper}`}
             id={fieldId('label')}
             defaultValue={pattern.data.label}
             {...register('label')}
             type="text"
             autoFocus
+          ></input>
+        </label>
+      </div>
+      <div className="mobile-lg:grid-col-12 margin-bottom-2">
+        <label
+          className={classnames(
+            'usa-label',
+            {
+              'usa-label--error': label.error,
+            },
+            `${styles.patternChoiceFieldWrapper}`
+          )}
+        >
+          <span className={`${styles.secondaryColor}`}>
+            {message.patterns.radioGroup.hintLabel}
+          </span>
+          {hint.error ? (
+            <span className="usa-error-message" role="alert">
+              {hint.error.message}
+            </span>
+          ) : null}
+          <input
+            className={`usa-input ${styles.patternChoiceFieldWrapper}`}
+            id={fieldId('hint')}
+            defaultValue={pattern.data.hint}
+            {...register('hint')}
+            type="text"
           ></input>
         </label>
       </div>
@@ -93,6 +125,10 @@ const EditComponent = ({ pattern }: { pattern: SelectDropdownPattern }) => {
                   defaultValue={option.value}
                   aria-label={`Option ${index + 1} value`}
                 />
+                <label
+                  htmlFor={`options-${index}.id`}
+                  className={`usa-radio__label ${styles.optionCircle}`}
+                ></label>
                 <input
                   className="usa-input"
                   id={fieldId(`options.${index}.label`)}
@@ -109,12 +145,14 @@ const EditComponent = ({ pattern }: { pattern: SelectDropdownPattern }) => {
           type="button"
           onClick={event => {
             event.preventDefault();
-            const optionId = `option-${options.length + 1}`;
+            const optionLabel = `Option ${options.length + 1}`;
             const optionValue = `value-${options.length + 1}`;
-            setOptions(options.concat({ value: optionValue, label: optionId }));
+            setOptions(
+              options.concat({ value: optionValue, label: optionLabel })
+            );
           }}
         >
-          Add new
+          Add option
         </button>
       </div>
       <div className="grid-col-12">

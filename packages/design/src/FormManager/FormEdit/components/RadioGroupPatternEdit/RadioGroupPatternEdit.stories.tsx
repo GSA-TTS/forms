@@ -14,6 +14,8 @@ const pattern: RadioGroupPattern = {
   type: 'radio-group',
   data: {
     label: message.patterns.radioGroup.displayName,
+    hint: message.patterns.radioGroup.hint,
+    required: false,
     options: [
       { label: 'Option 1', id: 'option-1' },
       { label: 'Option 2', id: 'option-2' },
@@ -70,7 +72,7 @@ export const AddField: StoryObj<typeof FormEdit> = {
 
     await userEvent.click(
       canvas.getByRole('button', {
-        name: /add new/i,
+        name: /add option/i,
       })
     );
 

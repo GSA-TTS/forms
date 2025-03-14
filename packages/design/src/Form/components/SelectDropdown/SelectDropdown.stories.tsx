@@ -32,11 +32,12 @@ export const Default: StoryObj<typeof SelectDropdownPattern> = {
     type: 'select-dropdown',
     selectId: 'select-1',
     label: 'Select an option',
+    hint: '',
     required: false,
     options: [
-      { value: 'value1', label: 'Option-1' },
-      { value: 'value2', label: 'Option-2' },
-      { value: 'value3', label: 'Option-3' },
+      { value: 'value1', label: 'Option 1' },
+      { value: 'value2', label: 'Option 2' },
+      { value: 'value3', label: 'Option 3' },
     ],
   },
 };
@@ -47,11 +48,12 @@ export const WithError: StoryObj<typeof SelectDropdownPattern> = {
     type: 'select-dropdown',
     selectId: 'select-with-error',
     label: 'Select an option with error',
+    hint: '',
     required: false,
     options: [
-      { value: 'value1', label: 'Option-1' },
-      { value: 'value2', label: 'Option-2' },
-      { value: 'value3', label: 'Option-3' },
+      { value: 'value1', label: 'Option 1' },
+      { value: 'value2', label: 'Option 2' },
+      { value: 'value3', label: 'Option 3' },
     ],
     error: {
       type: 'custom',
@@ -66,11 +68,12 @@ export const Required: StoryObj<typeof SelectDropdownPattern> = {
     type: 'select-dropdown',
     selectId: 'select-required',
     label: 'Select a required option',
+    hint: '',
     required: true,
     options: [
-      { value: 'value1', label: 'Option-1' },
-      { value: 'value2', label: 'Option-2' },
-      { value: 'value3', label: 'Option-3' },
+      { value: 'value1', label: 'Option 1' },
+      { value: 'value2', label: 'Option 2' },
+      { value: 'value3', label: 'Option 3' },
     ],
   },
 };

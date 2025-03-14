@@ -14,6 +14,7 @@ const pattern: SelectDropdownPattern = {
   type: 'select-dropdown',
   data: {
     label: message.patterns.selectDropdown.displayName,
+    hint: message.patterns.selectDropdown.hint,
     required: false,
     options: [
       { value: 'value1', label: 'Option-1' },
@@ -73,7 +74,7 @@ export const AddField: StoryObj<typeof FormEdit> = {
 
     await userEvent.click(
       canvas.getByRole('button', {
-        name: /add new/i,
+        name: /add option/i,
       })
     );
 

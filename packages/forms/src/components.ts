@@ -111,7 +111,14 @@ export type CheckboxProps = PatternProps<{
   type: 'checkbox';
   id: string;
   label: string;
-  defaultChecked: boolean;
+  hint?: string;
+  required: boolean;
+  options: {
+    id: string;
+    name: string;
+    label: string;
+    defaultChecked: boolean;
+  }[];
   error?: FormError;
 }>;
 
@@ -130,12 +137,16 @@ export type RadioGroupProps = PatternProps<{
   type: 'radio-group';
   groupId: string;
   legend: string;
+  label: string;
+  hint?: string;
+  required: boolean;
   options: {
     id: string;
     name: string;
     label: string;
     defaultChecked: boolean;
   }[];
+  error?: FormError;
 }>;
 
 export type SelectDropdownProps = PatternProps<{
@@ -146,6 +157,7 @@ export type SelectDropdownProps = PatternProps<{
     label: string;
   }[];
   label: string;
+  hint?: string;
   required: boolean;
   error?: FormError;
   value?: string;

@@ -34,6 +34,21 @@ export const Default = {
     type: 'checkbox',
     id: 'checkbox-1',
     label: 'Checkbox 1',
-    defaultChecked: true,
+    hint: '',
+    required: false,
+    options: [
+      {
+        id: 'option-1',
+        name: 'option-1',
+        label: 'Option 1',
+        defaultChecked: true,
+      },
+      {
+        id: 'option-2',
+        name: 'option-2',
+        label: 'Option 2',
+        defaultChecked: false,
+      },
+    ],
   } satisfies CheckboxProps,
 } satisfies StoryObj<typeof CheckboxPattern>;

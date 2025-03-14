@@ -36,19 +36,27 @@ const TxInput = z.object({
   page: z.union([z.number(), z.string()]),
 });
 
+const CheckboxOption = z.object({
+  id: z.string(),
+  label: z.string(),
+  name: z.string(),
+  default_checked: z.boolean(),
+  page: z.union([z.number(), z.string()]),
+});
+
 const Checkbox = z.object({
   component_type: z.literal('checkbox'),
   id: z.string(),
   label: z.string(),
-  default_checked: z.boolean(),
+  options: CheckboxOption.array(),
   page: z.union([z.number(), z.string()]),
+  required: z.boolean(),
 });
 
 const RadioGroupOption = z.object({
   id: z.string(),
   label: z.string(),
   name: z.string(),
-  default_checked: z.boolean(),
   page: z.union([z.number(), z.string()]),
 });
 
@@ -75,7 +83,7 @@ const RichText = z.object({
 const Fieldset = z.object({
   component_type: z.literal('fieldset'),
   legend: z.string(),
-  fields: z.union([TxInput, Checkbox]).array(),
+  field: TxInput,
   page: z.union([z.number(), z.string()]),
 });
 
@@ -199,7 +207,13 @@ export const processApiResponse = async (json: any): Promise<ParsedPdf> => {
         'checkbox',
         {
           label: element.label,
-          defaultChecked: element.default_checked,
+          options: element.options.map(option => ({
+            id: option.id,
+            label: option.label,
+            name: option.name,
+            defaultChecked: option.default_checked,
+          })),
+          required: false,
         }
       );
       if (checkboxPattern) {
@@ -228,8 +242,8 @@ export const processApiResponse = async (json: any): Promise<ParsedPdf> => {
             id: option.id,
             label: option.label,
             name: option.name,
-            defaultChecked: option.default_checked,
           })),
+          required: true,
         }
       );
       if (radioGroupPattern) {
@@ -244,7 +258,6 @@ export const processApiResponse = async (json: any): Promise<ParsedPdf> => {
             id: option.id,
             label: option.label,
             name: option.name,
-            defaultChecked: option.default_checked,
           })),
           value: '',
           required: true,
@@ -254,51 +267,29 @@ export const processApiResponse = async (json: any): Promise<ParsedPdf> => {
     }
 
     if (element.component_type === 'fieldset') {
-      for (const input of element.fields) {
-        if (input.component_type === 'text_input') {
-          const inputPattern = processPatternData<InputPattern>(
-            defaultFormConfig,
-            parsedPdf,
-            'input',
-            {
-              label: input.label,
-              required: false,
-              initial: '',
-              maxLength: 128,
-            }
-          );
-          if (inputPattern) {
-            fieldsetPatterns.push(inputPattern.id);
-            parsedPdf.outputs[inputPattern.id] = {
-              type: 'TextField',
-              name: input.id,
-              label: input.label,
-              value: '',
-              maxLength: 1024,
-              required: input.required,
-            };
+      if (element.field.component_type === 'text_input') {
+        const input = element.field;
+        const inputPattern = processPatternData<InputPattern>(
+          defaultFormConfig,
+          parsedPdf,
+          'input',
+          {
+            label: input.label,
+            required: false,
+            initial: '',
+            maxLength: 128,
           }
-        }
-        if (input.component_type === 'checkbox') {
-          const checkboxPattern = processPatternData<CheckboxPattern>(
-            defaultFormConfig,
-            parsedPdf,
-            'checkbox',
-            {
-              label: input.label,
-              defaultChecked: false,
-            }
-          );
-          if (checkboxPattern) {
-            fieldsetPatterns.push(checkboxPattern.id);
-            parsedPdf.outputs[checkboxPattern.id] = {
-              type: 'CheckBox',
-              name: input.id,
-              label: input.label,
-              value: false,
-              required: true,
-            };
-          }
+        );
+        if (inputPattern) {
+          fieldsetPatterns.push(inputPattern.id);
+          parsedPdf.outputs[inputPattern.id] = {
+            type: 'TextField',
+            name: input.id,
+            label: input.label,
+            value: '',
+            maxLength: 1024,
+            required: input.required,
+          };
         }
       }
     }
