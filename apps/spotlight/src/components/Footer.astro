@@ -2,6 +2,7 @@
 import { type GithubRepository, getBranchTreeUrl } from '../lib/github.js';
 import { Image } from 'astro:assets';
 import { getPublicDirUrl } from '../routes';
+import * as routes from '../routes';
 
 type Props = {
   github: GithubRepository;
@@ -128,6 +129,14 @@ const { github } = Astro.props;
                 target="_blank"
                 >Github</a
               >
+            </li>
+            <li class="usa-identifier__required-links-item">
+              <a
+                href={routes.getStorybookUrl()}
+                class="usa-identifier__required-link usa-link"
+              >
+                Storybook
+              </a>
             </li>
           </ul>
         </div>
