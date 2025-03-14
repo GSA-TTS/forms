@@ -16,7 +16,7 @@ const defaultArgs = {
   type: 'repeater',
 } satisfies RepeaterProps;
 
-const mockChildComponents = (index: number, withError = false) => [
+const mockChildComponents = (index: number) => [
   {
     props: {
       _patternId: `3fdb2cb6-5d65-4de1-b773-3fb8636f5d09.${index}.a6c217f0-fe84-44ef-b606-69142ecb3365`,
@@ -27,12 +27,6 @@ const mockChildComponents = (index: number, withError = false) => [
       monthId: `3fdb2cb6-5d65-4de1-b773-3fb8636f5d09.${index}.a6c217f0-fe84-44ef-b606-69142ecb3365.month`,
       yearId: `3fdb2cb6-5d65-4de1-b773-3fb8636f5d09.${index}.a6c217f0-fe84-44ef-b606-69142ecb3365.year`,
       required: false,
-      error: withError
-        ? {
-            type: 'custom',
-            message: 'Invalid date of birth',
-          }
-        : undefined,
     } as DateOfBirthProps,
     children: [],
   },
@@ -43,12 +37,6 @@ const mockChildComponents = (index: number, withError = false) => [
       label: 'Email',
       emailId: `3fdb2cb6-5d65-4de1-b773-3fb8636f5d09.${index}.7d5df1c1-ca92-488c-81ca-8bb180f952b6.email`,
       required: false,
-      error: withError
-        ? {
-            type: 'custom',
-            message: 'Invalid email address',
-          }
-        : undefined,
     } as EmailInputProps,
     children: [],
   },
@@ -62,11 +50,13 @@ export default {
       const FormDecorator = () => {
         const formMethods = useForm();
         return (
-          <FormProvider {...formMethods}>
-            <div className="usa-form margin-bottom-3 maxw-full">
-              <Story {...args} />
-            </div>
-          </FormProvider>
+          <div className="padding-left-2">
+            <FormProvider {...formMethods}>
+              <div className="usa-form margin-bottom-3 maxw-full">
+                <Story {...args} />
+              </div>
+            </FormProvider>
+          </div>
         );
       };
       return <FormDecorator />;
@@ -84,7 +74,6 @@ export const Default = {
 export const WithContents = {
   args: {
     ...defaultArgs,
-    childComponents: mockChildComponents(0),
     context: {
       components: {
         'date-of-birth': defaultPatternComponents['date-of-birth'],
@@ -95,6 +84,7 @@ export const WithContents = {
       },
       uswdsRoot: '/uswds/',
     },
+    childComponents: mockChildComponents(0),
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -116,10 +106,21 @@ export const WithContents = {
 export const ErrorState = {
   args: {
     ...defaultArgs,
-    childComponents: mockChildComponents(0, true),
     error: {
       type: 'custom',
-      message: 'This field has an error',
+      message: 'Please ensure all fields are properly filled out.',
+      fields: {
+        '3fdb2cb6-5d65-4de1-b773-3fb8636f5d09.0.a6c217f0-fe84-44ef-b606-69142ecb3365':
+          {
+            type: 'custom',
+            message: 'Invalid date of birth',
+          },
+        '3fdb2cb6-5d65-4de1-b773-3fb8636f5d09.0.7d5df1c1-ca92-488c-81ca-8bb180f952b6':
+          {
+            type: 'custom',
+            message: 'Invalid email address',
+          },
+      },
     },
     context: {
       components: {
@@ -131,6 +132,7 @@ export const ErrorState = {
       },
       uswdsRoot: '/uswds/',
     },
+    childComponents: mockChildComponents(0),
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

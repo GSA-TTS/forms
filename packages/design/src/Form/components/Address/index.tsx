@@ -7,30 +7,15 @@ import { type AddressComponentProps } from '@gsa-tts/forms-core';
 import { type PatternComponent } from '../../index.js';
 
 const AddressPattern: PatternComponent<AddressComponentProps> = ({
-  childProps, // Child fields have their own errors
-  errors, // Top level pattern errors
+  childProps,
+  error,
+  value,
   legend,
   required,
   _patternId,
   addMailingAddress,
   isMailingAddressSameAsPhysical,
 }) => {
-  const { register, setValue, getValues, watch } = useFormContext();
-  const [sameAsPhysical, setSameAsPhysical] = useState(
-    isMailingAddressSameAsPhysical
-  );
-  const [childPatternsProps, setChildPatternsProps] = useState(childProps);
-
-  const physicalAddressError = errors?.physical; // Physical address section error
-  const [mailingAddressError, setMailingAddressError] = useState(
-    errors?.mailing
-  ); // Mailing address section error
-
-  const physicalAddressKeys = Object.keys(childPatternsProps)
-    .filter(key => key.startsWith('physical'))
-    .map(key => `${_patternId}.${key}`);
-  const physicalAddressValues = watch(physicalAddressKeys);
-
   const getAriaDescribedBy = (
     errorId: string | null,
     hintId: string | null
@@ -38,6 +23,36 @@ const AddressPattern: PatternComponent<AddressComponentProps> = ({
     const ids = [errorId, hintId].filter(Boolean).join(' ');
     return ids || undefined;
   };
+
+  const enrichedChildProps = Object.entries(childProps).reduce(
+    (acc, [key, child]) => {
+      acc[key] = {
+        ...child,
+        error: error?.fields?.[key],
+        value: value?.[key],
+      };
+
+      return acc;
+    },
+    {} as typeof childProps
+  );
+
+  const { register, setValue, getValues, watch } = useFormContext();
+  const [sameAsPhysical, setSameAsPhysical] = useState(
+    isMailingAddressSameAsPhysical
+  );
+  const [childPatternsProps, setChildPatternsProps] =
+    useState(enrichedChildProps);
+
+  const physicalAddressError = error?.fields?._physical; // Physical address section error
+  const [mailingAddressError, setMailingAddressError] = useState(
+    error?.fields?._mailing
+  ); // Mailing address section error
+
+  const physicalAddressKeys = Object.keys(childPatternsProps)
+    .filter(key => key.startsWith('physical'))
+    .map(key => `${_patternId}.${key}`);
+  const physicalAddressValues = watch(physicalAddressKeys);
 
   const handleSameAsPhysicalChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -50,78 +65,55 @@ const AddressPattern: PatternComponent<AddressComponentProps> = ({
     }
   };
 
-  const copyPhysicalToMailing = () => {
-    const formValues = getValues();
-    let addressId;
-    let addressValues;
+  const processAddress = (isReset: boolean) => {
+    const extractAddressValues = (patternId: string) => {
+      const formValues = getValues();
+      const idParts = patternId.split('.');
+      const [parentKey, index, childId] = idParts;
+      const currentParentValues = formValues[parentKey];
 
-    for (const key of Object.keys(formValues)) {
-      const value = formValues[key];
-      if (
-        value &&
-        typeof value === 'object' &&
-        'physicalStreetAddress' in value
-      ) {
-        addressValues = value;
-        addressId = key;
-        break;
-      }
-    }
+      const addressValues =
+        currentParentValues?.[index]?.[childId] ?? currentParentValues;
+      const addressId = patternId;
+
+      return { addressValues, addressId };
+    };
+
+    const { addressValues, addressId } = extractAddressValues(_patternId);
 
     if (addressValues && addressId) {
       Object.entries(addressValues).forEach(([key, value]) => {
-        if (key.startsWith('physical') && !key.includes('GooglePlusCode')) {
+        if (
+          key.startsWith(isReset ? 'mailing' : 'physical') &&
+          !key.includes('GooglePlusCode')
+        ) {
           const mailingKey = key.replace('physical', 'mailing');
-          setValue(`${addressId}.${mailingKey}`, value, {
+          setValue(`${addressId}.${mailingKey}`, isReset ? '' : value, {
             shouldValidate: true,
             shouldDirty: true,
           });
         }
       });
+
+      if (isReset) {
+        setMailingAddressError(undefined);
+        const newChildPatternsProps = { ...childPatternsProps };
+        Object.keys(newChildPatternsProps).forEach(key => {
+          if (key.startsWith('mailing')) {
+            newChildPatternsProps[key].error = undefined;
+          }
+        });
+        setChildPatternsProps(newChildPatternsProps);
+      }
     }
   };
 
+  const copyPhysicalToMailing = () => {
+    processAddress(false);
+  };
+
   const resetMailingAddress = () => {
-    const formValues = getValues();
-    let addressId;
-    let addressValues;
-
-    for (const key of Object.keys(formValues)) {
-      const value = formValues[key];
-      if (
-        value &&
-        typeof value === 'object' &&
-        'physicalStreetAddress' in value
-      ) {
-        addressValues = value;
-        addressId = key;
-        break;
-      }
-    }
-
-    if (addressValues && addressId) {
-      Object.entries(addressValues).forEach(([key]) => {
-        if (key.startsWith('mailing')) {
-          setValue(`${addressId}.${key}`, '', {
-            shouldValidate: true,
-            shouldDirty: true,
-          });
-        }
-      });
-
-      // Reset the error for the mailing address
-      setMailingAddressError(undefined);
-
-      // Reset the errors for the mailing address child patterns
-      const newChildPatternsProps = { ...childPatternsProps };
-      Object.keys({ ...childPatternsProps }).forEach(key => {
-        if (key.startsWith('mailing')) {
-          newChildPatternsProps[key].error = undefined;
-        }
-      });
-
-      setChildPatternsProps(newChildPatternsProps);
-    }
+    processAddress(true);
   };
 
   useEffect(() => {

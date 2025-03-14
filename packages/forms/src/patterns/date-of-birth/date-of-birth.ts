@@ -2,7 +2,7 @@ import * as z from 'zod';
 
 import { type DateOfBirthProps } from '../../components.js';
 import { type Pattern, type PatternConfig } from '../../pattern.js';
-import { getFormSessionValue } from '../../session.js';
+import { getFormSessionError, getFormSessionValue } from '../../session.js';
 import {
   safeZodParseFormErrors,
   safeZodParseToFormError,
@@ -91,9 +91,8 @@ export const dateOfBirthConfig: PatternConfig<
   },
 
   createPrompt(_, session, pattern, options) {
-    const extraAttributes: Record<string, any> = {};
     const sessionValue = getFormSessionValue(session, pattern.id);
-    const error = session.data.errors[pattern.id];
+    const sessionError = getFormSessionError(session, pattern.id);
 
     return {
       props: {
@@ -105,9 +104,8 @@ export const dateOfBirthConfig: PatternConfig<
         monthId: `${pattern.id}.month`,
         yearId: `${pattern.id}.year`,
         required: pattern.data.required,
-        ...extraAttributes,
         value: sessionValue,
-        error,
+        error: sessionError,
       } as DateOfBirthProps,
       children: [],
     };
