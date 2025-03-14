@@ -25,7 +25,7 @@ const meta: Meta<typeof AddressPattern> = {
         },
       });
       return (
-        <div style={{ padding: '10px' }}>
+        <div className="padding-left-2">
           <FormProvider {...formMethods}>
             <Story />
           </FormProvider>
@@ -152,29 +152,48 @@ export const WithError: StoryObj<typeof AddressPattern> = {
     type: 'address',
     childProps: {
       ...baseChildProps,
-      physicalStreetAddress: {
-        ...baseChildProps.physicalStreetAddress,
-        error: {
-          type: 'custom',
-          message: 'Test - Wrong street address',
-        },
+      mailingStreetAddress: {
+        ...baseChildProps.mailingStreetAddress,
+        required: true,
       },
-      physicalZipCode: {
-        ...baseChildProps.physicalZipCode,
-        error: {
-          type: 'custom',
-          message: 'Test - Wrong zip code',
-        },
+      mailingCity: {
+        ...baseChildProps.mailingCity,
+        required: true,
+      },
+      mailingStateTerritoryOrMilitaryPost: {
+        ...baseChildProps.mailingStateTerritoryOrMilitaryPost,
+        required: true,
       },
     },
+    addMailingAddress: true,
     error: {
-      physical: {
-        type: 'custom',
-        message: 'This field has an error',
-      },
-      mailing: {
-        type: 'custom',
-        message: 'This field has an error',
+      type: 'custom',
+      fields: {
+        physicalStreetAddress: {
+          type: 'custom',
+          message: 'Invalid street address format. Please check and try again.',
+        },
+        physicalZipCode: {
+          type: 'custom',
+          message: 'Invalid ZIP code format. Please check and try again.',
+        },
+        physicalCity: {
+          type: 'custom',
+          message: 'Invalid city name. Please check and try again.',
+        },
+        mailingStreetAddress: {
+          type: 'custom',
+          message:
+            'Invalid mailing street address format. Please check and try again.',
+        },
+        _physical: {
+          type: 'custom',
+          message: 'Physical address is required.',
+        },
+        _mailing: {
+          type: 'custom',
+          message: 'Mailing address is required.',
+        },
       },
     },
   },

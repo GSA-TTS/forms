@@ -12,9 +12,11 @@ const meta: Meta<typeof SocialSecurityNumberPattern> = {
       const FormDecorator = () => {
         const formMethods = useForm();
         return (
-          <FormProvider {...formMethods}>
-            <Story {...args} />
-          </FormProvider>
+          <div className="padding-left-2">
+            <FormProvider {...formMethods}>
+              <Story {...args} />
+            </FormProvider>
+          </div>
         );
       };
       return <FormDecorator />;

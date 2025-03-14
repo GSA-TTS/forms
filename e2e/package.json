@@ -1,6 +1,6 @@
 {
   "name": "@gsa-tts/forms-e2e",
-  "version": "1.0.0-beta",
+  "version": "0.1.2",
   "private": true,
   "scripts": {
     "dev": "tsc -w",

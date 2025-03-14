@@ -20,9 +20,10 @@ const NamePattern: PatternComponent<NameProps> = ({
   givenNameHint,
   familyNameHint,
   required,
-  errors,
-  values,
+  error,
+  value,
 }) => {
+  const fieldErrors = error?.fields;
   const { register } = useFormContext();
   const errorId = `input-error-message-${givenNameId}`;
   const givenNameHintId = `hint-${givenNameId}`;
@@ -32,24 +33,24 @@ const NamePattern: PatternComponent<NameProps> = ({
     <fieldset className="usa-fieldset">
       <div
         className={classNames('usa-form-group margin-top-2', {
-          'usa-form-group--error': errors,
+          'usa-form-group--error': fieldErrors,
         })}
       >
         <legend
           className={classNames('usa-legend text-bold', {
-            'usa-legend--error': errors,
+            'usa-legend--error': fieldErrors,
           })}
         >
           {label}
           {required && <span className="required-indicator">*</span>}
         </legend>
-        {errors && (
+        {fieldErrors && (
           <div
             className="usa-error-message"
             id={'error-' + givenNameId}
             role="alert"
           >
-            {errors.nameInput?.message}
+            {error?.message}
           </div>
         )}
 
@@ -61,37 +62,37 @@ const NamePattern: PatternComponent<NameProps> = ({
             {givenNameHint}
           </div>
         )}
-        {errors?.givenName && (
+        {fieldErrors?.givenName && (
           <div className="usa-error-message" id={errorId}>
-            {errors?.givenName.message}
+            {fieldErrors?.givenName.message}
           </div>
         )}
         <input
           className={classNames('usa-input usa-input--xl', {
-            'usa-input--error': !!errors?.givenName,
+            'usa-input--error': !!fieldErrors?.givenName,
           })}
           id={givenNameId}
           {...register(givenNameId, { required })}
           aria-describedby={getAriaDescribedBy(
-            errors?.givenName ? errorId : null,
+            fieldErrors?.givenName ? errorId : null,
             givenNameHintId
           )}
-          defaultValue={values?.givenName || ''}
+          defaultValue={value?.givenName || ''}
         />
 
         <label className="usa-label" htmlFor={middleNameId}>
           Middle name
         </label>
-        {errors?.middleName && (
+        {fieldErrors?.middleName && (
           <div className="usa-error-message" id={errorId}>
-            {errors?.middleName.message}
+            {fieldErrors?.middleName.message}
           </div>
         )}
         <input
           className="usa-input usa-input--xl"
           id={middleNameId}
           {...register(middleNameId)}
-          defaultValue={values?.middleName || ''}
+          defaultValue={value?.middleName || ''}
         />
 
         <label className="usa-label" htmlFor={familyNameId}>
@@ -102,22 +103,24 @@ const NamePattern: PatternComponent<NameProps> = ({
             {familyNameHint}
           </div>
         )}
-        {errors?.familyName && (
+        {fieldErrors?.familyName && (
           <div className="usa-error-message" id={errorId}>
-            {errors?.familyName.message}
+            {fieldErrors?.familyName.message}
           </div>
         )}
         <input
           className={classNames('usa-input usa-input--xl', {
-            'usa-input--error': !!errors?.familyName,
+            'usa-input--error': !!fieldErrors?.familyName,
           })}
           id={familyNameId}
           {...register(familyNameId, { required })}
           aria-describedby={getAriaDescribedBy(
-            errors?.familyName ? `input-error-message-${familyNameId}` : null,
+            fieldErrors?.familyName
+              ? `input-error-message-${familyNameId}`
+              : null,
             familyNameHintId
           )}
-          defaultValue={values?.familyName || ''}
+          defaultValue={value?.familyName || ''}
         />
       </div>
     </fieldset>

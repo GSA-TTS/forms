@@ -5,7 +5,7 @@ import {
   createPromptForPattern,
   getPattern,
 } from '../../index.js';
-
+import { getFormSessionError } from '../../session.js';
 export const createPrompt: CreatePrompt<RepeaterPattern> = (
   config,
   session,
@@ -23,6 +23,7 @@ export const createPrompt: CreatePrompt<RepeaterPattern> = (
       ? currentValues[pattern.id]
       : [];
 
+  const sessionError = getFormSessionError(session, pattern.id);
   let children;
 
   if (isFormBuilder) {
@@ -61,7 +62,7 @@ export const createPrompt: CreatePrompt<RepeaterPattern> = (
       type: 'repeater',
       legend: pattern.data.legend,
       value: sessionValues,
-      error: session.data.errors[pattern.id],
+      error: sessionError,
     } satisfies RepeaterProps,
     children,
   };

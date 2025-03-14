@@ -90,9 +90,8 @@ export const AddPattern: StoryObj<typeof FormEdit> = {
     });
     await expect(fieldLabel).toBeInTheDocument();
 
-    // Confirm that the "Date of birth" legend exists
     const dateOfBirthLegend = await canvas.findByText('Date of birth', {
-      selector: 'legend',
+      selector: 'label',
     });
     await expect(dateOfBirthLegend).toBeInTheDocument();
   },

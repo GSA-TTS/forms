@@ -1,7 +1,7 @@
 import * as z from 'zod';
 import { type SocialSecurityNumberProps } from '../../components.js';
 import { type Pattern, type PatternConfig } from '../../pattern.js';
-import { getFormSessionValue } from '../../session.js';
+import { getFormSessionError, getFormSessionValue } from '../../session.js';
 import {
   safeZodParseFormErrors,
   safeZodParseToFormError,
@@ -28,57 +28,32 @@ export const createSSNSchema = (data: SocialSecurityNumberPattern['data']) => {
         return;
       }
 
-      let issues = [];
+      const isValidSSN =
+        value.length === 9 &&
+        !value.startsWith('9') &&
+        !value.startsWith('666') &&
+        !value.startsWith('000') &&
+        value.slice(3, 5) !== '00' &&
+        value.slice(5) !== '0000';
 
-      if (value.length !== 9) {
-        issues.push('have exactly 9 digits');
-      } else {
-        if (
-          value.startsWith('9') ||
-          value.startsWith('666') ||
-          value.startsWith('000')
-        ) {
-          issues.push('start with a valid prefix (not 9, 666, or 000)');
-        }
-
-        if (value.slice(3, 5) === '00') {
-          issues.push('have a valid middle segment (not 00)');
-        }
-
-        if (value.slice(5) === '0000') {
-          issues.push('have a valid suffix (not 0000)');
-        }
-      }
-
-      if (issues.length > 0) {
-        let enhancedMessage = 'Social Security number must ';
-        if (issues.length === 1) {
-          enhancedMessage += issues[0];
-        } else if (issues.length === 2) {
-          enhancedMessage += `${issues[0]} and ${issues[1]}`;
-        } else {
-          enhancedMessage += `${issues.slice(0, -1).join(', ')}, and ${issues[issues.length - 1]}`;
-        }
-
+      if (!isValidSSN) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: enhancedMessage,
+          message: 'Enter a valid Social Security number',
         });
       }
     });
 
   if (data.required) {
-    return z
-      .string()
-      .refine(value => value.trim().length > 0, {
-        message: 'This field is required',
-      })
-      .superRefine((value, ctx) => {
-        const result = baseSchema.safeParse(value.trim());
-        if (!result.success) {
-          result.error.issues.forEach(issue => ctx.addIssue(issue));
-        }
-      });
+    return z.string().superRefine((value, ctx) => {
+      const result = baseSchema.safeParse(value.trim());
+      if (!result.success) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Enter a valid Social Security number',
+        });
+      }
+    });
   } else {
     return baseSchema.optional();
   }
@@ -112,9 +87,8 @@ export const socialSecurityNumberConfig: PatternConfig<
   },
 
   createPrompt(_, session, pattern, options) {
-    const extraAttributes: Record<string, any> = {};
     const sessionValue = getFormSessionValue(session, pattern.id);
-    const error = session.data.errors[pattern.id];
+    const sessionError = getFormSessionError(session, pattern.id);
 
     return {
       props: {
@@ -125,8 +99,7 @@ export const socialSecurityNumberConfig: PatternConfig<
         required: pattern.data.required,
         hint: pattern.data.hint,
         value: sessionValue,
-        error,
-        ...extraAttributes,
+        error: sessionError,
       } as SocialSecurityNumberProps,
       children: [],
     };

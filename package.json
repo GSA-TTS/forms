@@ -15,16 +15,18 @@
     "format": "prettier --write \"packages/*/src/**/*.{js,jsx,ts,tsx,scss,css}\"",
     "lint": "turbo run lint",
     "pages": "rm -rf node_modules && npm i -g pnpm turbo && pnpm i && pnpm build && ln -sf ./apps/spotlight/dist _site",
+    "prepare": "husky",
+    "release": "pnpm run build && changeset publish",
     "test": "vitest run",
     "test:ci": "CI=true vitest run # --coverage.enabled --coverage.provider=v8 --coverage.reporter=text --coverage.reporter=json-summary --coverage.reporter=json --coverage.reportOnFailure",
     "test:infra": "turbo run --filter=infra-cdktf test",
-    "typecheck": "tsc --build --noEmit",
-    "prepare": "husky"
+    "typecheck": "tsc --build --noEmit"
   },
   "hooks": {
     "pre-commit": "pnpm format"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.28.1",
     "@playwright/test": "^1.50.0",
     "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-json": "^6.1.0",

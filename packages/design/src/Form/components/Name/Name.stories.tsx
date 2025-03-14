@@ -11,7 +11,7 @@ const meta: Meta<typeof NamePattern> = {
       const FormDecorator = () => {
         const formMethods = useForm();
         return (
-          <div style={{ padding: '10px' }}>
+          <div className="padding-left-2">
             <FormProvider {...formMethods}>
               <Story {...args} />
             </FormProvider>
@@ -48,18 +48,18 @@ export const WithError: StoryObj<typeof NamePattern> = {
   args: {
     ...defaultArgs,
     label: 'Name with error',
-    errors: {
-      nameInput: {
-        type: 'custom',
-        message: 'Given and family names must be filled',
-      },
-      givenName: {
-        type: 'custom',
-        message: 'Given name is required',
-      },
-      familyName: {
-        type: 'custom',
-        message: 'Family name is required',
+    error: {
+      type: 'custom',
+      message: 'Given and family names must be filled',
+      fields: {
+        givenName: {
+          type: 'custom',
+          message: 'Given name is required',
+        },
+        familyName: {
+          type: 'custom',
+          message: 'Family name is required',
+        },
       },
     },
   },

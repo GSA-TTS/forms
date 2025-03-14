@@ -66,6 +66,7 @@ const Attachment: PatternComponent<AttachmentProps> = props => {
         <div className="usa-form-group">
           <p className="text-bold" id={`label-${props.inputId}`}>
             {props.label}
+            {props.required && <span className="required-indicator">*</span>}
           </p>
           <label className="usa-label" htmlFor={`input-${props.inputId}`}>
             {props.maxAttachments === 1

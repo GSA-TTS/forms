@@ -10,13 +10,18 @@ export const SelectDropdownPattern: PatternComponent<SelectDropdownProps> = ({
   required,
   options,
   error,
+  value,
 }) => {
   const { register } = useFormContext();
   const errorId = `input-error-message-${selectId}`;
 
   return (
     <div className="usa-fieldset padding-top-2">
-      <div className={classNames('usa-form-group margin-top-2')}>
+      <div
+        className={classNames('usa-form-group margin-top-2', {
+          'usa-form-group--error': error,
+        })}
+      >
         <label
           className={classNames('usa-label', {
             'usa-label--error': error,
@@ -38,6 +43,7 @@ export const SelectDropdownPattern: PatternComponent<SelectDropdownProps> = ({
           id={selectId}
           {...register(selectId, { required })}
           aria-describedby={error ? errorId : undefined}
+          defaultValue={value}
         >
           <option key="default" value="">
             - Select -

@@ -28,7 +28,7 @@ describe('PhoneNumberPattern tests', () => {
       const invalidResult = schema.safeParse(invalidInput);
       expect(invalidResult.success).toBe(false);
       expect(invalidResult.error?.issues[0].message).toBe(
-        'Invalid phone number format.'
+        'Invalid phone number format'
       );
     });
 
@@ -54,7 +54,7 @@ describe('PhoneNumberPattern tests', () => {
       const invalidResult = schema.safeParse(invalidInput);
       expect(invalidResult.success).toBe(false);
       expect(invalidResult.error?.issues[0].message).toBe(
-        'Invalid phone number format.'
+        'Invalid phone number format'
       );
     });
 
@@ -70,7 +70,7 @@ describe('PhoneNumberPattern tests', () => {
       const shortInputResult = schema.safeParse(shortInput);
       expect(shortInputResult.success).toBe(false);
       expect(shortInputResult.error?.issues[0].message).toBe(
-        'Invalid phone number format.'
+        'Invalid phone number format'
       );
     });
 
@@ -86,7 +86,7 @@ describe('PhoneNumberPattern tests', () => {
       const longInputResult = schema.safeParse(longInput);
       expect(longInputResult.success).toBe(false);
       expect(longInputResult.error?.issues[0].message).toBe(
-        'Invalid phone number format.'
+        'Invalid phone number format'
       );
     });
   });
@@ -133,7 +133,7 @@ describe('PhoneNumberPattern tests', () => {
 
       if (!result.success) {
         expect(result.error).toBeDefined();
-        expect(result.error?.message).toContain('Invalid phone number format.');
+        expect(result.error?.message).toContain('Invalid phone number format');
       } else {
         expect.fail('Unexpected validation success');
       }
