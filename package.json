@@ -16,7 +16,6 @@
     "lint": "turbo run lint",
     "pages": "rm -rf node_modules && npm i -g pnpm turbo && pnpm i && pnpm build && ln -sf ./apps/spotlight/dist _site",
     "prepare": "husky",
-    "publish": "turbo run publish",
     "release": "pnpm run build && changeset publish",
     "test": "vitest run",
     "test:ci": "CI=true vitest run # --coverage.enabled --coverage.provider=v8 --coverage.reporter=text --coverage.reporter=json-summary --coverage.reporter=json --coverage.reportOnFailure",
