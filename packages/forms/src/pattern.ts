@@ -22,7 +22,7 @@ export type GetPattern<T extends Pattern = Pattern> = (
 
 export type ParseUserInput<Pattern, PatternOutput> = (
   pattern: Pattern,
-  obj: unknown,
+  obj: any,
   config?: FormConfig,
   form?: Blueprint
 ) => r.Result<PatternOutput, FormError>;

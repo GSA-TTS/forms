@@ -215,6 +215,16 @@ export type SocialSecurityNumberProps = PatternProps<{
   value: string;
 }>;
 
+export type SexProps = PatternProps<{
+  type: 'sex-input';
+  sexId: string;
+  label: string;
+  required: boolean;
+  error?: FormError;
+  helperText: string;
+  value: string;
+}>;
+
 export type GenderIdProps = PatternProps<{
   type: 'gender-id';
   genderId: string;

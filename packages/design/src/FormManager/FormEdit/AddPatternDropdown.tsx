@@ -28,6 +28,7 @@ const icons: Record<string, string | any> = {
   'page-icon.svg': pageIcon,
   'phone-icon.svg': '#phone',
   'richtext-icon.svg': '#text_fields',
+  'sex-icon.svg': '#person',
   'short-answer-icon.svg': shortAnswerIcon,
   'ssn-icon.svg': '#person',
   'radio-options-icon.svg': multipleChoiceIcon,
@@ -108,6 +109,11 @@ const sidebarPatterns: DropdownPattern[] = [
   [
     'date-of-birth',
     defaultFormConfig.patterns['date-of-birth'],
+    'Personal information',
+  ],
+  [
+    'sex-input',
+    defaultFormConfig.patterns['sex-input'],
     'Personal information',
   ],
   [

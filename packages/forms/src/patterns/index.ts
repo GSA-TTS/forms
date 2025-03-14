@@ -22,6 +22,7 @@ import { sequenceConfig } from './sequence.js';
 import { socialSecurityNumberConfig } from './social-security-number/social-security-number.js';
 import { textAreaConfig } from './text-area/text-area.js';
 import { nameConfig } from './name/index.js';
+import { sexConfig } from './sex/sex.js';
 // This configuration reflects what a user of this library would provide for
 // their usage scenarios. For now, keep here in the form service until we
 // understand the usage scenarios better.
@@ -49,9 +50,9 @@ export const defaultFormConfig: FormConfig = {
     sequence: sequenceConfig,
     'text-area': textAreaConfig,
     'name-input': nameConfig,
+    'sex-input': sexConfig,
   },
 } as const;
-
 export * from './attachment/index.js';
 export { type AttachmentPattern } from './attachment/config.js';
 export * from './attachment/file-type-options.js';
@@ -79,3 +80,4 @@ export * from './social-security-number/social-security-number.js';
 export * from './sequence.js';
 export * from './text-area/text-area.js';
 export * from './name/index.js';
+export * from './sex/sex.js';

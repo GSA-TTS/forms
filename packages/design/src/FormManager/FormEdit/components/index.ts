@@ -26,7 +26,7 @@ import SelectDropdownPatternEdit from './SelectDropdownPatternEdit/index.js';
 import SocialSecurityNumberPatternEdit from './SocialSecurityNumberPatternEdit/index.js';
 import SubmissionConfirmationEdit from './SubmissionConfirmationEdit.js';
 import TextAreaPatternEdit from './TextAreaPatternEdit/index.js';
-
+import SexPatternEdit from './SexPatternEdit/index.js';
 export const defaultPatternEditComponents: EditComponentForPattern = {
   address: AddressPatternEdit as PatternEditComponent,
   attachment: AttachmentPatternEdit as PatternEditComponent,
@@ -52,4 +52,5 @@ export const defaultPatternEditComponents: EditComponentForPattern = {
     SocialSecurityNumberPatternEdit as PatternEditComponent,
   'submission-confirmation': SubmissionConfirmationEdit as PatternEditComponent,
   'text-area': TextAreaPatternEdit as PatternEditComponent,
+  'sex-input': SexPatternEdit as PatternEditComponent,
 };
