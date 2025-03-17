@@ -42,6 +42,7 @@ export const sexConfig: PatternConfig<SexPattern, SexPatternOutput> = {
       'Helper text that explains why you are asking for this data and who it will be shared with',
   },
 
+  // @ts-ignore
   parseUserInput: (
     pattern,
     inputValue: z.infer<ReturnType<typeof createSexSchema>>
@@ -52,10 +53,15 @@ export const sexConfig: PatternConfig<SexPattern, SexPatternOutput> = {
     );
 
     if (!result.success) {
-      return {
-        ...result,
-        error: { ...result.error, message: 'Sex is required' },
-      };
+      return pattern['data'].required
+        ? {
+            ...result,
+            error: { ...result.error, message: 'Sex is required' },
+          }
+        : {
+            ...result,
+            error: undefined,
+          };
     }
 
     return result;
