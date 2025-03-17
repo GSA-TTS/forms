@@ -7,6 +7,7 @@ import { type PatternComponent } from '../../index.js';
 export const SelectDropdownPattern: PatternComponent<SelectDropdownProps> = ({
   selectId,
   label,
+  hint,
   required,
   options,
   error,
@@ -14,6 +15,7 @@ export const SelectDropdownPattern: PatternComponent<SelectDropdownProps> = ({
 }) => {
   const { register } = useFormContext();
   const errorId = `input-error-message-${selectId}`;
+  const hintId = `hint-${selectId}`;
 
   return (
     <div className="usa-fieldset padding-top-2">
@@ -31,6 +33,11 @@ export const SelectDropdownPattern: PatternComponent<SelectDropdownProps> = ({
           {label}
           {required && <span className="required-indicator">*</span>}
         </label>
+        {hint && (
+          <div className="usa-hint" id={hintId}>
+            {hint}
+          </div>
+        )}
         {error && (
           <div className="usa-error-message" id={errorId} role="alert">
             {error.message}
