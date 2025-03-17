@@ -301,10 +301,12 @@ describe('form builder', () => {
           id: 'radio-group-1',
           data: {
             label: 'Multiple choice question label',
+            hint: '',
             options: [
               { id: 'option-1', label: 'Option 1' },
               { id: 'option-2', label: 'Option 2' },
             ],
+            required: false,
           },
         },
         [newPattern.id]: {
@@ -382,10 +384,12 @@ describe('form builder', () => {
           id: 'radio-group-1',
           data: {
             label: 'Multiple choice question label',
+            hint: '',
             options: [
               { id: 'option-1', label: 'Option 1' },
               { id: 'option-2', label: 'Option 2' },
             ],
+            required: false,
           },
         },
         [newPattern.id]: {
@@ -465,10 +469,12 @@ describe('form builder', () => {
           id: 'radio-group-1',
           data: {
             label: 'Multiple choice question label',
+            hint: '',
             options: [
               { id: 'option-1', label: 'Option 1' },
               { id: 'option-2', label: 'Option 2' },
             ],
+            required: false,
           },
         },
         [newPattern.id]: {
@@ -544,10 +550,12 @@ describe('form builder', () => {
           id: 'radio-group-1',
           data: {
             label: 'Multiple choice question label',
+            hint: '',
             options: [
               { id: 'option-1', label: 'Option 1' },
               { id: 'option-2', label: 'Option 2' },
             ],
+            required: false,
           },
         },
         [newPattern.id]: {
@@ -557,10 +565,12 @@ describe('form builder', () => {
             label: expect.stringMatching(
               /^\(\s*Copy\s+\d{1,2}\/\d{1,2}\/\d{4},\s+\d{1,2}:\d{2}:\d{2}\s+[AP]M\)\s*Multiple choice question label/
             ),
+            hint: '',
             options: [
               { id: 'option-1', label: 'Option 1' },
               { id: 'option-2', label: 'Option 2' },
             ],
+            required: false,
           },
         },
       },
@@ -776,10 +786,12 @@ export const createTestBlueprintMultipleFieldsets = () => {
           id: 'radio-group-1',
           data: {
             label: 'Multiple choice question label',
+            hint: '',
             options: [
               { id: 'option-1', label: 'Option 1' },
               { id: 'option-2', label: 'Option 2' },
             ],
+            required: false,
           },
         } satisfies RadioGroupPattern,
       ],

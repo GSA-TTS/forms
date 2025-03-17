@@ -41,14 +41,16 @@ const EditComponent = ({ pattern }: { pattern: RadioGroupPattern }) => {
     usePatternEditFormContext<RadioGroupPattern>(pattern.id);
   const [options, setOptions] = useState(pattern.data.options);
   const label = getFieldState('label');
+  const hint = getFieldState('hint');
 
   return (
     <div className="grid-row grid-gap">
-      <div className="tablet:grid-col-6 mobile-lg:grid-col-12 margin-bottom-2">
+      <div className="mobile-lg:grid-col-12 margin-bottom-2">
         <label
           className={classnames('usa-label', {
             'usa-label--error': label.error,
-          })}
+          }, `${styles.patternChoiceFieldWrapper}`)}
+          htmlFor={fieldId('label')}
         >
           {message.patterns.radioGroup.fieldLabel}
           {label.error ? (
@@ -57,13 +59,41 @@ const EditComponent = ({ pattern }: { pattern: RadioGroupPattern }) => {
             </span>
           ) : null}
           <input
-            className="usa-input"
+            className={`usa-input ${styles.patternChoiceFieldWrapper}`}
             id={fieldId('label')}
             defaultValue={pattern.data.label}
             {...register('label')}
             type="text"
             autoFocus
           ></input>
+        </label>
+      </div>
+      <div className="mobile-lg:grid-col-12 margin-bottom-2">
+        <label
+          className={classnames(
+            'usa-label',
+            {
+              'usa-label--error': hint.error,
+            },
+            `${styles.patternChoiceFieldWrapper}`
+          )}
+          htmlFor={fieldId('hint')}
+        >
+          <span className={`${styles.secondaryColor}`}>
+            {message.patterns.radioGroup.hintLabel}
+          </span>
+          {hint.error ? (
+            <span className="usa-error-message" role="alert">
+              {hint.error.message}
+            </span>
+          ) : null}
+          <input
+            className={`usa-input ${styles.patternChoiceFieldWrapper}`}
+            id={fieldId('hint')}
+            defaultValue={pattern.data.hint}
+            {...register('hint')}
+            type="text"
+          />
         </label>
       </div>
       <div className="tablet:grid-col-6 mobile-lg:grid-col-12">
@@ -92,6 +122,10 @@ const EditComponent = ({ pattern }: { pattern: RadioGroupPattern }) => {
                   defaultValue={option.id}
                   aria-label={`Option ${index + 1} id`}
                 />
+                <label
+                  htmlFor={`options-${index}.id`}
+                  className={`usa-radio__label ${styles.optionCircle}`}
+                ></label>
                 <input
                   className="usa-input"
                   id={fieldId(`options.${index}.label`)}
@@ -104,19 +138,37 @@ const EditComponent = ({ pattern }: { pattern: RadioGroupPattern }) => {
           );
         })}
         <button
-          className="usa-button usa-button--outline margin-top-1"
+          className={`usa-link ${styles.addMorePatternButton}`}
           type="button"
           onClick={event => {
             event.preventDefault();
             const optionId = `option-${options.length + 1}`;
-            setOptions(options.concat({ id: optionId, label: optionId }));
+            setOptions(options.concat({ id: optionId, label: `Option ${options.length + 1}`}));
           }}
         >
-          Add new
+          Add option
         </button>
       </div>
       <div className="grid-col-12">
-        <PatternEditActions />
+      <PatternEditActions>
+          <span className="usa-checkbox">
+            <input
+              style={{ display: 'inline-block' }}
+              className="usa-checkbox__input bg-primary-lighter"
+              type="checkbox"
+              id={fieldId('required')}
+              {...register('required')}
+              defaultChecked={pattern.data.required}
+            />
+            <label
+              style={{ display: 'inline-block' }}
+              className="usa-checkbox__label"
+              htmlFor={fieldId('required')}
+            >
+              Required
+            </label>
+          </span>
+        </PatternEditActions>
       </div>
     </div>
   );

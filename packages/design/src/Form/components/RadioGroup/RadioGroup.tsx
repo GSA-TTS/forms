@@ -7,11 +7,17 @@ import { type PatternComponent } from '../../../Form/index.js';
 
 export const RadioGroupPattern: PatternComponent<RadioGroupProps> = props => {
   const { register } = useFormContext();
+  const hintId = `hint-${props.groupId}`;
   return (
     <div className="usa-fieldset padding-top-2">
       <legend className="usa-legend text-bold margin-top-0 padding-top-3">
         {props.legend}
       </legend>
+      {props.hint && (
+        <div className="usa-hint" id={hintId}>
+          {props.hint}
+        </div>
+      )}
       {props.options.map((option, index) => {
         const id = option.id;
         return (
