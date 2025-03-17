@@ -1,0 +1,35 @@
+#!/bin/sh
+
+SCRIPT_DIR=$(dirname "$0")
+TEMPLATE_FILE="${SCRIPT_DIR}/../dist/FormsPlatformStack.template.json"
+
+while getopts r:e:i: flag
+do
+  case "${flag}" in
+    r) REGION=${OPTARG};;
+    e) ENVIRONMENT=${OPTARG};;
+    i) IMAGE_URI=${OPTARG};;
+  esac
+done
+
+echo "REGION: $REGION"
+echo "ENVIRONMENT: $ENVIRONMENT"
+echo "IMAGE_URI: $IMAGE_URI"
+
+if [ -z "$REGION" ] || [ -z "$ENVIRONMENT" ]; then
+  echo "Usage: $0 -r <region> -e <environment> [-i <imageUri>]"
+  exit 1
+fi
+
+PARAMETER_OVERRIDES="environment=${ENVIRONMENT}"
+if [ -n "$IMAGE_URI" ]; then
+  PARAMETER_OVERRIDES="${PARAMETER_OVERRIDES} imageUri=${IMAGE_URI}"
+fi
+
+aws cloudformation deploy \
+  --stack-name forms-${ENVIRONMENT} \
+  --template-file $TEMPLATE_FILE \
+  --capabilities CAPABILITY_NAMED_IAM \
+  --parameter-overrides ${PARAMETER_OVERRIDES} \
+  --region ${REGION} \
+  --force-upload
