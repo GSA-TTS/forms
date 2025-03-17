@@ -48,9 +48,13 @@ const EditComponent = ({ pattern }: { pattern: SelectDropdownPattern }) => {
     <div className="grid-row grid-gap">
       <div className="mobile-lg:grid-col-12 margin-bottom-2">
         <label
-          className={classnames('usa-label', {
-            'usa-label--error': label.error,
-          }, `${styles.patternChoiceFieldWrapper}`)}
+          className={classnames(
+            'usa-label',
+            {
+              'usa-label--error': label.error,
+            },
+            `${styles.patternChoiceFieldWrapper}`
+          )}
         >
           {message.patterns.selectDropdown.fieldLabel}
           {label.error ? (
@@ -143,7 +147,9 @@ const EditComponent = ({ pattern }: { pattern: SelectDropdownPattern }) => {
             event.preventDefault();
             const optionLabel = `Option ${options.length + 1}`;
             const optionValue = `value-${options.length + 1}`;
-            setOptions(options.concat({ value: optionValue, label: optionLabel }));
+            setOptions(
+              options.concat({ value: optionValue, label: optionLabel })
+            );
           }}
         >
           Add option
