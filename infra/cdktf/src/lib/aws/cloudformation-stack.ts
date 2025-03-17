@@ -28,9 +28,9 @@ export class FormsCloudformationStack extends Construct {
       templateBody: `$\{file("${absPath}")}`,
       provider: provider,
       parameters: {
-        Environment: environment,
-        DockerImagePath: `${ecrRepositoryUrl}:${dockerImageTag}`,
-        //DockerImagePath: `ghcr.io/gsa-tts/forms/server-doj:${dockerImageTag}`,
+        environment,
+        imageUri: `${ecrRepositoryUrl}:${dockerImageTag}`,
+        //imageUri: `ghcr.io/gsa-tts/forms/server-doj:${dockerImageTag}`,
       },
       capabilities: ['CAPABILITY_IAM'],
       timeouts: {
