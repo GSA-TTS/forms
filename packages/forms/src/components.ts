@@ -150,6 +150,7 @@ export type SelectDropdownProps = PatternProps<{
     label: string;
   }[];
   label: string;
+  hint?: string;
   required: boolean;
   error?: FormError;
   value?: string;
