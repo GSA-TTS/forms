@@ -6,7 +6,6 @@ export const getFormUrl = (formId: string) => {
 };
 
 export const getFormManagerUrlById = (formId: string) => {
-  const context = getAppContext();
   return `${getManageUrl()}#/${formId}`;
 };
 
