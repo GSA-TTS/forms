@@ -38,34 +38,27 @@ export const radioGroupConfig: PatternConfig<RadioGroupPattern, PatternOutput> =
       required: false,
     },
     parseUserInput: (pattern, input: unknown) => {
-      // FIXME: Not sure why we're sometimes getting a string here, and sometimes
-      // the expected object. Workaround, by accepting both.
       if (typeof input === 'string') {
         return {
           success: true,
           data: input,
         };
       }
-      const optionId = getSelectedOption(pattern, input);
-      return {
-        success: true,
-        data: optionId || '',
-      };
-      /*
-      if (optionId) {
+
+      if (pattern.data.required) {
         return {
-          success: true,
-          data: optionId,
+          success: false,
+          error: {
+            type: 'custom',
+            message: 'No option selected for radio group',
+          },
         };
       }
+
       return {
-        success: false,
-        error: {
-          type: 'custom',
-          message: `No option selected for radio group: ${pattern.id}. Input: ${input}`,
-        },
+        success: true,
+        data: '',
       };
-      */
     },
     parseConfigData: obj => {
       const result = safeZodParseFormErrors(configSchema, obj);
@@ -104,19 +97,6 @@ export const radioGroupConfig: PatternConfig<RadioGroupPattern, PatternOutput> =
 
 const createId = (groupId: string, optionId: string) =>
   `${groupId}.${optionId}`;
-
-const getSelectedOption = (pattern: RadioGroupPattern, input: unknown) => {
-  if (!input) {
-    return;
-  }
-  const inputMap = input as Record<string, 'on' | null>;
-  const optionIds = pattern.data.options
-    .filter(option => inputMap[option.id] === 'on')
-    .map(option => option.id);
-  if (optionIds.length === 1) {
-    return optionIds[0];
-  }
-};
 
 export const extractOptionId = (
   groupId: string,
