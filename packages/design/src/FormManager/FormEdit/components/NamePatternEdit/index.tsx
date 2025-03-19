@@ -76,7 +76,9 @@ const EditComponent = ({ pattern }: { pattern: NamePattern }) => {
             'usa-label--error': givenNameHint.error,
           })}
         >
-          {message.patterns.nameInput.givenNameHint}
+          <span className={`${styles.secondaryColor}`}>
+            {message.patterns.nameInput.givenNameHint}
+          </span>
           {givenNameHint.error ? (
             <span className="usa-error-message" role="alert">
               {givenNameHint.error.message}
@@ -97,7 +99,9 @@ const EditComponent = ({ pattern }: { pattern: NamePattern }) => {
             'usa-label--error': familyNameHint.error,
           })}
         >
-          {message.patterns.nameInput.familyNameHint}
+          <span className={`${styles.secondaryColor}`}>
+            {message.patterns.nameInput.familyNameHint}
+          </span>
           {familyNameHint.error ? (
             <span className="usa-error-message" role="alert">
               {familyNameHint.error.message}
