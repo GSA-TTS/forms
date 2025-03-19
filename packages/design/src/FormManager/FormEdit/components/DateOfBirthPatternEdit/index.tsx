@@ -44,7 +44,7 @@ const EditComponent = ({ pattern }: { pattern: DateOfBirthPattern }) => {
 
   return (
     <div className="grid-row grid-gap">
-      <div className="tablet:grid-col-6 mobile-lg:grid-col-12 margin-bottom-2">
+      <div className="tablet:grid-col-12 mobile-lg:grid-col-12 margin-bottom-2">
         <label
           className={classnames('usa-label', {
             'usa-label--error': label.error,
@@ -66,13 +66,15 @@ const EditComponent = ({ pattern }: { pattern: DateOfBirthPattern }) => {
           />
         </label>
       </div>
-      <div className="tablet:grid-col-6 mobile-lg:grid-col-12 margin-bottom-2">
+      <div className="tablet:grid-col-12 mobile-lg:grid-col-12 margin-bottom-2">
         <label
           className={classnames('usa-label', {
             'usa-label--error': hint.error,
           })}
         >
-          {message.patterns.dateOfBirth.hintLabel}
+          <span className={`${styles.secondaryColor}`}>
+            {message.patterns.dateOfBirth.hintLabel}
+          </span>
           {hint.error ? (
             <span className="usa-error-message" role="alert">
               {hint.error.message}
