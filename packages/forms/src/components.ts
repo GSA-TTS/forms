@@ -178,6 +178,7 @@ export type EmailInputProps = PatternProps<{
   label: string;
   required: boolean;
   error?: FormError;
+  hint?: string;
   value: {
     email: string;
   };

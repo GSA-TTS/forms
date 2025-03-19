@@ -28,7 +28,37 @@ export default storyConfig;
 export const Basic: StoryObj<typeof FormEdit> = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const updatedLabel = 'Test Email Update Label';
+    const updatedLabel = 'Updated Email address label';
+    const updatedHint = 'Updated hint for Email address';
+
+    await userEvent.click(
+      canvas.getByText(message.patterns.emailInput.displayName)
+    );
+
+    const labelInput = canvas.getByLabelText(
+      message.patterns.emailInput.fieldLabel
+    );
+    await userEvent.clear(labelInput);
+    await userEvent.type(labelInput, updatedLabel);
+
+    const hintInput = canvas.getByLabelText(
+      message.patterns.emailInput.hintLabel
+    );
+    await userEvent.clear(hintInput);
+    await userEvent.type(hintInput, updatedHint);
+
+    const form = labelInput?.closest('form');
+    form?.requestSubmit();
+
+    await expect(await canvas.findByText(updatedLabel)).toBeInTheDocument();
+    await expect(await canvas.findByText(updatedHint)).toBeInTheDocument();
+  },
+};
+
+export const WithoutHint: StoryObj<typeof FormEdit> = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const updatedLabel = 'Updated Email address label';
 
     await userEvent.click(
       canvas.getByText(message.patterns.emailInput.displayName)
@@ -44,6 +74,9 @@ export const Basic: StoryObj<typeof FormEdit> = {
     form?.requestSubmit();
 
     await expect(await canvas.findByText(updatedLabel)).toBeInTheDocument();
+    await expect(
+      await canvas.queryByLabelText(message.patterns.emailInput.hintLabel)
+    ).toBeNull();
   },
 };
 
