@@ -45,7 +45,7 @@ const EditComponent = ({ pattern }: { pattern: NamePattern }) => {
 
   return (
     <div className="grid-row grid-gap-1">
-      <div className="tablet:grid-col-12 mobile-lg:grid-col-12">
+      <div className="grid-col-12">
         <label
           className={classNames('usa-label', {
             'usa-label--error': label.error,
@@ -70,7 +70,7 @@ const EditComponent = ({ pattern }: { pattern: NamePattern }) => {
           ></input>
         </label>
       </div>
-      <div className="tablet:grid-col-12 mobile-lg:grid-col-12 margin-bottom-2">
+      <div className="grid-col-12 margin-bottom-2">
         <label
           className={classNames('usa-label', {
             'usa-label--error': givenNameHint.error,
@@ -93,7 +93,7 @@ const EditComponent = ({ pattern }: { pattern: NamePattern }) => {
           />
         </label>
       </div>
-      <div className="tablet:grid-col-12 mobile-lg:grid-col-12 margin-bottom-2">
+      <div className="grid-col-12 margin-bottom-2">
         <label
           className={classNames('usa-label', {
             'usa-label--error': familyNameHint.error,

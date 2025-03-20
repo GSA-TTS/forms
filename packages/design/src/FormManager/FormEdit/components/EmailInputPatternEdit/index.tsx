@@ -43,7 +43,7 @@ const EditComponent = ({ pattern }: { pattern: EmailInputPattern }) => {
   const hint = getFieldState('hint');
   return (
     <div className="grid-row grid-gap">
-      <div className="tablet:grid-col-12 mobile-lg:grid-col-12 margin-bottom-2">
+      <div className="grid-col-12 margin-bottom-2">
         <label
           className={classnames('usa-label', {
             'usa-label--error': label.error,
@@ -65,7 +65,7 @@ const EditComponent = ({ pattern }: { pattern: EmailInputPattern }) => {
           />
         </label>
       </div>
-      <div className="tablet:grid-col-12 mobile-lg:grid-col-12 margin-bottom-2">
+      <div className="grid-col-12 margin-bottom-2">
         <label
           className={classnames('usa-label', {
             'usa-label--error': hint.error,
