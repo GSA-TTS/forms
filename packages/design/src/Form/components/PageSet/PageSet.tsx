@@ -26,7 +26,7 @@ const PageSet: PatternComponent<PageSetProps> = props => {
             {props.pages.map((page, index) => (
               <li
                 className={classNames('usa-step-indicator__segment', {
-                  'usa-step-indicator__segment--complete': !page.selected,
+                  'usa-step-indicator__segment--complete': page.visited,
                   'usa-step-indicator__segment--current': page.selected,
                 })}
                 key={index}
