@@ -22,6 +22,7 @@ export const createPrompt: CreatePrompt<FieldsetPattern> = (
       _patternId: pattern.id,
       type: 'fieldset',
       legend: pattern.data.legend,
+      hint: pattern.data.hint,
     } satisfies FieldsetProps,
     children,
   };

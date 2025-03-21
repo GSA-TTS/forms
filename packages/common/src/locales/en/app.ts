@@ -31,6 +31,7 @@ export const en = {
     fieldset: {
       ...defaults,
       displayName: 'Question set',
+      hintLabel: 'Hint Text (optional)',
       errorTextMustContainChar: 'String must contain at least 1 character(s)',
     },
     input: {
@@ -140,6 +141,7 @@ export const en = {
     repeater: {
       ...defaults,
       displayName: 'Repeatable Group',
+      hintLabel: 'Hint Text (optional)',
       errorTextMustContainChar: 'String must contain at least 1 character(s)',
     },
   },

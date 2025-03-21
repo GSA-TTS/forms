@@ -19,6 +19,16 @@ const Fieldset: PatternComponent<FieldsetProps> = props => {
             {props.legend}
           </legend>
         )}
+        {props.hint && (
+          <div className="usa-hint" id={props._patternId}>
+            {props.hint}
+          </div>
+        )}
+        {props.error && (
+          <div className="usa-error-message" id={props._patternId} role="alert">
+            {props.error.message}
+          </div>
+        )}
         {renderPromptComponents(props.context, props.childComponents)}
       </div>
     </fieldset>

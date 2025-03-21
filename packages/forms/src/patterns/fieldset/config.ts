@@ -9,11 +9,13 @@ import {
 
 export type FieldsetPattern = Pattern<{
   legend?: string;
+  hint?: string;
   patterns: PatternId[];
 }>;
 
 const configSchema = z.object({
   legend: z.string().min(1),
+  hint: z.string().optional(),
   patterns: z.union([
     // Support either an array of strings...
     z.array(z.string()),
