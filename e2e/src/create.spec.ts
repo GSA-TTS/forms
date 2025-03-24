@@ -41,7 +41,7 @@ test('Add questions', async ({ page }) => {
   // Create locators for both elements
   const fields = page.locator('.usa-label');
   const element1 = fields.filter({ hasText: 'Field label' });
-  const element2 = fields.filter({ hasText: 'Multiple choice question label' });
+  const element2 = fields.filter({ hasText: 'Question text' });
   expect(element1.first()).toBeTruthy();
   expect(element2.first()).toBeTruthy();
 

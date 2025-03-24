@@ -46,7 +46,7 @@ const EditComponent = ({
 
   return (
     <div className="grid-row grid-gap">
-      <div className="tablet:grid-col-6 mobile-lg:grid-col-12 margin-bottom-2">
+      <div className="grid-col-12 margin-bottom-2">
         <label
           className={classnames('usa-label', {
             'usa-label--error': label.error,
@@ -68,13 +68,15 @@ const EditComponent = ({
           />
         </label>
       </div>
-      <div className="tablet:grid-col-6 mobile-lg:grid-col-12 margin-bottom-2">
+      <div className="grid-col-12 margin-bottom-2">
         <label
           className={classnames('usa-label', {
             'usa-label--error': hint.error,
           })}
         >
-          {message.patterns.ssn.hintLabel}
+          <span className={`${styles.secondaryColor}`}>
+            {message.patterns.ssn.hintLabel}
+          </span>
           {hint.error ? (
             <span className="usa-error-message" role="alert">
               {hint.error.message}

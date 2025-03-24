@@ -40,10 +40,10 @@ const EditComponent = ({ pattern }: { pattern: EmailInputPattern }) => {
   const { fieldId, getFieldState, register } =
     usePatternEditFormContext<EmailInputPattern>(pattern.id);
   const label = getFieldState('label');
-
+  const hint = getFieldState('hint');
   return (
     <div className="grid-row grid-gap">
-      <div className="tablet:grid-col-12 mobile-lg:grid-col-12 margin-bottom-2">
+      <div className="grid-col-12 margin-bottom-2">
         <label
           className={classnames('usa-label', {
             'usa-label--error': label.error,
@@ -60,6 +60,30 @@ const EditComponent = ({ pattern }: { pattern: EmailInputPattern }) => {
             id={fieldId('label')}
             defaultValue={pattern.data.label}
             {...register('label')}
+            type="text"
+            autoFocus
+          />
+        </label>
+      </div>
+      <div className="grid-col-12 margin-bottom-2">
+        <label
+          className={classnames('usa-label', {
+            'usa-label--error': hint.error,
+          })}
+        >
+          <span className={`${styles.secondaryColor}`}>
+            {message.patterns.dateOfBirth.hintLabel}
+          </span>
+          {hint.error ? (
+            <span className="usa-error-message" role="alert">
+              {hint.error.message}
+            </span>
+          ) : null}
+          <input
+            className="usa-input"
+            id={fieldId('hint')}
+            defaultValue={pattern.data.hint}
+            {...register('hint')}
             type="text"
             autoFocus
           />

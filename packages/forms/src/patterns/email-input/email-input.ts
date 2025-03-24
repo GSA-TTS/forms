@@ -11,6 +11,7 @@ import {
 const configSchema = z.object({
   label: z.string().min(1),
   required: z.boolean(),
+  hint: z.string().optional(),
 });
 
 export type EmailInputPattern = Pattern<z.infer<typeof configSchema>>;
@@ -50,11 +51,12 @@ export const emailInputConfig: PatternConfig<
   EmailInputPattern,
   EmailInputPatternOutput
 > = {
-  displayName: 'Email',
+  displayName: 'Email address',
   iconPath: 'email-icon.svg',
   initial: {
-    label: 'Email',
+    label: 'Email address',
     required: false,
+    hint: 'Enter an email address without spaces using this format: email@domain.com',
   },
 
   parseUserInput: (pattern, inputValue) => {
@@ -79,6 +81,7 @@ export const emailInputConfig: PatternConfig<
         label: pattern.data.label,
         emailId: `${pattern.id}.email`,
         required: pattern.data.required,
+        hint: pattern.data.hint,
         error: sessionError,
         value: sessionValue,
       } as EmailInputProps,

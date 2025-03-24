@@ -1,5 +1,9 @@
 /* Add a Pattern Menu */
 
+.secondaryColor {
+  color: #757575;
+}
+
 .dropdownMenu {
   min-width: 315px;
   max-height: 19.688rem;
@@ -107,6 +111,14 @@
   background: none;
 }
 
+.optionCircle {
+  margin-top: 1.2rem;
+}
+
+.optionCircle:before {
+  box-shadow: 0 0 0 2px #a9aeb1;
+}
+
 .dottedLine {
   display: flex;
   align-items: center;
@@ -126,6 +138,10 @@
 
 .dottedLine::after {
   margin: 0 0 0 1em;
+}
+
+.patternChoiceFieldWrapper {
+  max-width: 100%;
 }
 
 /* Move to Page */
@@ -190,6 +206,16 @@
 
 .movePatternButton svg {
   font-size: 1.5rem;
+}
+
+.addMorePatternButton {
+  background-color: transparent;
+  border: none;
+  padding-left: 0;
+}
+
+.addMorePatternButton:focus {
+  outline: none !important;
 }
 
 @media (min-width: 64.5em) {

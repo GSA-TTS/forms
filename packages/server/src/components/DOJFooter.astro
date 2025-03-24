@@ -1,0 +1,158 @@
+---
+import { Image } from 'astro:assets';
+import * as routes from '../routes';
+import { getServerContext } from '../config/astro.js';
+
+const { baseUrl } = await getServerContext(Astro);
+---
+<style>
+    .usa-footer {
+      border-top: 3px solid #ffbe2e;
+      background-color: #171716;
+    }
+    
+    .footer-text {
+      color: #ffbe2e;
+    }
+    
+    .usa-link,
+    .usa-link:visited  {
+      color: #fff;
+    }
+    .usa-link:hover {
+      color: #ffbe2e;
+    }    
+</style>
+
+<footer id="footer" class="usa-footer">
+    <div class="usa-identifier usa-footer__primary padding-bottom-0">
+      <div class="grid-container usa-footer__primary-content maxw-desktop">
+        <div class="grid-row padding-top-0 padding-bottom-3 flex-justify-center">
+          <div>
+            <section
+              aria-label="Agency identifier,"
+              class="usa-identifier__section usa-identifier__section--masthead"
+            >
+              <div class="align-center display-flex maxw-desktop">
+                <div class="usa-identifier__logos padding-bottom-3">
+                  <a
+                    href="https://www.justice.gov/pardon"
+                    class="usa-identifier__logo"
+                  >
+                    <Image
+                      src=`https://www.justice.gov/themes/custom/usdoj_uswds/images/doj-main-header-logo.svg`
+                      alt="U.S. Department of Justice seal"
+                      width="300"
+                      height="100"
+                    />
+                  </a>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+        <nav
+          aria-label="Important links,"
+          class="usa-identifier__section usa-identifier__section--required-links"
+        >
+          <div class="align-center display-flex maxw-desktop">
+            <ul class="usa-identifier__required-links-list">
+              <li class="usa-identifier__required-links-item">
+                <a
+                  href="https://www.justice.gov/about"
+                  class="usa-identifier__required-link usa-link"
+                  >About</a
+                >
+              </li>
+              <li class="usa-identifier__required-links-item">
+                <a
+                  href="https://www.justice.gov/jmd/vulnerability-disclosure-policy"
+                  class="usa-identifier__required-link usa-link"
+                  >Vulnerability Disclosure Policy</a
+                >
+              </li>
+              <li class="usa-identifier__required-links-item">
+                <a
+                  href="https://www.justice.gov/accessibility/accessibility-statement"
+                  class="usa-identifier__required-link usa-link"
+                  >Accessibility statement</a
+                >
+              </li>
+              <li class="usa-identifier__required-links-item">
+                <a
+                  href="https://www.justice.gov/oip"
+                  class="usa-identifier__required-link usa-link"
+                  >FOIA requests</a
+                >
+              </li>
+              <li class="usa-identifier__required-links-item">
+                <a
+                  href="https://www.justice.gov/jmd/eeo-program-status-report"
+                  class="usa-identifier__required-link usa-link"
+                  >No FEAR Act data</a
+                >
+              </li>
+              <li class="usa-identifier__required-links-item">
+                <a
+                  href="https://www.gsaig.gov/"
+                  class="usa-identifier__required-link usa-link"
+                  >Office of the Inspector General</a
+                >
+              </li>
+              <li class="usa-identifier__required-links-item">
+                <a
+                  href="https://www.gsa.gov/reference/reports/budget-performance"
+                  class="usa-identifier__required-link usa-link"
+                  >Performance reports</a
+                >
+              </li>
+              <li class="usa-identifier__required-links-item">
+                <a
+                  href="/privacy-policy/"
+                  class="usa-identifier__required-link usa-link"
+                  >Privacy policy</a
+                >
+              </li>
+              <li class="usa-identifier__required-links-item">
+                <a
+                  href="mailto:10x@gsa.gov"
+                  class="usa-identifier__required-link usa-link"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >Email Us</a
+                >
+              </li>
+              <li class="usa-identifier__required-links-item">
+                <a
+                  href="https://github.com/GSA-TTS/forms"
+                  class="usa-identifier__required-link usa-link"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >Github</a
+                >
+              </li>
+              <li class="usa-identifier__required-links-item">
+                <a
+                  href={routes.getStorybookUrl(baseUrl)}
+                  class="usa-identifier__required-link usa-link"
+                >
+                  Storybook
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <section
+        aria-label="U.S. government information and services,"
+        class="usa-identifier__section usa-identifier__section--usagov margin-top-105 padding-bottom-105 maxw-desktop grid-container"
+      >
+          <div class="align-center display-flex maxw-desktop">
+            <div class="usa-identifier__usagov-description footer-text">
+              Looking for U.S. government information and services?&nbsp;
+            </div>
+            <a href="https://www.usa.gov/" class="usa-link">Contact USA.gov</a>
+          </div>
+      </section>
+    </div>
+  </footer>

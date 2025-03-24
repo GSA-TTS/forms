@@ -2,9 +2,15 @@
 import { getBranchTreeUrl } from '../lib/github';
 
 import { getServerContext } from '../config/astro.js';
+import DOJFooter from './DOJFooter.astro';
+
 const { github } = await getServerContext(Astro);
+const isForm = Astro.url.href.includes('/forms/');
 ---
 
+{ isForm ? (
+  <DOJFooter />
+) : ( 
 <footer class="usa-footer usa-footer--slim">
   <div class="grid-container usa-footer__return-to-top">
     <a href="#">Return to top</a>
@@ -37,3 +43,4 @@ const { github } = await getServerContext(Astro);
     </div>
   </div>
 </footer>
+)}

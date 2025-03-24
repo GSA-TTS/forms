@@ -59,6 +59,7 @@ export const createPrompt: CreatePrompt<PageSetPattern> = (
           title: childPattern.data.title || 'Untitled',
           selected: index === activePage,
           url: session.route?.url + '?' + params.toString(),
+          visited: index < (activePage || 0),
         };
       }),
     } satisfies PageSetProps,

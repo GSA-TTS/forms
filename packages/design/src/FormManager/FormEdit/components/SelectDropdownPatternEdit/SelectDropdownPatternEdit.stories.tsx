@@ -72,7 +72,7 @@ export const AddField: StoryObj<typeof FormEdit> = {
 
     await userEvent.click(
       canvas.getByRole('button', {
-        name: /add new/i,
+        name: /add option/i,
       })
     );
 

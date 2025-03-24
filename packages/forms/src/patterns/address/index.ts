@@ -221,7 +221,7 @@ export const addressConfig: PatternConfig<
   iconPath: 'address-icon.svg',
   initial: {
     legend: 'Physical address',
-    required: true,
+    required: false,
     addMailingAddress: false,
   },
   // @ts-ignore

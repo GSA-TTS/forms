@@ -1,0 +1,95 @@
+---
+import closeSvg from '@gsa-tts/forms-design/static/uswds/img/usa-icons/close.svg';
+import * as routes from '../routes';
+
+const getNavLinkClasses = (url: string) => {
+  if (url === Astro.url.pathname) {
+    return 'usa-nav-link usa-current';
+  } else {
+    return 'usa-nav-link';
+  }
+};
+
+const currentRoute = Astro.url.href;
+const isAboutContent = currentRoute.includes(`/about/`);
+const showAboutContent = false;
+---
+<style>
+.doj-background {
+  background-color: #162e51;
+  border-bottom: 3px solid #ffbe2e;
+}
+
+.doj-logo {
+  width: 350px;
+  height: 90px;
+}
+
+@media (max-width: 63.99em) {
+  .doj-logo {width: 100px; height: 40px;}
+}
+</style>
+
+<div class="usa-overlay"></div>
+<header class="usa-header usa-header--extended">
+  {!isAboutContent && (
+    <div class="topHeaderBanner bg-yellow">
+      <span class="usa-navbar height-auto display-block padding-2"
+      ><strong>DEMO SERVER</strong> - No changes you make here will be visible
+        to the public.</span
+      >
+    </div>
+  )}
+  <div class="usa-navbar doj-background">
+    <div class="usa-logo float-left site-logo">
+      <em class="usa-logo__text">
+        <a href={routes.getHomeUrl()} title="10x Forms Platform">
+          <img
+            src="https://www.justice.gov/d9/2023-07/doj-logo-pardon.svg"
+            loading="eager"
+            decoding="sync"
+            alt="DOJ Logo Pardon"
+            class="doj-logo"
+          />
+        </a>
+      </em>
+    </div>
+    <button type="button" class="usa-menu-btn">Menu</button>
+  </div>
+  <nav aria-label="Primary navigation" class="usa-nav">
+    <div class="usa-nav__inner">
+      <button type="button" class="usa-nav__close">
+        <img src={closeSvg.src} role="img" alt="Close" />
+      </button>
+      <ul class="usa-nav__primary usa-accordion">
+        <li class="usa-nav__primary-item">
+          <a
+            href={routes.getManageUrl()}
+            class={getNavLinkClasses(routes.getManageUrl())}
+          >
+            <span>My Forms</span>
+          </a>
+        </li>
+        {showAboutContent && (
+          <li class="usa-nav__primary-item">
+            <a
+              href={routes.getAboutUrl()}
+              class={getNavLinkClasses(routes.getAboutUrl())}
+            >
+              <span>About</span>
+            </a>
+          </li>
+        )}
+      </ul>
+      {showAboutContent && (
+        <div class="usa-nav__secondary">
+          <ul class="usa-nav__secondary-links">
+            <li class="usa-nav__secondary-item">
+              <button class="usa-button">Login</button>
+            </li>
+          </ul>
+        </div>
+      )}
+    </div>
+  </nav>
+</header>

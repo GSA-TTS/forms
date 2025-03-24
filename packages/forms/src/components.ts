@@ -117,7 +117,7 @@ export type CheckboxProps = PatternProps<{
 
 export type PageSetProps = PatternProps<{
   type: 'page-set';
-  pages: { title: string; selected: boolean; url: string }[];
+  pages: { title: string; selected: boolean; url: string; visited: boolean }[];
   actions: PromptAction[];
 }>;
 
@@ -130,12 +130,16 @@ export type RadioGroupProps = PatternProps<{
   type: 'radio-group';
   groupId: string;
   legend: string;
+  label: string;
+  hint?: string;
   options: {
     id: string;
     name: string;
     label: string;
     defaultChecked: boolean;
   }[];
+  required: boolean;
+  error?: FormError;
 }>;
 
 export type SelectDropdownProps = PatternProps<{
@@ -146,6 +150,7 @@ export type SelectDropdownProps = PatternProps<{
     label: string;
   }[];
   label: string;
+  hint?: string;
   required: boolean;
   error?: FormError;
   value?: string;
@@ -173,6 +178,7 @@ export type EmailInputProps = PatternProps<{
   label: string;
   required: boolean;
   error?: FormError;
+  hint?: string;
   value: {
     email: string;
   };

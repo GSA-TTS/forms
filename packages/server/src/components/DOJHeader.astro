@@ -1,0 +1,40 @@
+---
+import { getServerContext } from '../config/astro.js';
+import * as routes from '../routes';
+
+const { baseUrl } = await getServerContext(Astro);
+---
+<style>
+    .doj-background {
+      background-color: #162e51;
+      border-bottom: 3px solid #ffbe2e;
+    }
+    
+    .doj-logo {
+      width: 350px;
+      height: 90px;
+    }
+    
+    @media (max-width: 63.99em) {
+      .doj-logo {width: 100px; height: 40px;}
+    }
+</style>
+
+<div class="doj-background">
+    <div class="usa-navbar">
+      <div class="usa-logo float-left site-logo">
+        <em class="usa-logo__text">
+            <a href={routes.getHomeUrl(baseUrl)} title="10x Forms Platform">
+                <img
+                  src="https://www.justice.gov/d9/2023-07/doj-logo-pardon.svg"
+                  loading="eager"
+                  decoding="sync"
+                  alt="DOJ Logo Pardon"
+                  class="doj-logo"
+                />
+              </a>
+        </em>
+      </div>
+      <button type="button" class="usa-menu-btn">Menu</button>
+    </div>
+</div>

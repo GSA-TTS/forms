@@ -11,6 +11,7 @@ import {
 const configSchema = z.object({
   label: z.string().min(1),
   required: z.boolean(),
+  hint: z.string().optional(),
   options: z
     .object({
       value: z
@@ -67,9 +68,9 @@ export const selectDropdownConfig: PatternConfig<
     label: 'Dropdown-label',
     required: false,
     options: [
-      { value: 'value1', label: 'Option-1' },
-      { value: 'value2', label: 'Option-2' },
-      { value: 'value3', label: 'Option-3' },
+      { value: 'value1', label: 'Option 1' },
+      { value: 'value2', label: 'Option 2' },
+      { value: 'value3', label: 'Option 3' },
     ],
   },
 
@@ -97,6 +98,7 @@ export const selectDropdownConfig: PatternConfig<
         _patternId: pattern.id,
         type: 'select-dropdown',
         label: pattern.data.label,
+        hint: pattern.data.hint,
         selectId: pattern.id,
         options: pattern.data.options.map(option => {
           return {

@@ -1,11 +1,14 @@
 .sideNavWrapper {
   top: 6rem;
 }
-
-.sideNav a:not(.usa-button):not(.usa-current) {
+.sideNav a:not(.usa-button):not(.usa-current).visited {
   color: #005ea2;
 }
 
 .sideNav a:not(.usa-button):hover {
   background-color: #d9e8f6;
+}
+
+.sideNav a:not(.usa-button):not(.usa-current):not(.visited) {
+  color: #565c65;
 }

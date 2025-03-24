@@ -12,7 +12,6 @@ const TextInput: PatternComponent<TextInputProps> = ({
   error,
   value,
 }) => {
-  console.log('TextInput', inputId, label, required, error, value);
   const { register } = useFormContext();
   const id = inputId;
   return (

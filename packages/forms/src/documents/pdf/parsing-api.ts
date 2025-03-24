@@ -224,12 +224,14 @@ export const processApiResponse = async (json: any): Promise<ParsedPdf> => {
         'radio-group',
         {
           label: element.legend,
+          hint: '',
           options: element.options.map(option => ({
             id: option.id,
             label: option.label,
             name: option.name,
             defaultChecked: option.default_checked,
           })),
+          required: false,
         }
       );
       if (radioGroupPattern) {
