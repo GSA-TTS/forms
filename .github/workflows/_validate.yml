@@ -6,7 +6,7 @@ on:
       playwright_version:
         description: Installed playwright version
         required: false
-        default: '1.50.1'
+        default: '1.51.1'
         type: string
 
 jobs:
