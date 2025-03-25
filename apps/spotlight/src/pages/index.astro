@@ -1,7 +1,9 @@
 ---
 import { Image } from 'astro:assets';
 import ContentLayout from '../layouts/ContentLayout.astro';
-import editUIImage from '../images/attachments-edit-ui.png';
+import skipLogicImage from '../images/skip-logic-ui.png';
+import hintHelpImage from '../images/hint-help-ui.png';
+import heroImage from '../images/hero-image.png';
 import agencySealImage from '../images/agency-seal.png';
 import videoPlaceholderImage from '../images/video-placeholder.png';
 ---
@@ -69,25 +71,7 @@ import videoPlaceholderImage from '../images/video-placeholder.png';
           </ul>
         </div>
         <div class="tablet:grid-col-3 display-none tablet:display-block">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 292 279" fill="none" aria-hidden="true">
-            <rect width="292" height="203" y="32" fill="#1C1C1C" rx="4" />
-            <rect width="270" height="170" x="11" y="43" fill="#5842D2" rx="4" />
-            <path fill="#1C1C1C"
-                  d="M130 235h32v32h-32v-32ZM73 271a4 4 0 0 1 4-4h138a4 4 0 0 1 4 4v8H73v-8ZM39 4a4 4 0 0 1 4-4h208a4 4 0 0 1 4 4v204H39V4Z" />
-            <path fill="#fff" d="M39 213h216V24H39v189Z" />
-            <rect width="85.023" height="9" fill="#A9AEB1" rx="4" transform="matrix(1 0 0 -1 104 52)" />
-            <rect width="45.423" height="9" fill="#A9AEB1" rx="4" transform="matrix(1 0 0 -1 124 67.08)" />
-            <rect width="150.576" height="7" x="1" y="-1" stroke="#A9AEB1" stroke-width="2" rx="3.5"
-                  transform="matrix(1 0 0 -1 71 87.304)" />
-            <rect width="150.576" height="7" x="1" y="-1" stroke="#A9AEB1" stroke-width="2" rx="3.5"
-                  transform="matrix(1 0 0 -1 71 106.353)" />
-            <rect width="150.576" height="52" x="1" y="-1" stroke="#A9AEB1" stroke-width="2" rx="4"
-                  transform="matrix(1 0 0 -1 71 169.848)" />
-            <rect width="33.776" height="9" fill="#112E51" rx="4" transform="matrix(1 0 0 -1 130 194.315)" />
-            <circle cx="63" cy="11" r="4" fill="#D54309" />
-            <circle cx="76" cy="11" r="4" fill="#FFBE2E" />
-            <circle cx="89" cy="11" r="4" fill="#00A91C" />
-          </svg>
+          <img src={heroImage.src} alt="" width={heroImage.width} height={heroImage.height} class="display-block margin-x-auto" loading="eager" decoding="sync" />
         </div>
       </div>
     </div>
@@ -258,13 +242,13 @@ import videoPlaceholderImage from '../images/video-placeholder.png';
           </ul>
         </div>
         <div class="tablet:grid-col-6">
-          <Image src={editUIImage} alt="" width="438" height="370"
+          <Image src={skipLogicImage} alt="" width="438" height="361"
                  class="display-block margin-x-auto tablet:margin-x-0" />
         </div>
       </div>
       <div class="grid-row grid-gap">
         <div class="tablet:grid-col-6">
-          <Image src={editUIImage} alt="" width="438" height="370"
+          <Image src={hintHelpImage} alt="" width="438" height="313"
                  class="display-block margin-x-auto tablet:margin-x-0" />
         </div>
         <div class="tablet:grid-col-6">
