@@ -47,9 +47,13 @@ const EditComponent = ({ pattern }: { pattern: NamePattern }) => {
     <div className="grid-row grid-gap-1">
       <div className="grid-col-12">
         <label
-          className={classNames('usa-label', {
-            'usa-label--error': label.error,
-          })}
+          className={classNames(
+            'usa-label width-full maxw-full',
+            {
+              'usa-label--error': label.error,
+            },
+            `${styles.patternChoiceFieldWrapper}`
+          )}
           htmlFor={fieldId('label')}
         >
           {message.patterns.nameInput.fieldLabel}
@@ -59,9 +63,13 @@ const EditComponent = ({ pattern }: { pattern: NamePattern }) => {
             </span>
           ) : null}
           <input
-            className={classNames('usa-input bg-primary-lighter', {
-              'usa-input--error': label.error,
-            })}
+            className={classNames(
+              'usa-input bg-primary-lighter',
+              {
+                'usa-input--error': label.error,
+              },
+              `${styles.patternChoiceFieldWrapper}`
+            )}
             id={fieldId('label')}
             defaultValue={pattern.data.label}
             {...register('label')}
@@ -72,9 +80,13 @@ const EditComponent = ({ pattern }: { pattern: NamePattern }) => {
       </div>
       <div className="grid-col-12 margin-bottom-2">
         <label
-          className={classNames('usa-label', {
-            'usa-label--error': givenNameHint.error,
-          })}
+          className={classNames(
+            'usa-label',
+            {
+              'usa-label--error': givenNameHint.error,
+            },
+            `${styles.patternChoiceFieldWrapper}`
+          )}
         >
           <span className={`${styles.secondaryColor}`}>
             {message.patterns.nameInput.givenNameHint}
@@ -85,7 +97,10 @@ const EditComponent = ({ pattern }: { pattern: NamePattern }) => {
             </span>
           ) : null}
           <input
-            className="usa-input"
+            className={classNames(
+              'usa-input bg-primary-lighter',
+              `${styles.patternChoiceFieldWrapper}`
+            )}
             id={fieldId('givenNameHint')}
             defaultValue={pattern.data.givenNameHint}
             {...register('givenNameHint')}
@@ -95,9 +110,13 @@ const EditComponent = ({ pattern }: { pattern: NamePattern }) => {
       </div>
       <div className="grid-col-12 margin-bottom-2">
         <label
-          className={classNames('usa-label', {
-            'usa-label--error': familyNameHint.error,
-          })}
+          className={classNames(
+            'usa-label',
+            {
+              'usa-label--error': familyNameHint.error,
+            },
+            `${styles.patternChoiceFieldWrapper}`
+          )}
         >
           <span className={`${styles.secondaryColor}`}>
             {message.patterns.nameInput.familyNameHint}
@@ -108,7 +127,10 @@ const EditComponent = ({ pattern }: { pattern: NamePattern }) => {
             </span>
           ) : null}
           <input
-            className="usa-input"
+            className={classNames(
+              'usa-input bg-primary-lighter',
+              `${styles.patternChoiceFieldWrapper}`
+            )}
             id={fieldId('familyNameHint')}
             defaultValue={pattern.data.familyNameHint}
             {...register('familyNameHint')}

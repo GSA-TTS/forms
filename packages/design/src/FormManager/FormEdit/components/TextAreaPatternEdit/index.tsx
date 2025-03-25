@@ -91,7 +91,7 @@ const EditComponent = ({ patternId }: { patternId: PatternId }) => {
             </span>
           ) : null}
           <input
-            className="usa-input"
+            className="usa-input bg-primary-lighter"
             id={fieldId('hint')}
             defaultValue={pattern.data.hint}
             {...register('hint')}
@@ -113,7 +113,7 @@ const EditComponent = ({ patternId }: { patternId: PatternId }) => {
           ) : null}
           {message.patterns.textarea.maxLength}
           <input
-            className="usa-input bg-primary-lighter text-bold"
+            className="usa-input bg-primary-lighter"
             id={fieldId('maxLength')}
             {...maxLengthAttributes}
             {...register('maxLength')}

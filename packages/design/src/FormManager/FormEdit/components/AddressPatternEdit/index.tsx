@@ -1,5 +1,5 @@
 import React from 'react';
-import classnames from 'classnames';
+import classNames from 'classnames';
 
 import { type AddressComponentProps } from '@gsa-tts/forms-core';
 import { type AddressPattern } from '@gsa-tts/forms-core';
@@ -44,11 +44,15 @@ const EditComponent = ({ pattern }: { pattern: AddressPattern }) => {
 
   return (
     <div className="grid-row grid-gap">
-      <div className="tablet:grid-col-12 mobile-lg:grid-col-12 margin-bottom-2">
+      <div className="grid-col-12 margin-bottom-2">
         <label
-          className={classnames('usa-label', {
-            'usa-label--error': legend.error,
-          })}
+          className={classNames(
+            'usa-label',
+            {
+              'usa-label--error': legend.error,
+            },
+            `${styles.patternChoiceFieldWrapper}`
+          )}
         >
           {message.patterns.address.fieldLabel}
           {legend.error ? (
@@ -57,7 +61,13 @@ const EditComponent = ({ pattern }: { pattern: AddressPattern }) => {
             </span>
           ) : null}
           <input
-            className="usa-input"
+            className={classNames(
+              'usa-input bg-primary-lighter',
+              {
+                'usa-input--error': legend.error,
+              },
+              `${styles.patternChoiceFieldWrapper}`
+            )}
             id={fieldId('legend')}
             defaultValue={pattern.data.legend}
             {...register('legend')}
@@ -68,7 +78,13 @@ const EditComponent = ({ pattern }: { pattern: AddressPattern }) => {
         <span className="usa-checkbox">
           <input
             style={{ display: 'inline-block' }}
-            className="usa-checkbox__input bg-primary-lighter"
+            className={classNames(
+              'usa-checkbox__input bg-primary-lighter',
+              {
+                'usa-checkbox__input--error': addMailingAddress.error,
+              },
+              `${styles.patternChoiceFieldWrapper}`
+            )}
             type="checkbox"
             id={fieldId('addMailingAddress')}
             {...register('addMailingAddress')}
@@ -76,7 +92,10 @@ const EditComponent = ({ pattern }: { pattern: AddressPattern }) => {
           />
           <label
             style={{ display: 'inline-block' }}
-            className="usa-checkbox__label"
+            className={classNames(
+              'usa-checkbox__label',
+              `${styles.patternChoiceFieldWrapper}`
+            )}
             htmlFor={fieldId('addMailingAddress')}
           >
             Add Mailing Address
