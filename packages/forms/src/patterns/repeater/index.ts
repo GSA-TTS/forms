@@ -81,7 +81,7 @@ export const repeaterConfig: PatternConfig<RepeaterPattern> = {
   iconPath: 'list-icon.svg',
   initial: {
     legend: 'Default Heading',
-    hint: 'Default hint text',
+    hint: '',
     addButtonLabel: 'Add',
     patterns: [],
     showControls: true,
