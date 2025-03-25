@@ -44,9 +44,13 @@ const EditComponent = ({ pattern }: { pattern: Pattern }) => {
     <div className="grid-row grid-gap-1">
       <div className="grid-col-12">
         <label
-          className={classNames('usa-label', {
-            'usa-label--error': title.error,
-          }, `${styles.patternChoiceFieldWrapper}`)}
+          className={classNames(
+            'usa-label',
+            {
+              'usa-label--error': title.error,
+            },
+            `${styles.patternChoiceFieldWrapper}`
+          )}
           htmlFor={fieldId('title')}
         >
           Title
@@ -67,9 +71,13 @@ const EditComponent = ({ pattern }: { pattern: Pattern }) => {
       </div>
       <div className="grid-col-12">
         <label
-          className={classNames('usa-label', {
-            'usa-input--error': description.error,
-          }, `${styles.patternChoiceFieldWrapper}`)}
+          className={classNames(
+            'usa-label',
+            {
+              'usa-input--error': description.error,
+            },
+            `${styles.patternChoiceFieldWrapper}`
+          )}
           htmlFor={fieldId('description')}
         >
           Description

@@ -1,9 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import { PatternId, AttachmentProps } from '@gsa-tts/forms-core';
-import {
-  AttachmentPattern
-} from '@gsa-tts/forms-core';
+import { AttachmentPattern } from '@gsa-tts/forms-core';
 import Attachment from '../../../../Form/components/Attachment/index.js';
 import { useFormManagerStore } from '../../../store.js';
 import { PatternEditComponent } from '../../types.js';
@@ -47,9 +45,13 @@ const EditComponent = ({ patternId }: { patternId: PatternId }) => {
     <div className="grid-row grid-gap-1">
       <div className="grid-col-12">
         <label
-          className={classNames('usa-label', {
-            'usa-label--error': label.error,
-          }, `${styles.patternChoiceFieldWrapper}`)}
+          className={classNames(
+            'usa-label',
+            {
+              'usa-label--error': label.error,
+            },
+            `${styles.patternChoiceFieldWrapper}`
+          )}
           htmlFor={fieldId('label')}
         >
           {message.patterns.attachment.fieldLabel}

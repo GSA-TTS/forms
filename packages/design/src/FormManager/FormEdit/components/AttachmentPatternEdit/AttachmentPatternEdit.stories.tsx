@@ -37,9 +37,7 @@ export const Basic: StoryObj<typeof FormEdit> = {
     const canvas = within(canvasElement);
     const updatedLabel = 'Updated attachment pattern';
 
-    await userEvent.click(
-      canvas.getByText('File upload')
-    );
+    await userEvent.click(canvas.getByText('File upload'));
 
     const labelInput = canvas.getByLabelText(
       message.patterns.address.fieldLabel
@@ -51,8 +49,9 @@ export const Basic: StoryObj<typeof FormEdit> = {
     const form = labelInput?.closest('form');
     form?.requestSubmit();
 
-    await expect(await canvas.getByDisplayValue(updatedLabel)).toBeInTheDocument();
-
+    await expect(
+      await canvas.getByDisplayValue(updatedLabel)
+    ).toBeInTheDocument();
   },
 };
 

@@ -147,9 +147,13 @@ const EditComponent = ({
           ) : null}
         </label>
         <input
-          className={classNames('usa-input bg-primary-lighter text-bold', {
-            'usa-input--error': legend.error,
-          }, `${styles.patternChoiceFieldWrapper}`)}
+          className={classNames(
+            'usa-input bg-primary-lighter text-bold',
+            {
+              'usa-input--error': legend.error,
+            },
+            `${styles.patternChoiceFieldWrapper}`
+          )}
           id={fieldId('legend')}
           defaultValue={pattern.data.legend}
           {...register('legend')}
