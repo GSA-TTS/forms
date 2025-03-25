@@ -14,6 +14,7 @@ const defaultArgs = {
   legend: 'Default Heading',
   _patternId: 'test-id',
   type: 'repeater',
+  hint: 'Hint text (optional)',
 } satisfies RepeaterProps;
 
 const mockChildComponents = (index: number) => [

@@ -35,7 +35,7 @@ export const Basic: StoryObj<typeof FormEdit> = {
     await testUpdateFormFieldOnSubmitByElement(
       canvasElement,
       await canvas.findByText('Repeater question set pattern description'),
-      'Legend Text Element',
+      'Question set label',
       'Updated repeater pattern'
     );
   },
@@ -47,7 +47,7 @@ export const Error: StoryObj<typeof FormEdit> = {
     await testEmptyFormLabelErrorByElement(
       canvasElement,
       await canvas.findByText('Repeater question set pattern description'),
-      'Legend Text Element',
+      'Question set label',
       message.patterns.repeater.errorTextMustContainChar
     );
   },
@@ -73,7 +73,7 @@ export const AddPattern: StoryObj<typeof FormEdit> = {
     await userEvent.type(input, 'Repeater short question');
 
     const addQuestionToRepeaterButton = canvas.getByRole('button', {
-      name: /Add question to repeater set/,
+      name: /Add question to set/,
     });
     await userEvent.click(addQuestionToRepeaterButton);
 
