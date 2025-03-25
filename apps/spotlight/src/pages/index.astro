@@ -50,6 +50,10 @@ import videoPlaceholderImage from '../images/video-placeholder.png';
       padding-bottom: 56.25%;
       height: 0;
     }
+
+    .text-overlay {
+      background: #1b1b1b;
+    }
   </style>
   <section class="usa-section usa-section--dark" aria-label="Introduction">
     <div class="grid-container maxw-desktop marketing-section--dark">
@@ -59,9 +63,6 @@ import videoPlaceholderImage from '../images/video-placeholder.png';
             Elegant federal forms that work for all users on all devices
           </h1>
           <ul class="usa-button-group">
-            <li class="usa-button-group__item">
-              <a href="#" class="usa-button usa-button--outline marketing-button--outline">Download our brochure</a>
-            </li>
             <li class="usa-button-group__item">
               <a href="https://airtable.com/appGtiqPPhrrdKy65/pagiq1oAO6YHJJdZR/form" class="usa-button">Request a demo</a>
             </li>
@@ -106,9 +107,19 @@ import videoPlaceholderImage from '../images/video-placeholder.png';
       <div class="tablet:grid-col-12 margin-bottom-5 text-center">
         <div class="video-player">
           <a href="https://www.loom.com/share/b0e2812f202842fdbdc7872296100987?sid=bd8345e3-32ff-4314-bf33-f4aa2389c421"
-             class="video-player__button display-inline-block" aria-label="Play video">
+             class="video-player__button display-block position-relative" aria-label="Play video">
             <Image src={videoPlaceholderImage} alt="" width="744" height="418" class="display-block margin-x-auto"
                    loading="eager" decoding="sync" />
+            <div class="text-overlay position-absolute bottom-0 left-0 width-full">
+              <div class="text-overlay__content text-left padding-x-4 padding-y-2 text-white text-bold">
+                <div class="display-flex flex-align-center">
+                  <svg width="29" height="34" viewBox="0 0 29 34" fill="none" xmlns="http://www.w3.org/2000/svg" class="display-block">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 0.5V33.5L28.5 17L0 0.5Z" fill="white" aria-hidden="true" />
+                  </svg>
+                  <span class="margin-left-2">Forms platform demo: <time datetime="2025-03-21">2025-03-21</time></span>
+                </div>
+              </div>
+            </div>
           </a>
           <template id="video-content">
             <div class="video-content-target bg-primary-darker">
