@@ -97,6 +97,11 @@
   padding: 1em 0;
 }
 
+/* Form title and description */
+.patternChoiceFieldWrapper {
+  max-width: 100%;
+}
+
 /* Configure and Publish Pages */
 .progressPage {
   min-height: 60vh;

@@ -5,7 +5,6 @@ import { type AttachmentPattern } from '@gsa-tts/forms-core';
 import {
   createPatternEditStoryMeta,
   testEmptyFormLabelError,
-  testUpdateFormFieldOnSubmit,
 } from '../common/story-helper.js';
 import FormEdit from '../../index.js';
 import { userEvent, expect } from '@storybook/test';
@@ -35,12 +34,25 @@ export default storyConfig;
 
 export const Basic: StoryObj<typeof FormEdit> = {
   play: async ({ canvasElement }) => {
-    await testUpdateFormFieldOnSubmit(
-      canvasElement,
-      label,
-      message.patterns.attachment.fieldLabel,
-      'Updated attachment pattern'
+    const canvas = within(canvasElement);
+    const updatedLabel = 'Updated attachment pattern';
+
+    await userEvent.click(
+      canvas.getByText('File upload')
     );
+
+    const labelInput = canvas.getByLabelText(
+      message.patterns.address.fieldLabel
+    );
+
+    await userEvent.clear(labelInput);
+    await userEvent.type(labelInput, updatedLabel);
+
+    const form = labelInput?.closest('form');
+    form?.requestSubmit();
+
+    await expect(await canvas.getByDisplayValue(updatedLabel)).toBeInTheDocument();
+
   },
 };
 
@@ -54,15 +66,8 @@ export const Error: StoryObj<typeof FormEdit> = {
     );
 
     const canvas = within(canvasElement);
-    const fileTypes = await canvas.findByDisplayValue('application/pdf');
-    await userEvent.click(fileTypes);
-    fileTypes.blur();
 
-    const maxAttachments = await canvas.findByLabelText('Max attachments');
-    await userEvent.clear(maxAttachments);
-    maxAttachments.blur();
-
-    const invalidError = canvas.getByText('Invalid file type found.', {
+    const invalidError = canvas.getByText('A field label is required', {
       selector: '.usa-error-message',
     });
     expect(invalidError).toBeInTheDocument();

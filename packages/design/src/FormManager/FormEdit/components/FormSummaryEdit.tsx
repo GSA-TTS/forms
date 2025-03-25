@@ -10,7 +10,7 @@ import { PatternEditComponent } from '../types.js';
 
 import { PatternEditForm } from './common/PatternEditForm.js';
 import { usePatternEditFormContext } from './common/hooks.js';
-import { PatternEditActions } from './common/PatternEditActions.js';
+import styles from '../formEditStyles.module.css';
 
 const FormSummaryEdit: PatternEditComponent<FormSummaryProps> = ({
   context,
@@ -42,11 +42,11 @@ const EditComponent = ({ pattern }: { pattern: Pattern }) => {
 
   return (
     <div className="grid-row grid-gap-1">
-      <div className="desktop:grid-col-6 mobile:grid-col-12">
+      <div className="grid-col-12">
         <label
           className={classNames('usa-label', {
             'usa-label--error': title.error,
-          })}
+          }, `${styles.patternChoiceFieldWrapper}`)}
           htmlFor={fieldId('title')}
         >
           Title
@@ -57,7 +57,7 @@ const EditComponent = ({ pattern }: { pattern: Pattern }) => {
           ) : null}
           <input
             id={fieldId('title')}
-            className="usa-input bg-primary-lighter text-bold"
+            className={`usa-input bg-primary-lighter text-bold ${styles.patternChoiceFieldWrapper}`}
             {...register('title')}
             defaultValue={pattern.data.title}
             type="text"
@@ -65,11 +65,11 @@ const EditComponent = ({ pattern }: { pattern: Pattern }) => {
           ></input>
         </label>
       </div>
-      <div className="desktop:grid-col-6 mobile:grid-col-12">
+      <div className="grid-col-12">
         <label
           className={classNames('usa-label', {
             'usa-input--error': description.error,
-          })}
+          }, `${styles.patternChoiceFieldWrapper}`)}
           htmlFor={fieldId('description')}
         >
           Description
@@ -80,14 +80,11 @@ const EditComponent = ({ pattern }: { pattern: Pattern }) => {
           ) : null}
           <textarea
             id={fieldId('description')}
-            className="usa-textarea bg-primary-lighter text-bold"
+            className={`usa-textarea bg-primary-lighter text-bold ${styles.patternChoiceFieldWrapper} ${styles.formDescription}`}
             {...register('description')}
             defaultValue={pattern.data.description}
           ></textarea>
         </label>
-      </div>
-      <div className="grid-col-12">
-        <PatternEditActions />
       </div>
     </div>
   );

@@ -139,7 +139,7 @@ const EditComponent = ({
           })}
           htmlFor={fieldId('legend')}
         >
-          Legend Text Element
+          Question text
           {legend.error ? (
             <span className="usa-error-message" role="alert">
               {legend.error.message}
@@ -149,7 +149,7 @@ const EditComponent = ({
         <input
           className={classNames('usa-input bg-primary-lighter text-bold', {
             'usa-input--error': legend.error,
-          })}
+          }, `${styles.patternChoiceFieldWrapper}`)}
           id={fieldId('legend')}
           defaultValue={pattern.data.legend}
           {...register('legend')}
