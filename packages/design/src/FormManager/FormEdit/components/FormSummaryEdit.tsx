@@ -61,7 +61,7 @@ const EditComponent = ({ pattern }: { pattern: Pattern }) => {
           ) : null}
           <input
             id={fieldId('title')}
-            className={`usa-input bg-primary-lighter text-bold ${styles.patternChoiceFieldWrapper}`}
+            className={`usa-input bg-primary-lighter ${styles.patternChoiceFieldWrapper}`}
             {...register('title')}
             defaultValue={pattern.data.title}
             type="text"
@@ -88,7 +88,7 @@ const EditComponent = ({ pattern }: { pattern: Pattern }) => {
           ) : null}
           <textarea
             id={fieldId('description')}
-            className={`usa-textarea bg-primary-lighter text-bold ${styles.patternChoiceFieldWrapper} ${styles.formDescription}`}
+            className={`usa-textarea bg-primary-lighter ${styles.patternChoiceFieldWrapper} ${styles.formDescription}`}
             {...register('description')}
             defaultValue={pattern.data.description}
           ></textarea>

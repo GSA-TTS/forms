@@ -35,7 +35,6 @@ const icons: Record<string, string | any> = {
   'template-icon.svg': templateIcon,
   'add-element-icon.svg': '#add_circle',
   'add-arrow-down-icon.svg': '#arrow_drop_down',
-  // 'package-download-icon.svg': '#file_download',
 };
 
 const getIconPath = (iconPath: string): string => {
