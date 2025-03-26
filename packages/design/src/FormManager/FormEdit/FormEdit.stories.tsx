@@ -56,15 +56,22 @@ export const FormEditAddPattern: StoryObj<typeof FormEdit> = {
     // Get the initial count of inputs
     const initialCount = (await canvas.findAllByRole('textbox')).length;
 
-    const select = canvas.getAllByText('Add element');
-    await userEvent.click(canvas.getByText('Pattern 1'));
-    //await userEvent.selectOptions(select, 'Text input');
+    const addElementMenuButton = canvas.getByRole('button', {
+      name: /Add element/,
+    });
+    await userEvent.click(addElementMenuButton);
 
-    await Promise.all(
-      select.map(async element => {
-        return await userEvent.click(element);
-      })
-    );
+    // Add a new pattern
+    const shortAnswer = canvas.getByRole('button', {
+      name: /Short answer/,
+    });
+    await userEvent.click(shortAnswer);
+
+    const saveButton = canvas.getByRole('button', {
+      name: /Save/,
+    });
+
+    await userEvent.click(saveButton);
 
     const finalCount = (await canvas.findAllByRole('textbox')).length;
     await expect(finalCount).toBeGreaterThan(initialCount);
@@ -110,7 +117,10 @@ export const FormEditReorderPattern: StoryObj<typeof FormEdit> = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const grabber = canvas.getAllByRole('button')[2];
+    const handle = await canvas.findAllByRole('button', {
+      name: /Move this item/,
+    });
+    const grabber = handle[1];
 
     // Enter reordering mode with the spacebar
     await userEvent.type(grabber, ' ');
