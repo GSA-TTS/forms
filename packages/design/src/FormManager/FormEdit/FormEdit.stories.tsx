@@ -117,11 +117,11 @@ export const FormEditReorderPattern: StoryObj<typeof FormEdit> = {
 
     // Press the arrow down, to move the first pattern to the second position
     await userEvent.type(grabber, '[ArrowDown]');
-    await new Promise(r => setTimeout(r, 1000));
+    await new Promise(r => setTimeout(r, 2000));
 
     // Press the spacebar to exit reordering mode
     await userEvent.type(grabber, ' ');
-    await new Promise(r => setTimeout(r, 1000));
+    await new Promise(r => setTimeout(r, 2000));
 
     // Pattern 1 should be after pattern 2 in the document
     const pattern1 = canvas.getByText('Pattern 1');
