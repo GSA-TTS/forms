@@ -35,7 +35,7 @@ export const Basic: StoryObj<typeof FormEdit> = {
     await testUpdateFormFieldOnSubmitByElement(
       canvasElement,
       await canvas.findByText('Question set pattern description'),
-      'Legend Text Element',
+      'Question set label',
       'Updated question set pattern'
     );
   },
@@ -47,7 +47,7 @@ export const Error: StoryObj<typeof FormEdit> = {
     await testEmptyFormLabelErrorByElement(
       canvasElement,
       await canvas.findByText('Question set pattern description'),
-      'Legend Text Element',
+      'Question set label',
       message.patterns.fieldset.errorTextMustContainChar
     );
   },

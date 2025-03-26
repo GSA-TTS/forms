@@ -68,7 +68,7 @@ const EditComponent = ({ patternId }: { patternId: PatternId }) => {
             </span>
           ) : null}
           <input
-            className={classNames('usa-input bg-primary-lighter text-bold', {
+            className={classNames('usa-input bg-primary-lighter', {
               'usa-input--error': label.error,
             })}
             id={fieldId('label')}
@@ -93,7 +93,7 @@ const EditComponent = ({ patternId }: { patternId: PatternId }) => {
           ) : null}
           {message.patterns.input.defaultFieldValue}
           <input
-            className="usa-input bg-primary-lighter text-bold"
+            className="usa-input bg-primary-lighter"
             id={fieldId('initial')}
             type="text"
             defaultValue={pattern.data.initial}
@@ -115,7 +115,7 @@ const EditComponent = ({ patternId }: { patternId: PatternId }) => {
           ) : null}
           {message.patterns.input.maxLength}
           <input
-            className="usa-input bg-primary-lighter text-bold"
+            className="usa-input bg-primary-lighter"
             id={fieldId('maxLength')}
             {...maxLengthAttributes}
             type="text"

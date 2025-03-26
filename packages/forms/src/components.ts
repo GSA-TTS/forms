@@ -99,6 +99,7 @@ export type FieldsetProps = PatternProps<{
   legend?: string;
   subHeading?: string;
   error?: FormError;
+  hint?: string;
 }>;
 
 export type ZipcodeProps = PatternProps<{
@@ -248,10 +249,12 @@ export type GenderIdProps = PatternProps<{
 export type RepeaterProps = PatternProps<{
   type: 'repeater';
   legend?: string;
+  hint?: string;
   showControls?: boolean;
   subHeading?: string;
   error?: FormError;
   value?: unknown;
+  addButtonLabel?: string;
 }>;
 
 export type SequenceProps = PatternProps<{

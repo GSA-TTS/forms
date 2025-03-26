@@ -24,8 +24,6 @@ export const repeaterAddRowHandler: SubmitHandler<RepeaterPattern> = async (
     {} as Record<string, any>
   );
 
-  console.log('New Row Data:', initialRepeaterRowData);
-
   // If this is the first add (repeaterPatternData is empty), add two rows
   // Otherwise add just one row
   const rowsToAdd = repeaterPatternData.length === 0 ? 2 : 1;

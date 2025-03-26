@@ -63,7 +63,7 @@ const EditComponent = ({ pattern }: { pattern: SelectDropdownPattern }) => {
             </span>
           ) : null}
           <input
-            className={`usa-input ${styles.patternChoiceFieldWrapper}`}
+            className={`usa-input bg-primary-lighter ${styles.patternChoiceFieldWrapper}`}
             id={fieldId('label')}
             defaultValue={pattern.data.label}
             {...register('label')}
@@ -91,7 +91,7 @@ const EditComponent = ({ pattern }: { pattern: SelectDropdownPattern }) => {
             </span>
           ) : null}
           <input
-            className={`usa-input ${styles.patternChoiceFieldWrapper}`}
+            className={`usa-input bg-primary-lighter ${styles.patternChoiceFieldWrapper}`}
             id={fieldId('hint')}
             defaultValue={pattern.data.hint}
             {...register('hint')}
@@ -130,7 +130,7 @@ const EditComponent = ({ pattern }: { pattern: SelectDropdownPattern }) => {
                   className={`usa-radio__label ${styles.optionCircle}`}
                 ></label>
                 <input
-                  className="usa-input"
+                  className="usa-input bg-primary-lighter"
                   id={fieldId(`options.${index}.label`)}
                   {...register(`options.${index}.label`)}
                   defaultValue={option.label}

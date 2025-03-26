@@ -21,7 +21,7 @@ describe('AddressPattern tests', () => {
         mailingUrbanizationCode: 'URB123',
       };
 
-      const schema = createAddressSchema({ required: true });
+      const schema = createAddressSchema({ legend: 'Default', required: true });
       expect(schema.safeParse(validInput).success).toBe(true);
     });
 
@@ -37,7 +37,7 @@ describe('AddressPattern tests', () => {
         mailingZipCode: '',
       };
 
-      const schema = createAddressSchema({ required: true });
+      const schema = createAddressSchema({ legend: 'Default', required: true });
       expect(schema.safeParse(invalidInput).success).toBe(false);
     });
   });

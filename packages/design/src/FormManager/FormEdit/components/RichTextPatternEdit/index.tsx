@@ -245,7 +245,7 @@ const EditComponent = ({ patternId }: { patternId: PatternId }) => {
           <MenuBar editor={editor} />
           <EditorContent
             editor={editor}
-            className={`padding-2 ${styles.richTextEditorBody}`}
+            className={`padding-2 bg-primary-lighter ${styles.richTextEditorBody}`}
             aria-label="Edit and format this text"
             spellCheck="false"
             role="textbox"

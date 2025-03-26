@@ -61,8 +61,10 @@ export const createPrompt: CreatePrompt<RepeaterPattern> = (
       _patternId: pattern.id,
       type: 'repeater',
       legend: pattern.data.legend,
+      hint: pattern.data.hint,
       value: sessionValues,
       error: sessionError,
+      addButtonLabel: pattern.data.addButtonLabel,
     } satisfies RepeaterProps,
     children,
   };

@@ -39,7 +39,8 @@ const baseAddressSchema = z.object({
   mailingStreetAddress: z
     .string()
     .min(1, { message: 'Street address is required' })
-    .max(128, { message: 'Street address must be less than 128 characters' }),
+    .max(128, { message: 'Street address must be less than 128 characters' })
+    .optional(),
   mailingStreetAddress2: z
     .string()
     .max(128, {
@@ -49,13 +50,16 @@ const baseAddressSchema = z.object({
   mailingCity: z
     .string()
     .min(1, { message: 'City is required' })
-    .max(64, { message: 'City must be less than 64 characters' }),
+    .max(64, { message: 'City must be less than 64 characters' })
+    .optional(),
   mailingStateTerritoryOrMilitaryPost: z
     .string()
-    .min(1, { message: 'State, territory, or military post is required' }),
+    .min(1, { message: 'State, territory, or military post is required' })
+    .optional(),
   mailingZipCode: z
     .string()
-    .max(10, { message: 'ZIP code must be less than 10 characters' }),
+    .max(10, { message: 'ZIP code must be less than 10 characters' })
+    .optional(),
   mailingUrbanizationCode: z
     .string()
     .max(128, { message: 'Urbanization code must be less than 128 characters' })
@@ -67,24 +71,32 @@ const baseAddressSchema = z.object({
 
 export type AddressPatternOutput = z.infer<typeof baseAddressSchema>;
 
-export const createAddressSchema = (data: { required: boolean }) => {
+interface AddressSchemaData {
+  legend: string;
+  required: boolean;
+  addMailingAddress?: boolean;
+}
+
+export const createAddressSchema = (data: AddressSchemaData) => {
   const schema = baseAddressSchema.superRefine((fields, ctx) => {
-    const requiredPhysicalFields = [
+    const requiredPhysicalFields: (keyof typeof fields)[] = [
       'physicalStreetAddress',
       'physicalCity',
       'physicalStateTerritoryOrMilitaryPost',
-    ] as const;
+    ];
 
-    const requiredMailingFields = [
+    const requiredMailingFields: (keyof typeof fields)[] = [
       'mailingStreetAddress',
       'mailingCity',
       'mailingStateTerritoryOrMilitaryPost',
-    ] as const;
+    ];
 
     const hasPhysicalError = requiredPhysicalFields.some(
       field => !fields[field]
     );
-    const hasMailingError = requiredMailingFields.some(field => !fields[field]);
+    const hasMailingError = data.addMailingAddress
+      ? requiredMailingFields.some(field => !fields[field])
+      : false;
 
     if (hasPhysicalError) {
       ctx.addIssue({

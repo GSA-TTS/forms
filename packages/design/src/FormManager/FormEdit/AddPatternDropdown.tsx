@@ -35,7 +35,6 @@ const icons: Record<string, string | any> = {
   'template-icon.svg': templateIcon,
   'add-element-icon.svg': '#add_circle',
   'add-arrow-down-icon.svg': '#arrow_drop_down',
-  'package-download-icon.svg': '#file_download',
 };
 
 const getIconPath = (iconPath: string): string => {
@@ -137,7 +136,6 @@ const sidebarPatterns: DropdownPattern[] = [
   ],
   ['rich-text', defaultFormConfig.patterns['rich-text'], 'Other'],
   ['attachment', defaultFormConfig.patterns['attachment'], 'Other'],
-  ['package-download', defaultFormConfig.patterns['package-download'], 'Other'],
 ] as const;
 
 export const compoundFieldChildPatterns: DropdownPattern[] =
@@ -199,9 +197,7 @@ export const CompoundAddPatternButton = ({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div
-      className={classNames(styles.dottedLine, 'margin-top-2 cursor-default')}
-    >
+    <div className={classNames('margin-top-2 cursor-default')}>
       <AddPatternDropdown
         availablePatterns={compoundFieldChildPatterns}
         closeDropdown={() => setIsOpen(false)}
@@ -209,23 +205,11 @@ export const CompoundAddPatternButton = ({
         patternSelected={patternSelected}
       >
         <button
-          className={classNames(
-            'bg-white text-base padding-0 border-0 cursor-pointer'
-          )}
+          className={classNames('usa-button usa-button--unstyled')}
           onClick={() => setIsOpen(!isOpen)}
         >
-          <svg
-            className="usa-icon text-base"
-            width="24"
-            height="24"
-            aria-hidden="true"
-            focusable="false"
-            role="img"
-          >
-            <use xlinkHref={getIconPath('add-element-icon.svg')}></use>
-          </svg>{' '}
           <span className="display-inline-block text-ttop tablet:width-auto text-center">
-            <span className="display-inline-block text-ttop margin-right-1">
+            <span className="display-inline-block text-ttop margin-right-1 text-underline">
               {title}
             </span>
           </span>

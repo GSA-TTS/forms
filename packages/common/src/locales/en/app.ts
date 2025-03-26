@@ -17,6 +17,7 @@ export const en = {
     attachment: {
       ...defaults,
       displayName: 'Attachment',
+      fieldLabel: 'Question text',
       maxAttachmentsLabel: 'Max attachments',
       allowedFileTypesLabel: 'Allowable file types',
       errorTextMustContainChar: 'String must contain at least 1 character(s)',
@@ -30,6 +31,7 @@ export const en = {
     fieldset: {
       ...defaults,
       displayName: 'Question set',
+      hintLabel: 'Hint Text (optional)',
       errorTextMustContainChar: 'String must contain at least 1 character(s)',
     },
     input: {
@@ -58,8 +60,8 @@ export const en = {
       errorTextMustContainChar: 'String must contain at least 1 character(s)',
     },
     richText: {
-      fieldLabel: 'Rich text',
-      displayName: 'Rich text',
+      fieldLabel: 'Page text',
+      displayName: 'Page text',
       errorTextMustContainChar: 'String must contain at least 1 character(s)',
     },
     radioGroup: {
@@ -139,6 +141,7 @@ export const en = {
     repeater: {
       ...defaults,
       displayName: 'Repeatable Group',
+      hintLabel: 'Hint Text (optional)',
       errorTextMustContainChar: 'String must contain at least 1 character(s)',
     },
   },

@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import classNames from 'classnames';
 import React from 'react';
 
 import { type DateOfBirthProps } from '@gsa-tts/forms-core';
@@ -46,9 +46,13 @@ const EditComponent = ({ pattern }: { pattern: DateOfBirthPattern }) => {
     <div className="grid-row grid-gap">
       <div className="grid-col-12 margin-bottom-2">
         <label
-          className={classnames('usa-label', {
-            'usa-label--error': label.error,
-          })}
+          className={classNames(
+            'usa-label',
+            {
+              'usa-label--error': label.error,
+            },
+            `${styles.patternChoiceFieldWrapper}`
+          )}
         >
           {message.patterns.dateOfBirth.fieldLabel}
           {label.error ? (
@@ -57,7 +61,13 @@ const EditComponent = ({ pattern }: { pattern: DateOfBirthPattern }) => {
             </span>
           ) : null}
           <input
-            className="usa-input"
+            className={classNames(
+              'usa-input bg-primary-lighter',
+              {
+                'usa-input--error': label.error,
+              },
+              `${styles.patternChoiceFieldWrapper}`
+            )}
             id={fieldId('label')}
             defaultValue={pattern.data.label}
             {...register('label')}
@@ -68,9 +78,10 @@ const EditComponent = ({ pattern }: { pattern: DateOfBirthPattern }) => {
       </div>
       <div className="grid-col-12 margin-bottom-2">
         <label
-          className={classnames('usa-label', {
-            'usa-label--error': hint.error,
-          })}
+          className={classNames(
+            'usa-label',
+            `${styles.patternChoiceFieldWrapper}`
+          )}
         >
           <span className={`${styles.secondaryColor}`}>
             {message.patterns.dateOfBirth.hintLabel}
@@ -81,12 +92,14 @@ const EditComponent = ({ pattern }: { pattern: DateOfBirthPattern }) => {
             </span>
           ) : null}
           <input
-            className="usa-input"
+            className={classNames(
+              'usa-input bg-primary-lighter',
+              `${styles.patternChoiceFieldWrapper}`
+            )}
             id={fieldId('hint')}
             defaultValue={pattern.data.hint}
             {...register('hint')}
             type="text"
-            autoFocus
           />
         </label>
       </div>
