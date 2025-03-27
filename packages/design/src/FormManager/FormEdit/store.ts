@@ -78,7 +78,7 @@ export const createFormEditSlice =
         state.session.form
       );
       const page = getSessionPage(state.session);
-      const newPattern = builder.addDefaultPatternToPage(patternType, page);
+      const newPattern = builder.addPatternToPage(patternType, page);
 
       set({
         session: mergeSession(state.session, { form: builder.form }),

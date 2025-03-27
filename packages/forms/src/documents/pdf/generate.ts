@@ -40,11 +40,7 @@ export const fillPDF = async (
   const form = pdfDoc.getForm();
   try {
     Object.entries(fieldData).forEach(([name, value]) => {
-      try {
-        setFormFieldData(form, value.type, name, value.value);
-      } catch (error: any) {
-        console.error(`error setting PDF field "${name}": "${error.message}"`);
-      }
+      setFormFieldData(form, value.type, name, value.value);
     });
   } catch (error: any) {
     const fieldDataNames = Object.keys(fieldData); // names we got from API
@@ -96,9 +92,6 @@ const setFormFieldData = (
   fieldName: string,
   fieldValue: any
 ) => {
-  if (fieldValue === undefined) {
-    return;
-  }
   if (fieldType === 'TextField') {
     const field = form.getTextField(fieldName);
     field.setText(fieldValue);

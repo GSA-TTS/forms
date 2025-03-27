@@ -5,7 +5,7 @@ export class PackageDownload extends PatternBuilder<PackageDownloadPattern> {
   toPattern(): PackageDownloadPattern {
     return {
       id: this.id,
-      type: 'package-download',
+      type: 'page-set',
       data: this.data,
     };
   }

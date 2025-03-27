@@ -5,6 +5,7 @@ import { EditorContent, useEditor } from '@tiptap/react';
 import { Editor } from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';
 
+import { enLocale as message } from '@gsa-tts/forms-common';
 import {
   type PatternId,
   type PatternMap,
@@ -75,6 +76,7 @@ const RichTextPatternEdit: PatternEditComponent<RichTextProps> = ({
         ></PatternEditForm>
       ) : (
         <div className="padding-left-3 padding-bottom-3 padding-right-3">
+          <p>{message.patterns.richText.displayName}</p>
           <RichText context={context} {...previewProps} />
         </div>
       )}

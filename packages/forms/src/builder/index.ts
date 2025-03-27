@@ -26,8 +26,6 @@ import { type PageSetPattern } from '../patterns/page-set/config.js';
 import type { Blueprint, FormSummary } from '../types.js';
 import type { ParsedPdf } from '../documents/pdf/parsing-api.js';
 import { type RepeaterPattern } from '../patterns/repeater/index.js';
-import type { PagePattern } from '../patterns/index.js';
-import { Page } from '../patterns/page/builder.js';
 
 /**
  * Constructs and manipulates a Blueprint object for forms. A Blueprint
@@ -66,24 +64,21 @@ export class BlueprintBuilder {
     this.bp = updatedForm;
   }
 
-  addPage(page?: PagePattern): PagePattern {
-    const newPage = page || createDefaultPattern(this.config, 'page');
+  addPage() {
+    const newPage = createDefaultPattern(this.config, 'page');
     this.bp = addPageToPageSet(this.form, newPage);
     return newPage;
   }
 
-  addPatternToPage(pattern: Pattern, pageNum: number = 0) {
+  addPatternToPage(patternType: string, pageNum: number = 0) {
+    const pattern = createDefaultPattern(this.config, patternType);
     const root = this.form.patterns[this.form.root] as PageSetPattern;
     if (root.type !== 'page-set') {
       throw new Error('expected root to be a page-set');
     }
     const pagePatternId = root.data.pages[pageNum];
     this.bp = addPatternToPage(this.form, pagePatternId, pattern);
-  }
 
-  addDefaultPatternToPage(patternType: string, pageNum: number = 0) {
-    const pattern = createDefaultPattern(this.config, patternType);
-    this.addPatternToPage(pattern, pageNum);
     return pattern;
   }
 

@@ -46,21 +46,6 @@ export const PageMenu = ({ pages }: PageMenuProps) => {
             >
               {page.title}
             </a>
-            {/*
-            <ul className="usa-sidenav__sublist">
-              <li className="usa-sidenav__item">
-                <a href="javascript:void(0);">Child link</a>
-              </li>
-              <li className="usa-sidenav__item">
-                <a href="javascript:void(0);">Child link</a>
-              </li>
-              <li className="usa-sidenav__item">
-                <a href="javascript:void(0);" className="usa-current">
-                  Child link
-                </a>
-              </li>
-            </ul>
-            */}
           </li>
         ))}
       </ul>

@@ -334,7 +334,7 @@ export default function FormManager(props: FormManagerProps) {
                         </ul>
                         <p>
                           <a
-                            href={AppRoutes.MyForms.getUrl()}
+                            href={AppRoutes.Preview.getUrl(formId)}
                             className="usa-button usa-button--big margin-top-3"
                           >
                             Publish

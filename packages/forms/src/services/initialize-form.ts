@@ -6,8 +6,6 @@ import { BlueprintBuilder } from '../builder/index.js';
 import { type FormServiceContext } from '../context/index.js';
 import type { FormSummary } from '../types.js';
 import { base64ToUint8Array } from '../util/base64.js';
-import { Page } from '../patterns/page/builder.js';
-import { PackageDownload } from '../patterns/package-download/builder.js';
 
 type InitializeFormError = {
   status: number;
@@ -114,21 +112,6 @@ export const initializeForm: InitializeForm = async (ctx, opts) => {
   if (summary) {
     builder.setFormSummary(summary);
   }
-
-  // Add confirmation page with PDF download link
-  builder.addPage(
-    new Page({
-      title: 'Confirmation',
-      patterns: [],
-    }).toPattern()
-  );
-  const lastPage = builder.bp.patterns[builder.bp.root].data.pages.length - 1;
-  builder.addPatternToPage(
-    new PackageDownload({
-      text: 'Download a copy of your form for your own records.',
-    }).toPattern(),
-    lastPage
-  );
 
   const result = await ctx.repository.addForm(builder.form);
   if (!result.success) {

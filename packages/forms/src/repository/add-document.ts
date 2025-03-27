@@ -22,6 +22,7 @@ export type AddDocument = (
 export const addDocument: AddDocument = async (ctx, document) => {
   const uuid = crypto.randomUUID();
   const db = await ctx.db.getKysely();
+
   return await db
     .insertInto('form_documents')
     .values({

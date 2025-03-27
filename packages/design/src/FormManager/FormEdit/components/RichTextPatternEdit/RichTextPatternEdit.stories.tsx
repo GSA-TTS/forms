@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-//import { expect, userEvent } from '@storybook/test';
-//import { within } from '@testing-library/react';
+import { expect, userEvent } from '@storybook/test';
+import { within } from '@testing-library/react';
 
 import { type RichTextPattern } from '@gsa-tts/forms-core';
-//import { en as message } from '@gsa-tts/forms-common/src/locales/en/app.js';
+import { en as message } from '@gsa-tts/forms-common/src/locales/en/app.js';
 
 import { createPatternEditStoryMeta } from '../common/story-helper.js';
 import FormEdit from '../../index.js';
@@ -29,7 +29,6 @@ export default storyConfig;
 
 export const Basic: StoryObj<typeof FormEdit> = {};
 
-/*
 export const Formatting: StoryObj<typeof FormEdit> = {
   play: async ({ canvasElement }) => {
     userEvent.setup();
@@ -80,4 +79,3 @@ export const Formatting: StoryObj<typeof FormEdit> = {
     }
   },
 };
-*/
