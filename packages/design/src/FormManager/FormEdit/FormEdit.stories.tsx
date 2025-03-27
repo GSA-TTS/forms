@@ -62,15 +62,10 @@ export const FormEditAddPattern: StoryObj<typeof FormEdit> = {
     await userEvent.click(addElementMenuButton);
 
     // Add a new pattern
-    const shortAnswer = canvas.getByRole('button', {
-      name: /Short answer/,
-    });
+    const shortAnswer = canvas.getByRole('button', { name: /Short answer/ });
     await userEvent.click(shortAnswer);
 
-    const saveButton = canvas.getByRole('button', {
-      name: /Save/,
-    });
-
+    const saveButton = canvas.getByRole('button', { name: /Save/ });
     await userEvent.click(saveButton);
 
     const finalCount = (await canvas.findAllByRole('textbox')).length;
@@ -127,11 +122,11 @@ export const FormEditReorderPattern: StoryObj<typeof FormEdit> = {
 
     // Press the arrow down, to move the first pattern to the second position
     await userEvent.type(grabber, '[ArrowDown]');
-    await new Promise(r => setTimeout(r, 2000));
+    await new Promise(r => setTimeout(r, 5000));
 
     // Press the spacebar to exit reordering mode
     await userEvent.type(grabber, ' ');
-    await new Promise(r => setTimeout(r, 2000));
+    await new Promise(r => setTimeout(r, 5000));
 
     // Pattern 1 should be after pattern 2 in the document
     const pattern1 = canvas.getByText('Pattern 1');
