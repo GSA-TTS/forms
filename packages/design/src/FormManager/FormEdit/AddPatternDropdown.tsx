@@ -35,6 +35,7 @@ const icons: Record<string, string | any> = {
   'template-icon.svg': templateIcon,
   'add-element-icon.svg': '#add_circle',
   'add-arrow-down-icon.svg': '#arrow_drop_down',
+  'package-download-icon.svg': '#file_download',
 };
 
 const getIconPath = (iconPath: string): string => {
@@ -136,6 +137,7 @@ const sidebarPatterns: DropdownPattern[] = [
   ],
   ['rich-text', defaultFormConfig.patterns['rich-text'], 'Other'],
   ['attachment', defaultFormConfig.patterns['attachment'], 'Other'],
+  ['package-download', defaultFormConfig.patterns['package-download'], 'Other'],
 ] as const;
 
 export const compoundFieldChildPatterns: DropdownPattern[] =
