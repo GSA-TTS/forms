@@ -83,57 +83,50 @@ const editFieldLabel = async (
   // Give focus to the field matching `currentLabel`
   await userEvent.click(await canvas.findByLabelText(currentLabel));
 
-  // Enter new text for first field
   const input = canvas.getByLabelText('Field label');
-  const select = canvas.getAllByText('Add element');
-
   await userEvent.clear(input);
   await userEvent.type(input, updatedLabel);
-  //await userEvent.click(canvas.getByText('Add Element'));
-
-  await Promise.all(
-    select.map(async element => {
-      return await userEvent.click(element);
-    })
-  );
 
   await userEvent.click(canvas.getByText(/save and close/i));
 
-  waitFor(
-    async () => {
-      const newLabel = await canvas.getByLabelText(updatedLabel);
-      await expect(newLabel).toBeInTheDocument();
-    },
-    { interval: 5 }
-  );
+  // Wait for the updated label to appear
+  await waitFor(() => {
+    const newLabel = canvas.getByLabelText(updatedLabel);
+    expect(newLabel).toBeInTheDocument();
+  });
 };
 
 export const FormEditReorderPattern: StoryObj<typeof FormEdit> = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const handle = await canvas.findAllByRole('button', {
-      name: /Move this item/,
+    // Wait for the buttons to appear
+    const handle = await waitFor(async () => {
+      const buttons = await canvas.findAllByRole('button', {
+        name: 'Move this item',
+      });
+      expect(buttons).not.toHaveLength(0);
+      return buttons;
     });
+
     const grabber = handle[1];
 
     // Enter reordering mode with the spacebar
     await userEvent.type(grabber, ' ');
 
-    // Press the arrow down, to move the first pattern to the second position
+    // Press the arrow down to move the first pattern to the second position
     await userEvent.type(grabber, '[ArrowDown]');
-    await new Promise(r => setTimeout(r, 5000));
 
     // Press the spacebar to exit reordering mode
     await userEvent.type(grabber, ' ');
-    await new Promise(r => setTimeout(r, 5000));
 
-    // Pattern 1 should be after pattern 2 in the document
-    const pattern1 = canvas.getByText('Pattern 1');
-    const pattern2 = canvas.getByText('Pattern 2');
-
-    expect(pattern2.compareDocumentPosition(pattern1)).toBe(
-      Node.DOCUMENT_POSITION_FOLLOWING
-    );
+    // Wait for the DOM to update and verify the new order
+    await waitFor(() => {
+      const pattern1 = canvas.getByText('Pattern 1');
+      const pattern2 = canvas.getByText('Pattern 2');
+      expect(pattern2.compareDocumentPosition(pattern1)).toBe(
+        Node.DOCUMENT_POSITION_FOLLOWING
+      );
+    });
   },
 };
