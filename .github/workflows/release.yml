@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+    inputs:
+      playwright-version:
+        description: "Set the Playwright version"
+        default: "1.51.1"
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -28,6 +32,17 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      - name: Cache Playwright binaries
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ inputs.playwright_version }}
+
+      - name: Install Playwright
+        run: pnpm dlx playwright@${{ inputs.playwright_version }} install --with-deps
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
 
       - name: Build packages
         run: pnpm run build
