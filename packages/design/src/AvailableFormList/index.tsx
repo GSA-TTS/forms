@@ -32,7 +32,7 @@ export default function AvailableFormList({
   }, []);
   return (
     <>
-      <section className="padding-y-3 border-base-lighter border-y">
+      <section className="padding-y-3 desktop:margin-top-10 border-base-lighter border-y">
         <div className="grid-container">
           <div className="grid-row flex-justify-center">
             <div className="grid-col-12 tablet:grid-col-12 desktop:grid-col-12">
@@ -53,6 +53,9 @@ export default function AvailableFormList({
           <Link to={AppRoutes.GuidedFormCreation.path} className="usa-button">
             Create New
           </Link>
+        </p>
+        <p>
+          <DebugTools />
         </p>
       </div>
     </>
@@ -127,5 +130,20 @@ const FormList = ({
         )}
       </tbody>
     </table>
+  );
+};
+
+const DebugTools = () => {
+  return (
+    <button
+      className="usa-button"
+      onClick={() => {
+        console.warn('clearing localStorage...');
+        window.localStorage.clear();
+        window.location.reload();
+      }}
+    >
+      Delete all demo data (clear browser local storage)
+    </button>
   );
 };

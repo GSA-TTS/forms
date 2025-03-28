@@ -66,6 +66,12 @@ test('Drag-and-drop questions via mouse interaction', async ({ page }) => {
   await createNewForm(page);
   await addQuestions(page);
 
+  const element1BoxPreOrder = await page.locator('.usa-label', { hasText: 'Short answer label'}).first().boundingBox();
+  const element2BoxPreOrder = await page.locator('.usa-legend', { hasText: 'Multiple choice question label' }).first().boundingBox();
+
+  // Compare the vertical positions of the elements
+  expect(element1BoxPreOrder!.y).toBeLessThan(element2BoxPreOrder!.y);
+
   // Locate the handle for the first draggable item
   const handle = page.locator('[aria-describedby="DndDescribedBy-1"]').first();
   await handle.hover();
@@ -81,6 +87,12 @@ test('Drag-and-drop questions via mouse interaction', async ({ page }) => {
   await nextElement.hover();
 
   // Verify that the drag-and-drop action has completed
-  await expect(page.locator('.draggable-list-item-wrapper').nth(2)).toContainText('Short answer label');
-  await expect(page.locator('.draggable-list-item-wrapper').nth(1)).toContainText('Multiple choice question label');
+  const element1BoxPostOrder = await page.locator('.usa-legend', { hasText: 'Multiple choice question label' }).first().boundingBox();
+  const element2BoxPostOrder =  await page.locator('.usa-label', { hasText: 'Short answer label'}).first().boundingBox();
+
+  expect(element1BoxPostOrder).not.toBeNull();
+  expect(element2BoxPostOrder).not.toBeNull();
+  
+  await page.screenshot()
+  expect(element1BoxPostOrder!.y).toBeLessThan(element2BoxPostOrder!.y);
 });

@@ -145,7 +145,7 @@ describe('PDF form filler', () => {
     });
   });
 
-  it.fails('returns an error when provided a non-existent field', async () => {
+  it('returns an error when provided a non-existent field', async () => {
     const pdfBytes = await loadSamplePDF('dod_character.pdf');
 
     const result = (await fillPDF(pdfBytes, {

@@ -12,7 +12,7 @@ import { Input } from '../input/builder';
 import { loadSamplePDF } from '../../documents/__tests__/sample-data';
 
 describe('downloadPackageHandler', async () => {
-  it.fails('returns failure when form is not complete', async () => {
+  it('returns failure when form is not complete', async () => {
     const session: FormSession = {
       form: await createTestForm(),
       data: { errors: {}, values: {} },
