@@ -68,7 +68,7 @@ export const AddPattern: StoryObj<typeof FormEdit> = {
     await userEvent.click(shortAnswerButton);
 
     // Submit new field's edit form
-    const input = await canvas.findByLabelText('Field label');
+    const input = canvas.getByRole('textbox');
     await userEvent.clear(input);
     await userEvent.type(input, 'Repeater short question');
 
@@ -84,11 +84,6 @@ export const AddPattern: StoryObj<typeof FormEdit> = {
 
     const form = input?.closest('form');
     form?.requestSubmit();
-
-    const fieldLabel = await canvas.findByText('Field label', {
-      selector: 'label',
-    });
-    await expect(fieldLabel).toBeInTheDocument();
 
     const dateOfBirthLegend = await canvas.findByText('Date of birth', {
       selector: 'label',

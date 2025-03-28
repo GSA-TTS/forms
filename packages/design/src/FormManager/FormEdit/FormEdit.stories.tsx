@@ -83,7 +83,7 @@ const editFieldLabel = async (
   // Give focus to the field matching `currentLabel`
   await userEvent.click(await canvas.findByLabelText(currentLabel));
 
-  const input = canvas.getByLabelText('Field label');
+  const input = canvas.getByLabelText('Question text');
   await userEvent.clear(input);
   await userEvent.type(input, updatedLabel);
 

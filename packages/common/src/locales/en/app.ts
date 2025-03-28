@@ -37,14 +37,14 @@ export const en = {
     input: {
       ...defaults,
       displayName: 'Short answer',
-      maxLength: 'Maximum length',
+      fieldLabel: 'Question text',
+      hintLabel: 'Hint Text (optional)',
     },
     textarea: {
       ...defaults,
       displayName: 'Long answer',
-      maxLength: 'Maximum length',
+      fieldLabel: 'Question text',
       hintLabel: 'Hint Text (optional)',
-      hint: 'The more specific you can be, the better. Use the space below and/or attach additional pages.',
     },
     packageDownload: {
       ...defaults,
