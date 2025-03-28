@@ -16,7 +16,6 @@ const pattern: TextAreaPattern = {
   data: {
     label: message.patterns.textarea.displayName,
     required: false,
-    maxLength: 256,
     initial: 'Initial text',
   },
 };
@@ -47,6 +46,19 @@ export const Error: StoryObj<typeof FormEdit> = {
       message.patterns.textarea.displayName,
       message.patterns.textarea.fieldLabel,
       message.patterns.textarea.fieldLabelRequired
+    );
+  },
+};
+
+export const Hint: StoryObj<typeof FormEdit> = {
+  play: async ({ canvasElement }) => {
+    await testUpdateFormFieldOnSubmit(
+      canvasElement,
+      message.patterns.textarea.displayName,
+      message.patterns.textarea.fieldLabel,
+      'Updated textarea pattern',
+      message.patterns.textarea.hintLabel,
+      'Updated hint value'
     );
   },
 };
