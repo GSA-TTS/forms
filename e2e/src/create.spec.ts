@@ -13,7 +13,7 @@ const addQuestions = async (page: Page) => {
   
   await menuButton.click();
   await page.getByRole('button', { name: 'Short answer' }).click();
-  const fieldLabel = page.locator('.usa-label', { hasText: 'Field label' })
+  const fieldLabel = page.locator('.usa-label', { hasText: 'Question text' })
   await fieldLabel.fill('Short answer label');
 
   await menuButton.click();
