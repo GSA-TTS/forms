@@ -20,7 +20,7 @@ describe('parseForm', () => {
           data: {
             label: 'label',
             required: true,
-            maxLength: 100,
+            hint: '',
           },
         } satisfies InputPattern,
       },
@@ -95,7 +95,7 @@ describe('parseFormString', () => {
           data: {
             label: 'label',
             required: true,
-            maxLength: 100,
+            hint: '',
             initial: '',
           },
         } satisfies InputPattern,

@@ -203,7 +203,6 @@ export const createTestBlueprint = () => {
             label: 'Pattern 1',
             initial: '',
             required: true,
-            maxLength: 128,
           },
         } satisfies InputPattern,
         {
@@ -213,7 +212,6 @@ export const createTestBlueprint = () => {
             label: 'Pattern 2',
             initial: 'test',
             required: true,
-            maxLength: 128,
           },
         } satisfies InputPattern,
       ],
