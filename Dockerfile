@@ -13,7 +13,7 @@ COPY . /usr/src/app
 WORKDIR /usr/src/app
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 RUN pnpm build
-RUN pnpm --filter=$APP_DIR --prod deploy /app/$APP_DIR
+RUN pnpm --filter=forms-$APP_DIR --prod deploy /app/$APP_DIR
 
 FROM base AS app
 ARG APP_DIR
