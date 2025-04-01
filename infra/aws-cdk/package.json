@@ -26,7 +26,7 @@
     "@aws-cdk/aws-apprunner-alpha": "2.184.1-alpha.0",
     "@gsa-tts/forms-infra-core": "workspace:*",
     "aws-cdk": "2.1004.0",
-    "aws-cdk-lib": "2.184.1",
+    "aws-cdk-lib": "2.187.0",
     "change-case": "^5.4.4",
     "constructs": "^10.4.2"
   },
