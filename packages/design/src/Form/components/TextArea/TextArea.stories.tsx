@@ -35,7 +35,6 @@ export const Required: StoryObj<typeof TextArea> = {
     value: '',
     label: 'Please enter your comments',
     required: true,
-    maxLength: 500,
   },
 };
 
@@ -47,7 +46,6 @@ export const NotRequired: StoryObj<typeof TextArea> = {
     value: '',
     label: 'Please enter your comments',
     required: false,
-    maxLength: 500,
   },
 };
 
@@ -59,7 +57,6 @@ export const ErrorState: StoryObj<typeof TextArea> = {
     value: '',
     label: 'Please enter your comments',
     required: true,
-    maxLength: 500,
     error: {
       type: 'required',
       message: 'This field is required',
@@ -75,7 +72,6 @@ export const WithHint: StoryObj<typeof TextArea> = {
     value: '',
     label: 'Please enter your comments',
     required: false,
-    maxLength: 500,
     hint: 'This is a hint that provides additional context to the user.',
   },
 };

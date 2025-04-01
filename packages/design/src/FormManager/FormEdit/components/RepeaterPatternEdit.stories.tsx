@@ -35,7 +35,7 @@ export const Basic: StoryObj<typeof FormEdit> = {
     await testUpdateFormFieldOnSubmitByElement(
       canvasElement,
       await canvas.findByText('Repeater question set pattern description'),
-      'Legend Text Element',
+      'Question set label',
       'Updated repeater pattern'
     );
   },
@@ -47,7 +47,7 @@ export const Error: StoryObj<typeof FormEdit> = {
     await testEmptyFormLabelErrorByElement(
       canvasElement,
       await canvas.findByText('Repeater question set pattern description'),
-      'Legend Text Element',
+      'Question set label',
       message.patterns.repeater.errorTextMustContainChar
     );
   },
@@ -68,12 +68,12 @@ export const AddPattern: StoryObj<typeof FormEdit> = {
     await userEvent.click(shortAnswerButton);
 
     // Submit new field's edit form
-    const input = await canvas.findByLabelText('Field label');
+    const input = canvas.getByRole('textbox');
     await userEvent.clear(input);
     await userEvent.type(input, 'Repeater short question');
 
     const addQuestionToRepeaterButton = canvas.getByRole('button', {
-      name: /Add question to repeater set/,
+      name: /Add question to set/,
     });
     await userEvent.click(addQuestionToRepeaterButton);
 
@@ -84,11 +84,6 @@ export const AddPattern: StoryObj<typeof FormEdit> = {
 
     const form = input?.closest('form');
     form?.requestSubmit();
-
-    const fieldLabel = await canvas.findByText('Field label', {
-      selector: 'label',
-    });
-    await expect(fieldLabel).toBeInTheDocument();
 
     const dateOfBirthLegend = await canvas.findByText('Date of birth', {
       selector: 'label',

@@ -56,7 +56,7 @@ const CheckboxEditComponent = ({ pattern }: { pattern: CheckboxPattern }) => {
           </span>
         ) : null}
         <input
-          className="usa-input"
+          className="usa-input bg-primary-lighter"
           id={fieldId('label')}
           defaultValue={pattern.data.label}
           {...register('label')}

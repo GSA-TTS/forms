@@ -37,7 +37,7 @@ const RepeaterRow = ({
       {children.map((child, i) => (
         <React.Fragment key={i}>{child}</React.Fragment>
       ))}
-      {index !== fieldsLength - 1 && fieldsLength > 1 && (
+      {fieldsLength > 1 && (
         <button
           type="submit"
           name="action"
@@ -45,7 +45,7 @@ const RepeaterRow = ({
           className="usa-button usa-button--outline"
           onClick={handleDelete}
         >
-          Delete this item
+          Delete
         </button>
       )}
     </li>
@@ -154,20 +154,6 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
     [props._patternId]
   );
 
-  const handleDeleteLast = React.useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>) => {
-      const form = e.currentTarget.form;
-      if (form) {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'deleteIndex';
-        input.value = (fields.length - 1).toString();
-        form.appendChild(input);
-      }
-    },
-    [fields.length]
-  );
-
   const renderRows = useMemo(
     () =>
       fields.map((field, index) => (
@@ -197,6 +183,11 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
           {props.legend}
         </legend>
       )}
+      {props.hint && (
+        <div className="usa-hint" id={props._patternId}>
+          {props.hint}
+        </div>
+      )}
       {props.error && (
         <div className="usa-error-message" id={props._patternId} role="alert">
           {props.error.message}
@@ -212,17 +203,7 @@ const Repeater: PatternComponent<RepeaterProps> = props => {
               value={`action/repeater-add-row/${props._patternId}`}
               className="usa-button usa-button--outline"
             >
-              Add new item
-            </button>
-            <button
-              type="submit"
-              name="action"
-              value={`action/repeater-delete-row/${props._patternId}`}
-              className="usa-button usa-button--outline"
-              disabled={fields.length === 1}
-              onClick={handleDeleteLast}
-            >
-              Delete last item
+              {props.addButtonLabel || 'Add'}
             </button>
           </div>
         </>

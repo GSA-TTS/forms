@@ -10,10 +10,18 @@ const createNewForm = async (page: Page) => {
 
 const addQuestions = async (page: Page) => {
   const menuButton = page.getByRole('button', { name: 'Add element', exact: true });
+  
   await menuButton.click();
   await page.getByRole('button', { name: 'Short answer' }).click();
+  const fieldLabel = page.locator('.usa-label', { hasText: 'Question text' })
+  await fieldLabel.fill('Short answer label');
+
   await menuButton.click();
   await page.getByRole('button', { name: 'Multiple choice' }).click();
+  const fieldLabel2 = page.locator('.usa-label', { hasText: 'Question text' })
+  await fieldLabel2.fill('Multiple choice question label');
+
+  await page.getByRole('button', { name: 'Save' }).click();
 }
 
 test('Create form from scratch', async ({ page }) => {
@@ -37,39 +45,54 @@ test('Create form from scratch', async ({ page }) => {
 test('Add questions', async ({ page }) => {
   await createNewForm(page);
   await addQuestions(page);
+  
+  const element1 = page.locator('.usa-label', { hasText: 'Short answer label'});
+  const element2 = page.locator('.usa-legend', { hasText: 'Multiple choice question label' });
 
-  // Create locators for both elements
-  const fields = page.locator('.usa-label');
-  const element1 = fields.filter({ hasText: 'Field label' });
-  const element2 = fields.filter({ hasText: 'Question text' });
   expect(element1.first()).toBeTruthy();
   expect(element2.first()).toBeTruthy();
 
-  const htmlContent = await page.content();
+  const element1Box = await element1.first().boundingBox();
+  const element2Box = await element2.first().boundingBox();
 
-  const element1Index = htmlContent.indexOf((await element1.textContent() as string));
-  const element2Index = htmlContent.indexOf((await element2.textContent() as string));
-  expect(element1Index).toBeLessThan(element2Index);
+  expect(element1Box).not.toBeNull();
+  expect(element2Box).not.toBeNull();
 
+  // Compare the vertical positions of the elements
+  expect(element1Box!.y).toBeLessThan(element2Box!.y);
 });
 
 test('Drag-and-drop questions via mouse interaction', async ({ page }) => {
   await createNewForm(page);
   await addQuestions(page);
 
-  const handle = page.locator('[aria-describedby="DndDescribedBy-0"]').first();
+  const element1BoxPreOrder = await page.locator('.usa-label', { hasText: 'Short answer label'}).first().boundingBox();
+  const element2BoxPreOrder = await page.locator('.usa-legend', { hasText: 'Multiple choice question label' }).first().boundingBox();
+
+  // Compare the vertical positions of the elements
+  expect(element1BoxPreOrder!.y).toBeLessThan(element2BoxPreOrder!.y);
+
+  // Locate the handle for the first draggable item
+  const handle = page.locator('[aria-describedby="DndDescribedBy-1"]').first();
   await handle.hover();
   await page.mouse.down();
-  const nextElement = page.locator('.draggable-list-item-wrapper').nth(1);
-  await nextElement.hover();
+
+  // Locate the target position for the drag-and-drop action
+  const nextElement = page.locator('.draggable-list-item-wrapper').nth(2);
+  const nextElementBox = await nextElement.boundingBox();
+  if (nextElementBox) {
+    await page.mouse.move(nextElementBox.x + nextElementBox.width / 2, nextElementBox.y + nextElementBox.height / 2);
+  }
   await page.mouse.up();
+  await nextElement.hover();
 
-  // Initiating a reorder clones the element. We want to await the count to go back to 1 to
-  // signify the invocation of the drag event has completed and the update has rendered.
-  await expect(page.getByText('Field label')).toHaveCount(1, {
-    timeout: 10000
-  });
+  // Verify that the drag-and-drop action has completed
+  const element1BoxPostOrder = await page.locator('.usa-legend', { hasText: 'Multiple choice question label' }).first().boundingBox();
+  const element2BoxPostOrder =  await page.locator('.usa-label', { hasText: 'Short answer label'}).first().boundingBox();
 
-  await expect(page.locator('.draggable-list-item-wrapper').nth(1)).toContainText('Field label');
-
+  expect(element1BoxPostOrder).not.toBeNull();
+  expect(element2BoxPostOrder).not.toBeNull();
+  
+  await page.screenshot()
+  expect(element1BoxPostOrder!.y).toBeLessThan(element2BoxPostOrder!.y);
 });

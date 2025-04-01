@@ -58,7 +58,7 @@ const EditComponent = ({ pattern }: { pattern: GenderIdPattern }) => {
             </span>
           ) : null}
           <input
-            className="usa-input"
+            className="usa-input bg-primary-lighter"
             id={fieldId('label')}
             defaultValue={pattern.data.label}
             {...register('label')}
@@ -82,7 +82,7 @@ const EditComponent = ({ pattern }: { pattern: GenderIdPattern }) => {
             </span>
           ) : null}
           <input
-            className="usa-input"
+            className="usa-input bg-primary-lighter"
             id={fieldId('hint')}
             defaultValue={pattern.data.hint}
             {...register('hint')}
@@ -103,7 +103,7 @@ const EditComponent = ({ pattern }: { pattern: GenderIdPattern }) => {
             </span>
           ) : null}
           <input
-            className="usa-input"
+            className="usa-input bg-primary-lighter"
             id={fieldId('preferNotToAnswerText')}
             defaultValue={''}
             {...register('preferNotToAnswerText')}

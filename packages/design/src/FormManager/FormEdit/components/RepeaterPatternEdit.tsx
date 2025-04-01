@@ -16,6 +16,8 @@ import { PatternEditComponent } from '../types.js';
 import { PatternEditActions } from './common/PatternEditActions.js';
 import { PatternEditForm } from './common/PatternEditForm.js';
 import { usePatternEditFormContext } from './common/hooks.js';
+import { enLocale as message } from '@gsa-tts/forms-common';
+
 import styles from '../formEditStyles.module.css';
 import { renderEditPromptComponents } from '../../manager-common.js';
 import type { FormManagerContext } from '../../index.js';
@@ -59,6 +61,14 @@ const RepeaterPreview: PatternComponent<RepeaterProps> = props => {
             {props.legend}
           </legend>
         )}
+        {props.hint && (
+          <div
+            className="usa-hint padding-left-3 padding-right-3"
+            id={props._patternId}
+          >
+            {props.hint}
+          </div>
+        )}
         {renderEditPromptComponents(props.context, props.childComponents)}
         {pattern && pattern.data.patterns.length === 0 && (
           <div
@@ -99,7 +109,7 @@ const RepeaterPreview: PatternComponent<RepeaterProps> = props => {
           >
             <div className={classNames(styles.usaAlertBody, 'usa-alert__body')}>
               <CompoundAddPatternButton
-                title="Add question to repeater set"
+                title="Add question to set"
                 patternSelected={patternType =>
                   addPatternToCompoundField(patternType, props._patternId)
                 }
@@ -125,6 +135,9 @@ const EditComponent = ({
   const { fieldId, getFieldState, register } =
     usePatternEditFormContext<RepeaterPattern>(patternId);
   const legend = getFieldState('legend');
+  const hint = getFieldState('hint');
+  const addButtonLabel = getFieldState('addButtonLabel');
+
   return (
     <div className="grid-row">
       <div className="grid-col-12 margin-bottom-3 flex-align-self-end">
@@ -134,12 +147,16 @@ const EditComponent = ({
           defaultValue={pattern.data.patterns}
         ></input>
         <label
-          className={classNames('usa-label width-full maxw-full', {
-            'usa-label--error': legend.error,
-          })}
+          className={classNames(
+            'usa-label',
+            {
+              'usa-label--error': legend.error,
+            },
+            `${styles.patternChoiceFieldWrapper}`
+          )}
           htmlFor={fieldId('legend')}
         >
-          Legend Text Element
+          Question set label
           {legend.error ? (
             <span className="usa-error-message" role="alert">
               {legend.error.message}
@@ -147,15 +164,85 @@ const EditComponent = ({
           ) : null}
         </label>
         <input
-          className={classNames('usa-input bg-primary-lighter text-bold', {
-            'usa-input--error': legend.error,
-          })}
+          className={classNames(
+            'usa-input bg-primary-lighter',
+            {
+              'usa-input--error': legend.error,
+            },
+            `${styles.patternChoiceFieldWrapper}`
+          )}
           id={fieldId('legend')}
           defaultValue={pattern.data.legend}
           {...register('legend')}
           type="text"
           autoFocus
         ></input>
+      </div>
+      <div className="grid-col-12 margin-bottom-3 flex-align-self-end">
+        <label
+          className={classNames(
+            'usa-label',
+            {
+              'usa-label--error': addButtonLabel.error,
+            },
+            `${styles.patternChoiceFieldWrapper}`
+          )}
+          htmlFor={fieldId('addButtonLabel')}
+        >
+          Button to add to the set
+          {addButtonLabel.error ? (
+            <span className="usa-error-message" role="alert">
+              {addButtonLabel.error.message}
+            </span>
+          ) : null}
+        </label>
+        <input
+          className={classNames(
+            'usa-input bg-primary-lighter',
+            {
+              'usa-input--error': addButtonLabel.error,
+            },
+            `${styles.patternChoiceFieldWrapper}`
+          )}
+          id={fieldId('addButtonLabel')}
+          defaultValue={pattern.data.addButtonLabel}
+          {...register('addButtonLabel')}
+          type="text"
+        ></input>
+      </div>
+      <div className="grid-col-12 margin-bottom-2">
+        <label
+          className={classNames(
+            'usa-label',
+            {
+              'usa-label--error': hint.error,
+            },
+            `${styles.patternChoiceFieldWrapper}`
+          )}
+          htmlFor={fieldId('hint')}
+        >
+          <span className={`${styles.secondaryColor}`}>
+            {message.patterns.repeater.hintLabel}
+          </span>
+          {hint.error ? (
+            <span className="usa-error-message" role="alert">
+              {hint.error.message}
+            </span>
+          ) : null}
+          <textarea
+            className={classNames(
+              'usa-input bg-primary-lighter',
+              {
+                'usa-input--error': hint.error,
+              },
+              `${styles.patternChoiceFieldWrapper}`
+            )}
+            id={fieldId('hint')}
+            defaultValue={pattern.data.hint}
+            {...register('hint')}
+            style={{ resize: 'none', overflow: 'auto', height: '100px' }}
+          />
+        </label>
       </div>
       <Repeater type="repeater" _patternId={patternId} context={context} />
       <PatternEditActions />

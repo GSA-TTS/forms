@@ -7,6 +7,7 @@ export const fieldsetConfig: PatternConfig<FieldsetPattern> = {
   iconPath: 'list-icon.svg',
   initial: {
     legend: 'Default Heading',
+    hint: '',
     patterns: [],
   },
   parseConfigData,

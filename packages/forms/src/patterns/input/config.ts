@@ -9,9 +9,9 @@ export type InputPattern = Pattern<InputConfigSchema>;
 
 const configSchema = z.object({
   label: z.string().min(1, message.patterns.input.fieldLabelRequired),
+  hint: z.string().optional(),
   initial: z.string().optional(),
   required: z.boolean(),
-  maxLength: z.coerce.number(),
 });
 export type InputConfigSchema = z.infer<typeof configSchema>;
 

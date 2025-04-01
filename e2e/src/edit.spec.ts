@@ -45,7 +45,7 @@ class TestPage {
 
 const preparePageTitles = (items: any) => {
   return Object.values(items)
-    .filter(item => item.type === 'page')
+    .filter((item: any): item is { type: string; data: PageDataTest } => item.type === 'page')
     .map(item => (item.data as PageDataTest).title);
 };
 
@@ -105,7 +105,7 @@ test('Drag-and-drop pages via mouse interaction', async ({ context, page }) => {
   await testPage.setLocalStorage(key, obj);
   const pageTitles = preparePageTitles(obj.patterns);
 
-  await page.goto(`${BASE_URL}`);
+  await page.goto(`${BASE_URL}/`);
   await page.getByRole('link', { name: 'Edit' }).click();
   const buttonText = 'Move this item';
 

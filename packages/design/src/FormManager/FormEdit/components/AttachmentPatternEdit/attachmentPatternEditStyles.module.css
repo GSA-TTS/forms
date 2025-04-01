@@ -7,3 +7,7 @@ p.inlineFieldLabel,
 .attachmentInputSmall {
   max-width: 13ex;
 }
+
+.patternChoiceFieldWrapper {
+  max-width: 100%;
+}

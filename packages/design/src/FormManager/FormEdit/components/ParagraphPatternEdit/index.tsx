@@ -60,7 +60,7 @@ const EditComponent = ({ patternId }: { patternId: PatternId }) => {
         ) : null}
         <textarea
           id={fieldId('text')}
-          className="usa-textarea bg-primary-lighter text-bold"
+          className="usa-textarea bg-primary-lighter"
           style={{ height: 'unset' }}
           rows={4}
           {...register('text')}

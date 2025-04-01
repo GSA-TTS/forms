@@ -10,10 +10,10 @@ const configSchema = z.object({
 export type RichTextPattern = Pattern<z.infer<typeof configSchema>>;
 
 export const richTextConfig: PatternConfig<RichTextPattern> = {
-  displayName: 'Rich Text',
+  displayName: 'Page Text',
   iconPath: 'richtext-icon.svg',
   initial: {
-    text: 'Rich text...',
+    text: '',
   },
   parseConfigData: obj => safeZodParseFormErrors(configSchema, obj),
   getChildren() {

@@ -8,12 +8,16 @@ import { type PatternComponent } from '../../../Form/index.js';
 const TextInput: PatternComponent<TextInputProps> = ({
   inputId,
   label,
+  hint,
   required,
   error,
   value,
 }) => {
   const { register } = useFormContext();
   const id = inputId;
+  const errorId = `input-error-message-${inputId}`;
+  const hintId = `hint-${inputId}`;
+
   return (
     <fieldset className="usa-fieldset">
       <div
@@ -30,12 +34,13 @@ const TextInput: PatternComponent<TextInputProps> = ({
           {label}
           {required && <span className="required-indicator">*</span>}
         </label>
+        {hint && (
+          <div className="usa-hint" id={hintId}>
+            {hint}
+          </div>
+        )}
         {error && (
-          <div
-            className="usa-error-message"
-            id={`input-error-message-${id}`}
-            role="alert"
-          >
+          <div className="usa-error-message" id={errorId} role="alert">
             {error.message}
           </div>
         )}
@@ -47,7 +52,10 @@ const TextInput: PatternComponent<TextInputProps> = ({
           defaultValue={value}
           {...register(id || Math.random().toString())}
           type="text"
-          aria-describedby={`input-message-${id}`}
+          aria-describedby={
+            `${hint ? `${hintId}` : ''}${error ? ` ${errorId}` : ''}`.trim() ||
+            undefined
+          }
         />
       </div>
     </fieldset>
