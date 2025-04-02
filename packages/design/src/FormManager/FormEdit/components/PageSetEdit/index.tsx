@@ -1,18 +1,18 @@
+import classNames from 'classnames';
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { UniqueIdentifier } from '@dnd-kit/core';
 
 import { getPattern, type PageSetProps } from '@gsa-tts/forms-core';
 
 import { PatternEditComponent } from '../../types.js';
 
-import ActionBar from '../../../../Form/ActionBar/index.js';
-import classNames from 'classnames';
 import styles from '../../../../Form/components/PageSet/PageMenu/pageMenuStyles.module.css';
 import { DraggableList } from '../PreviewSequencePattern/DraggableList.js';
 import { useFormManagerStore } from '../../../store.js';
-import { useSearchParams } from 'react-router-dom';
-import { UniqueIdentifier } from '@dnd-kit/core';
 import { PageMenuProps } from '../../../../Form/components/PageSet/PageMenu/PageMenu.js';
 import { renderEditPromptComponents } from '../../../manager-common.js';
+import ActionBar from '../../../../Form/ActionBar/index.js';
 
 const PageSetEdit: PatternEditComponent<PageSetProps> = ({
   context,

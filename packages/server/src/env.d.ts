@@ -15,7 +15,7 @@ namespace App {
     ctx?: import('./config/context.ts').AppContext | null;
 
     // Auth types from Lucia
-    session: import('@atj/auth').Session | null;
-    user: import('@atj/auth').User | null;
+    session: import('@gsa-tts/auth').Session | null;
+    user: import('@gsa-tts/auth').User | null;
   }
 }

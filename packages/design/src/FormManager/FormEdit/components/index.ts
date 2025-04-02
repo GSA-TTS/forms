@@ -15,7 +15,7 @@ import GenderIdPatternEdit from './GenderIdPatternEdit/index.js';
 import NamePatternEdit from './NamePatternEdit/index.js';
 import PackageDownloadPatternEdit from './PackageDownloadPatternEdit.js';
 import PageSetEdit from './PageSetEdit/index.js';
-import { PageEdit } from './PageEdit.js';
+import { PageEdit } from './PageEdit/index.js';
 import ParagraphPatternEdit from './ParagraphPatternEdit/index.js';
 import { PatternPreviewSequence } from './PreviewSequencePattern/index.js';
 import PhoneNumberPatternEdit from './PhoneNumberPatternEdit/index.js';

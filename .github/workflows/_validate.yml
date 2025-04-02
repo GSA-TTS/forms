@@ -62,7 +62,7 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit != 'true'
 
       # While most of the test suite is self-contained, the tests for the demo
-      # servers require a prod build of @atj/server.
+      # servers require a prod build of @gsa-tts/forms-server.
       - name: Build
         run: pnpm build
 
@@ -70,10 +70,10 @@ jobs:
         run: mkdir -p output/build-artifacts
 
       - name: Spotlight app performance budget
-        run: pnpm --filter @atj/spotlight size:ci > output/build-artifacts/spotlight-size-output.txt
+        run: pnpm --filter @gsa-tts/forms-spotlight size:ci > output/build-artifacts/spotlight-size-output.txt
 
       - name: Design package performance budget
-        run: pnpm --filter @atj/design size:ci > output/build-artifacts/design-size-output.txt
+        run: pnpm --filter @gsa-tts/forms-design size:ci > output/build-artifacts/design-size-output.txt
 
       - name: Upload size:ci results
         uses: actions/upload-artifact@v4

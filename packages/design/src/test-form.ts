@@ -3,6 +3,7 @@ import {
   createFormSession,
   defaultFormConfig,
   type Blueprint,
+  type CheckboxPattern,
   type Pattern,
 } from '@gsa-tts/forms-core';
 import { createTestBrowserFormService } from '@gsa-tts/forms-core/context';
@@ -39,6 +40,7 @@ export const createOnePageTwoPatternTestForm = () => {
           data: {
             title: 'Page 1',
             patterns: ['element-1', 'element-2'],
+            rules: [],
           },
         } satisfies PagePattern,
         {
@@ -86,6 +88,7 @@ export const createTwoPageTwoPatternTestForm = () => {
           data: {
             title: 'First page',
             patterns: ['element-1', 'element-2'],
+            rules: [],
           },
         } satisfies PagePattern,
         {
@@ -94,6 +97,7 @@ export const createTwoPageTwoPatternTestForm = () => {
           data: {
             title: 'Second page',
             patterns: [],
+            rules: [],
           },
         } satisfies PagePattern,
         {
@@ -153,6 +157,81 @@ export const createTwoPatternTestForm = () => {
             required: true,
           },
         } satisfies InputPattern,
+      ],
+    }
+  );
+};
+
+export const createThreePageFormWithPageRules = () => {
+  return createForm(
+    {
+      title: 'Test form with page rules',
+      description: 'This form has three pages and page rules',
+    },
+    {
+      root: 'root',
+      patterns: [
+        {
+          type: 'page-set',
+          id: 'root',
+          data: {
+            pages: ['page-1', 'page-2', 'page-3'],
+          },
+        } satisfies PageSetPattern,
+        {
+          type: 'page',
+          id: 'page-1',
+          data: {
+            title: 'First page',
+            patterns: ['checkbox-1', 'checkbox-2'],
+            rules: [
+              {
+                patternId: 'checkbox-1',
+                condition: { value: 'on', operator: '=' },
+                next: 'page-2',
+              },
+              {
+                patternId: 'checkbox-1',
+                condition: { value: 'off', operator: '=' },
+                next: 'page-3',
+              },
+            ],
+          },
+        } satisfies PagePattern,
+        {
+          type: 'page',
+          id: 'page-2',
+          data: {
+            title: 'Second page',
+            patterns: [],
+            rules: [],
+          },
+        } satisfies PagePattern,
+        {
+          type: 'page',
+          id: 'page-3',
+          data: {
+            title: 'Third page',
+            patterns: [],
+            rules: [],
+          },
+        } satisfies PagePattern,
+        {
+          type: 'checkbox',
+          id: 'checkbox-1',
+          data: {
+            label: 'Pattern 1',
+            defaultChecked: false,
+          },
+        } satisfies CheckboxPattern,
+        {
+          type: 'checkbox',
+          id: 'checkbox-2',
+          data: {
+            label: 'Pattern 2',
+            defaultChecked: false,
+          },
+        } satisfies CheckboxPattern,
       ],
     }
   );

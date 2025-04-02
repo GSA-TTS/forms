@@ -194,6 +194,7 @@ export const createTestBlueprint = () => {
           data: {
             title: 'Page 1',
             patterns: ['element-1', 'element-2'],
+            rules: [],
           },
         } satisfies PagePattern,
         {

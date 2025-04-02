@@ -5,8 +5,8 @@ import { defaultFormConfig } from '../patterns/index.js';
 import { type FieldsetPattern } from '../patterns/fieldset/config.js';
 import { type FormSummaryPattern } from '../patterns/form-summary.js';
 import { type InputPattern } from '../patterns/input/config.js';
-import { type PagePattern } from '../patterns/page/config.js';
-import { type PageSetPattern } from '../patterns/page-set/config.js';
+import { type PagePattern } from '../patterns/pages/page/config.js';
+import { type PageSetPattern } from '../patterns/pages/page-set/config.js';
 import { type RadioGroupPattern } from '../patterns/radio-group.js';
 
 import { BlueprintBuilder } from './index.js';
@@ -61,6 +61,7 @@ describe('form builder', () => {
         data: {
           title: 'Page 1',
           patterns: ['element-2', 'element-1'],
+          rules: [],
         },
       } satisfies PagePattern,
       'page-2': {
@@ -69,6 +70,7 @@ describe('form builder', () => {
         data: {
           title: 'Page 2',
           patterns: ['element-3'],
+          rules: [],
         },
       } satisfies PagePattern,
       'element-1': {
@@ -123,6 +125,7 @@ describe('form builder', () => {
         data: {
           title: 'Page 1',
           patterns: ['element-2'],
+          rules: [],
         },
       } satisfies PagePattern,
       'page-2': {
@@ -131,6 +134,7 @@ describe('form builder', () => {
         data: {
           title: 'Page 2',
           patterns: ['element-1', 'element-3'],
+          rules: [],
         },
       } satisfies PagePattern,
       'element-1': {
@@ -190,6 +194,7 @@ describe('form builder', () => {
         data: {
           title: 'Page 1',
           patterns: ['element-2'],
+          rules: [],
         },
       } satisfies PagePattern,
       'page-2': {
@@ -198,6 +203,7 @@ describe('form builder', () => {
         data: {
           title: 'Page 2',
           patterns: ['element-3', 'element-1'],
+          rules: [],
         },
       } satisfies PagePattern,
       'element-1': {
@@ -259,6 +265,7 @@ describe('form builder', () => {
               'fieldset-1',
               'radio-group-1',
             ],
+            rules: [],
           },
         },
         'element-1': {
@@ -340,6 +347,7 @@ describe('form builder', () => {
               'fieldset-1',
               'radio-group-1',
             ],
+            rules: [],
           },
         },
         'element-1': {
@@ -424,6 +432,7 @@ describe('form builder', () => {
               newPattern.id,
               'radio-group-1',
             ],
+            rules: [],
           },
         },
         'element-1': {
@@ -504,6 +513,7 @@ describe('form builder', () => {
               'radio-group-1',
               newPattern.id,
             ],
+            rules: [],
           },
         },
         'element-1': {
@@ -580,6 +590,7 @@ describe('form builder', () => {
         data: {
           title: 'Page 1',
           patterns: ['element-1'],
+          rules: [],
         },
       } satisfies PagePattern,
       'element-1': {
@@ -617,6 +628,7 @@ export const createTestBlueprint = () => {
           data: {
             title: 'Page 1',
             patterns: ['element-1', 'element-2'],
+            rules: [],
           },
         } satisfies PagePattern,
         {
@@ -664,6 +676,7 @@ export const createTwoPageThreePatternTestForm = () => {
           data: {
             title: 'Page 1',
             patterns: ['element-1', 'element-2'],
+            rules: [],
           },
         } satisfies PagePattern,
         {
@@ -672,6 +685,7 @@ export const createTwoPageThreePatternTestForm = () => {
           data: {
             title: 'Page 2',
             patterns: ['element-3'],
+            rules: [],
           },
         } satisfies PagePattern,
         {
@@ -733,6 +747,7 @@ export const createTestBlueprintMultipleFieldsets = () => {
               'fieldset-1',
               'radio-group-1',
             ],
+            rules: [],
           },
         } satisfies PagePattern,
         {

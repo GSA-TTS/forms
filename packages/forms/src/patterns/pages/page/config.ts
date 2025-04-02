@@ -1,7 +1,18 @@
 import { z } from 'zod';
 
-import { type Pattern, type ParsePatternConfigData } from '../../pattern.js';
-import { safeZodParseFormErrors } from '../../util/zod.js';
+import { type Pattern, type ParsePatternConfigData } from '../../../pattern.js';
+import { safeZodParseFormErrors } from '../../../util/zod.js';
+
+const ruleSchema = z.object({
+  patternId: z.string(),
+  condition: z.object({
+    operator: z.literal('='),
+    value: z.string(),
+  }),
+  next: z.string(),
+  alertMessage: z.string().optional(),
+});
+export type PageRule = z.infer<typeof ruleSchema>;
 
 const configSchema = z.object({
   title: z.string(),
@@ -21,6 +32,7 @@ const configSchema = z.object({
       )
       .pipe(z.string().array()),
   ]),
+  rules: z.array(ruleSchema).default([]),
 });
 
 type PageConfigSchema = z.infer<typeof configSchema>;

@@ -6,8 +6,8 @@ import { type Blueprint, type FormSession, defaultFormConfig } from '../..';
 
 import { downloadPackageHandler } from './submit';
 import { PackageDownload } from './builder';
-import { PageSet } from '../page-set/builder';
-import { Page } from '../page/builder';
+import { PageSet } from '../pages/page-set/builder';
+import { Page } from '../pages/page/builder';
 import { Input } from '../input/builder';
 import { loadSamplePDF } from '../../documents/__tests__/sample-data';
 
@@ -85,7 +85,10 @@ const createTestForm = async (): Promise<Blueprint> => {
     'doj-pardon-marijuana/demo-application_for_certificate_of_pardon_for_simple_marijuana_possession.pdf'
   );
   const input1 = new Input({ label: 'Input 1', required: true }, 'input-1');
-  const page1 = new Page({ title: 'Page 1', patterns: [input1.id] }, 'page-1');
+  const page1 = new Page(
+    { title: 'Page 1', patterns: [input1.id], rules: [] },
+    'page-1'
+  );
   const pageSet = new PageSet({ pages: [page1.id] }, 'page-set');
   return {
     summary: {

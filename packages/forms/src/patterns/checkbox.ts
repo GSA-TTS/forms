@@ -1,6 +1,10 @@
 import * as z from 'zod';
 
-import { type Pattern, type PatternConfig } from '../pattern.js';
+import {
+  type Pattern,
+  PatternBuilder,
+  type PatternConfig,
+} from '../pattern.js';
 import { type CheckboxProps } from '../components.js';
 import { getFormSessionError, getFormSessionValue } from '../session.js';
 import {
@@ -59,3 +63,7 @@ export const checkboxConfig: PatternConfig<CheckboxPattern, PatternOutput> = {
     };
   },
 };
+
+export class Checkbox extends PatternBuilder<CheckboxPattern> {
+  type = 'checkbox';
+}

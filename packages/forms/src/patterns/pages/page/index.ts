@@ -1,4 +1,4 @@
-import { type PatternConfig } from '../../pattern.js';
+import { type PatternConfig } from '../../../pattern.js';
 
 import { type PagePattern, parseConfigData } from './config.js';
 import { createPrompt } from './prompt.js';
@@ -9,6 +9,7 @@ export const pageConfig: PatternConfig<PagePattern> = {
   initial: {
     title: 'Untitled Page',
     patterns: [],
+    rules: [],
   },
   createPrompt,
   parseConfigData,

@@ -1,7 +1,7 @@
 import { failure, success, type Result } from '@gsa-tts/forms-common';
 
 import { type FormServiceContext } from '../context/index.js';
-import { submitPage } from '../patterns/page-set/submit';
+import { submitPage } from '../patterns/pages/submit';
 import { downloadPackageHandler } from '../patterns/package-download/submit';
 import {
   repeaterAddRowHandler,
