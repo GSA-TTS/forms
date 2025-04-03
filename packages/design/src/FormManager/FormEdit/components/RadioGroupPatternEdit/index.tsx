@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import React, { useState, useEffect } from 'react';
 
 import { type RadioGroupProps } from '@gsa-tts/forms-core';
