@@ -154,7 +154,6 @@ const EditComponent = ({ pattern }: { pattern: RadioGroupPattern }) => {
                   onChange={e => handleOptionLabelChange(index, e.target.value)}
                   aria-label={`Option ${index + 1} label`}
                 />
-
                 <PatternOptionActions
                   optionId={option.id}
                   onDelete={handleDeleteOption}
