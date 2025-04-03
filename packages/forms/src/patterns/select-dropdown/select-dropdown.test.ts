@@ -12,8 +12,8 @@ describe('SelectDropdownPattern tests', () => {
         label: 'Test Label',
         required: true,
         options: [
-          { value: 'value1', label: 'Option 1' },
-          { value: 'value2', label: 'Option 2' },
+          { value: 'value1', label: 'Option 1', id: 'option-1' },
+          { value: 'value2', label: 'Option 2', id: 'option-2' },
         ],
       };
 
@@ -30,8 +30,8 @@ describe('SelectDropdownPattern tests', () => {
         label: 'Test Label',
         required: false,
         options: [
-          { value: 'value1', label: 'Option 1' },
-          { value: 'value2', label: 'Option 2' },
+          { value: 'value1', label: 'Option 1', id: 'option-1' },
+          { value: 'value2', label: 'Option 2', id: 'option-2' },
         ],
       };
 
@@ -64,8 +64,8 @@ describe('SelectDropdownPattern tests', () => {
           label: 'Test Dropdown',
           required: true,
           options: [
-            { value: 'value1', label: 'Option 1' },
-            { value: 'value2', label: 'Option 2' },
+            { value: 'value1', label: 'Option 1', id: 'option-1' },
+            { value: 'value2', label: 'Option 2', id: 'option-2' },
           ],
         },
       };
@@ -90,8 +90,8 @@ describe('SelectDropdownPattern tests', () => {
           label: 'Test Dropdown',
           required: true,
           options: [
-            { value: 'value1', label: 'Option 1' },
-            { value: 'value2', label: 'Option 2' },
+            { value: 'value1', label: 'Option 1', id: 'option-1' },
+            { value: 'value2', label: 'Option 2', id: 'option-2' },
           ],
         },
       };
@@ -116,8 +116,8 @@ describe('SelectDropdownPattern tests', () => {
         label: 'Test Dropdown',
         required: true,
         options: [
-          { value: 'value1', label: 'Option 1' },
-          { value: 'value2', label: 'Option 2' },
+          { value: 'value1', label: 'Option 1', id: 'option-1' },
+          { value: 'value2', label: 'Option 2', id: 'option-2' },
         ],
       };
 
