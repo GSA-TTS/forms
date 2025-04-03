@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+import {v4 as uuidv4} from 'uuid';
 import React, { useState, useEffect } from 'react';
 
 import { type RadioGroupProps } from '@gsa-tts/forms-core';
@@ -168,7 +169,7 @@ const EditComponent = ({ pattern }: { pattern: RadioGroupPattern }) => {
           type="button"
           onClick={event => {
             event.preventDefault();
-            const optionId = `option-${Date.now()}`;
+            const optionId = `option-${uuidv4()}`;
             setOptions(
               options.concat({
                 id: optionId,

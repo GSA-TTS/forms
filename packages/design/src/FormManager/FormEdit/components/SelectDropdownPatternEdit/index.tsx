@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+import {v4 as uuidv4} from 'uuid';
 import React, { useState, useEffect } from 'react';
 
 import { type SelectDropdownProps } from '@gsa-tts/forms-core';
@@ -169,7 +170,7 @@ const EditComponent = ({ pattern }: { pattern: SelectDropdownPattern }) => {
             event.preventDefault();
             const optionLabel = `Option ${options.length + 1}`;
             const optionValue = `value-${options.length + 1}`;
-            const optionId = `option-${Date.now()}`;
+            const optionId = `option-${uuidv4()}`;
             setOptions(
               options.concat({
                 value: optionValue,
