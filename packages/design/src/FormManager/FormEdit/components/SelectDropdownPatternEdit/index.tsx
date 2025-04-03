@@ -5,10 +5,10 @@ import { type SelectDropdownProps } from '@gsa-tts/forms-core';
 import { type SelectDropdownPattern } from '@gsa-tts/forms-core';
 
 import SelectDropdown from '../../../../Form/components/SelectDropdown/index.js';
-import { useFormManagerStore } from '../../../store.js';
 import { PatternEditComponent } from '../../types.js';
 
 import { PatternEditActions } from '../common/PatternEditActions.js';
+import { PatternOptionActions } from '../common/PatternOptionActions.js';
 import { PatternEditForm } from '../common/PatternEditForm.js';
 import { usePatternEditFormContext } from '../common/hooks.js';
 import { enLocale as message } from '@gsa-tts/forms-common';
@@ -41,18 +41,9 @@ const SelectDropdownPatternEdit: PatternEditComponent<SelectDropdownProps> = ({
 const EditComponent = ({ pattern }: { pattern: SelectDropdownPattern }) => {
   const { fieldId, getFieldState, register, setValue } =
     usePatternEditFormContext<SelectDropdownPattern>(pattern.id);
-
-  const { uswdsRoot } = useFormManagerStore(state => ({
-    uswdsRoot: state.context.uswdsRoot,
-  }));
-
   const [options, setOptions] = useState(pattern.data.options);
   const label = getFieldState('label');
   const hint = getFieldState('hint');
-
-  useEffect(() => {
-    setValue(`options`, options);
-  }, [options, setValue]);
 
   const handleOptionLabelChange = (index: number, value: string) => {
     const newOptions = [...options];
@@ -61,14 +52,13 @@ const EditComponent = ({ pattern }: { pattern: SelectDropdownPattern }) => {
   };
 
   const handleDeleteOption = (optionId: string) => {
-    const confirmed = window.confirm(
-      'Are you sure you want to delete this option?'
-    );
-    if (!confirmed) return;
-
     const newOptions = options.filter(o => o.id !== optionId);
     setOptions(newOptions);
   };
+
+  useEffect(() => {
+    setValue(`options`, options);
+  }, [options, setValue]);
 
   return (
     <div className="grid-row grid-gap">
@@ -164,25 +154,10 @@ const EditComponent = ({ pattern }: { pattern: SelectDropdownPattern }) => {
                   aria-label={`Option ${index + 1} label`}
                 />
 
-                <button
-                  type="button"
-                  aria-label="Delete this pattern"
-                  title="Delete this pattern"
-                  className="usa-button--outline usa-button--unstyled"
-                  onClick={event => {
-                    event.preventDefault();
-                    handleDeleteOption(option.id);
-                  }}
-                >
-                  <svg
-                    className="usa-icon usa-icon--size-3 margin-1 text-middle"
-                    aria-hidden="true"
-                    focusable="false"
-                    role="img"
-                  >
-                    <use xlinkHref={`${uswdsRoot}img/sprite.svg#delete`}></use>
-                  </svg>
-                </button>
+                 <PatternOptionActions 
+                   optionId={option.id}
+                   onDelete={handleDeleteOption}
+                 />
               </div>
             </div>
           );
