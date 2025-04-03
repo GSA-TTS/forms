@@ -154,10 +154,10 @@ const EditComponent = ({ pattern }: { pattern: SelectDropdownPattern }) => {
                   aria-label={`Option ${index + 1} label`}
                 />
 
-                 <PatternOptionActions 
-                   optionId={option.id}
-                   onDelete={handleDeleteOption}
-                 />
+                <PatternOptionActions
+                  optionId={option.id}
+                  onDelete={handleDeleteOption}
+                />
               </div>
             </div>
           );
