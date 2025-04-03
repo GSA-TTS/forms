@@ -1,5 +1,4 @@
 import classnames from 'classnames';
-import { randomUUID } from 'crypto';
 import React, { useState, useEffect } from 'react';
 
 import { type SelectDropdownProps } from '@gsa-tts/forms-core';
@@ -170,7 +169,7 @@ const EditComponent = ({ pattern }: { pattern: SelectDropdownPattern }) => {
             event.preventDefault();
             const optionLabel = `Option ${options.length + 1}`;
             const optionValue = `value-${options.length + 1}`;
-            const optionId = `option-${randomUUID()}`;
+            const optionId = `option-${crypto.randomUUID()}`;
             setOptions(
               options.concat({
                 value: optionValue,

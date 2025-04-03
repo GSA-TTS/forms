@@ -1,5 +1,4 @@
 import classnames from 'classnames';
-import { randomUUID } from 'crypto';
 import React, { useState, useEffect } from 'react';
 
 import { type RadioGroupProps } from '@gsa-tts/forms-core';
@@ -169,7 +168,7 @@ const EditComponent = ({ pattern }: { pattern: RadioGroupPattern }) => {
           type="button"
           onClick={event => {
             event.preventDefault();
-            const optionId = `option-${randomUUID()}`;
+            const optionId = `option-${crypto.randomUUID()}`;
             setOptions(
               options.concat({
                 id: optionId,
