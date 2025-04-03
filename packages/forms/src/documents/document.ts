@@ -118,7 +118,6 @@ export const addDocumentFieldsToForm = (
           label: field.label,
           initial: '',
           required: false,
-          maxLength: 128,
         },
       } satisfies InputPattern);
     } else if (field.type === 'OptionList') {
@@ -129,7 +128,6 @@ export const addDocumentFieldsToForm = (
           label: field.label,
           initial: '',
           required: false,
-          maxLength: 128,
         },
       } satisfies InputPattern);
     } else if (field.type === 'Dropdown') {
@@ -140,7 +138,6 @@ export const addDocumentFieldsToForm = (
           label: field.label,
           initial: '',
           required: false,
-          maxLength: 128,
         },
       } satisfies InputPattern);
     } else if (field.type === 'TextField') {
@@ -151,7 +148,6 @@ export const addDocumentFieldsToForm = (
           label: field.label,
           initial: '',
           required: false,
-          maxLength: 128,
         },
       } satisfies InputPattern);
     } else if (field.type === 'RadioGroup') {
@@ -162,7 +158,6 @@ export const addDocumentFieldsToForm = (
           label: field.label,
           initial: '',
           required: false,
-          maxLength: 128,
         },
       } satisfies InputPattern);
     } else if (field.type === 'Paragraph' || field.type === 'RichText') {

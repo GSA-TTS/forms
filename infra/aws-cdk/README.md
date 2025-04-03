@@ -15,7 +15,13 @@ pnpm build
 ### Create stack
 
 ```bash
-forms-apply-stack -r <region> -e <environment-identifier>
+#forms-apply-stack -r <region> -e <environment-identifier>
+cd node_modules/@gsa-tts/forms-infra-aws-cdk
+pnpm cdk deploy \
+  --ci FormsPlatformStack \
+  --parameters "tagOrDigest=${TAG_OR_DIGEST}" \
+  --parameters "environment=${ENVIRONMENT}" \
+  --parameters "repositoryName=${REPO_NAME}"
 ```
 
 ### Deploy

@@ -78,7 +78,6 @@ describe('form builder', () => {
           label: 'Pattern 1',
           initial: '',
           required: true,
-          maxLength: 128,
         },
       },
       'element-2': {
@@ -88,7 +87,6 @@ describe('form builder', () => {
           label: 'Pattern 2',
           initial: '',
           required: true,
-          maxLength: 128,
         },
       },
       'element-3': {
@@ -98,7 +96,6 @@ describe('form builder', () => {
           label: 'Pattern 3',
           initial: '',
           required: true,
-          maxLength: 128,
         },
       },
     });
@@ -143,7 +140,6 @@ describe('form builder', () => {
           label: 'Pattern 1',
           initial: '',
           required: true,
-          maxLength: 128,
         },
       },
       'element-2': {
@@ -153,7 +149,6 @@ describe('form builder', () => {
           label: 'Pattern 2',
           initial: '',
           required: true,
-          maxLength: 128,
         },
       },
       'element-3': {
@@ -163,7 +158,6 @@ describe('form builder', () => {
           label: 'Pattern 3',
           initial: '',
           required: true,
-          maxLength: 128,
         },
       },
     });
@@ -213,7 +207,6 @@ describe('form builder', () => {
           label: 'Pattern 1',
           initial: '',
           required: true,
-          maxLength: 128,
         },
       },
       'element-2': {
@@ -223,7 +216,6 @@ describe('form builder', () => {
           label: 'Pattern 2',
           initial: '',
           required: true,
-          maxLength: 128,
         },
       },
       'element-3': {
@@ -233,7 +225,6 @@ describe('form builder', () => {
           label: 'Pattern 3',
           initial: '',
           required: true,
-          maxLength: 128,
         },
       },
     });
@@ -277,7 +268,6 @@ describe('form builder', () => {
             label: 'Input Pattern',
             initial: '',
             required: true,
-            maxLength: 128,
           },
         },
         'form-summary-1': {
@@ -318,7 +308,6 @@ describe('form builder', () => {
             ),
             initial: '',
             required: true,
-            maxLength: 128,
           },
         },
       },
@@ -360,7 +349,6 @@ describe('form builder', () => {
             label: 'Input Pattern',
             initial: '',
             required: true,
-            maxLength: 128,
           },
         },
         'form-summary-1': {
@@ -445,7 +433,6 @@ describe('form builder', () => {
             label: 'Input Pattern',
             initial: '',
             required: true,
-            maxLength: 128,
           },
         },
         'form-summary-1': {
@@ -526,7 +513,6 @@ describe('form builder', () => {
             label: 'Input Pattern',
             initial: '',
             required: true,
-            maxLength: 128,
           },
         },
         'form-summary-1': {
@@ -603,7 +589,6 @@ describe('form builder', () => {
           label: 'Pattern 1',
           initial: '',
           required: true,
-          maxLength: 128,
         },
       },
     });
@@ -641,7 +626,6 @@ export const createTestBlueprint = () => {
             label: 'Pattern 1',
             initial: '',
             required: true,
-            maxLength: 128,
           },
         } satisfies InputPattern,
         {
@@ -651,7 +635,6 @@ export const createTestBlueprint = () => {
             label: 'Pattern 2',
             initial: 'test',
             required: true,
-            maxLength: 128,
           },
         } satisfies InputPattern,
       ],
@@ -698,7 +681,6 @@ export const createTwoPageThreePatternTestForm = () => {
             label: 'Pattern 1',
             initial: '',
             required: true,
-            maxLength: 128,
           },
         } satisfies InputPattern,
         {
@@ -708,7 +690,6 @@ export const createTwoPageThreePatternTestForm = () => {
             label: 'Pattern 2',
             initial: '',
             required: true,
-            maxLength: 128,
           },
         } satisfies InputPattern,
         {
@@ -718,7 +699,6 @@ export const createTwoPageThreePatternTestForm = () => {
             label: 'Pattern 3',
             initial: '',
             required: true,
-            maxLength: 128,
           },
         } satisfies InputPattern,
       ],
@@ -762,7 +742,6 @@ export const createTestBlueprintMultipleFieldsets = () => {
             label: 'Input Pattern',
             initial: '',
             required: true,
-            maxLength: 128,
           },
         } satisfies InputPattern,
         {

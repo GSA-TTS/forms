@@ -1,27 +1,32 @@
 {
   "name": "@gsa-tts/forms-infra-aws-cdk",
-  "version": "0.1.2",
+  "version": "0.1.12",
   "bin": {
     "aws-cdk": "bin/aws-cdk.js",
     "forms-apply-stack": "bin/forms-apply-stack",
     "forms-update-stack-imag": "bin/forms-update-stack-image"
   },
   "files": [
-    "dist"
+    "bin",
+    "cdk.out",
+    "dist",
+    "lib",
+    "cdk.json",
+    "tsconfig.json"
   ],
   "scripts": {
     "build": "pnpm build:typescript && pnpm build:synth",
     "build:typescript": "tsc",
-    "build:synth": "cdk synth --output dist",
+    "build:synth": "cdk synth",
     "cdk": "cdk",
     "test": "echo 'no tests'",
     "watch": "tsc -w"
   },
   "dependencies": {
-    "@aws-cdk/aws-apprunner-alpha": "2.182.0-alpha.0",
+    "@aws-cdk/aws-apprunner-alpha": "2.184.1-alpha.0",
     "@gsa-tts/forms-infra-core": "workspace:*",
-    "aws-cdk": "2.1003.0",
-    "aws-cdk-lib": "2.182.0",
+    "aws-cdk": "2.1004.0",
+    "aws-cdk-lib": "2.184.1",
     "change-case": "^5.4.4",
     "constructs": "^10.4.2"
   },

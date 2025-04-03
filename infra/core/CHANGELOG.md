@@ -1,5 +1,17 @@
 # @gsa-tts/forms-infra-core
 
+## 0.1.4
+
+### Patch Changes
+
+- CDK work
+
+## 0.1.3
+
+### Patch Changes
+
+- VPC endpoint for AWS Secrets manager
+
 ## 0.1.2
 
 ### Patch Changes

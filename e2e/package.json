@@ -1,11 +1,11 @@
 {
   "name": "@gsa-tts/forms-e2e",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": true,
   "scripts": {
     "dev": "tsc -w",
     "test:storybook": "test-storybook",
-    "test": "export E2E_ENDPOINT=http://localhost:4321/manage; pnpm playwright test --ui-port=8080 --ui-host=0.0.0.0"
+    "test": "export E2E_ENDPOINT=http://localhost:4321/manage; pnpm playwright test --headed --ui-port=8080 --ui-host=0.0.0.0"
   },
   "devDependencies": {
     "@storybook/test-runner": "^0.19.1",

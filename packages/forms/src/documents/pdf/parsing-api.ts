@@ -266,7 +266,6 @@ export const processApiResponse = async (json: any): Promise<ParsedPdf> => {
               label: input.label,
               required: false,
               initial: '',
-              maxLength: 128,
             }
           );
           if (inputPattern) {

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import * as cdk from 'aws-cdk-lib';
-import { FormsPlatformStack } from '../lib/forms-stack';
+import { FormsPipelineStack } from '../lib/pipeline-stack';
+import { FormsPlatformStack } from '../lib/platform-stack';
 
 const app = new cdk.App();
 new FormsPlatformStack(app, 'FormsPlatformStack', {
@@ -8,5 +9,10 @@ new FormsPlatformStack(app, 'FormsPlatformStack', {
     account: process.env.CDK_DEFAULT_ACCOUNT,
     region: process.env.CDK_DEFAULT_REGION,
   },
-  /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
+});
+new FormsPipelineStack(app, 'FormsPipelineStack', {
+  env: {
+    account: process.env.CDK_DEFAULT_ACCOUNT,
+    region: process.env.CDK_DEFAULT_REGION,
+  },
 });

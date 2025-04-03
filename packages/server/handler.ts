@@ -8,7 +8,7 @@ import { fileURLToPath } from 'url';
 
 import express from 'express';
 
-import { type ServerOptions } from './src/context.js';
+import { type ServerOptions } from './src/config/options.js';
 
 export const createServer = async (
   serverOptions: ServerOptions

@@ -1,6 +1,6 @@
 {
   "name": "@gsa-tts/forms-cli",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "10x Forms Platform command-line interface",
   "type": "module",
   "license": "CC0",

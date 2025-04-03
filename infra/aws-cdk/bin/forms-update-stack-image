@@ -1,7 +1,7 @@
 #!/bin/sh
 
 SCRIPT_DIR=$(dirname "$0")
-TEMPLATE_FILE="${SCRIPT_DIR}/../dist/FormsPlatformStack.template.json"
+TEMPLATE_FILE="${SCRIPT_DIR}/../cdk.out/FormsPlatformStack.template.json"
 
 while getopts r:e:i: flag
 do

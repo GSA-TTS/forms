@@ -12,6 +12,7 @@ import { PatternEditActions } from '../common/PatternEditActions.js';
 import { PatternEditForm } from '../common/PatternEditForm.js';
 import { usePatternEditFormContext } from '../common/hooks.js';
 import { enLocale as message } from '@gsa-tts/forms-common';
+import styles from '../../formEditStyles.module.css';
 
 const InputPatternEdit: PatternEditComponent<TextInputProps> = ({
   context,
@@ -41,25 +42,20 @@ const EditComponent = ({ patternId }: { patternId: PatternId }) => {
   const { fieldId, register, getFieldState } =
     usePatternEditFormContext<InputPattern>(patternId);
 
-  const initial = getFieldState('initial');
   const label = getFieldState('label');
-  const maxLength = getFieldState('maxLength');
-
-  const maxLengthAttributes =
-    pattern.data.maxLength > 0
-      ? {
-          defaultValue: pattern.data.maxLength,
-        }
-      : {};
+  const hint = getFieldState('hint');
 
   return (
     <div className="grid-row grid-gap-1">
-      <div className="tablet:grid-col-6 mobile-lg:grid-col-12">
+      <div className="grid-col-12">
         <label
-          className={classNames('usa-label', {
-            'usa-label--error': label.error,
-          })}
-          htmlFor={fieldId('label')}
+          className={classNames(
+            'usa-label',
+            {
+              'usa-label--error': label.error,
+            },
+            `${styles.patternChoiceFieldWrapper}`
+          )}
         >
           {message.patterns.input.fieldLabel}
           {label.error ? (
@@ -68,9 +64,13 @@ const EditComponent = ({ patternId }: { patternId: PatternId }) => {
             </span>
           ) : null}
           <input
-            className={classNames('usa-input bg-primary-lighter', {
-              'usa-input--error': label.error,
-            })}
+            className={classNames(
+              'usa-input bg-primary-lighter',
+              {
+                'usa-input--error': label.error,
+              },
+              `${styles.patternChoiceFieldWrapper}`
+            )}
             id={fieldId('label')}
             defaultValue={pattern.data.label}
             {...register('label')}
@@ -79,48 +79,38 @@ const EditComponent = ({ patternId }: { patternId: PatternId }) => {
           ></input>
         </label>
       </div>
-      <div className="tablet:grid-col-6 mobile-lg:grid-col-12 ohio">
+      <div className="grid-col-12">
         <label
-          className={classNames('usa-label', {
-            'usa-label--error': initial.error,
-          })}
-          htmlFor={fieldId('initial')}
+          className={classNames(
+            'usa-label',
+            {
+              'usa-label--error': hint.error,
+            },
+            `${styles.patternChoiceFieldWrapper}`
+          )}
+          htmlFor={fieldId('hint')}
         >
-          {initial.error ? (
+          <span className={`${styles.secondaryColor}`}>
+            {message.patterns.input.hintLabel}
+          </span>
+          {hint.error ? (
             <span className="usa-error-message" role="alert">
-              {initial.error.message}
+              {hint.error.message}
             </span>
           ) : null}
-          {message.patterns.input.defaultFieldValue}
           <input
-            className="usa-input bg-primary-lighter"
-            id={fieldId('initial')}
+            className={classNames(
+              'usa-input bg-primary-lighter',
+              {
+                'usa-input--error': hint.error,
+              },
+              `${styles.patternChoiceFieldWrapper}`
+            )}
+            id={fieldId('hint')}
             type="text"
-            defaultValue={pattern.data.initial}
-            {...register('initial')}
-          ></input>
-        </label>
-      </div>
-      <div className="tablet:grid-col-6 mobile-lg:grid-col-12">
-        <label
-          className={classNames('usa-label', {
-            'usa-label--error': maxLength.error,
-          })}
-          htmlFor={fieldId('maxLength')}
-        >
-          {maxLength.error ? (
-            <span className="usa-error-message" role="alert">
-              {maxLength.error.message}
-            </span>
-          ) : null}
-          {message.patterns.input.maxLength}
-          <input
-            className="usa-input bg-primary-lighter"
-            id={fieldId('maxLength')}
-            {...maxLengthAttributes}
-            type="text"
-            {...register('maxLength')}
-          ></input>
+            defaultValue={pattern.data.hint}
+            {...register('hint')}
+          />
         </label>
       </div>
       <div className="grid-col-12">

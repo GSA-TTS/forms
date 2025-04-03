@@ -28,6 +28,7 @@ export class AWSSecretsManagerSecretsVault implements SecretsVault {
   }
 
   async deleteSecret(key: SecretKey) {
+    console.log(`Deleting Secrets Manager key: "${key}"...`);
     try {
       await this.client.send(
         new DeleteSecretCommand({
@@ -42,6 +43,7 @@ export class AWSSecretsManagerSecretsVault implements SecretsVault {
   }
 
   async getSecret(key: SecretKey) {
+    console.log(`Getting Secrets Manager key: "${key}"...`);
     try {
       const response = await this.client.send(
         new GetSecretValueCommand({
@@ -78,6 +80,7 @@ export class AWSSecretsManagerSecretsVault implements SecretsVault {
 
   async setSecret(key: SecretKey, value: SecretValue) {
     try {
+      console.log(`Creating Secrets Manager key: "${key}"...`);
       await this.client.send(
         new CreateSecretCommand({
           Name: key,

@@ -68,7 +68,7 @@ export const AddPattern: StoryObj<typeof FormEdit> = {
     await userEvent.click(shortAnswerButton);
 
     // Submit new field's edit form
-    const input = await canvas.findByLabelText('Field label');
+    const input = await canvas.findByLabelText('Question text');
     await userEvent.clear(input);
     await userEvent.type(input, 'Question set short question');
     const form = input?.closest('form');

@@ -148,14 +148,8 @@ describe('Page-set submission', () => {
 });
 
 const createTestSession = () => {
-  const input1 = new Input(
-    { label: 'label', required: true, maxLength: 10 },
-    'input-1'
-  );
-  const input2 = new Input(
-    { label: 'label', required: true, maxLength: 10 },
-    'input-2'
-  );
+  const input1 = new Input({ label: 'label', required: true }, 'input-1');
+  const input2 = new Input({ label: 'label', required: true }, 'input-2');
   const page1 = new Page({ title: 'Page 1', patterns: [input1.id] }, 'page-1');
   const page2 = new Page({ title: 'Page 2', patterns: [input2.id] }, 'page-2');
   const pageSet = new PageSet({ pages: [page1.id, page2.id] }, 'page-set-1');

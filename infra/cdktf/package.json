@@ -1,6 +1,6 @@
 {
   "name": "@gsa-tts/forms-infra-cdktf",
-  "version": "0.1.2",
+  "version": "0.1.12",
   "description": "10x Forms Platform Terraform CDK",
   "main": "src/index.js",
   "types": "src/index.ts",
