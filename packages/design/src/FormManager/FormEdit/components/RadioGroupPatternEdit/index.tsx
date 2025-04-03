@@ -61,9 +61,11 @@ const EditComponent = ({ pattern }: { pattern: RadioGroupPattern }) => {
   };
 
   const handleDeleteOption = (optionId: string) => {
-    const confirmed = window.confirm('Are you sure you want to delete this option?');
+    const confirmed = window.confirm(
+      'Are you sure you want to delete this option?'
+    );
     if (!confirmed) return;
-  
+
     const newOptions = options.filter(o => o.id !== optionId);
     setOptions(newOptions);
   };
@@ -160,7 +162,7 @@ const EditComponent = ({ pattern }: { pattern: RadioGroupPattern }) => {
                   id={fieldId(`options.${index}.label`)}
                   {...register(`options.${index}.label`)}
                   value={option.label}
-                  onChange={(e) => handleOptionLabelChange(index, e.target.value)}
+                  onChange={e => handleOptionLabelChange(index, e.target.value)}
                   aria-label={`Option ${index + 1} label`}
                 />
 
@@ -180,9 +182,7 @@ const EditComponent = ({ pattern }: { pattern: RadioGroupPattern }) => {
                     focusable="false"
                     role="img"
                   >
-                    <use
-                      xlinkHref={`${uswdsRoot}img/sprite.svg#delete`}
-                    ></use>
+                    <use xlinkHref={`${uswdsRoot}img/sprite.svg#delete`}></use>
                   </svg>
                 </button>
               </div>
