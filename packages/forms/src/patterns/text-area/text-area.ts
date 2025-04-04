@@ -48,7 +48,7 @@ export const textAreaConfig: PatternConfig<
   displayName: message.patterns.textarea.displayName,
   iconPath: 'long-answer-icon.svg',
   initial: {
-    label: '',
+    label: 'Question text',
     hint: '',
     initial: '',
     required: false,

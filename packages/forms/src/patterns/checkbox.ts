@@ -29,7 +29,7 @@ export const checkboxConfig: PatternConfig<CheckboxPattern, PatternOutput> = {
   displayName: 'Checkbox',
   iconPath: 'checkbox-icon.svg',
   initial: {
-    label: 'Checkbox label',
+    label: 'Question text',
     defaultChecked: false,
   },
   parseUserInput: (_, obj) => {

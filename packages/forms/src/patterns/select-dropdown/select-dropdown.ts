@@ -66,7 +66,7 @@ export const selectDropdownConfig: PatternConfig<
   displayName: 'Dropdown',
   iconPath: 'dropdown-icon.svg',
   initial: {
-    label: 'Dropdown-label',
+    label: 'Question text',
     required: false,
     options: [
       { value: 'value1', label: 'Option 1', id: 'option-1' },

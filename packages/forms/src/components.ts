@@ -36,6 +36,14 @@ export type TextAreaProps = PatternProps<{
   hint?: string;
 }>;
 
+export type AccordionRowProps = PatternProps<{
+  type: 'accordion-row';
+  inputId: string;
+  title: string;
+  text: string;
+  isOpen?: boolean;
+}>;
+
 export type AddressFieldProps = {
   type: 'input' | 'select';
   inputId: string;
