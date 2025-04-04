@@ -1,12 +1,71 @@
-name: End-to-end tests
+name: End-to-end Tests
 on:
   workflow_call:
+    inputs:
+      playwright_version:
+        description: Installed playwright version
+        required: false
+        default: '1.51.1'
+        type: string
+
 jobs:
   end-to-end:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v${{ inputs.playwright_version }}-noble
+    env:
+      HOME: /root
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Build Docker to run tests
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Repo ownership
+        run: git config --global --add safe.directory /__w/forms/forms
+
+      - name: Install system dependencies
         run: |
-          docker build --platform linux/amd64 --tag 'playwright' . -f ./e2e/Dockerfile --target test
+          apt-get update && apt-get install -y \
+          build-essential \
+          python3 \
+          python3-pip \
+          python-is-python3 \
+          g++ \
+          make
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        id: pnpm-install
+        with:
+          run_install: false
+
+      - name: Install node.js version
+        uses: actions/setup-node@v4
+        id: install-node
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+          cache-dependency-path: 'pnpm-lock.yaml'
+
+      # needed for better-sqlite3 binary
+      - name: Install global deps
+        run: npm i -g node-gyp
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
+
+      # xvfb is pre-installed in the playwright container
+      - name: Run end-to-end tests
+        shell: bash
+        run: xvfb-run pnpm test:e2e:ci
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30

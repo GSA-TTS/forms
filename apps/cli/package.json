@@ -14,6 +14,8 @@
   },
   "dependencies": {
     "@gsa-tts/forms-infra-core": "workspace:*",
+    "@gsa-tts/forms-auth": "workspace:^",
+    "@gsa-tts/forms-database": "workspace:*",
     "commander": "^11.1.0"
   }
 }

@@ -11,6 +11,7 @@ import multipleChoiceIcon from './images/radio-options-icon.svg';
 import templateIcon from './images/template-icon.svg';
 
 import classNames from 'classnames';
+import { enLocale as message } from '@gsa-tts/forms-common';
 
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
 const icons: Record<string, string | any> = {
@@ -73,7 +74,7 @@ export const AddPatternMenu = () => {
         <ul className="usa-list usa-list--unstyled grid-row tablet:flex-justify-end flex-justify-center">
           <li className="position-relative tablet:grid-col-12 grid-col-5 text-center">
             <SidebarAddPatternMenuItem
-              title="Add element"
+              title={message.controls.addElement.textContent}
               patternSelected={addPattern}
             />
           </li>

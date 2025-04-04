@@ -27,19 +27,20 @@ const addQuestions = async (page: Page) => {
 test('Create form from scratch', async ({ page }) => {
   const { regexp } = pathToRegexp(Create.path);
   await createNewForm(page);
-  let pageUrl = page.url();
+
   let pagePath = '';
-
-  if(Create.getUrl().indexOf('#') === 0) {
-    const parts = pageUrl.split('#');
-    if(parts.length === 2) {
-      pagePath = parts[1];
+  let hasMatch = false;
+  await page.waitForURL((url) => {
+    if (url.hash.startsWith('#')) {
+      pagePath = url.hash.substring(1);
+    } else {
+      pagePath = url.pathname;
     }
-  } else {
-    pagePath = new URL(pageUrl).pathname;
-  }
+    hasMatch = regexp.test(pagePath);
+    return hasMatch;
+  });
 
-  expect(regexp.test(pagePath)).toBe(true);
+  expect(hasMatch).toBe(true);
 });
 
 test('Add questions', async ({ page }) => {
