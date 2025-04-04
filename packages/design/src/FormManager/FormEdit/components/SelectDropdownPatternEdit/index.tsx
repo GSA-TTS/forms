@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { type SelectDropdownProps } from '@gsa-tts/forms-core';
 import { type SelectDropdownPattern } from '@gsa-tts/forms-core';
@@ -8,6 +8,7 @@ import SelectDropdown from '../../../../Form/components/SelectDropdown/index.js'
 import { PatternEditComponent } from '../../types.js';
 
 import { PatternEditActions } from '../common/PatternEditActions.js';
+import { PatternOptionActions } from '../common/PatternOptionActions.js';
 import { PatternEditForm } from '../common/PatternEditForm.js';
 import { usePatternEditFormContext } from '../common/hooks.js';
 import { enLocale as message } from '@gsa-tts/forms-common';
@@ -38,11 +39,26 @@ const SelectDropdownPatternEdit: PatternEditComponent<SelectDropdownProps> = ({
 };
 
 const EditComponent = ({ pattern }: { pattern: SelectDropdownPattern }) => {
-  const { fieldId, getFieldState, register } =
+  const { fieldId, getFieldState, register, setValue } =
     usePatternEditFormContext<SelectDropdownPattern>(pattern.id);
   const [options, setOptions] = useState(pattern.data.options);
   const label = getFieldState('label');
   const hint = getFieldState('hint');
+
+  const handleOptionLabelChange = (index: number, value: string) => {
+    const newOptions = [...options];
+    newOptions[index].label = value;
+    setOptions(newOptions);
+  };
+
+  const handleDeleteOption = (optionId: string) => {
+    const newOptions = options.filter(o => o.id !== optionId);
+    setOptions(newOptions);
+  };
+
+  useEffect(() => {
+    setValue(`options`, options);
+  }, [options, setValue]);
 
   return (
     <div className="grid-row grid-gap">
@@ -133,22 +149,32 @@ const EditComponent = ({ pattern }: { pattern: SelectDropdownPattern }) => {
                   className="usa-input bg-primary-lighter"
                   id={fieldId(`options.${index}.label`)}
                   {...register(`options.${index}.label`)}
-                  defaultValue={option.label}
+                  value={option.label}
+                  onChange={e => handleOptionLabelChange(index, e.target.value)}
                   aria-label={`Option ${index + 1} label`}
+                />
+                <PatternOptionActions
+                  optionId={option.id}
+                  onDelete={handleDeleteOption}
                 />
               </div>
             </div>
           );
         })}
         <button
-          className="usa-button usa-button--outline margin-top-1"
+          className={`usa-link ${styles.addMorePatternButton} margin-top-1`}
           type="button"
           onClick={event => {
             event.preventDefault();
             const optionLabel = `Option ${options.length + 1}`;
             const optionValue = `value-${options.length + 1}`;
+            const optionId = `option-${crypto.randomUUID()}`;
             setOptions(
-              options.concat({ value: optionValue, label: optionLabel })
+              options.concat({
+                value: optionValue,
+                label: optionLabel,
+                id: optionId,
+              })
             );
           }}
         >

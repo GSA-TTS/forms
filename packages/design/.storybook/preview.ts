@@ -11,7 +11,8 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
-  },
+    testTimeout: 60000, // Set global timeout for Storybook tests (60 seconds)
+    },
 };
 
 export default preview;

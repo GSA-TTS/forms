@@ -10,10 +10,10 @@ export const inputConfig: PatternConfig<InputPattern, InputPatternOutput> = {
   displayName: message.patterns.input.displayName,
   iconPath: 'short-answer-icon.svg',
   initial: {
-    label: message.patterns.input.fieldLabel,
+    label: '',
+    hint: '',
     initial: '',
     required: false,
-    maxLength: 128,
   },
   parseUserInput,
   parseConfigData,

@@ -12,7 +12,6 @@ const TextArea: PatternComponent<TextAreaProps> = ({
   error,
   value,
   hint,
-  maxLength,
 }) => {
   const { register } = useFormContext();
   const errorId = `input-error-message-${inputId}`;
@@ -55,7 +54,6 @@ const TextArea: PatternComponent<TextAreaProps> = ({
             `${hint ? `${hintId}` : ''}${error ? ` ${errorId}` : ''}`.trim() ||
             undefined
           }
-          maxLength={maxLength}
           style={{ resize: 'none', overflow: 'auto', height: '100px' }}
         />
       </div>

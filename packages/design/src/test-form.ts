@@ -48,7 +48,6 @@ export const createOnePageTwoPatternTestForm = () => {
             label: 'Pattern 1',
             initial: '',
             required: false,
-            maxLength: 128,
           },
         } satisfies InputPattern,
         {
@@ -58,7 +57,6 @@ export const createOnePageTwoPatternTestForm = () => {
             label: 'Pattern 2',
             initial: 'test',
             required: false,
-            maxLength: 128,
           },
         } satisfies InputPattern,
       ],
@@ -105,7 +103,6 @@ export const createTwoPageTwoPatternTestForm = () => {
             label: 'Pattern 1',
             initial: '',
             required: true,
-            maxLength: 128,
           },
         } satisfies InputPattern,
         {
@@ -115,7 +112,6 @@ export const createTwoPageTwoPatternTestForm = () => {
             label: 'Pattern 2',
             initial: 'test',
             required: true,
-            maxLength: 128,
           },
         } satisfies InputPattern,
       ],
@@ -146,7 +142,6 @@ export const createTwoPatternTestForm = () => {
             label: 'Pattern 1',
             initial: '',
             required: true,
-            maxLength: 128,
           },
         } satisfies InputPattern,
         {
@@ -156,7 +151,6 @@ export const createTwoPatternTestForm = () => {
             label: 'Pattern 2',
             initial: 'test',
             required: true,
-            maxLength: 128,
           },
         } satisfies InputPattern,
       ],

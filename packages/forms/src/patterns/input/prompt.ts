@@ -20,6 +20,7 @@ export const createPrompt: CreatePrompt<InputPattern> = (
       value: sessionValue,
       error: sessionError,
       label: pattern.data.label,
+      hint: pattern.data.hint,
       required: pattern.data.required,
     } as TextInputProps,
     children: [],

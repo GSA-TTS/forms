@@ -15,9 +15,9 @@ const pattern: SelectDropdownPattern = {
     label: message.patterns.selectDropdown.displayName,
     required: false,
     options: [
-      { value: 'value1', label: 'Option-1' },
-      { value: 'value2', label: 'Option-2' },
-      { value: 'value3', label: 'Option-3' },
+      { value: 'value1', label: 'Option-1', id: 'option-1' },
+      { value: 'value2', label: 'Option-2', id: 'option-2' },
+      { value: 'value3', label: 'Option-3', id: 'option-3' },
     ],
   },
 };

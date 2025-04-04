@@ -1,5 +1,11 @@
 # @gsa-tts/forms-e2e
 
+## 0.1.3
+
+### Patch Changes
+
+- 6b52609: Splash page changes
+
 ## 0.1.2
 
 ### Patch Changes

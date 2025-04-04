@@ -17,6 +17,7 @@ const configSchema = z.object({
       value: z
         .string()
         .regex(/^[A-Za-z][A-Za-z0-9\-_:.]*$/, 'Invalid Option Value'),
+      id: z.string().regex(/^[A-Za-z][A-Za-z0-9\-_:.]*$/, 'Invalid Option ID'),
       label: z.string().min(1),
     })
     .array(),
@@ -68,9 +69,9 @@ export const selectDropdownConfig: PatternConfig<
     label: 'Dropdown-label',
     required: false,
     options: [
-      { value: 'value1', label: 'Option 1' },
-      { value: 'value2', label: 'Option 2' },
-      { value: 'value3', label: 'Option 3' },
+      { value: 'value1', label: 'Option 1', id: 'option-1' },
+      { value: 'value2', label: 'Option 2', id: 'option-2' },
+      { value: 'value3', label: 'Option 3', id: 'option-3' },
     ],
   },
 
@@ -104,6 +105,7 @@ export const selectDropdownConfig: PatternConfig<
           return {
             value: option.value,
             label: option.label,
+            id: option.id,
           };
         }),
         required: pattern.data.required,
