@@ -68,12 +68,12 @@ export const Error: StoryObj<typeof FormEdit> = {
     );
     await userEvent.clear(titleInput);
 
-    const helperText = canvas.getByLabelText(
+    const textInput = canvas.getByLabelText(
       message.patterns.accordionRow.textLabel
     );
-    await userEvent.clear(helperText);
+    await userEvent.clear(textInput);
 
-    const form = helperText?.closest('form');
+    const form = textInput?.closest('form');
     form?.requestSubmit();
 
     await expect(

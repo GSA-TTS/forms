@@ -25,7 +25,7 @@ export const Default: StoryObj<typeof AccordionRow> = {
     inputId: 'accordion-1',
     title: 'Accordion Row 1 (Closed)',
     text: 'This is the content of the first accordion row.',
-    isOpen: false, // Starts closed
+    isOpen: false,
   },
 };
 
@@ -34,7 +34,7 @@ export const Open: StoryObj<typeof AccordionRow> = {
     inputId: 'accordion-2',
     title: 'Accordion Row 2 (Open)',
     text: 'This is the content of the second accordion row, and it is open by default.',
-    isOpen: true, // Starts open
+    isOpen: true,
   },
 };
 
