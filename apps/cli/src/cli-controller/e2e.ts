@@ -1,10 +1,8 @@
 import { promises as fs } from 'fs';
-import path from 'path';
 import { Command } from 'commander';
 
 import { type Context } from './types.js';
-import { createAuthRepository, BaseAuthContext } from '@gsa-tts/forms-auth';
-import { randomUUID } from 'crypto';
+import { createAuthRepository, BaseAuthContext, createTestDbSession } from '@gsa-tts/forms-auth';
 
 export const addE2eCommands = (ctx: Context, cli: Command) => {
   const cmd = cli
@@ -62,11 +60,7 @@ export const addE2eCommands = (ctx: Context, cli: Command) => {
         const userId = await authRepository.getUserId(testEmail);
 
         if (userId) {
-          const lucia = await authContext.getLucia();
-          const session = await lucia.createSession(userId, {
-            session_token: randomUUID(),
-          });
-          console.log(`Test session created.`);
+          const session = await createTestDbSession(userId, authContext);
 
           const envContent = `AUTH_SESSION=${session.id}\nE2E_ENDPOINT=http://localhost:4321\n`;
           await fs.writeFile(outputFile, envContent, 'utf8');
