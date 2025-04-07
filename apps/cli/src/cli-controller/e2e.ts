@@ -62,9 +62,11 @@ export const addE2eCommands = (ctx: Context, cli: Command) => {
         if (userId) {
           const session = await createTestDbSession(userId, authContext);
 
-          const envContent = `AUTH_SESSION=${session.id}\nE2E_ENDPOINT=http://localhost:4321\n`;
-          await fs.writeFile(outputFile, envContent, 'utf8');
-          console.log(`.env file written to: ${outputFile}`);
+          if(session && session.id) {
+            const envContent = `AUTH_SESSION=${session.id}\nE2E_ENDPOINT=http://localhost:4321\n`;
+            await fs.writeFile(outputFile, envContent, 'utf8');
+            console.log(`.env file written to: ${outputFile}`);
+          }
         }
         console.log('Auth Context & Database Prepared Successfully!');
       } catch (error) {
