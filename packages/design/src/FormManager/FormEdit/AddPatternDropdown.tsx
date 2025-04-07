@@ -139,6 +139,7 @@ const sidebarPatterns: DropdownPattern[] = [
   ['rich-text', defaultFormConfig.patterns['rich-text'], 'Other'],
   ['attachment', defaultFormConfig.patterns['attachment'], 'Other'],
   ['package-download', defaultFormConfig.patterns['package-download'], 'Other'],
+  ['accordion-row', defaultFormConfig.patterns['accordion-row'], 'Other'], // TODO: remove this from the sidebar menu once accordion-row is added to fieldset and repeater
 ] as const;
 
 export const compoundFieldChildPatterns: DropdownPattern[] =

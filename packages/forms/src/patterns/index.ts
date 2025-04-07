@@ -1,5 +1,6 @@
 import { type FormConfig } from '../pattern.js';
 
+import { accordionRowConfig } from './accordion-row/index.js';
 import { attachmentConfig } from './attachment/index.js';
 import { addressConfig } from './address/index.js';
 import { checkboxConfig } from './checkbox.js';
@@ -28,6 +29,7 @@ import { sexConfig } from './sex/sex.js';
 // understand the usage scenarios better.
 export const defaultFormConfig: FormConfig = {
   patterns: {
+    'accordion-row': accordionRowConfig,
     address: addressConfig,
     attachment: attachmentConfig,
     checkbox: checkboxConfig,
@@ -53,6 +55,7 @@ export const defaultFormConfig: FormConfig = {
     'sex-input': sexConfig,
   },
 } as const;
+export * from './accordion-row/index.js';
 export * from './attachment/index.js';
 export { type AttachmentPattern } from './attachment/config.js';
 export * from './attachment/file-type-options.js';

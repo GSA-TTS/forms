@@ -7,6 +7,12 @@ const defaults = {
 
 export const en = {
   patterns: {
+    accordionRow: {
+      displayName: 'Accordion row',
+      fieldLabel: 'Information box title',
+      textLabel: 'Information box text',
+      errorTextMustContainChar: 'String must contain at least 1 character(s)',
+    },
     address: {
       ...defaults,
       displayName: 'Address',

@@ -3,6 +3,7 @@ import {
   type EditComponentForPattern,
 } from '../types.js';
 
+import AccordionRowPatternEdit from './AccordionRowPatternEdit/index.js';
 import AddressPatternEdit from './AddressPatternEdit/index.js';
 import AttachmentPatternEdit from './AttachmentPatternEdit/index.js';
 import CheckboxPatternEdit from './CheckboxPatternEdit/index.js';
@@ -28,6 +29,7 @@ import SubmissionConfirmationEdit from './SubmissionConfirmationEdit.js';
 import TextAreaPatternEdit from './TextAreaPatternEdit/index.js';
 import SexPatternEdit from './SexPatternEdit/index.js';
 export const defaultPatternEditComponents: EditComponentForPattern = {
+  'accordion-row': AccordionRowPatternEdit as PatternEditComponent,
   address: AddressPatternEdit as PatternEditComponent,
   attachment: AttachmentPatternEdit as PatternEditComponent,
   checkbox: CheckboxPatternEdit as PatternEditComponent,
