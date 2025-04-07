@@ -1,13 +1,19 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { createTestDbSession } from './create-test-db-session.js';
+import { BaseAuthContext } from '../context/base.js';
+import { Lucia, UserId } from 'lucia';
+import type { AuthRepository } from '../repository/index.js';
 
 vi.mock('crypto', () => ({
   randomUUID: vi.fn().mockReturnValue('test-uuid-123'),
 }));
 
 describe('createTestDbSession', () => {
-  let mockLucia;
-  let mockAuthContext;
+  let mockLucia: {
+    createSession: ReturnType<typeof vi.fn>;
+  };
+
+  let mockAuthContext: BaseAuthContext;
 
   beforeEach(() => {
     mockLucia = {
@@ -18,31 +24,39 @@ describe('createTestDbSession', () => {
       }),
     };
 
-    mockAuthContext = {
-      getLucia: vi.fn().mockResolvedValue(mockLucia),
-      db: {
-        createSession: vi.fn().mockResolvedValue('some-session-id'),
-        createUser: vi.fn().mockResolvedValue({
-          id: 'user-id-1234-5678-9012',
-          email: 'test@example.com',
-        }),
-        getUserId: vi.fn().mockResolvedValue('user-id-1234-5678-9012'),
-      },
-      provider: {},
-      getCookie: vi.fn(),
-      setCookie: vi.fn(),
-      setUserSession: vi.fn(),
-      isUserAuthorized: vi.fn(),
-    };
+    const mockRepository = {
+      getContext: vi.fn().mockReturnValue({ engine: 'sqlite' }),
+      createSession: vi.fn().mockResolvedValue('some-session-id'),
+      createUser: vi.fn().mockResolvedValue({
+        id: 'user-id-1234-5678-9012',
+        email: 'test@example.com',
+      }),
+      getUserId: vi.fn().mockResolvedValue('user-id-1234-5678-9012'),
+    } as unknown as AuthRepository;
+
+    mockAuthContext = new BaseAuthContext(
+      mockRepository,
+      {} as any,
+      vi.fn(),
+      vi.fn(),
+      vi.fn(),
+      vi.fn().mockResolvedValue(true)
+    );
+
+    mockAuthContext.getLucia = vi
+      .fn()
+      .mockResolvedValue(mockLucia as unknown as Lucia);
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
   });
 
   it('should create a session when userId is provided', async () => {
-    const userId = 'test-user-id';
-
+    const userId = 'test-user-id' as UserId;
     const session = await createTestDbSession(userId, mockAuthContext);
 
     expect(mockAuthContext.getLucia).toHaveBeenCalledTimes(1);
-
     expect(mockLucia.createSession).toHaveBeenCalledWith(userId, {
       session_token: 'test-uuid-123',
     });
