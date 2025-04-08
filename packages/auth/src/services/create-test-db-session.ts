@@ -9,8 +9,8 @@ import { UserId } from 'lucia';
  * @returns A Promise that resolves to the created session or undefined if creation fails
  */
 export async function createTestDbSession(
-  userId: UserId,
-  authContext: BaseAuthContext
+  authContext: BaseAuthContext,
+  userId: UserId
 ) {
   if (userId) {
     const lucia = await authContext.getLucia();

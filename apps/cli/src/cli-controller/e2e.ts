@@ -60,7 +60,7 @@ export const addE2eCommands = (ctx: Context, cli: Command) => {
         const userId = await authRepository.getUserId(testEmail);
 
         if (userId) {
-          const session = await createTestDbSession(userId, authContext);
+          const session = await createTestDbSession(authContext, userId);
 
           if(session && session.id) {
             const envContent = `AUTH_SESSION=${session.id}\nE2E_ENDPOINT=http://localhost:4321\n`;

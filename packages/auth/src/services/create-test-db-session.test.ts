@@ -54,7 +54,7 @@ describe('createTestDbSession', () => {
 
   it('should create a session when userId is provided', async () => {
     const userId = 'test-user-id' as UserId;
-    const session = await createTestDbSession(userId, mockAuthContext);
+    const session = await createTestDbSession(mockAuthContext, userId);
 
     expect(mockAuthContext.getLucia).toHaveBeenCalledTimes(1);
     expect(mockLucia.createSession).toHaveBeenCalledWith(userId, {
@@ -70,7 +70,7 @@ describe('createTestDbSession', () => {
 
   it('should return undefined when userId is not provided', async () => {
     // @ts-expect-error null arg is not allowed
-    const session = await createTestDbSession(null, mockAuthContext);
+    const session = await createTestDbSession(mockAuthContext, null);
 
     expect(mockAuthContext.getLucia).not.toHaveBeenCalled();
     expect(mockLucia.createSession).not.toHaveBeenCalled();
