@@ -138,7 +138,6 @@ const sidebarPatterns: DropdownPattern[] = [
   ['rich-text', defaultFormConfig.patterns['rich-text'], 'Other'],
   ['attachment', defaultFormConfig.patterns['attachment'], 'Other'],
   ['package-download', defaultFormConfig.patterns['package-download'], 'Other'],
-  ['accordion-row', defaultFormConfig.patterns['accordion-row'], 'Other'], // TODO: remove this from the sidebar menu once accordion-row is added to fieldset and repeater
 ] as const;
 
 export const compoundFieldChildPatterns: DropdownPattern[] =
@@ -219,6 +218,24 @@ export const CompoundAddPatternButton = ({
         </button>
       </AddPatternDropdown>
     </div>
+  );
+};
+
+export const AddInformationButton = ({
+  patternSelected,
+  title,
+}: PatternMenuProps) => {
+  return (
+    <button
+      className={classNames('usa-button usa-button--unstyled')}
+      onClick={() => patternSelected('accordion-row')}
+    >
+      <span className="display-inline-block text-ttop tablet:width-auto text-center">
+        <span className="display-inline-block text-ttop margin-right-1 text-underline">
+          {title}
+        </span>
+      </span>
+    </button>
   );
 };
 
