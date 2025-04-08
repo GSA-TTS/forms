@@ -21,25 +21,24 @@ export const addE2eCommands = (ctx: Context, cli: Command) => {
       'Path to output the .env file used for testing',
     )
     .action(async (options) => {
-      const { createFilesystemDatabaseContext } = await import(
-        '@gsa-tts/forms-database/context'
-        );
       const dbPath = options.path;
       const outputFile = options.output;
 
       try {
         console.log('Preparing database at:', dbPath);
+
+        // The login flow is to create fs db context -> feed into base auth context constructor -> feed it into the auth service
+        const { createFilesystemDatabaseContext } = await import(
+          '@gsa-tts/forms-database/context'
+        );
+        const dbContext = await createFilesystemDatabaseContext(dbPath);
+        const authRepository = createAuthRepository(dbContext);
+
         const stubLoginProvider = {};
         const stubGetCookie = () => {};
         const stubSetCookie = () => {};
         const stubSetUserSession = () => {};
-        const stubIsUserAuthorized = () => {
-          return Promise.resolve(true);
-        }
-
-        // The login flow is to create fs db context -> feed into base auth context constructor -> feed it into the auth service
-        const dbContext = await createFilesystemDatabaseContext(dbPath);
-        const authRepository = createAuthRepository(dbContext);
+        const stubIsUserAuthorized = () => Promise.resolve(true);
         const authContext = new BaseAuthContext(
           authRepository,
           // Stub a login provider for testing (can be plugged in as needed)
@@ -51,13 +50,13 @@ export const addE2eCommands = (ctx: Context, cli: Command) => {
           stubIsUserAuthorized,
         );
 
-        const testEmail = 'test@example.com';
+        const email = 'test@example.com';
 
-        const user = await authRepository.createUser(testEmail);
+        const user = await authRepository.createUser(email);
         if (!user) {
-          console.log(`Test user created with id: ${testEmail}`);
+          console.log(`Test user created with id: ${email}`);
         }
-        const userId = await authRepository.getUserId(testEmail);
+        const userId = await authRepository.getUserId(email);
 
         if (userId) {
           const session = await createTestDbSession(authContext, userId);
