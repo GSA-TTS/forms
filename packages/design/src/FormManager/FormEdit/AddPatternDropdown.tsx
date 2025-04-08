@@ -221,7 +221,7 @@ export const CompoundAddPatternButton = ({
   );
 };
 
-export const AddInformationButton = ({
+export const AddInformationOrInstructionsButton = ({
   patternSelected,
   title,
 }: PatternMenuProps) => {
