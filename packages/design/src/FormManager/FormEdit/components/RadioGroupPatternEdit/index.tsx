@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import { type RadioGroupProps } from '@gsa-tts/forms-core';
 import { type RadioGroupPattern } from '@gsa-tts/forms-core';
@@ -10,7 +10,10 @@ import { PatternEditComponent } from '../../types.js';
 import { PatternEditActions } from '../common/PatternEditActions.js';
 import { PatternOptionActions } from '../common/PatternOptionActions.js';
 import { PatternEditForm } from '../common/PatternEditForm.js';
-import { usePatternEditFormContext } from '../common/hooks.js';
+import {
+  createPatternOptionsWithContext,
+  usePatternEditFormContext,
+} from '../common/hooks.js';
 import { enLocale as message } from '@gsa-tts/forms-common';
 import styles from '../../formEditStyles.module.css';
 
@@ -38,26 +41,12 @@ const RadioGroupPatternEdit: PatternEditComponent<RadioGroupProps> = ({
 };
 
 const EditComponent = ({ pattern }: { pattern: RadioGroupPattern }) => {
-  const { fieldId, getFieldState, register, setValue } =
+  const { fieldId, getFieldState, register } =
     usePatternEditFormContext<RadioGroupPattern>(pattern.id);
-  const [options, setOptions] = useState(() => [...pattern.data.options]);
+  const { options, setOptions, deleteOption, updateOptionLabel } =
+    createPatternOptionsWithContext(pattern);
   const label = getFieldState('label');
   const hint = getFieldState('hint');
-
-  const handleOptionLabelChange = (index: number, value: string) => {
-    const newOptions = [...options];
-    newOptions[index].label = value;
-    setOptions(newOptions);
-  };
-
-  const handleDeleteOption = (optionId: string) => {
-    const newOptions = options.filter(o => o.id !== optionId);
-    setOptions(newOptions);
-  };
-
-  useEffect(() => {
-    setValue(`options`, options);
-  }, [options, setValue]);
 
   return (
     <div className="grid-row grid-gap">
@@ -151,12 +140,12 @@ const EditComponent = ({ pattern }: { pattern: RadioGroupPattern }) => {
                   id={fieldId(`options.${index}.label`)}
                   {...register(`options.${index}.label`)}
                   value={option.label}
-                  onChange={e => handleOptionLabelChange(index, e.target.value)}
+                  onChange={e => updateOptionLabel(index, e.target.value)}
                   aria-label={`Option ${index + 1} label`}
                 />
                 <PatternOptionActions
                   optionId={option.id}
-                  onDelete={handleDeleteOption}
+                  onDelete={deleteOption}
                 />
               </div>
             </div>
