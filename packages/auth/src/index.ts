@@ -12,6 +12,7 @@ export { logOut } from './services/logout.js';
 export { processProviderCallback } from './services/process-provider-callback.js';
 export { processSessionCookie } from './services/process-session-cookie.js';
 export { createTestDbSession } from './services/create-test-db-session.js';
+export { createE2eAuthContext } from './context/e2e.js';
 export { User, Session };
 export { type AuthServiceContext } from './services/index.js';
 
