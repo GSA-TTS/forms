@@ -3,7 +3,6 @@
   "files": [],
   "references": [
     { "path": "./apps/cli" },
-    { "path": "./apps/rest-api" },
     { "path": "./infra/cdktf" },
     { "path": "./infra/core" },
     { "path": "./packages/auth" },
