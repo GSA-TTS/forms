@@ -81,6 +81,5 @@ class AppStack extends TerraformStack {
     */
 
     //new Docassemble(this, `${id}-docassemble`);
-    //new FormService(this, `${id}-rest-api`);
   }
 }
