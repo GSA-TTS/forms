@@ -1,5 +1,12 @@
 # @gsa-tts/forms-database
 
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies [bbd065d]
+  - @gsa-tts/forms-common@0.1.3
+
 ## 0.1.2
 
 ### Patch Changes
