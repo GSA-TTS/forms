@@ -23,6 +23,7 @@ export type TextInputProps = PatternProps<{
   label: string;
   required: boolean;
   error?: FormError;
+  hint?: string;
 }>;
 
 export type TextAreaProps = PatternProps<{
@@ -33,7 +34,14 @@ export type TextAreaProps = PatternProps<{
   required: boolean;
   error?: FormError;
   hint?: string;
-  maxLength: number;
+}>;
+
+export type AccordionRowProps = PatternProps<{
+  type: 'accordion-row';
+  inputId: string;
+  title: string;
+  text: string;
+  isOpen?: boolean;
 }>;
 
 export type AddressFieldProps = {

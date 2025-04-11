@@ -7,6 +7,7 @@ import { type FormSummaryPattern } from '@gsa-tts/forms-core';
 
 import FormSummary from '../../../Form/components/FormSummary/index.js';
 import { PatternEditComponent } from '../types.js';
+import { PatternEditActions } from './common/PatternEditActions.js';
 
 import { PatternEditForm } from './common/PatternEditForm.js';
 import { usePatternEditFormContext } from './common/hooks.js';
@@ -91,8 +92,12 @@ const EditComponent = ({ pattern }: { pattern: Pattern }) => {
             className={`usa-textarea bg-primary-lighter ${styles.patternChoiceFieldWrapper} ${styles.formDescription}`}
             {...register('description')}
             defaultValue={pattern.data.description}
-          ></textarea>
+            style={{ resize: 'none', overflow: 'auto', height: '100px' }}
+          />
         </label>
+      </div>
+      <div className="grid-col-12">
+        <PatternEditActions />
       </div>
     </div>
   );

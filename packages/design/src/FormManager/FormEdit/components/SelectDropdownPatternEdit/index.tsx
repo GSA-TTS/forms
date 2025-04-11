@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { type SelectDropdownProps } from '@gsa-tts/forms-core';
 import { type SelectDropdownPattern } from '@gsa-tts/forms-core';
@@ -8,8 +8,12 @@ import SelectDropdown from '../../../../Form/components/SelectDropdown/index.js'
 import { PatternEditComponent } from '../../types.js';
 
 import { PatternEditActions } from '../common/PatternEditActions.js';
+import { PatternOptionActions } from '../common/PatternOptionActions.js';
 import { PatternEditForm } from '../common/PatternEditForm.js';
-import { usePatternEditFormContext } from '../common/hooks.js';
+import {
+  usePatternEditFormContext,
+  createPatternOptionsWithContext,
+} from '../common/hooks.js';
 import { enLocale as message } from '@gsa-tts/forms-common';
 import styles from '../../formEditStyles.module.css';
 
@@ -40,7 +44,8 @@ const SelectDropdownPatternEdit: PatternEditComponent<SelectDropdownProps> = ({
 const EditComponent = ({ pattern }: { pattern: SelectDropdownPattern }) => {
   const { fieldId, getFieldState, register } =
     usePatternEditFormContext<SelectDropdownPattern>(pattern.id);
-  const [options, setOptions] = useState(pattern.data.options);
+  const { options, setOptions, deleteOption, updateOptionLabel } =
+    createPatternOptionsWithContext(pattern);
   const label = getFieldState('label');
   const hint = getFieldState('hint');
 
@@ -133,22 +138,32 @@ const EditComponent = ({ pattern }: { pattern: SelectDropdownPattern }) => {
                   className="usa-input bg-primary-lighter"
                   id={fieldId(`options.${index}.label`)}
                   {...register(`options.${index}.label`)}
-                  defaultValue={option.label}
+                  value={option.label}
+                  onChange={e => updateOptionLabel(index, e.target.value)}
                   aria-label={`Option ${index + 1} label`}
+                />
+                <PatternOptionActions
+                  optionId={option.id}
+                  onDelete={deleteOption}
                 />
               </div>
             </div>
           );
         })}
         <button
-          className="usa-button usa-button--outline margin-top-1"
+          className={`usa-link ${styles.addMorePatternButton} margin-top-1`}
           type="button"
           onClick={event => {
             event.preventDefault();
             const optionLabel = `Option ${options.length + 1}`;
             const optionValue = `value-${options.length + 1}`;
+            const optionId = `option-${crypto.randomUUID()}`;
             setOptions(
-              options.concat({ value: optionValue, label: optionLabel })
+              options.concat({
+                value: optionValue,
+                label: optionLabel,
+                id: optionId,
+              })
             );
           }}
         >

@@ -1,5 +1,6 @@
 import { type FormConfig } from '../pattern.js';
 
+import { accordionRowConfig } from './accordion-row/index.js';
 import { attachmentConfig } from './attachment/index.js';
 import { addressConfig } from './address/index.js';
 import { checkboxConfig } from './checkbox.js';
@@ -7,7 +8,7 @@ import { dateOfBirthConfig } from './date-of-birth/date-of-birth.js';
 import { emailInputConfig } from './email-input/email-input.js';
 import { fieldsetConfig } from './fieldset/index.js';
 import { repeaterConfig } from './repeater/index.js';
-import { formSummaryConfig } from './form-summary.js';
+import { formSummaryConfig } from './form-summary/form-summary.js';
 import { genderIdConfig } from './gender-id/gender-id.js';
 import { inputConfig } from './input/index.js';
 import { packageDownloadConfig } from './package-download/index.js';
@@ -28,6 +29,7 @@ import { sexConfig } from './sex/sex.js';
 // understand the usage scenarios better.
 export const defaultFormConfig: FormConfig = {
   patterns: {
+    'accordion-row': accordionRowConfig,
     address: addressConfig,
     attachment: attachmentConfig,
     checkbox: checkboxConfig,
@@ -53,6 +55,7 @@ export const defaultFormConfig: FormConfig = {
     'sex-input': sexConfig,
   },
 } as const;
+export * from './accordion-row/index.js';
 export * from './attachment/index.js';
 export { type AttachmentPattern } from './attachment/config.js';
 export * from './attachment/file-type-options.js';
@@ -62,7 +65,7 @@ export * from './date-of-birth/date-of-birth.js';
 export * from './email-input/email-input.js';
 export * from './fieldset/index.js';
 export { type FieldsetPattern } from './fieldset/config.js';
-export * from './form-summary.js';
+export * from './form-summary/form-summary.js';
 export * from './gender-id/gender-id.js';
 export * from './input/index.js';
 export { type InputPattern } from './input/config.js';

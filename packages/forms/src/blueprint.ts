@@ -9,6 +9,7 @@ import {
 } from './pattern';
 import {
   type FieldsetPattern,
+  type FormSummaryPattern,
   type PagePattern,
   type PageSetPattern,
   type RepeaterPattern,
@@ -39,6 +40,7 @@ export const nullBlueprint: Blueprint = {
  */
 export const createOnePageBlueprint = (): Blueprint => {
   const page1 = generatePatternId();
+  const formSummaryId = generatePatternId();
   return {
     summary: {
       title: '',
@@ -58,9 +60,17 @@ export const createOnePageBlueprint = (): Blueprint => {
         id: page1,
         data: {
           title: 'Page 1',
-          patterns: [],
+          patterns: [formSummaryId],
         },
       },
+      [formSummaryId]: {
+        type: 'form-summary',
+        id: formSummaryId,
+        data: {
+          title: `My form - ${new Date().toISOString()}`,
+          description: '',
+        },
+      } satisfies FormSummaryPattern,
     },
     outputs: [],
   };

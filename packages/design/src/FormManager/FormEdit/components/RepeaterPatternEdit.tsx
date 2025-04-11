@@ -7,6 +7,7 @@ import { RepeaterPattern } from '@gsa-tts/forms-core';
 import {
   CompoundAddPatternButton,
   CompoundAddNewPatternButton,
+  AddInformationOrInstructionsButton,
 } from '../AddPatternDropdown.js';
 import { PatternComponent } from '../../../Form/index.js';
 import Repeater from '../../../Form/components/Repeater/index.js';
@@ -108,6 +109,12 @@ const RepeaterPreview: PatternComponent<RepeaterProps> = props => {
             className="margin-left-3 margin-right-3 margin-bottom-3 bg-none"
           >
             <div className={classNames(styles.usaAlertBody, 'usa-alert__body')}>
+              <AddInformationOrInstructionsButton
+                title="Add supplementary information or instructions"
+                patternSelected={patternType =>
+                  addPatternToCompoundField(patternType, props._patternId)
+                }
+              />
               <CompoundAddPatternButton
                 title="Add question to set"
                 patternSelected={patternType =>

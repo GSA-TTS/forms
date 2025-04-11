@@ -7,6 +7,7 @@ import { FieldsetPattern } from '@gsa-tts/forms-core';
 import {
   CompoundAddPatternButton,
   CompoundAddNewPatternButton,
+  AddInformationOrInstructionsButton,
 } from '../../AddPatternDropdown.js';
 import { useFormManagerStore } from '../../../store.js';
 import { PatternEditComponent } from '../../types.js';
@@ -107,6 +108,12 @@ const FieldsetPreview: PatternComponent<FieldsetProps> = props => {
             className="margin-left-3 margin-right-3 margin-bottom-3 bg-none"
           >
             <div className={classNames(styles.usaAlertBody, 'usa-alert__body')}>
+              <AddInformationOrInstructionsButton
+                title="Add supplementary information or instructions"
+                patternSelected={patternType =>
+                  addPatternToCompoundField(patternType, props._patternId)
+                }
+              />
               <CompoundAddPatternButton
                 title="Add question to set"
                 patternSelected={patternType =>

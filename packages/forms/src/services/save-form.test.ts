@@ -1,12 +1,23 @@
 import { describe, expect, it } from 'vitest';
 
-import { createForm } from '../index.js';
+import { createForm, generatePatternId } from '../index.js';
 import { createTestFormServiceContext } from '../testing.js';
 
 import { saveForm } from './save-form.js';
 import { success } from '@gsa-tts/forms-common';
 
 const TEST_FORM = createForm({ title: 'Form Title', description: '' });
+const formSummaryId = generatePatternId();
+
+TEST_FORM.patterns[formSummaryId] = {
+  type: 'form-summary',
+  id: formSummaryId,
+  data: {
+    title: 'Form Title',
+    description: '',
+  },
+};
+
 const TEST_FORM_2 = {
   ...TEST_FORM,
   summary: {
@@ -14,6 +25,7 @@ const TEST_FORM_2 = {
     title: 'New Title',
   },
 };
+TEST_FORM_2.patterns[formSummaryId].data.title = 'New Title';
 
 describe('saveForm', () => {
   it('returns access denied (401) if user is not logged in', async () => {

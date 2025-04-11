@@ -7,6 +7,12 @@ const defaults = {
 
 export const en = {
   patterns: {
+    accordionRow: {
+      displayName: 'Accordion row',
+      fieldLabel: 'Information box title',
+      textLabel: 'Information box text',
+      errorTextMustContainChar: 'String must contain at least 1 character(s)',
+    },
     address: {
       ...defaults,
       displayName: 'Address',
@@ -37,14 +43,14 @@ export const en = {
     input: {
       ...defaults,
       displayName: 'Short answer',
-      maxLength: 'Maximum length',
+      fieldLabel: 'Question text',
+      hintLabel: 'Hint Text (optional)',
     },
     textarea: {
       ...defaults,
       displayName: 'Long answer',
-      maxLength: 'Maximum length',
+      fieldLabel: 'Question text',
       hintLabel: 'Hint Text (optional)',
-      hint: 'The more specific you can be, the better. Use the space below and/or attach additional pages.',
     },
     packageDownload: {
       ...defaults,
@@ -143,6 +149,11 @@ export const en = {
       displayName: 'Repeatable Group',
       hintLabel: 'Hint Text (optional)',
       errorTextMustContainChar: 'String must contain at least 1 character(s)',
+    },
+  },
+  controls: {
+    addElement: {
+      textContent: 'Add element',
     },
   },
 };

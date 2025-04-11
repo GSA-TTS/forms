@@ -1,8 +1,8 @@
 import * as z from 'zod';
 
-import { type Pattern, type PatternConfig } from '../pattern.js';
-import { type FormSummaryProps } from '../components.js';
-import { safeZodParseFormErrors } from '../util/zod.js';
+import { type Pattern, type PatternConfig } from '../../pattern.js';
+import { type FormSummaryProps } from '../../components.js';
+import { safeZodParseFormErrors } from '../../util/zod.js';
 
 const configSchema = z.object({
   title: z.string().max(128).min(1, 'Title is required'),

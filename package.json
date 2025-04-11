@@ -19,6 +19,8 @@
     "release": "pnpm run build && changeset publish",
     "test": "vitest run",
     "test:ci": "CI=true vitest run # --coverage.enabled --coverage.provider=v8 --coverage.reporter=text --coverage.reporter=json-summary --coverage.reporter=json --coverage.reportOnFailure",
+    "test:e2e:ci": "pnpm --filter @gsa-tts/forms-e2e test:e2e:ci",
+    "test:e2e:dev": "pnpm --filter @gsa-tts/forms-e2e test:e2e:dev",
     "test:infra": "turbo run --filter=infra-cdktf test",
     "typecheck": "tsc --build --noEmit"
   },

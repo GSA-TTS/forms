@@ -1,5 +1,6 @@
 import { PatternComponent, type ComponentForPattern } from '../index.js';
 
+import AccordionRow from './AccordionRow/index.js';
 import Attachment from './Attachment/index.js';
 import Address from './Address/index.js';
 import Checkbox from './Checkbox/index.js';
@@ -26,6 +27,7 @@ import TextArea from './TextArea/index.js';
 import Name from './Name/index.js';
 
 export const defaultPatternComponents: ComponentForPattern = {
+  'accordion-row': AccordionRow as PatternComponent,
   attachment: Attachment as PatternComponent,
   address: Address as PatternComponent,
   checkbox: Checkbox as PatternComponent,

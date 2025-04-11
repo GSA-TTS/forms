@@ -11,6 +11,7 @@ import multipleChoiceIcon from './images/radio-options-icon.svg';
 import templateIcon from './images/template-icon.svg';
 
 import classNames from 'classnames';
+import { enLocale as message } from '@gsa-tts/forms-common';
 
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
 const icons: Record<string, string | any> = {
@@ -73,7 +74,7 @@ export const AddPatternMenu = () => {
         <ul className="usa-list usa-list--unstyled grid-row tablet:flex-justify-end flex-justify-center">
           <li className="position-relative tablet:grid-col-12 grid-col-5 text-center">
             <SidebarAddPatternMenuItem
-              title="Add element"
+              title={message.controls.addElement.textContent}
               patternSelected={addPattern}
             />
           </li>
@@ -130,11 +131,6 @@ const sidebarPatterns: DropdownPattern[] = [
   ['fieldset', defaultFormConfig.patterns['fieldset'], 'Form structure'],
   ['repeater', defaultFormConfig.patterns['repeater'], 'Form structure'],
   ['page', defaultFormConfig.patterns['page'], 'Form structure'],
-  [
-    'form-summary',
-    defaultFormConfig.patterns['form-summary'],
-    'Form structure',
-  ],
   ['rich-text', defaultFormConfig.patterns['rich-text'], 'Other'],
   ['attachment', defaultFormConfig.patterns['attachment'], 'Other'],
   ['package-download', defaultFormConfig.patterns['package-download'], 'Other'],
@@ -145,8 +141,7 @@ export const compoundFieldChildPatterns: DropdownPattern[] =
     ([key]) =>
       key !== 'fieldset' &&
       key !== 'repeater' &&
-      key !== 'page' &&
-      key !== 'form-summary'
+      key !== 'page'
   );
 
 export const SidebarAddPatternMenuItem = ({
@@ -218,6 +213,24 @@ export const CompoundAddPatternButton = ({
         </button>
       </AddPatternDropdown>
     </div>
+  );
+};
+
+export const AddInformationOrInstructionsButton = ({
+  patternSelected,
+  title,
+}: PatternMenuProps) => {
+  return (
+    <button
+      className={classNames('usa-button usa-button--unstyled')}
+      onClick={() => patternSelected('accordion-row')}
+    >
+      <span className="display-inline-block text-ttop tablet:width-auto text-center">
+        <span className="display-inline-block text-ttop margin-right-1 text-underline">
+          {title}
+        </span>
+      </span>
+    </button>
   );
 };
 

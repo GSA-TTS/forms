@@ -10,6 +10,8 @@ import type { Blueprint } from '../types';
 export const parseForm = (config: FormConfig, obj: any): Result<Blueprint> => {
   const formSchema = createFormSchema(config);
   const result = formSchema.safeParse(obj);
+  if (result.data) syncFormSummary(result.data);
+
   if (result.error) {
     return failure(result.error.message);
   }
@@ -62,4 +64,32 @@ const createFormSchema = (config: FormConfig) => {
       })
     ),
   });
+};
+
+const syncFormSummary = (blueprint: Blueprint): Blueprint => {
+  if (!blueprint || !blueprint.patterns || !blueprint.summary) return blueprint;
+
+  const { patterns, summary } = blueprint;
+  const formSummaryPattern = Object.values(patterns).find(
+    (pattern: any) => pattern.type === 'form-summary'
+  );
+
+  if (!formSummaryPattern) return blueprint;
+
+  // Check if the pattern has data property before accessing it
+  if (!formSummaryPattern.data) return blueprint;
+
+  // Now it's safe to access title and description
+  const { title, description } = formSummaryPattern.data;
+
+  // Only update if values exist and differ
+  if (title !== undefined && summary.title !== title) {
+    summary.title = title;
+  }
+
+  if (description !== undefined && summary.description !== description) {
+    summary.description = description;
+  }
+
+  return blueprint;
 };

@@ -2,6 +2,7 @@ import {
   createForm,
   createFormSession,
   defaultFormConfig,
+  FormSummaryPattern,
   type Blueprint,
   type Pattern,
 } from '@gsa-tts/forms-core';
@@ -17,7 +18,7 @@ import { defaultPatternEditComponents } from './FormManager/FormEdit/components/
 import { type FormManagerContext } from './FormManager/index.js';
 import { FormRoute } from '../../forms/dist/types/route-data.js';
 
-export const createOnePageTwoPatternTestForm = () => {
+export const createOnePageThreePatternTestForm = () => {
   return createForm(
     {
       title: 'Test form',
@@ -38,7 +39,7 @@ export const createOnePageTwoPatternTestForm = () => {
           id: 'page-1',
           data: {
             title: 'Page 1',
-            patterns: ['element-1', 'element-2'],
+            patterns: ['form-summary-1', 'element-1', 'element-2'],
           },
         } satisfies PagePattern,
         {
@@ -48,7 +49,6 @@ export const createOnePageTwoPatternTestForm = () => {
             label: 'Pattern 1',
             initial: '',
             required: false,
-            maxLength: 128,
           },
         } satisfies InputPattern,
         {
@@ -58,9 +58,16 @@ export const createOnePageTwoPatternTestForm = () => {
             label: 'Pattern 2',
             initial: 'test',
             required: false,
-            maxLength: 128,
           },
         } satisfies InputPattern,
+        {
+          type: 'form-summary',
+          id: 'form-summary-1',
+          data: {
+            title: 'New Form Title',
+            description: 'New form description',
+          },
+        } satisfies FormSummaryPattern,
       ],
     }
   );
@@ -87,7 +94,7 @@ export const createTwoPageTwoPatternTestForm = () => {
           id: 'page-1',
           data: {
             title: 'First page',
-            patterns: ['element-1', 'element-2'],
+            patterns: ['form-summary-1', 'element-1', 'element-2'],
           },
         } satisfies PagePattern,
         {
@@ -105,7 +112,6 @@ export const createTwoPageTwoPatternTestForm = () => {
             label: 'Pattern 1',
             initial: '',
             required: true,
-            maxLength: 128,
           },
         } satisfies InputPattern,
         {
@@ -115,9 +121,16 @@ export const createTwoPageTwoPatternTestForm = () => {
             label: 'Pattern 2',
             initial: 'test',
             required: true,
-            maxLength: 128,
           },
         } satisfies InputPattern,
+        {
+          type: 'form-summary',
+          id: 'form-summary-1',
+          data: {
+            title: 'New Form Title',
+            description: 'New form description',
+          },
+        } satisfies FormSummaryPattern,
       ],
     }
   );
@@ -136,7 +149,7 @@ export const createTwoPatternTestForm = () => {
           type: 'sequence',
           id: 'root',
           data: {
-            patterns: ['element-1', 'element-2'],
+            patterns: ['form-summary-1', 'element-1', 'element-2'],
           },
         } satisfies SequencePattern,
         {
@@ -146,7 +159,6 @@ export const createTwoPatternTestForm = () => {
             label: 'Pattern 1',
             initial: '',
             required: true,
-            maxLength: 128,
           },
         } satisfies InputPattern,
         {
@@ -156,9 +168,16 @@ export const createTwoPatternTestForm = () => {
             label: 'Pattern 2',
             initial: 'test',
             required: true,
-            maxLength: 128,
           },
         } satisfies InputPattern,
+        {
+          type: 'form-summary',
+          id: 'form-summary-1',
+          data: {
+            title: 'New Form Title',
+            description: 'New form description',
+          },
+        } satisfies FormSummaryPattern,
       ],
     }
   );

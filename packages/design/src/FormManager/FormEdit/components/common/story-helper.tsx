@@ -54,14 +54,18 @@ export const testUpdateFormFieldOnSubmit = async (
   canvasElement: HTMLElement,
   displayName: string,
   fieldLabel: string,
-  updatedLabel: string
+  updatedLabel: string,
+  hintLabel?: string,
+  updatedHintValue?: string
 ): Promise<void> => {
   const canvas = within(canvasElement);
   return testUpdateFormFieldOnSubmitByElement(
     canvasElement,
     await canvas.findByLabelText(displayName),
     fieldLabel,
-    updatedLabel
+    updatedLabel,
+    hintLabel,
+    updatedHintValue
   );
 };
 
@@ -69,7 +73,9 @@ export const testUpdateFormFieldOnSubmitByElement = async (
   canvasElement: HTMLElement,
   element: HTMLElement,
   fieldLabel: string,
-  updatedValue: string
+  updatedValue: string,
+  hintLabel?: string,
+  updatedHintValue?: string
 ): Promise<void> => {
   userEvent.setup();
   const canvas = within(canvasElement);
@@ -80,6 +86,13 @@ export const testUpdateFormFieldOnSubmitByElement = async (
   // Enter new text for the field
   await userEvent.clear(input);
   await userEvent.type(input, updatedValue);
+
+  // Enter new text for the Hint
+  if (hintLabel && updatedHintValue) {
+    const hint = await canvas.findByLabelText(hintLabel);
+    await userEvent.clear(hint);
+    await userEvent.type(hint, updatedHintValue);
+  }
 
   const form = input?.closest('form');
   /**

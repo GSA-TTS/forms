@@ -12,4 +12,4 @@ export const getSecretKeys = (env: string) => [
 const secretPrefix = (env: string) => `/tts-10x-forms-${env}`;
 
 export const getDatabaseSecretKey = (env: string) =>
-  `/${secretPrefix(env)}/database`;
+  `${secretPrefix(env)}/database`;

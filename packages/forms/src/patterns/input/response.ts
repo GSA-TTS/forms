@@ -6,7 +6,7 @@ import { safeZodParseToFormError } from '../../util/zod.js';
 import { type InputPattern } from './config.js';
 
 const createSchema = (data: InputPattern['data']) => {
-  const stringSchema = z.string().max(data.maxLength);
+  const stringSchema = z.string();
 
   const baseSchema = data.required
     ? stringSchema.min(1, { message: 'This field is required' })

@@ -29,7 +29,7 @@ export const radioGroupConfig: PatternConfig<RadioGroupPattern, PatternOutput> =
     displayName: 'Multiple choice',
     iconPath: 'radio-options-icon.svg',
     initial: {
-      label: 'Multiple choice question label',
+      label: 'Question text',
       hint: '',
       options: [
         { id: 'option-1', label: 'Option 1' },

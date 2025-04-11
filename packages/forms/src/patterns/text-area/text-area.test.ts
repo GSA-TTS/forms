@@ -13,7 +13,6 @@ describe('TextAreaPattern tests', () => {
         label: 'Test TextArea Input Label',
         initial: '',
         required: true,
-        maxLength: 500,
         hint: 'This is a hint',
       };
 
@@ -35,23 +34,15 @@ describe('TextAreaPattern tests', () => {
         label: 'Test TextArea Input Label',
         initial: '',
         required: false,
-        maxLength: 500,
         hint: 'This is a hint',
       };
 
       const schema = createTextAreaSchema(data);
       const validInput = 'This is a valid input.';
       const emptyInput = '';
-      const tooLongInput = 'a'.repeat(501);
 
       expect(schema.safeParse(validInput).success).toBe(true);
       expect(schema.safeParse(emptyInput).success).toBe(true);
-
-      const tooLongResult = schema.safeParse(tooLongInput);
-      expect(tooLongResult.success).toBe(false);
-      expect(tooLongResult.error?.issues[0].message).toBe(
-        `String must contain at most 500 character(s)`
-      );
     });
 
     it('should handle repeated fields', () => {
@@ -59,7 +50,6 @@ describe('TextAreaPattern tests', () => {
         label: 'Test Repeater TextArea Input Label',
         initial: '',
         required: true,
-        maxLength: 500,
         hint: 'This is a hint',
       };
 
@@ -81,7 +71,6 @@ describe('TextAreaPattern tests', () => {
           label: 'Test TextArea Input Label',
           initial: '',
           required: true,
-          maxLength: 500,
           hint: 'This is a hint',
         },
       };
@@ -106,7 +95,6 @@ describe('TextAreaPattern tests', () => {
           label: 'Test TextArea Input Label',
           initial: '',
           required: true,
-          maxLength: 500,
           hint: 'This is a hint',
         },
       };
@@ -129,7 +117,6 @@ describe('TextAreaPattern tests', () => {
         label: 'Test TextArea Input Label',
         initial: '',
         required: true,
-        maxLength: 500,
         hint: 'This is a hint',
       };
 
@@ -140,7 +127,6 @@ describe('TextAreaPattern tests', () => {
       if (result.success) {
         expect(result.data.label).toBe('Test TextArea Input Label');
         expect(result.data.required).toBe(true);
-        expect(result.data.maxLength).toBe(500);
         expect(result.data.hint).toBe('This is a hint');
       } else {
         expect.fail('Unexpected validation failure');
@@ -152,7 +138,6 @@ describe('TextAreaPattern tests', () => {
         label: '',
         initial: '',
         required: true,
-        maxLength: 500,
         hint: 'This is a hint',
       };
 

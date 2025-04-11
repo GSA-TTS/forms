@@ -79,7 +79,7 @@ export const addSecretCommands = (ctx: Context, cli: Command) => {
     .command('set-login-gov-keys')
     .description(
       'generate and save login.gov keypair; if it already exists, it is not ' +
-        'updated (future work might include adding key rotation)'
+      'updated (future work might include adding key rotation)',
     )
     .argument('<deploy-env>', 'deployment environment (dev, demo)')
     .argument('<app-key>', 'application key')
@@ -89,12 +89,12 @@ export const addSecretCommands = (ctx: Context, cli: Command) => {
       const loginResult = await commands.setLoginGovSecrets(
         { vault, secretsDir },
         env,
-        appKey
+        appKey,
       );
       if (loginResult.preexisting) {
         console.log('Keypair already exists.');
       } else {
-        console.log(`New keypair added`);
+        console.log('New keypair added');
       }
     });
 };

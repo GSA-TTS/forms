@@ -13,7 +13,7 @@ const addQuestions = async (page: Page) => {
   
   await menuButton.click();
   await page.getByRole('button', { name: 'Short answer' }).click();
-  const fieldLabel = page.locator('.usa-label', { hasText: 'Field label' })
+  const fieldLabel = page.locator('.usa-label', { hasText: 'Question text' })
   await fieldLabel.fill('Short answer label');
 
   await menuButton.click();
@@ -22,24 +22,36 @@ const addQuestions = async (page: Page) => {
   await fieldLabel2.fill('Multiple choice question label');
 
   await page.getByRole('button', { name: 'Save' }).click();
+  await menuButton.click();
+  await page.getByRole('button', { name: 'Short answer' }).click();
+}
+
+const addAndSelectPage = async (page: Page) => {
+  const menuButton = page.getByRole('button', { name: 'Add element', exact: true });
+  await menuButton.click();
+  await page.getByRole('button', { name: 'Page', exact: true }).click();
+
+  const untitledPage = page.locator('.usa-sidenav__item', { hasText: 'Untitled Page'})
+  await untitledPage.click();
 }
 
 test('Create form from scratch', async ({ page }) => {
   const { regexp } = pathToRegexp(Create.path);
   await createNewForm(page);
-  let pageUrl = page.url();
+
   let pagePath = '';
-
-  if(Create.getUrl().indexOf('#') === 0) {
-    const parts = pageUrl.split('#');
-    if(parts.length === 2) {
-      pagePath = parts[1];
+  let hasMatch = false;
+  await page.waitForURL((url) => {
+    if (url.hash.startsWith('#')) {
+      pagePath = url.hash.substring(1);
+    } else {
+      pagePath = url.pathname;
     }
-  } else {
-    pagePath = new URL(pageUrl).pathname;
-  }
+    hasMatch = regexp.test(pagePath);
+    return hasMatch;
+  });
 
-  expect(regexp.test(pagePath)).toBe(true);
+  expect(hasMatch).toBe(true);
 });
 
 test('Add questions', async ({ page }) => {
@@ -64,15 +76,23 @@ test('Add questions', async ({ page }) => {
 
 test('Drag-and-drop questions via mouse interaction', async ({ page }) => {
   await createNewForm(page);
+  await addAndSelectPage(page);
   await addQuestions(page);
+
+  const element1BoxPreOrder = await page.locator('.usa-label', { hasText: 'Short answer label'}).first().boundingBox();
+  const element2BoxPreOrder = await page.locator('.usa-legend', { hasText: 'Multiple choice question label' }).first().boundingBox();
+
+  // Compare the vertical positions of the elements
+  expect(element1BoxPreOrder!.y).toBeLessThan(element2BoxPreOrder!.y);
 
   // Locate the handle for the first draggable item
   const handle = page.locator('[aria-describedby="DndDescribedBy-1"]').first();
   await handle.hover();
   await page.mouse.down();
+  await page.mouse.up();
 
   // Locate the target position for the drag-and-drop action
-  const nextElement = page.locator('.draggable-list-item-wrapper').nth(2);
+  const nextElement = page.locator('.draggable-list-item-wrapper').nth(3);
   const nextElementBox = await nextElement.boundingBox();
   if (nextElementBox) {
     await page.mouse.move(nextElementBox.x + nextElementBox.width / 2, nextElementBox.y + nextElementBox.height / 2);
@@ -81,6 +101,12 @@ test('Drag-and-drop questions via mouse interaction', async ({ page }) => {
   await nextElement.hover();
 
   // Verify that the drag-and-drop action has completed
-  await expect(page.locator('.draggable-list-item-wrapper').nth(2)).toContainText('Short answer label');
-  await expect(page.locator('.draggable-list-item-wrapper').nth(1)).toContainText('Multiple choice question label');
+  const element1BoxPostOrder = await page.locator('.usa-legend', { hasText: 'Multiple choice question label' }).first().boundingBox();
+  const element2BoxPostOrder =  await page.locator('.usa-label', { hasText: 'Short answer label'}).first().boundingBox();
+
+  expect(element1BoxPostOrder).not.toBeNull();
+  expect(element2BoxPostOrder).not.toBeNull();
+  
+  await page.screenshot()
+  expect(element1BoxPostOrder!.y).toBeLessThan(element2BoxPostOrder!.y);
 });
