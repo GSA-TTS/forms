@@ -20,11 +20,7 @@ const meta: Meta<typeof FormDelete> = {
   args: {
     formId: 'test-form',
     formService: createTestBrowserFormService({
-      'test-form': createPatternTestForm({
-        useSequence: true,
-        patternCount: 2,
-        requiredInputs: true,
-      }),
+      'test-form': createPatternTestForm(),
     }),
   },
   tags: ['autodocs'],

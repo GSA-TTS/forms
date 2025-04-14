@@ -24,6 +24,7 @@ const meta: Meta<typeof FormEdit> = {
             form: createPatternTestForm({
               patternCount: 3,
               requiredInputs: false,
+              useSequence: false,
             }),
             route: {
               params: {

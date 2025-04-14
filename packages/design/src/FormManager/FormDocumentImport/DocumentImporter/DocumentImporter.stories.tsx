@@ -17,11 +17,7 @@ const meta: Meta<typeof DocumentImporter> = {
   ],
   parameters: {
     formId: 'test-id',
-    form: createPatternTestForm({
-      useSequence: true,
-      patternCount: 2,
-      requiredInputs: true,
-    }),
+    form: createPatternTestForm(),
   },
   tags: ['autodocs'],
 };

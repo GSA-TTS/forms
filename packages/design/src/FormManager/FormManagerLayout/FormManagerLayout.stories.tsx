@@ -19,12 +19,7 @@ const meta: Meta<typeof FormManagerLayout> = {
       <MemoryRouter initialEntries={['/']}>
         <FormManagerProvider
           context={createTestFormManagerContext()}
-          session={createTestSession({ form: createPatternTestForm({
-            useSequence: true,
-            patternCount: 2,
-            requiredInputs: true,
-          })
-        })}
+          session={createTestSession({ form: createPatternTestForm() })}
         >
           <Story {...args} />
         </FormManagerProvider>

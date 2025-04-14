@@ -11,11 +11,10 @@ import { createPatternTestForm } from '../../../../test-form.js';
 const blueprint = createPatternTestForm({
   pageCount: 2,
   pageTitles: ['First page', 'Second page'],
-  patternCount: 2,
-  requiredInputs: true,
   patternDistribution: {
     0: ['element-1', 'element-2'],
   },
+  useSequence: false,
 });
 
 const storyConfig: Meta<typeof PageSetEdit> = {

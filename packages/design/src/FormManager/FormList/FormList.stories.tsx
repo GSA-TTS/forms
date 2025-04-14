@@ -20,12 +20,7 @@ const meta: Meta<typeof FormList> = {
       <MemoryRouter initialEntries={['/']}>
         <FormManagerProvider
           context={createTestFormManagerContext()}
-          session={createTestSession({ form: createPatternTestForm({
-            useSequence: true,
-            patternCount: 2,
-            requiredInputs: true,
-          })
-        })}
+          session={createTestSession({ form: createPatternTestForm() })}
         >
           <Story {...args} />
         </FormManagerProvider>
@@ -34,11 +29,7 @@ const meta: Meta<typeof FormList> = {
   ],
   args: {
     formService: createTestBrowserFormService({
-      'test-form': createPatternTestForm({
-        useSequence: true,
-        patternCount: 2,
-        requiredInputs: true,
-      }),
+      'test-form': createPatternTestForm(),
     }),
   },
   tags: ['autodocs'],

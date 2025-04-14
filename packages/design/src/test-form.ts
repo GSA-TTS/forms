@@ -41,8 +41,8 @@ export const createPatternTestForm = (config: TestFormConfig = {}) => {
       .fill(0)
       .map((_, i) => `Page ${i + 1}`),
     patternCount = 2,
-    requiredInputs = false,
-    useSequence = false,
+    requiredInputs = true,
+    useSequence = true,
     formTitle = 'Test form',
     formDescription = 'Test description',
     formSummaryTitle = 'New Form Title',
@@ -156,14 +156,6 @@ export const createPatternTestForm = (config: TestFormConfig = {}) => {
   });
 };
 
-export const createTwoPatternTestForm = () => {
-  return createPatternTestForm({
-    useSequence: true,
-    patternCount: 2,
-    requiredInputs: true,
-  });
-};
-
 export const createTestFormConfig = () => {
   return defaultFormConfig;
 };
@@ -200,11 +192,7 @@ export const createTestSession = (options?: {
   route?: FormRoute;
 }) => {
   return createFormSession(
-    options?.form || createPatternTestForm({
-      useSequence: true,
-      patternCount: 2,
-      requiredInputs: true,
-    }),
+    options?.form || createPatternTestForm(),
     options?.route
   );
 };
