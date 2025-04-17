@@ -23,11 +23,14 @@ export const createCustomServer = async (db: DatabaseContext): Promise<any> => {
         'beatrice.mercier@gsa.gov',
         'samantha.noor@gsa.gov',
         'emily.herrick@gsa.gov',
+        'nichole.aquino@gsa.gov',
         // DOJ test users
         'deserene.h.worsley@usdoj.gov',
         'jordan.pendergrass@usdoj.gov',
         'kira.gillespie@usdoj.gov',
         'kameron.c.thomas@usdoj.gov',
+        'abiel.m.ogbe@usdoj.gov',
+        'kelley.c.huber@usdoj.gov',
       ].includes(email.toLowerCase());
     },
   });
