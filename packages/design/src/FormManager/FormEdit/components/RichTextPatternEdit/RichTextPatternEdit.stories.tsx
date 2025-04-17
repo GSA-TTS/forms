@@ -3,7 +3,6 @@ import { expect, userEvent } from '@storybook/test';
 import { within } from '@testing-library/react';
 
 import { type RichTextPattern } from '@gsa-tts/forms-core';
-import { en as message } from '@gsa-tts/forms-common/src/locales/en/app.js';
 
 import { createPatternEditStoryMeta } from '../common/story-helper.js';
 import FormEdit from '../../index.js';
@@ -36,7 +35,9 @@ export const Formatting: StoryObj<typeof FormEdit> = {
     const canvas = within(canvasElement);
 
     await userEvent.click(
-      canvas.getByText(message.patterns.richText.displayName)
+      canvas.getByText(editorText, {
+        selector: '[class*="_richTextEditorWrapper"] p',
+      })
     );
 
     const headingMap: Record<string, string> = {

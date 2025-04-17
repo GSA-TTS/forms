@@ -24,6 +24,7 @@ export const createCustomServer = async (db: DatabaseContext): Promise<any> => {
         'samantha.noor@gsa.gov',
         'emily.herrick@gsa.gov',
         'nichole.aquino@gsa.gov',
+        'senai.mesfin@gsa.gov',
         // DOJ test users
         'deserene.h.worsley@usdoj.gov',
         'jordan.pendergrass@usdoj.gov',
