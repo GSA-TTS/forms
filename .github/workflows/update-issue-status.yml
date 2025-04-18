@@ -1,0 +1,51 @@
+name: Update Linked Issue to "In Review"
+
+on:
+  pull_request:
+    types:
+      - opened
+      - ready_for_review
+
+jobs:
+  update-linked-issue:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup gh cli
+        uses: ksivamuthu/actions-setup-gh-cli@v3
+
+      - name: Check if PR is not a draft
+        id: check_draft
+        run: |
+          if [[ "${{ github.event.pull_request.draft }}" == "true" ]]; then
+            echo "This PR is in draft mode. Exiting..."
+            exit 0
+          fi
+          
+          echo "PR is not in draft mode. Proceeding..."
+
+      - name: Extract Linked Issue Number
+        id: extract_issue
+        run: |
+          # Search the PR description for an issue reference (e.g., "Fixes #123")
+          ISSUE_NUMBER=$(echo "${{ github.event.pull_request.body }}" | grep -oE "#[0-9]+" | head -n 1 | tr -d "#")
+          
+          # Fail if no linked issue is found
+          if [ -z "$ISSUE_NUMBER" ]; then
+            echo "No linked issue found in the PR description. Exiting..."
+            exit 0
+          fi
+          
+          echo "Found linked issue: $ISSUE_NUMBER"
+          
+          # Export the issue number for later steps
+          echo "::set-output name=issue_number::$ISSUE_NUMBER"
+
+      - name: Update GitHub Issue Status to "In Review"
+        if: steps.check_draft.outcome == 'success' && steps.extract_issue.outcome == 'success'
+        run: |
+          ISSUE_NUMBER=${{ steps.extract_issue.outputs.issue_number }}
+          echo "Updating linked issue #$ISSUE_NUMBER to 'In Review'..."
+          
+          gh issue comment $ISSUE_NUMBER --body "Status updated to **In Review** due to PR #${{ github.event.pull_request.number }} being marked ready for review."
+          gh issue edit $ISSUE_NUMBER --label "In Review"
