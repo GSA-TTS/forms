@@ -5,6 +5,7 @@ import {
   addPatternToPage,
   addPatternToRepeater,
   copyPattern,
+  copyPage,
   createOnePageBlueprint,
   movePatternBetweenPages,
   removePatternFromBlueprint,
@@ -108,8 +109,17 @@ export class BlueprintBuilder {
     return pattern;
   }
 
+  copyPage(pageId: PatternId) {
+    const root = this.form.patterns[this.form.root] as PageSetPattern;
+    if (root.type !== 'page-set') {
+      throw new Error('expected root to be a page-set');
+    }
+    const results = copyPage(this.form, pageId);
+    this.bp = results.bp;
+    return results.pattern;
+  }
+
   copyPattern(parentPatternId: PatternId, patternId: PatternId) {
-    const pattern = getPattern(this.form, patternId);
     const root = this.form.patterns[this.form.root] as PageSetPattern;
     if (root.type !== 'page-set') {
       throw new Error('expected root to be a page-set');
