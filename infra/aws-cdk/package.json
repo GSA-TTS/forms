@@ -1,6 +1,6 @@
 {
   "name": "@gsa-tts/forms-infra-aws-cdk",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "bin": {
     "aws-cdk": "bin/aws-cdk.js",
     "forms-apply-stack": "bin/forms-apply-stack",
