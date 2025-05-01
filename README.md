@@ -7,6 +7,8 @@ Forms Platform is the product of extensive research and development completed by
 
 Forms Platform aims to solve a persistent challenge faced by federal agencies: delivery of compliant and user-friendly forms, delivered cost-effectively, seamlessly integrated with diverse agency workflows, and accessible to non-technical program office staff. Deployed broadly, Forms Platform would serve as a common interface to federal government services, tailored to public sector needs.
 
+If you would like to connect with the team or are interested in Forms Platform for your agency, please contact us at [10x-forms-platform@gsa.gov](mailto:10x-forms-platform@gsa.gov).
+
 ## Overview
 
 An architectural overview is [available here](documents/architecture.md).
