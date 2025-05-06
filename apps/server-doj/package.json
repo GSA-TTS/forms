@@ -1,6 +1,6 @@
 {
   "name": "@gsa-tts/forms-server-doj",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Form server instance for DOJ",
   "type": "module",
   "license": "CC0",

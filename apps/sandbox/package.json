@@ -1,6 +1,6 @@
 {
   "name": "@gsa-tts/forms-sandbox",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Form server sandbox for evaluating functionality.",
   "type": "module",
   "license": "CC0",

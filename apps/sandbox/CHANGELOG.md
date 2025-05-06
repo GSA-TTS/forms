@@ -1,5 +1,13 @@
 # @gsa-tts/forms-server-doj
 
+## 0.1.5
+
+### Patch Changes
+
+- @gsa-tts/forms-infra-core@0.1.5
+- @gsa-tts/forms-database@0.1.3
+- @gsa-tts/forms-server@0.1.3
+
 ## 0.1.4
 
 ### Patch Changes

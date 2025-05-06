@@ -1,5 +1,11 @@
 # @gsa-tts/forms-infra-aws-cdk
 
+## 0.1.13
+
+### Patch Changes
+
+- @gsa-tts/forms-infra-core@0.1.5
+
 ## 0.1.12
 
 ### Patch Changes
