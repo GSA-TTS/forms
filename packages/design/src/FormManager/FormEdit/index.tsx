@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import Form, { type ComponentForPattern } from '../../Form/index.js';
+import Form from '../../Form/Form.js';
+import { type ComponentForPattern } from '../../Form/types.js';
+
 import { AddPatternMenu } from './AddPatternDropdown.js';
 import { PreviewPattern } from './PreviewPattern.js';
 import { useFormManagerStore } from '../store.js';

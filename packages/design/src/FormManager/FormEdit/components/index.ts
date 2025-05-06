@@ -3,32 +3,33 @@ import {
   type EditComponentForPattern,
 } from '../types.js';
 
-import AccordionRowPatternEdit from './AccordionRowPatternEdit/index.js';
-import AddressPatternEdit from './AddressPatternEdit/index.js';
-import AttachmentPatternEdit from './AttachmentPatternEdit/index.js';
-import CheckboxPatternEdit from './CheckboxPatternEdit/index.js';
-import CheckboxGroupPatternEdit from './CheckboxGroupPatternEdit/index.js';
-import DatePatternEdit from './DatePatternEdit/index.js';
-import EmailInputPatternEdit from './EmailInputPatternEdit/index.js';
-import FieldsetEdit from './FieldsetEdit/index.js';
+import AccordionRowPatternEdit from './AccordionRowPatternEdit/AccordionRowPatternEdit.js';
+import AddressPatternEdit from './AddressPatternEdit/AddressPatternEdit.js';
+import AttachmentPatternEdit from './AttachmentPatternEdit/AttachmentPatternEdit.js';
+import CheckboxPatternEdit from './CheckboxPatternEdit/CheckboxPatternEdit.js';
+import CheckboxGroupPatternEdit from './CheckboxGroupPatternEdit/CheckboxGroupPatternEdit.js';
+import DatePatternEdit from './DatePatternEdit/DatePatternEdit.js';
+import EmailInputPatternEdit from './EmailInputPatternEdit/EmailInputPatternEdit.js';
+import FieldsetEdit from './FieldsetEdit/FieldsetEdit.js';
 import FormSummaryEdit from './FormSummaryEdit.js';
-import InputPatternEdit from './InputPatternEdit/index.js';
-import GenderIdPatternEdit from './GenderIdPatternEdit/index.js';
-import NamePatternEdit from './NamePatternEdit/index.js';
+import InputPatternEdit from './InputPatternEdit/InputPatternEdit.js';
+import GenderIdPatternEdit from './GenderIdPatternEdit/GenderIdPatternEdit.js';
+import NamePatternEdit from './NamePatternEdit/NamePatternEdit.js';
 import PackageDownloadPatternEdit from './PackageDownloadPatternEdit.js';
-import PageSetEdit from './PageSetEdit/index.js';
+import PageSetEdit from './PageSetEdit/PageSetEdit.js';
 import { PageEdit } from './PageEdit.js';
-import ParagraphPatternEdit from './ParagraphPatternEdit/index.js';
-import { PatternPreviewSequence } from './PreviewSequencePattern/index.js';
-import PhoneNumberPatternEdit from './PhoneNumberPatternEdit/index.js';
-import RadioGroupPatternEdit from './RadioGroupPatternEdit/index.js';
-import RepeaterPatternEdit from './RepeaterPatternEdit.js';
-import RichTextPatternEdit from './RichTextPatternEdit/index.js';
-import SelectDropdownPatternEdit from './SelectDropdownPatternEdit/index.js';
-import SocialSecurityNumberPatternEdit from './SocialSecurityNumberPatternEdit/index.js';
+import ParagraphPatternEdit from './ParagraphPatternEdit/ParagraphPatternEdit.js';
+import { PatternPreviewSequence } from './PreviewSequencePattern/PreviewSequencePattern.js';
+import PhoneNumberPatternEdit from './PhoneNumberPatternEdit/PhoneNumberPatternEdit.js';
+import RadioGroupPatternEdit from './RadioGroupPatternEdit/RadioGroupPatternEdit.js';
+import RepeaterPatternEdit from './RepeaterPatternEdit/RepeaterPatternEdit.js';
+import RichTextPatternEdit from './RichTextPatternEdit/RichTextPatternEdit.js';
+import SelectDropdownPatternEdit from './SelectDropdownPatternEdit/SelectDropdownPatternEdit.js';
+import SocialSecurityNumberPatternEdit from './SocialSecurityNumberPatternEdit/SocialSecurityNumberPatternEdit.js';
 import SubmissionConfirmationEdit from './SubmissionConfirmationEdit.js';
-import TextAreaPatternEdit from './TextAreaPatternEdit/index.js';
-import SexPatternEdit from './SexPatternEdit/index.js';
+import TextAreaPatternEdit from './TextAreaPatternEdit/SocialSecurityNumberPatternEdit.js';
+import SexPatternEdit from './SexPatternEdit/SexPatternEdit.js';
+
 export const defaultPatternEditComponents: EditComponentForPattern = {
   'accordion-row': AccordionRowPatternEdit as PatternEditComponent,
   address: AddressPatternEdit as PatternEditComponent,

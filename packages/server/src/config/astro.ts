@@ -28,6 +28,7 @@ const createAstroAppContext = async (
   serverOptions: ServerOptions
 ): Promise<AppContext> => {
   return {
+    agencyBranding: serverOptions.agencyBranding,
     auth: await createDefaultAuthContext({
       Astro,
       authRepository: createAuthRepository(serverOptions.db),

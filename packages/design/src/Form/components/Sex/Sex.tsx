@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import { useFormContext } from 'react-hook-form';
-import { type PatternComponent } from '../../index.js';
+import { type PatternComponent } from '../../types.js';
 import { type SexProps } from '@gsa-tts/forms-core';
 import Modal from './Modal.js';
 

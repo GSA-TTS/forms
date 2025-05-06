@@ -6,6 +6,8 @@ Date: 2024-09-04
 
 Approved
 
+> *NOTE: The strategy for API management would benefit from being reconsidered.*
+
 ## Context
 
 During the prototyping and demo phase, Forms Platform used client-side services that persisted to browser local storage. As we introduce a backend to support agency users, we need to structure an API for the content authoring operations of the platform.

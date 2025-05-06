@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormManagerStore } from '../store.js';
 
-export const FormInspect = () => {
+const FormInspect = () => {
   const form = useFormManagerStore(state => state.session.form);
   return (
     <pre>
@@ -9,3 +9,5 @@ export const FormInspect = () => {
     </pre>
   );
 };
+
+export default FormInspect;

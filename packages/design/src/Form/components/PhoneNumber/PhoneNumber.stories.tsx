@@ -2,7 +2,7 @@ import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { type Meta, type StoryObj } from '@storybook/react';
 
-import { PhoneNumberPattern } from './PhoneNumber.js';
+import PhoneNumberPattern from './PhoneNumber.js';
 
 const meta: Meta<typeof PhoneNumberPattern> = {
   title: 'patterns/PhoneNumberPattern',

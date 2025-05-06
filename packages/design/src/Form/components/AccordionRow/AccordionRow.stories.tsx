@@ -1,7 +1,7 @@
 import React from 'react';
 import { type Meta, type StoryObj } from '@storybook/react';
 
-import AccordionRow from './index.js';
+import AccordionRow from './AccordionRow.js';
 
 const meta: Meta<typeof AccordionRow> = {
   title: 'patterns/AccordionRow',

@@ -1,6 +1,13 @@
 # 10x Forms Platform
 
-Test bed for 10x forms tooling, completed as part of the [10x Forms Platform](https://github.com/orgs/GSA-TTS/projects/38?pane=issue&itemId=58755590&issue=GSA-TTS%7C10x-projects%7C29) project.
+> **Notice:**
+> As of early May 2025, Forms Platform development is paused pending administrative prioritization.
+
+Forms Platform is the product of extensive research and development completed by [10x](https://10x.gsa.gov/), a federal venture studio housed within the [General Services Administration](https://www.gsa.gov/)'s [Technology Transformation Services](https://tts.gsa.gov/).
+
+Forms Platform aims to solve a persistent challenge faced by federal agencies: delivery of compliant and user-friendly forms, delivered cost-effectively, seamlessly integrated with diverse agency workflows, and accessible to non-technical program office staff. Deployed broadly, Forms Platform would serve as a common interface to federal government services, tailored to public sector needs.
+
+If you would like to connect with the team or are interested in Forms Platform for your agency, please contact us at [10x-forms-platform@gsa.gov](mailto:10x-forms-platform@gsa.gov).
 
 ## Overview
 

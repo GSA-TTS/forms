@@ -2,12 +2,10 @@ import React from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { type CheckboxGroupProps } from '@gsa-tts/forms-core';
-import { type PatternComponent } from '../../../Form/index.js';
+import { type PatternComponent } from '../../types.js';
 import classNames from 'classnames';
 
-export const CheckboxGroupPattern: PatternComponent<
-  CheckboxGroupProps
-> = props => {
+const CheckboxGroupPattern: PatternComponent<CheckboxGroupProps> = props => {
   const { register } = useFormContext();
   const hintId = `hint-${props.groupId}`;
   const errorId = `error-${props.groupId}`;
@@ -62,3 +60,5 @@ export const CheckboxGroupPattern: PatternComponent<
     </fieldset>
   );
 };
+
+export default CheckboxGroupPattern;

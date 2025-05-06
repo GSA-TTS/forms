@@ -34,5 +34,12 @@ export class CloudGovSpace extends Construct {
         ),
       }
     );
+
+    new AstroService(scope, `${id}-sandbox`, space.id, `sandbox:${gitRef}`, {
+      loginGovPrivateKey: getSecret(
+        this,
+        `/${id}/sandbox/login.gov/private-key`
+      ),
+    });
   }
 }

@@ -32,4 +32,4 @@ By starting small and not pulling in dependencies we do not immediately need, we
 
 However, we risk losing the opportunity to quickly get "big wins" by pulling in a more fully-baked interview format at the onset. As a result, such solutions should be considered near-term integration opportunities.
 
-This ADR will need to be continually reevaluated through the course of 10x phase 3 work.
+This ADR should be continually reevaluated through the course of development.

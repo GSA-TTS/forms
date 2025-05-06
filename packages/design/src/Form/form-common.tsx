@@ -1,6 +1,6 @@
 import React from 'react';
 import type { PromptComponent } from '@gsa-tts/forms-core';
-import type { FormUIContext } from './index.js';
+import type { FormUIContext } from './types.js';
 
 export const renderPromptComponents = (
   context: FormUIContext,

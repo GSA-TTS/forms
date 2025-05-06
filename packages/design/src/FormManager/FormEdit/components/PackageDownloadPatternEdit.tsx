@@ -8,7 +8,7 @@ import {
   type PatternId,
 } from '@gsa-tts/forms-core';
 
-import PackageDownload from '../../../Form/components/PackageDownload/index.js';
+import PackageDownload from '../../../Form/components/PackageDownload/PackageDownload.js';
 import { PatternEditComponent } from '../types.js';
 
 import { PatternEditActions } from './common/PatternEditActions.js';

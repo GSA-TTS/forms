@@ -6,6 +6,8 @@ Date: 2024-09-04
 
 Approved
 
+> *NOTE: Lucia [is deprecated](https://github.com/lucia-auth/lucia/discussions/1714), and there were some challenges integrating it cleanly into the [auth package](../../packages/auth/). As a result, this ADR should be reconsidered.*
+
 ## Context
 
 Forms Platform requires a method of authenticating users. We are inclined to default to [Login.gov](https://login.gov/), a government-wide federated service hosted by [TTS](https://www.gsa.gov/about-us/organization/federal-acquisition-service/technology-transformation-services), unless circumstances prevent its usage.

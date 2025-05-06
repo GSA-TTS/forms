@@ -18,7 +18,7 @@ The database should be commonly used and easy to host in many varied deployment 
 
 ## Decision
 
-We will use PostgreSQL in our production deployments. We will use [Testcontainers](https://testcontainers.com/) to unit-test database gateway logic against a PostgreSQL container. Integration testing will be handled with an in-memory SQLite database.
+We will use PostgreSQL in our production deployments. We will use [Testcontainers](https://testcontainers.com/) to unit-test database gateway logic against a PostgreSQL container. Integration testing will be handled with ephemeral in-memory SQLite databases.
 
 [Knex.js](https://knexjs.org/) is the most widely-used node.js query builder, and has backend adapters for most common relational databases. We will utilize Knex.js for its migration support. Knex.js may also be used for queries, as appropriate.
 

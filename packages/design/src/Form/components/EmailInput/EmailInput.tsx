@@ -2,9 +2,9 @@ import React from 'react';
 import classNames from 'classnames';
 import { useFormContext } from 'react-hook-form';
 import { type EmailInputProps } from '@gsa-tts/forms-core';
-import { type PatternComponent } from '../../index.js';
+import { type PatternComponent } from '../../types.js';
 
-export const EmailInputPattern: PatternComponent<EmailInputProps> = ({
+const EmailInputPattern: PatternComponent<EmailInputProps> = ({
   emailId,
   label,
   required,
@@ -57,3 +57,5 @@ export const EmailInputPattern: PatternComponent<EmailInputProps> = ({
     </fieldset>
   );
 };
+
+export default EmailInputPattern;

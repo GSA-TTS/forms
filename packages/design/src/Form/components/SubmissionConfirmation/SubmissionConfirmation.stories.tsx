@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import SubmissionConfirmation from './index.js';
+import SubmissionConfirmation from './SubmissionConfirmation.js';
 
 export default {
   title: 'patterns/SubmissionConfirmation',

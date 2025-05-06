@@ -6,7 +6,7 @@ import { type AttachmentProps } from '@gsa-tts/forms-core';
 import { FormProvider, useForm } from 'react-hook-form';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Attachment from './index.js';
+import Attachment from './Attachment.js';
 
 const defaultArgs = {
   _patternId: '',

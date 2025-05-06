@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { useFormContext } from 'react-hook-form';
 import { type SocialSecurityNumberProps } from '@gsa-tts/forms-core';
 
-import { type PatternComponent } from '../../index.js';
+import { type PatternComponent } from '../../types.js';
 
 const formatSSN = (value: string) => {
   const rawValue = value.replace(/[^\d]/g, '');
@@ -13,7 +13,7 @@ const formatSSN = (value: string) => {
   return `${rawValue.slice(0, 3)}-${rawValue.slice(3, 5)}-${rawValue.slice(5, 9)}`;
 };
 
-export const SocialSecurityNumberPattern: PatternComponent<
+const SocialSecurityNumberPattern: PatternComponent<
   SocialSecurityNumberProps
 > = ({ ssnId, hint, label, required, error, value }) => {
   const { register, setValue } = useFormContext();
@@ -69,3 +69,5 @@ export const SocialSecurityNumberPattern: PatternComponent<
     </fieldset>
   );
 };
+
+export default SocialSecurityNumberPattern;

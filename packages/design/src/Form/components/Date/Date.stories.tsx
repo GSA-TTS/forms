@@ -2,7 +2,7 @@ import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { type Meta, type StoryObj } from '@storybook/react';
 
-import { DatePattern } from './Date.js';
+import DatePattern from './Date.js';
 
 const meta: Meta<typeof DatePattern> = {
   title: 'patterns/DateOfBirthPattern',

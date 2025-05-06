@@ -1,0 +1,25 @@
+{
+  "name": "@gsa-tts/forms-sandbox",
+  "version": "0.1.4",
+  "description": "Form server sandbox for evaluating functionality.",
+  "type": "module",
+  "license": "CC0",
+  "main": "src/index.ts",
+  "private": true,
+  "scripts": {
+    "build": "tsup src/* --format esm",
+    "clean": "rimraf dist tsconfig.tsbuildinfo coverage",
+    "dev": "tsup src/* --watch  --format esm",
+    "start": "VCAP_SERVICES='{\"aws-rds\": [{ \"credentials\": { \"uri\": \"\" }}]}' node dist/index.js",
+    "test": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@gsa-tts/forms-database": "workspace:*",
+    "@gsa-tts/forms-infra-core": "workspace:*",
+    "@gsa-tts/forms-server": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/supertest": "^6.0.2",
+    "supertest": "^7.0.0"
+  }
+}

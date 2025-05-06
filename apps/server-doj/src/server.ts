@@ -3,6 +3,7 @@ import { createServer } from '@gsa-tts/forms-server';
 
 export const createCustomServer = async (db: DatabaseContext): Promise<any> => {
   return createServer({
+    agencyBranding: true,
     title: 'DOJ Form Service',
     db,
     loginGovOptions: {

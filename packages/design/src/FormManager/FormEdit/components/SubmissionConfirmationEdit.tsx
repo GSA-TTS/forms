@@ -5,7 +5,7 @@ import {
   SubmissionConfirmationProps,
 } from '@gsa-tts/forms-core';
 
-import SubmissionConfirmation from '../../../Form/components/SubmissionConfirmation/index.js';
+import SubmissionConfirmation from '../../../Form/components/SubmissionConfirmation/SubmissionConfirmation.js';
 import { PatternEditComponent } from '../types.js';
 
 import { PatternEditForm } from './common/PatternEditForm.js';

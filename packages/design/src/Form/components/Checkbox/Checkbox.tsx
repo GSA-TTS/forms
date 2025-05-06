@@ -3,10 +3,10 @@ import { useFormContext } from 'react-hook-form';
 
 import { type CheckboxProps } from '@gsa-tts/forms-core';
 
-import { type PatternComponent } from '../../../Form/index.js';
+import { type PatternComponent } from '../../types.js';
 import classNames from 'classnames';
 
-export const CheckboxPattern: PatternComponent<CheckboxProps> = props => {
+const CheckboxPattern: PatternComponent<CheckboxProps> = props => {
   const { register } = useFormContext();
   return (
     <div className="usa-checkbox">
@@ -29,3 +29,5 @@ export const CheckboxPattern: PatternComponent<CheckboxProps> = props => {
     </div>
   );
 };
+
+export default CheckboxPattern;

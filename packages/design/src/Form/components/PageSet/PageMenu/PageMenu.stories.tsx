@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { PageMenu } from './PageMenu.js';
+import PageMenu from './PageMenu.js';
 
 const meta: Meta<typeof PageMenu> = {
   title: 'patterns/PageSet/PageMenu',

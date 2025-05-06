@@ -4,7 +4,7 @@ import { type CheckboxGroupPattern } from '@gsa-tts/forms-core';
 
 import { createPatternEditStoryMeta } from '../common/story-helper.js';
 import FormEdit from '../../index.js';
-import CheckboxGroupPatternEdit from '../CheckboxGroupPatternEdit/index.js';
+import CheckboxGroupPatternEdit from './CheckboxGroupPatternEdit.js';
 import { enLocale as message } from '@gsa-tts/forms-common';
 import { expect, userEvent } from '@storybook/test';
 import { within } from '@testing-library/react';

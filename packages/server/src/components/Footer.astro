@@ -4,43 +4,44 @@ import { getBranchTreeUrl } from '../lib/github';
 import { getServerContext } from '../config/astro.js';
 import DOJFooter from './DOJFooter.astro';
 
-const { github } = await getServerContext(Astro);
-const isForm = Astro.url.href.includes('/forms/');
+const { agencyBranding, github } = await getServerContext(Astro);
+const useAgencyBranding = agencyBranding && Astro.url.href.includes('/forms/');
 ---
 
-{ isForm ? (
-  <DOJFooter />
-) : ( 
-<footer class="usa-footer usa-footer--slim">
-  <div class="grid-container usa-footer__return-to-top">
-    <a href="#">Return to top</a>
-  </div>
-  <div class="usa-footer__primary-section">
-    <div class="usa-footer__primary-container grid-row">
-      <div class="mobile-lg:grid-col-8">
-        <nav class="usa-footer__nav" aria-label="Footer navigation,">
-          <ul class="grid-row grid-gap">
-            <li
-              class="mobile-lg:grid-col-6 desktop:grid-col-auto usa-footer__primary-content"
-            >
-              <a class="usa-footer__primary-link" href="https://10x.gsa.gov/">
-                10x
-              </a>
-            </li>
-            <li
-              class="mobile-lg:grid-col-6 desktop:grid-col-auto usa-footer__primary-content"
-            >
-              <a
-                class="usa-footer__primary-link"
-                href={getBranchTreeUrl(github, true)}
-              >
-                Github repository
-              </a>
-            </li>
-          </ul>
-        </nav>
+{
+  useAgencyBranding ? (
+    <DOJFooter />
+  ) : (
+    <footer class="usa-footer usa-footer--slim">
+      <div class="grid-container usa-footer__return-to-top">
+        <a href="#">Return to top</a>
       </div>
-    </div>
-  </div>
-</footer>
-)}
+      <div class="usa-footer__primary-section">
+        <div class="usa-footer__primary-container grid-row">
+          <div class="mobile-lg:grid-col-8">
+            <nav class="usa-footer__nav" aria-label="Footer navigation,">
+              <ul class="grid-row grid-gap">
+                <li class="mobile-lg:grid-col-6 desktop:grid-col-auto usa-footer__primary-content">
+                  <a
+                    class="usa-footer__primary-link"
+                    href="https://10x.gsa.gov/"
+                  >
+                    10x
+                  </a>
+                </li>
+                <li class="mobile-lg:grid-col-6 desktop:grid-col-auto usa-footer__primary-content">
+                  <a
+                    class="usa-footer__primary-link"
+                    href={getBranchTreeUrl(github, true)}
+                  >
+                    Github repository
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}

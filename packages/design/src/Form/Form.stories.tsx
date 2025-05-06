@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Form from './index.js';
+import Form from './Form.js';
 import { createTestFormContext, createTestSession } from '../test-form.js';
 import { MemoryRouter } from 'react-router-dom';
 
