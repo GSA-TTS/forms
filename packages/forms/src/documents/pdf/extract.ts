@@ -31,7 +31,10 @@ export const getDocumentFieldData = async (
   pdfBytes: Uint8Array
 ): Promise<DocumentFieldMap> => {
   const pdfDoc = await PDFDocument.load(pdfBytes);
-  const widgets = await getWidgets(pdfDoc);
+  const widgets = (await getWidgets(pdfDoc)).filter(widget => {
+    const ft = widget.get(PDFName.of('FT'));
+    return ft instanceof PDFName;
+  });
 
   pdfDoc.catalog.set(
     PDFName.of('AcroForm'),
