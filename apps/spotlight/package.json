@@ -27,7 +27,7 @@
     "@gsa-tts/forms-common": "workspace:*",
     "@gsa-tts/forms-design": "workspace:*",
     "@gsa-tts/forms-core": "workspace:*",
-    "astro": "^4.16.18",
+    "astro": "^4.16.19",
     "qs": "^6.13.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
