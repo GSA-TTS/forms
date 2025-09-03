@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { type Meta, type StoryObj } from '@storybook/react';
-import GenderIdPattern from './index.js';
+import GenderIdPattern from './GenderId.js';
 
 const meta: Meta<typeof GenderIdPattern> = {
   title: 'patterns/GenderIdPattern',

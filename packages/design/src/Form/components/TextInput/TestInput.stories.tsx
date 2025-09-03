@@ -2,7 +2,7 @@ import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import TextInput from './index.js';
+import TextInput from './TextInput.js';
 
 const meta: Meta<typeof TextInput> = {
   title: 'patterns/TextInput',

@@ -11,7 +11,7 @@ import { PatternEditComponent } from '../types.js';
 import { PatternEditActions } from './common/PatternEditActions.js';
 import { PatternEditForm } from './common/PatternEditForm.js';
 import { usePatternEditFormContext } from './common/hooks.js';
-import { PatternPreviewSequence } from './PreviewSequencePattern/index.js';
+import { PatternPreviewSequence } from './PreviewSequencePattern/PreviewSequencePattern.js';
 import styles from '../formEditStyles.module.css';
 
 export const PageEdit: PatternEditComponent<PageProps> = props => {

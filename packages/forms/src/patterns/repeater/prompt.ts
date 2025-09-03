@@ -1,11 +1,8 @@
 import { type RepeaterPattern } from './index.js';
-import {
-  type CreatePrompt,
-  type RepeaterProps,
-  createPromptForPattern,
-  getPattern,
-} from '../../index.js';
 import { getFormSessionError } from '../../session.js';
+import { createPromptForPattern, type CreatePrompt, type RepeaterProps } from '../../components.js';
+import { getPattern } from '../../pattern.js';
+
 export const createPrompt: CreatePrompt<RepeaterPattern> = (
   config,
   session,

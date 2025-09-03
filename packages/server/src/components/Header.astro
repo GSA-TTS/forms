@@ -6,7 +6,7 @@ import { getServerContext, getUserSession } from '../config/astro.js';
 import * as routes from '../routes';
 import DOJHeader from './DOJHeader.astro';
 
-const { baseUrl, title } = await getServerContext(Astro);
+const { agencyBranding, baseUrl, title } = await getServerContext(Astro);
 
 const getNavLinkClasses = (url: string) => {
   if (url === Astro.url.pathname) {
@@ -17,7 +17,7 @@ const getNavLinkClasses = (url: string) => {
 };
 
 const { session } = getUserSession(Astro);
-const isForm = Astro.url.href.includes('/forms/');
+const useAgencyBranding = agencyBranding && Astro.url.href.includes('/forms/');
 ---
 
 <div class="usa-overlay"></div>
@@ -28,23 +28,27 @@ const isForm = Astro.url.href.includes('/forms/');
       the public.</span
     >
   </div>
-  {isForm ? (
-    <DOJHeader />
-  ) : (
-  <div class="bg-base-darkest">
-    <div class="usa-navbar">
-      <div class="usa-logo">
-        <em class="usa-logo__text">
-          <a href={routes.getHomeUrl(baseUrl)} title="10x Forms Platform">
-            <img src={logoSvg.src} role="img" alt="10x Logo" />
-            <span class="text-white">{title}</span>
-          </a>
-        </em>
+  {
+    useAgencyBranding ? (
+      <DOJHeader />
+    ) : (
+      <div class="bg-base-darkest">
+        <div class="usa-navbar">
+          <div class="usa-logo">
+            <em class="usa-logo__text">
+              <a href={routes.getHomeUrl(baseUrl)} title="10x Forms Platform">
+                <img src={logoSvg.src} role="img" alt="10x Logo" />
+                <span class="text-white">{title}</span>
+              </a>
+            </em>
+          </div>
+          <button type="button" class="usa-menu-btn">
+            Menu
+          </button>
+        </div>
       </div>
-      <button type="button" class="usa-menu-btn">Menu</button>
-    </div>
-  </div>
-  )}
+    )
+  }
   <nav aria-label="Primary navigation" class="usa-nav">
     <div class="usa-nav__inner">
       <button type="button" class="usa-nav__close">

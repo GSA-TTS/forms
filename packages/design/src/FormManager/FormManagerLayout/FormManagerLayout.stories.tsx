@@ -2,7 +2,7 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { FormManagerLayout } from './index.js';
+import { FormManagerLayout } from './FormManagerLayout.js';
 import {
   createPatternTestForm,
   createTestSession,

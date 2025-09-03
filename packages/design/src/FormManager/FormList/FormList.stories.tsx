@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { createTestBrowserFormService } from '@gsa-tts/forms-core/context';
 
-import FormList from './index.js';
+import FormList from './FormList.js';
 import {
   createPatternTestForm,
   createTestSession,

@@ -2,7 +2,7 @@ import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { type Meta, type StoryObj } from '@storybook/react';
 
-import { RadioGroupPattern } from './RadioGroup.js';
+import RadioGroupPattern from './RadioGroup.js';
 
 const meta: Meta<typeof RadioGroupPattern> = {
   title: 'patterns/RadioGroupPattern',

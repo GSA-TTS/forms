@@ -35,8 +35,9 @@ export const PatternEditActions = ({ children }: PatternEditActionsProps) => {
     focusPatternType === 'repeater' || focusPatternType === 'fieldset';
   const isSummary = focusPatternType === 'form-summary';
   const isPagePattern = focusPatternType === 'page';
-  const { copyPattern } = useFormManagerStore(state => ({
+  const { copyPattern, copyPage } = useFormManagerStore(state => ({
     copyPattern: state.copyPattern,
+    copyPage: state.copyPage,
   }));
   const pages = useFormManagerStore(state =>
     Object.values<Pattern>(state.session.form.patterns).filter(
@@ -67,6 +68,12 @@ export const PatternEditActions = ({ children }: PatternEditActionsProps) => {
     }
   };
 
+  const handleCopyPage = () => {
+    if (focusPatternId && isPagePattern) {
+      copyPage(focusPatternId);
+    }
+  };
+
   return (
     <div
       className={`${styles.patternActionWrapper} margin-top-2 margin-bottom-1 padding-top-1 width-full pattern-edit-panel base-dark text-right`}
@@ -90,12 +97,20 @@ export const PatternEditActions = ({ children }: PatternEditActionsProps) => {
           >
             <button
               type="button"
-              aria-label="Create a copy of this pattern"
-              title="Create a copy of this pattern"
+              aria-label={
+                isPagePattern
+                  ? 'Create a copy of this page'
+                  : 'Create a copy of this pattern'
+              }
+              title={
+                isPagePattern
+                  ? 'Create a copy of this page'
+                  : 'Create a copy of this pattern'
+              }
               className="usa-button--outline usa-button--unstyled"
               onClick={event => {
                 event.preventDefault();
-                handleCopyPattern();
+                isPagePattern ? handleCopyPage() : handleCopyPattern();
               }}
             >
               <svg

@@ -4,6 +4,7 @@ import { type FormConfig, type FormService } from '@gsa-tts/forms-core';
 import { type GithubRepository } from '../lib/github.js';
 
 export type AppContext = {
+  agencyBranding: boolean;
   auth: AuthServiceContext;
   baseUrl: `${string}/`;
   formConfig: FormConfig;

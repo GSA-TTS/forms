@@ -12,10 +12,10 @@ import { type PageSetPattern } from '@gsa-tts/forms-core';
 import { type SequencePattern } from '@gsa-tts/forms-core';
 
 import { type FormSummaryPattern } from '@gsa-tts/forms-core';
-import { type FormUIContext } from './Form/index.js';
+import { type FormUIContext } from './Form/types.js';
 import { defaultPatternComponents } from './Form/components/index.js';
 import { defaultPatternEditComponents } from './FormManager/FormEdit/components/index.js';
-import { type FormManagerContext } from './FormManager/index.js';
+import { type FormManagerContext } from './FormManager/types.js';
 import { FormRoute } from '../../forms/dist/types/route-data.js';
 
 export interface TestFormConfig {

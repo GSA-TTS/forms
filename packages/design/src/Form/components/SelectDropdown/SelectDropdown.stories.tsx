@@ -2,7 +2,7 @@ import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { type Meta, type StoryObj } from '@storybook/react';
 
-import { SelectDropdownPattern } from './SelectDropdown.js';
+import SelectDropdownPattern from './SelectDropdown.js';
 
 const meta: Meta<typeof SelectDropdownPattern> = {
   title: 'patterns/SelectDropdownPattern',

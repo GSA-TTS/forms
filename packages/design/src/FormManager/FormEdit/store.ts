@@ -10,7 +10,7 @@ import {
   getSessionPage,
   mergeSession,
 } from '@gsa-tts/forms-core';
-import { type FormManagerContext } from '../index.js';
+import { type FormManagerContext } from '../types.js';
 import { type PatternFocus } from './types.js';
 import {
   type NotificationSlice,
@@ -31,6 +31,7 @@ export type FormEditSlice = {
   ) => void;
   clearFocus: () => void;
   copyPattern: (parentPatternId: PatternId, patternId: PatternId) => void;
+  copyPage: (pageId: PatternId) => void;
   deletePattern: (id: PatternId) => void;
   deleteSelectedPattern: () => void;
   movePattern: (
@@ -121,6 +122,22 @@ export const createFormEditSlice =
       });
       state.addNotification('success', 'Element copied successfully.');
     },
+
+    copyPage: (pageId: PatternId) => {
+      const state = get();
+      const builder = new BlueprintBuilder(
+        state.context.config,
+        state.session.form
+      );
+      const newPage = builder.copyPage(pageId);
+
+      set({
+        session: mergeSession(state.session, { form: builder.form }),
+        focus: { pattern: newPage },
+      });
+      state.addNotification('success', 'Page copied successfully.');
+    },
+
     addPatternToCompoundField: (patternType, targetPattern) => {
       const state = get();
       const builder = new BlueprintBuilder(

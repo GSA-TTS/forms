@@ -2,7 +2,7 @@ import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { type Meta, type StoryObj } from '@storybook/react';
 
-import { EmailInputPattern } from './EmailInput.js';
+import EmailInputPattern from './EmailInput.js';
 
 const meta: Meta<typeof EmailInputPattern> = {
   title: 'patterns/EmailInputPattern',

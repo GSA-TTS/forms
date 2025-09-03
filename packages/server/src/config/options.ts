@@ -5,6 +5,7 @@ import { type LoginGovOptions } from '@gsa-tts/forms-auth';
 import { DatabaseContext } from '@gsa-tts/forms-database';
 
 export type ServerOptions = {
+  agencyBranding: boolean;
   title: string;
   db: DatabaseContext;
   loginGovOptions: LoginGovOptions;
@@ -19,6 +20,7 @@ export const createDevServerOptions = async (): Promise<ServerOptions> => {
     join(dirname(fileURLToPath(import.meta.url)), '../main.db')
   );
   return {
+    agencyBranding: false,
     title: 'Form Service',
     db,
     loginGovOptions: {
@@ -40,6 +42,7 @@ export const createTestServerOptions = async (): Promise<ServerOptions> => {
   );
   const db = await createInMemoryDatabaseContext();
   return {
+    agencyBranding: false,
     title: 'Form Service - Test suite',
     db,
     loginGovOptions: {

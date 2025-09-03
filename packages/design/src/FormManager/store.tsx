@@ -12,7 +12,7 @@ import { type FormSession, type Blueprint } from '@gsa-tts/forms-core';
 
 import { type FormListSlice, createFormListSlice } from './FormList/store.js';
 import { type FormEditSlice, createFormEditSlice } from './FormEdit/store.js';
-import { type FormManagerContext } from './index.js';
+import { type FormManagerContext } from './types.js';
 
 type StoreContext = {
   context: FormManagerContext;

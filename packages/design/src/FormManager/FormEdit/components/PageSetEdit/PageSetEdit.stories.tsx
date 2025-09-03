@@ -5,7 +5,7 @@ import {
   createPatternEditStoryMeta,
   testUpdateFormFieldOnSubmitByElement,
 } from '../common/story-helper.js';
-import PageSetEdit from './index.js';
+import PageSetEdit from './PageSetEdit.js';
 import { createPatternTestForm } from '../../../../test-form.js';
 
 const blueprint = createPatternTestForm({

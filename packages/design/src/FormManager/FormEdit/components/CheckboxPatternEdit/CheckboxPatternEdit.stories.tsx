@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { type CheckboxPattern } from '@gsa-tts/forms-core';
 
-import CheckboxPatternEdit from './index.js';
+import CheckboxPatternEdit from './CheckboxPatternEdit.js';
 import {
   createPatternEditStoryMeta,
   testEmptyFormLabelError,

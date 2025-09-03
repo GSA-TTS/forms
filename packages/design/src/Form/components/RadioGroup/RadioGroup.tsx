@@ -3,10 +3,10 @@ import { useFormContext } from 'react-hook-form';
 
 import { type RadioGroupProps } from '@gsa-tts/forms-core';
 
-import { type PatternComponent } from '../../../Form/index.js';
+import { type PatternComponent } from '../../types.js';
 import classNames from 'classnames';
 
-export const RadioGroupPattern: PatternComponent<RadioGroupProps> = props => {
+const RadioGroupPattern: PatternComponent<RadioGroupProps> = props => {
   const { register } = useFormContext();
   const hintId = `hint-${props.groupId}`;
   return (
@@ -52,3 +52,5 @@ export const RadioGroupPattern: PatternComponent<RadioGroupProps> = props => {
     </div>
   );
 };
+
+export default RadioGroupPattern;

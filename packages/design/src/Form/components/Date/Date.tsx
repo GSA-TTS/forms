@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { useFormContext } from 'react-hook-form';
 import { type DateProps } from '@gsa-tts/forms-core';
-import { type PatternComponent } from '../../index.js';
+import { type PatternComponent } from '../../types.js';
 
 const months = [
   { value: '01', label: 'January' },
@@ -27,7 +27,7 @@ const getAriaDescribedBy = (
   return ids || undefined;
 };
 
-export const DatePattern: PatternComponent<DateProps> = ({
+const DatePattern: PatternComponent<DateProps> = ({
   monthId,
   dayId,
   yearId,
@@ -143,3 +143,5 @@ export const DatePattern: PatternComponent<DateProps> = ({
     </fieldset>
   );
 };
+
+export default DatePattern;

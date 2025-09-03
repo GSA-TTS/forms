@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { useFormContext } from 'react-hook-form';
 import { type PhoneNumberProps } from '@gsa-tts/forms-core';
-import { type PatternComponent } from '../../index.js';
+import { type PatternComponent } from '../../types.js';
 
 const formatPhoneNumber = (value: string) => {
   const rawValue = value.replace(/[^\d]/g, ''); // Remove non-digit characters
@@ -13,7 +13,7 @@ const formatPhoneNumber = (value: string) => {
   return `${rawValue.slice(0, 3)}-${rawValue.slice(3, 6)}-${rawValue.slice(6, 10)}`;
 };
 
-export const PhoneNumberPattern: PatternComponent<PhoneNumberProps> = ({
+const PhoneNumberPattern: PatternComponent<PhoneNumberProps> = ({
   phoneId,
   hint,
   label,
@@ -74,3 +74,5 @@ export const PhoneNumberPattern: PatternComponent<PhoneNumberProps> = ({
     </fieldset>
   );
 };
+
+export default PhoneNumberPattern;

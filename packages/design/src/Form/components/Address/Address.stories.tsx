@@ -2,7 +2,7 @@ import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { type Meta, type StoryObj } from '@storybook/react';
 
-import AddressPattern from './index.js';
+import AddressPattern from './Address.js';
 import { stateTerritoryOrMilitaryPostList } from '@gsa-tts/forms-core';
 
 const meta: Meta<typeof AddressPattern> = {

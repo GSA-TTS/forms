@@ -5,7 +5,7 @@ import { type FormSummaryProps } from '@gsa-tts/forms-core';
 import { type Pattern } from '@gsa-tts/forms-core';
 import { type FormSummaryPattern } from '@gsa-tts/forms-core';
 
-import FormSummary from '../../../Form/components/FormSummary/index.js';
+import FormSummary from '../../../Form/components/FormSummary/FormSummary.js';
 import { PatternEditComponent } from '../types.js';
 import { PatternEditActions } from './common/PatternEditActions.js';
 

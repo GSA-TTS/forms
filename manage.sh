@@ -1,3 +1,3 @@
 #!/bin/sh
 
-pnpm --filter @atj/cli-app cli $@
+pnpm --filter @gsa-tts/forms-cli cli $@

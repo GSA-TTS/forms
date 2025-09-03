@@ -2,9 +2,9 @@ import React from 'react';
 import classNames from 'classnames';
 import { useFormContext } from 'react-hook-form';
 import { type SelectDropdownProps } from '@gsa-tts/forms-core';
-import { type PatternComponent } from '../../index.js';
+import { type PatternComponent } from '../../types.js';
 
-export const SelectDropdownPattern: PatternComponent<SelectDropdownProps> = ({
+const SelectDropdownPattern: PatternComponent<SelectDropdownProps> = ({
   selectId,
   label,
   hint,
@@ -65,3 +65,5 @@ export const SelectDropdownPattern: PatternComponent<SelectDropdownProps> = ({
     </div>
   );
 };
+
+export default SelectDropdownPattern;

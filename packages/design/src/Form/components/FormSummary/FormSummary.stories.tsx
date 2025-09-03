@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import FormSummary from './index.js';
+import FormSummary from './FormSummary.js';
 
 export default {
   title: 'patterns/FormSummary',

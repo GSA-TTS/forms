@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import Repeater from './index.js';
+import Repeater from './Repeater.js';
 import { FormProvider, useForm } from 'react-hook-form';
 import { defaultPatternComponents } from '../index.js';
 import type {

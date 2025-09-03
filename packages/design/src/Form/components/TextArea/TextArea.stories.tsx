@@ -2,7 +2,7 @@ import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import TextArea from './index.js';
+import TextArea from './TextArea.js';
 
 const meta: Meta<typeof TextArea> = {
   title: 'patterns/TextArea',

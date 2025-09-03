@@ -8,7 +8,7 @@ import {
   createTestFormManagerContext,
 } from '../../../test-form.js';
 import { FormManagerProvider } from '../../store.js';
-import CreateNew from './index.js';
+import CreateNew from './CreateNew.js';
 
 const meta: Meta<typeof CreateNew> = {
   title: 'FormManager/FormList/CreateNew',

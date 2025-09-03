@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { type Meta, type StoryObj } from '@storybook/react';
-import NamePattern from './index.js';
+import NamePattern from './Name.js';
 
 const meta: Meta<typeof NamePattern> = {
   title: 'patterns/NamePattern',

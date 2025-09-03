@@ -11,14 +11,25 @@ export type PageMenuProps = {
   }[];
 };
 
-export const PageMenu = ({ pages }: PageMenuProps) => {
+const PageMenu = ({ pages }: PageMenuProps) => {
   const [updatedPages, setUpdatedPages] = React.useState(pages);
 
   const handlePageVisit = (index: number) => {
     setUpdatedPages(prevPages =>
-      prevPages.map((page, i) =>
-        i === index || page.selected ? { ...page, visited: true } : page
-      )
+      prevPages.map((page, i) => {
+        if (i === index) {
+          return {
+            ...page,
+            selected: true,
+            visited: true,
+          };
+        } else {
+          return {
+            ...page,
+            selected: false,
+          };
+        }
+      })
     );
   };
 
@@ -52,3 +63,5 @@ export const PageMenu = ({ pages }: PageMenuProps) => {
     </div>
   );
 };
+
+export default PageMenu;

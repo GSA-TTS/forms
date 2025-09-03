@@ -17,6 +17,15 @@ jobs:
       deploy-key: "${{ github.ref_name == 'main' && 'dev' || 'demo' }}"
       #deploy-key: dev
 
+  build-image-sandbox:
+    uses: ./.github/workflows/_docker-build-image.yml
+    secrets: inherit
+    with:
+      app-name: sandbox
+      tag-name: ${{ github.ref_name }}
+      deploy-key: "${{ github.ref_name == 'main' && 'dev' || 'demo' }}"
+      #deploy-key: dev
+
   deploy:
     needs: [build-image-doj]
     uses: ./.github/workflows/_terraform-apply.yml

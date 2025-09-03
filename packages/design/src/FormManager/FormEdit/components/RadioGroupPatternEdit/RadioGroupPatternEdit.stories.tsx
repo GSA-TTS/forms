@@ -4,7 +4,7 @@ import { type RadioGroupPattern } from '@gsa-tts/forms-core';
 
 import { createPatternEditStoryMeta } from '../common/story-helper.js';
 import FormEdit from '../../index.js';
-import CheckboxPatternEdit from '../CheckboxPatternEdit/index.js';
+import CheckboxPatternEdit from '../CheckboxPatternEdit/CheckboxPatternEdit.js';
 import { enLocale as message } from '@gsa-tts/forms-common';
 import { expect, userEvent } from '@storybook/test';
 import { within } from '@testing-library/react';

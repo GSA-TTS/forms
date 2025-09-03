@@ -6,7 +6,7 @@ import {
   type PatternProps,
   type PromptComponent,
 } from '@gsa-tts/forms-core';
-import { FormManagerContext } from '../index.js';
+import { FormManagerContext } from '../types.js';
 
 export type PatternFocus = {
   pattern: Pattern;

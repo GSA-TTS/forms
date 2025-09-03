@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { createTestBrowserFormService } from '@gsa-tts/forms-core/context';
 
 import { createPatternTestForm } from '../../test-form.js';
-import FormDelete from './index.js';
+import FormDelete from './FormDelete.js';
 
 const meta: Meta<typeof FormDelete> = {
   title: 'FormManager/FormDelete',

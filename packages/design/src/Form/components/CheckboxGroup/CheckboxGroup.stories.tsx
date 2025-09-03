@@ -2,7 +2,7 @@ import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { type Meta, type StoryObj } from '@storybook/react';
 
-import { CheckboxGroupPattern } from './CheckboxGroup.js';
+import CheckboxGroupPattern from './CheckboxGroup.js';
 
 const meta: Meta<typeof CheckboxGroupPattern> = {
   title: 'patterns/CheckboxGroupPattern',
