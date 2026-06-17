@@ -2,7 +2,6 @@ import React from 'react';
 import {
   type StoreApi,
   type StateCreator,
-  type UseBoundStore,
   create,
 } from 'zustand';
 import { createContext } from 'zustand-utils';
@@ -132,12 +131,15 @@ const createFormManagerSlice =
     },
   });
 
-const initializePeriodicSave = (
-  store: UseBoundStore<StoreApi<FormManagerStore>>
+export const initializePeriodicSave = (
+  store: Pick<StoreApi<FormManagerStore>, 'getState'>
 ) => {
   let lastForm: Blueprint;
-  setInterval(async () => {
-    const { session, saveForm } = store.getState();
+  return setInterval(async () => {
+    const { focus, session, saveForm } = store.getState();
+    if (focus !== undefined) {
+      return;
+    }
     if (session.form && session.form !== lastForm) {
       await saveForm(session.form);
       lastForm = session.form;
