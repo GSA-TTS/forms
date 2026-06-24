@@ -93,16 +93,16 @@ const EditComponent = ({ pattern }: { pattern: SexPattern }) => {
           ) : null}
           <textarea
             className={classNames(
-              'usa-input bg-primary-lighter',
+              'usa-input bg-primary-lighter height-15 overflow-auto',
               {
                 'usa-input--error': helperText.error,
               },
-              `${styles.patternChoiceFieldWrapper}`
+              `${styles.patternChoiceFieldWrapper}`,
+              styles.nonResizableTextarea
             )}
             id={fieldId('helperText')}
             defaultValue={pattern.data.helperText}
             {...register('helperText')}
-            style={{ resize: 'none', overflow: 'auto', height: '100px' }}
           />
         </label>
       </div>

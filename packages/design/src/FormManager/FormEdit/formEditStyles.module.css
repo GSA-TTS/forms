@@ -103,6 +103,10 @@
   max-width: 100%;
 }
 
+.nonResizableTextarea {
+  resize: none;
+}
+
 /* Configure and Publish Pages */
 .progressPage {
   min-height: 60vh;

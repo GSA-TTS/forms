@@ -204,16 +204,16 @@ const EditComponent = ({
           ) : null}
           <textarea
             className={classNames(
-              'usa-input bg-primary-lighter',
+              'usa-input bg-primary-lighter height-15 overflow-auto',
               {
                 'usa-input--error': hint.error,
               },
-              `${styles.patternChoiceFieldWrapper}`
+              `${styles.patternChoiceFieldWrapper}`,
+              styles.nonResizableTextarea
             )}
             id={fieldId('hint')}
             defaultValue={pattern.data.hint}
             {...register('hint')}
-            style={{ resize: 'none', overflow: 'auto', height: '100px' }}
           />
         </label>
       </div>
