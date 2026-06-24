@@ -89,10 +89,9 @@ const EditComponent = ({ pattern }: { pattern: Pattern }) => {
           ) : null}
           <textarea
             id={fieldId('description')}
-            className={`usa-textarea bg-primary-lighter ${styles.patternChoiceFieldWrapper} ${styles.formDescription}`}
+            className={`usa-textarea bg-primary-lighter height-15 overflow-auto ${styles.patternChoiceFieldWrapper} ${styles.formDescription} ${styles.nonResizableTextarea}`}
             {...register('description')}
             defaultValue={pattern.data.description}
-            style={{ resize: 'none', overflow: 'auto', height: '100px' }}
           />
         </label>
       </div>

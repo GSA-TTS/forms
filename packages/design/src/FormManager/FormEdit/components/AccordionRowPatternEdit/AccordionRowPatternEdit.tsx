@@ -94,16 +94,16 @@ const EditComponent = ({ pattern }: { pattern: AccordionRowPattern }) => {
           ) : null}
           <textarea
             className={classNames(
-              'usa-input bg-primary-lighter',
+              'usa-input bg-primary-lighter height-15 overflow-auto',
               {
                 'usa-input--error': text.error,
               },
-              `${styles.patternChoiceFieldWrapper}`
+              `${styles.patternChoiceFieldWrapper}`,
+              styles.nonResizableTextarea
             )}
             id={fieldId('text')}
             defaultValue={pattern.data.text}
             {...register('text')}
-            style={{ resize: 'none', overflow: 'auto', height: '100px' }}
           />
         </label>
       </div>
